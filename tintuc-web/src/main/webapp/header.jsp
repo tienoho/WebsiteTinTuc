@@ -1,6 +1,8 @@
+<%@ page import="vn.haui.web.command.categoryDao" %>
+<%@ page import="vn.haui.web.model.Category" %>
 <!DOCTYPE html>
 <html lang="en-US">
-<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+<meta http-equiv="content-type" content="text/html;charset=UTF-8"/>
 <head>
     <meta charset="UTF-8"/>
     <link type="text/css" media="all" href="css/style.css" rel="stylesheet"/>
@@ -17,12 +19,49 @@
     <link rel='stylesheet' id='smartmag-skin-css' href='http://localhost/wp-content/themes/smart-mag/css/skin-trendy.css?ver=4.9.8' type='text/css' media='all' />-->
     <title>SmartMag Trendy &mdash; Premium Theme Demo</title>
     <script type="text/javascript">
-        window._wpemojiSettings = { "baseUrl": "https:\/\/s.w.org\/images\/core\/emoji\/2.2.1\/72x72\/", "ext": ".png", "svgUrl": "https:\/\/s.w.org\/images\/core\/emoji\/2.2.1\/svg\/", "svgExt": ".svg", "source": { "concatemoji": "http:\/\/theme-sphere.com\/smart-mag\/demos\/trendy\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.7.11" } };
-        !function (a, b, c) { function d(a) { var b, c, d, e, f = String.fromCharCode; if (!k || !k.fillText) return !1; switch (k.clearRect(0, 0, j.width, j.height), k.textBaseline = "top", k.font = "600 32px Arial", a) { case "flag": return k.fillText(f(55356, 56826, 55356, 56819), 0, 0), !(j.toDataURL().length < 3e3) && (k.clearRect(0, 0, j.width, j.height), k.fillText(f(55356, 57331, 65039, 8205, 55356, 57096), 0, 0), b = j.toDataURL(), k.clearRect(0, 0, j.width, j.height), k.fillText(f(55356, 57331, 55356, 57096), 0, 0), c = j.toDataURL(), b !== c); case "emoji4": return k.fillText(f(55357, 56425, 55356, 57341, 8205, 55357, 56507), 0, 0), d = j.toDataURL(), k.clearRect(0, 0, j.width, j.height), k.fillText(f(55357, 56425, 55356, 57341, 55357, 56507), 0, 0), e = j.toDataURL(), d !== e } return !1 } function e(a) { var c = b.createElement("script"); c.src = a, c.defer = c.type = "text/javascript", b.getElementsByTagName("head")[0].appendChild(c) } var f, g, h, i, j = b.createElement("canvas"), k = j.getContext && j.getContext("2d"); for (i = Array("flag", "emoji4"), c.supports = { everything: !0, everythingExceptFlag: !0 }, h = 0; h < i.length; h++) c.supports[i[h]] = d(i[h]), c.supports.everything = c.supports.everything && c.supports[i[h]], "flag" !== i[h] && (c.supports.everythingExceptFlag = c.supports.everythingExceptFlag && c.supports[i[h]]); c.supports.everythingExceptFlag = c.supports.everythingExceptFlag && !c.supports.flag, c.DOMReady = !1, c.readyCallback = function () { c.DOMReady = !0 }, c.supports.everything || (g = function () { c.readyCallback() }, b.addEventListener ? (b.addEventListener("DOMContentLoaded", g, !1), a.addEventListener("load", g, !1)) : (a.attachEvent("onload", g), b.attachEvent("onreadystatechange", function () { "complete" === b.readyState && c.readyCallback() })), f = c.source || {}, f.concatemoji ? e(f.concatemoji) : f.wpemoji && f.twemoji && (e(f.twemoji), e(f.wpemoji))) }(window, document, window._wpemojiSettings);</script>
+        window._wpemojiSettings = {
+            "baseUrl": "https:\/\/s.w.org\/images\/core\/emoji\/2.2.1\/72x72\/",
+            "ext": ".png",
+            "svgUrl": "https:\/\/s.w.org\/images\/core\/emoji\/2.2.1\/svg\/",
+            "svgExt": ".svg",
+            "source": {"concatemoji": "http:\/\/theme-sphere.com\/smart-mag\/demos\/trendy\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.7.11"}
+        };
+        !function (a, b, c) {
+            function d(a) {
+                var b, c, d, e, f = String.fromCharCode;
+                if (!k || !k.fillText) return !1;
+                switch (k.clearRect(0, 0, j.width, j.height), k.textBaseline = "top", k.font = "600 32px Arial", a) {
+                    case "flag":
+                        return k.fillText(f(55356, 56826, 55356, 56819), 0, 0), !(j.toDataURL().length < 3e3) && (k.clearRect(0, 0, j.width, j.height), k.fillText(f(55356, 57331, 65039, 8205, 55356, 57096), 0, 0), b = j.toDataURL(), k.clearRect(0, 0, j.width, j.height), k.fillText(f(55356, 57331, 55356, 57096), 0, 0), c = j.toDataURL(), b !== c);
+                    case "emoji4":
+                        return k.fillText(f(55357, 56425, 55356, 57341, 8205, 55357, 56507), 0, 0), d = j.toDataURL(), k.clearRect(0, 0, j.width, j.height), k.fillText(f(55357, 56425, 55356, 57341, 55357, 56507), 0, 0), e = j.toDataURL(), d !== e
+                }
+                return !1
+            }
+
+            function e(a) {
+                var c = b.createElement("script");
+                c.src = a, c.defer = c.type = "text/javascript", b.getElementsByTagName("head")[0].appendChild(c)
+            }
+
+            var f, g, h, i, j = b.createElement("canvas"), k = j.getContext && j.getContext("2d");
+            for (i = Array("flag", "emoji4"), c.supports = {
+                everything: !0,
+                everythingExceptFlag: !0
+            }, h = 0; h < i.length; h++) c.supports[i[h]] = d(i[h]), c.supports.everything = c.supports.everything && c.supports[i[h]], "flag" !== i[h] && (c.supports.everythingExceptFlag = c.supports.everythingExceptFlag && c.supports[i[h]]);
+            c.supports.everythingExceptFlag = c.supports.everythingExceptFlag && !c.supports.flag, c.DOMReady = !1, c.readyCallback = function () {
+                c.DOMReady = !0
+            }, c.supports.everything || (g = function () {
+                c.readyCallback()
+            }, b.addEventListener ? (b.addEventListener("DOMContentLoaded", g, !1), a.addEventListener("load", g, !1)) : (a.attachEvent("onload", g), b.attachEvent("onreadystatechange", function () {
+                "complete" === b.readyState && c.readyCallback()
+            })), f = c.source || {}, f.concatemoji ? e(f.concatemoji) : f.wpemoji && f.twemoji && (e(f.twemoji), e(f.wpemoji)))
+        }(window, document, window._wpemojiSettings);</script>
     <script type='text/javascript' src='js/jquery.js'></script>
     <script>document.querySelector('head').innerHTML += '<style class="bunyad-img-effects-css">.main img, .main-footer img { opacity: 0; }</style>';</script>
 </head>
 <body class="home page-template page-template-page-blocks page-template-page-blocks-php page page-id-11 page-builder right-sidebar full skin-tech has-featured img-effects has-nav-light-b has-nav-full has-head-tech has-mobile-head">
+    <% categoryDao categoryDao=new categoryDao();%>
 <div class="main-wrap">
     <div class="top-bar dark">
         <div class="wrap">
@@ -78,9 +117,9 @@
                 <div class="menu-icon"><a href="#"><i class="fa fa-bars"></i></a></div>
                 <div class="title">
                     <a href="index.html" title="SmartMag Trendy" rel="home" class="is-logo-mobile">
-                        <img src="images/sm-logo-mobile.png" class="logo-mobile" width="0" height="0" />
+                        <img src="images/sm-logo-mobile.png" class="logo-mobile" width="0" height="0"/>
                         <img src="images/sm-logo-1.png" class="logo-image" alt="SmartMag Trendy"
-                             srcset="images/sm-logo-1.png ,images/sm-logo2x-1.png 2x" />
+                             srcset="images/sm-logo-1.png ,images/sm-logo2x-1.png 2x"/>
                     </a>
                 </div>
                 <div class="search-overlay">
@@ -90,14 +129,15 @@
             <header class="tech">
                 <div class="title">
                     <a href="index.html" title="SmartMag Trendy" rel="home" class="is-logo-mobile">
-                        <img src="images/sm-logo-mobile.png" class="logo-mobile" width="0" height="0" />
-                        <img src="images/sm-logo-1.png" class="logo-image" alt="SmartMag Trendy" srcset="images/sm-logo-1.png ,images/sm-logo2x-1.png 2x" />
+                        <img src="images/sm-logo-mobile.png" class="logo-mobile" width="0" height="0"/>
+                        <img src="images/sm-logo-1.png" class="logo-image" alt="SmartMag Trendy"
+                             srcset="images/sm-logo-1.png ,images/sm-logo2x-1.png 2x"/>
                     </a>
                 </div>
                 <div class="right">
                     <div class="a-widget">
                         <a href="#">
-                            <img src="images/sm-728x90.jpg" width="728" height="90" alt="Banner" />
+                            <img src="images/sm-728x90.jpg" width="728" height="90" alt="Banner"/>
                         </a>
                     </div>
                 </div>
@@ -118,16 +158,19 @@
                             <ul id="menu-main-menu" class="menu">
                                 <li id="menu-item-8"
                                     class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-8">
-                                    <a href="#"><i class="fa fa-bars only-icon"></i></a>
+                                    <a href="#">
+                                        <i class="fa fa-bars only-icon"></i>
+                                    </a>
                                     <ul class="sub-menu">
+                                        <%
+                                            for(Category category:categoryDao.getListCategory())
+                                            {
+                                        %>
                                         <li id="menu-item-578"
-                                            class="menu-item menu-item-type-custom menu-item-object-custom menu-item-578">
-                                            <a href="http://theme-sphere.com/smart-mag/">Classic Demo</a>
+                                            class="menu-item menu-item-type-custom menu-item-object-custom menu-item-<%=category.getCategoryID()%>">
+                                            <a href="<%=category.getCategorySlug()%>"><%=category.getCategoryName()%></a>
                                         </li>
-                                        <li id="menu-item-579"
-                                            class="menu-item menu-item-type-custom menu-item-object-custom menu-item-579">
-                                            <a href="#">Tech Demo</a>
-                                        </li>
+                                        <%}%>
                                     </ul>
                                 </li>
                                 <li id="menu-item-10"
@@ -510,7 +553,7 @@
                                                                  alt="shutterstock_350007890"
                                                                  title="Summer Style: Chunky Knit For Leather Suits"
                                                                  srcset="images/shutterstock_350007890-336x200.jpg 336w, images/shutterstock_350007890-336x200@2x.jpg 672w"
-                                                                 sizes="(max-width: 336px) 100vw, 336px" />
+                                                                 sizes="(max-width: 336px) 100vw, 336px"/>
                                                         </a>
                                                         <h2 class="post-title">
                                                             <a href="2017/01/08/summer-style-chunky-knit-for-leather-suits-2/index.html"
@@ -543,7 +586,7 @@
                                                                  alt="shutterstock_536935141"
                                                                  title="Fashion Chic X Mejuri Jewelry Collection of 2017"
                                                                  srcset="images/shutterstock_536935141-104x69.jpg 104w, images/shutterstock_536935141-300x196.jpg 300w, images/shutterstock_536935141-1000x653.jpg 1000w, images/shutterstock_536935141-702x459.jpg 702w, images/shutterstock_536935141-214x140.jpg 214w, images/shutterstock_536935141-104x69@2x.jpg 208w, images/shutterstock_536935141-300x196@2x.jpg 600w, images/shutterstock_536935141-1000x653@2x.jpg 2000w, images/shutterstock_536935141-702x459@2x.jpg 1404w, images/shutterstock_536935141-214x140@2x.jpg 428w"
-                                                                 sizes="(max-width: 104px) 100vw, 104px" />
+                                                                 sizes="(max-width: 104px) 100vw, 104px"/>
                                                         </a>
                                                         <div class="content">
                                                             <a href="2017/01/08/fashion-chic-x-latest-mejuri-jewelry-collection-of-2017-2/index.html">
@@ -566,7 +609,7 @@
                                                                  alt="shutterstock_518581786"
                                                                  title="Trending: Bodysuits and Faded Friendship Jeans"
                                                                  srcset="images/shutterstock_518581786-104x69.jpg 104w, images/shutterstock_518581786-300x200.jpg 300w, images/shutterstock_518581786-1000x667.jpg 1000w, images/shutterstock_518581786-702x459.jpg 702w, images/shutterstock_518581786-214x140.jpg 214w, images/shutterstock_518581786-104x69@2x.jpg 208w, images/shutterstock_518581786-300x200@2x.jpg 600w, images/shutterstock_518581786-1000x667@2x.jpg 2000w, images/shutterstock_518581786-702x459@2x.jpg 1404w, images/shutterstock_518581786-214x140@2x.jpg 428w"
-                                                                 sizes="(max-width: 104px) 100vw, 104px" />
+                                                                 sizes="(max-width: 104px) 100vw, 104px"/>
                                                         </a>
                                                         <div class="content">
                                                             <a href="2017/01/08/trending-bodysuits-and-faded-friendship-jeans-2/index.html">
@@ -589,7 +632,7 @@
                                                                  alt="shutterstock_350007890"
                                                                  title="Summer Style: Chunky Knit For Leather Suits"
                                                                  srcset="images/shutterstock_350007890-104x69.jpg 104w, images/shutterstock_350007890-300x200.jpg 300w, images/shutterstock_350007890-1000x667.jpg 1000w, images/shutterstock_350007890-702x459.jpg 702w, images/shutterstock_350007890-214x140.jpg 214w, images/shutterstock_350007890-104x69@2x.jpg 208w, images/shutterstock_350007890-300x200@2x.jpg 600w, images/shutterstock_350007890-1000x667@2x.jpg 2000w, images/shutterstock_350007890-702x459@2x.jpg 1404w, images/shutterstock_350007890-214x140@2x.jpg 428w"
-                                                                 sizes="(max-width: 104px) 100vw, 104px" />
+                                                                 sizes="(max-width: 104px) 100vw, 104px"/>
                                                         </a>
                                                         <div class="content">
                                                             <a href="2017/01/08/summer-style-chunky-knit-for-leather-suits-2/index.html">
@@ -625,7 +668,7 @@
                         <div class="search">
                             <form role="search" action="" method="get">
                                 <input type="text" name="s" class="query live-search-query" value=""
-                                       placeholder="Search..." />
+                                       placeholder="Search..."/>
                                 <button class="search-button" type="submit">
                                     <i class="fa fa-search"></i>
                                 </button>
