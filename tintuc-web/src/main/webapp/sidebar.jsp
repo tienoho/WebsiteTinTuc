@@ -1,3 +1,4 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <aside class="col-4 sidebar" data-sticky="1">
     <div class="theiaStickySidebar">
         <ul>

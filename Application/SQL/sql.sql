@@ -19,3 +19,32 @@ CREATE TABLE `user` (
   KEY `FK_USER_ROLE_idx` (`roleid`),
   CONSTRAINT `FK_USER_ROLE` FOREIGN KEY (`roleid`) REFERENCES `role` (`roleid`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+
+-- auto-generated definition
+create table category
+(
+  category_id   int auto_increment
+    primary key,
+  category_name longtext     null,
+  category_slug varchar(255) null,
+  constraint category_category_id_uindex
+  unique (category_id)
+);
+
+-- auto-generated definition
+create table post
+(
+  post_id        int auto_increment
+    primary key,
+  authorID       int         null,
+  post_date      datetime    null,
+  post_edit_date int         null,
+  post_content   longtext    null,
+  post_title     text        null,
+  post_status    varchar(10) null,
+  post_slug      text        null,
+  constraint post_post_id_uindex
+  unique (post_id)
+);
+
+
