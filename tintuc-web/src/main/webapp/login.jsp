@@ -9,14 +9,35 @@
 <html>
 <head>
     <title>Login</title>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" type="text/javascript"></script>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link href="css/login.css" rel="stylesheet"/>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <%--<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>--%>
+    <script src="js/login.js"></script>
+    <!------ Include the above in your HEAD tag ---------->
+    <script type="text/javascript">
+        //check email
+        $(document).ready(function () {
+            var x_timer;
+            $("#email").keyup(function (e) {
+                clearTimeout(x_timer);
+                var user_name = $(this).val();
+                x_timer = setTimeout(function () {
+                    check_username_ajax(user_name);
+                }, 1000);
+            });
+
+            function check_username_ajax(email) {
+                $("#user-result").html('<img src="js/ajax-loader.gif" />');
+                $.post('CheckEmailServlet', {'email': email}, function (data) {
+                    $("#user-result").html(data);
+                });
+            }
+        });
+    </script>
 </head>
 <body>
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<link href="css/login.css" rel="stylesheet"/>
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<script src="js/login.js"></script>
-<!------ Include the above in your HEAD tag ---------->
 
 <div class="container">
     <div class="row">
@@ -36,12 +57,12 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-lg-12">
-                            <form id="login-form" action="https://phpoll.com/login/process" method="post" role="form" style="display: block;">
+                            <form id="login-form" action="Sinup" method="post" role="form" style="display: block;">
                                 <div class="form-group">
-                                    <input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Username" value="">
+                                    <input type="text" name="emailLogin" id="emailLogin" tabindex="1" class="form-control" placeholder="email" value="">
                                 </div>
                                 <div class="form-group">
-                                    <input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password">
+                                    <input type="password" name="passwordLogin" id="passwordLogin" tabindex="2" class="form-control" placeholder="Password">
                                 </div>
                                 <div class="form-group text-center">
                                     <input type="checkbox" tabindex="3" class="" name="remember" id="remember">
@@ -54,29 +75,33 @@
                                         </div>
                                     </div>
                                 </div>
+                                <input type="hidden" hidden="hidden" name="command" value="login"/>
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-lg-12">
                                             <div class="text-center">
-                                                <a href="https://phpoll.com/recover" tabindex="5" class="forgot-password">Forgot Password?</a>
+                                                <a href="" tabindex="5" class="forgot-password">Forgot Password?</a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </form>
-                            <form id="register-form" action="https://phpoll.com/register/process" method="post" role="form" style="display: none;">
-                                <div class="form-group">
-                                    <input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Username" value="">
-                                </div>
+                            <form id="register-form" action="Sinup" method="post" role="form" style="display: none;">
                                 <div class="form-group">
                                     <input type="email" name="email" id="email" tabindex="1" class="form-control" placeholder="Email Address" value="">
+                                    <span id="user-result"></span>
                                 </div>
                                 <div class="form-group">
                                     <input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password">
                                 </div>
                                 <div class="form-group">
                                     <input type="password" name="confirm-password" id="confirm-password" tabindex="2" class="form-control" placeholder="Confirm Password">
+                                    <span id="message"></span>
                                 </div>
+                                <div class="form-group">
+                                    <input type="text" name="fullname" id="fullname" tabindex="2" class="form-control" placeholder="Le Van A">
+                                </div>
+                                <input type="hidden" hidden="hidden" name="command" value="insert"/>
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-sm-6 col-sm-offset-3">
@@ -92,5 +117,14 @@
         </div>
     </div>
 </div>
+<script type="text/javascript">
+    //check confirm password
+    $('#password, #confirm-password').on('keyup', function () {
+        if ($('#password').val() == $('#confirm-password').val()) {
+            $('#message').html('Matching').css('color', 'green');
+        } else
+            $('#message').html('Not Matching').css('color', 'red');
+    });
+</script>
 </body>
 </html>

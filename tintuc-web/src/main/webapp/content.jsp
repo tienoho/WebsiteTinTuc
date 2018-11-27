@@ -1,4 +1,3 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div class="main-featured">
     <div class="wrap cf">
         <div class="featured-grid featured-grid-b" data-animation="fade" data-animation-speed="600"

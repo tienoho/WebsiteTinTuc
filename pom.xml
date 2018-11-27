@@ -15,12 +15,18 @@
 
     <properties>
         <jsp.api.version>2.3.1</jsp.api.version>
+        <jsp.servlet.version>3.1.0</jsp.servlet.version>
     </properties>
     <dependencies>
         <dependency>
             <groupId>javax.servlet.jsp</groupId>
             <artifactId>javax.servlet.jsp-api</artifactId>
             <version>${jsp.api.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>${jsp.servlet.version}</version>
         </dependency>
     </dependencies>
 </project>

@@ -7,11 +7,13 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class PostDao {
-    public ArrayList<Post> getListPostbyCategory(int categoryID) throws SQLException {
+    //lấy ra danh sách các post
+    //lấy ra thông tin chi tiết post
+    public ArrayList<Post> getListPostByCategory(String column,int ID) throws SQLException {
         Connection connection = DBConnect.getConnecttion();
-        String sql = "SELECT * FROM post where authorID=?";
+        String sql = "SELECT * FROM post where "+column+"="+ID;
         PreparedStatement st = connection.prepareStatement(sql);
-        st.setInt(1,categoryID);
+       // st.setInt(1,categoryID);
         ResultSet rs = st.executeQuery(sql);
         ArrayList<Post> list = new ArrayList<Post>();
         while (rs.next()) {
@@ -25,8 +27,11 @@ public class PostDao {
             post.setPostStatus(rs.getString("post_status"));
             post.setPostSlug(rs.getString("post_slug"));
             post.setPostImg(rs.getString("post_img"));
+            post.setCategoryID(rs.getInt("category_id"));
             list.add(post);
         }
         return list;
     }
+
+
 }

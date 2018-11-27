@@ -1,5 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<footer class="main-footer">
+ <footer class="main-footer">
     <div class="wrap">
         <ul class="widgets row cf">
             <li class="widget col-4 bunyad-about">
