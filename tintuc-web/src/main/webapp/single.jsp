@@ -1,3 +1,4 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="vn.haui.web.command.PostDao" %>
 <%@ page import="vn.haui.web.common.WebConstant" %>
 <%@ page import="vn.haui.web.model.Post" %>

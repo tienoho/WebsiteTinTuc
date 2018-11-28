@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-public class categoryDao {
+public class CategoryDao {
 
 
     public ArrayList<Category> getListCategory() throws SQLException {
@@ -27,4 +27,5 @@ public class categoryDao {
         }
         return list;
     }
+
 }

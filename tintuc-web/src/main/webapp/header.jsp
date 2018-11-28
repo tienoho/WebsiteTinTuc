@@ -1,11 +1,13 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="vn.haui.web.command.categoryDao" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="vn.haui.web.command.CategoryDao" %>
 <%@ page import="vn.haui.web.model.Category" %>
+<%@ page import="vn.haui.web.model.Users" %>
+<%@ page import="vn.haui.web.common.WebConstant" %>
 <!DOCTYPE html>
-<html lang="en-US">
-<meta http-equiv="content-type" content="text/html;charset=UTF-8"/>
+<html lang="vi-VN">
 <head>
     <meta charset="UTF-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link type="text/css" media="all" href="css/style.css" rel="stylesheet"/>
     <!--<link rel='stylesheet' id='rs-plugin-settings-css' href='http://localhost/wp-content/plugins/revslider/public/assets/css/settings.css?ver=5.3.1.5' type='text/css' media='all' />
     <style id='rs-plugin-settings-inline-css' type='text/css'>
@@ -24,7 +26,12 @@
     <script>document.querySelector('head').innerHTML += '<style class="bunyad-img-effects-css">.main img, .main-footer img { opacity: 0; }</style>';</script>
 </head>
 <body class="home page-template page-template-page-blocks page-template-page-blocks-php page page-id-11 page-builder right-sidebar full skin-tech has-featured img-effects has-nav-light-b has-nav-full has-head-tech has-mobile-head">
-    <% categoryDao categoryDao=new categoryDao();%>
+    <%Users users=null;
+    if(session.getAttribute("user")!=null)
+        {
+            users=(Users)session.getAttribute("user");
+        }
+    CategoryDao categoryDao=new CategoryDao();%>
 <div class="main-wrap">
     <div class="top-bar dark">
         <div class="wrap">
@@ -32,10 +39,17 @@
                 <span class="date"> Friday, November 23 </span>
                 <div class="menu-top-nav-container">
                     <ul id="menu-top-nav" class="menu">
+                        <%if(users!=null){%>
                         <li id="menu-item-4"
                             class="menu-item menu-item-type-custom menu-item-object-custom menu-item-4">
-                            <a href="#">Start Here</a>
+                            <a href="#"><%=users.getFullName()%></a>
                         </li>
+                        <%}else {%>
+                        <li id="menu-item-4"
+                            class="menu-item menu-item-type-custom menu-item-object-custom menu-item-4">
+                            <a href="/sinup">Đăng nhập</a>
+                        </li>
+                        <%}%>
                         <li id="menu-item-5"
                             class="menu-item menu-item-type-custom menu-item-object-custom menu-item-5">
                             <a href="#">Forums</a>
@@ -44,6 +58,12 @@
                             class="menu-item menu-item-type-custom menu-item-object-custom menu-item-7">
                             <a href="#">Contact</a>
                         </li>
+                        <%if(users!=null){%>
+                        <li id="menu-item-4"
+                            class="menu-item menu-item-type-custom menu-item-object-custom menu-item-4">
+                            <a action="SinOut" method="post">Đăng xuất</a>
+                        </li>
+                        <%}%>
                     </ul>
                 </div>
                 <div class="textwidget">
@@ -91,7 +111,7 @@
             </div>
             <header class="tech">
                 <div class="title">
-                    <a href="index.html" title="SmartMag Trendy" rel="home" class="is-logo-mobile">
+                    <a href="<%=WebConstant.localHost%>" title="SmartMag Trendy" rel="home" class="is-logo-mobile">
                         <img src="images/sm-logo-mobile.png" class="logo-mobile" width="0" height="0"/>
                         <img src="images/sm-logo-1.png" class="logo-image" alt="SmartMag Trendy"
                              srcset="images/sm-logo-1.png ,images/sm-logo2x-1.png 2x"/>
@@ -131,14 +151,14 @@
                                         %>
                                         <li id="menu-item-578"
                                             class="menu-item menu-item-type-custom menu-item-object-custom menu-item-<%=category.getCategoryID()%>">
-                                            <a href="category.jsp?category=<%=category.getCategoryID()%>"><%=category.getCategoryName()%></a>
+                                            <a href="category.jsp?categoryID=<%=category.getCategoryID()%>&pages=1"><%=category.getCategoryName()%></a>
                                         </li>
                                         <%}%>
                                     </ul>
                                 </li>
                                 <li id="menu-item-10"
                                     class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home menu-item-10">
-                                    <a href="index.html">Home</a>
+                                    <a href="<%=WebConstant.localHost%>">Home</a>
                                 </li>
                                 <li id="menu-item-586"
                                     class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-586">

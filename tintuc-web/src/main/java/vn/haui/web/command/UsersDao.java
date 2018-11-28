@@ -76,4 +76,25 @@ public class UsersDao {
         }
         return false;
     }
+    //Login
+    public Users login(String email, String password) {
+        Connection con = DBConnect.getConnecttion();
+        String sql = "select * from user where email='" + email + "' and password='" + password + "'";
+        PreparedStatement ps;
+        try {
+            ps = (PreparedStatement) con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                Users users=new Users();
+                users.setEmail(rs.getString("email"));
+                users.setFullName(rs.getString("fullname"));
+                users.setRoleId(rs.getInt("roleid"));
+                con.close();
+                return users;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

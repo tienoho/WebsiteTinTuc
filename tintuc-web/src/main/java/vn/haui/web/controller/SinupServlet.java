@@ -14,37 +14,55 @@ import java.io.IOException;
 import java.util.Calendar;
 
 
-@WebServlet("/Sinup")
+@WebServlet("/SinupServlet")
 public class SinupServlet extends HttpServlet {
     UsersDao usersDao = new UsersDao();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String url = "";
         String command = request.getParameter("command");
+        Users users = null;
+        String email = "";
+        String password = "";
         if ("insert".equals(command)) {
             //Register
-            String email = request.getParameter("email");
-            String password = request.getParameter("password");
+            email = request.getParameter("email");
+            password = request.getParameter("password");
             String fullName = request.getParameter("fullname");
             password = UsersDao.encryption(password);
             //DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
             java.util.Date myDate = (Calendar.getInstance().getTime());
             java.sql.Date sqlDateNow = new java.sql.Date(myDate.getTime());
-            Users users = new Users(email, password, fullName, sqlDateNow, 1);
-            if(usersDao.insertUser(users)){
+            users = new Users(email, password, fullName, sqlDateNow, 1);
+            if (usersDao.insertUser(users)) {
                 HttpSession session = request.getSession();
                 session.setAttribute("user", users);
-                url = "index.jsp";
-                RequestDispatcher rd=getServletContext().getRequestDispatcher(url);
-                rd.forward(request,response);
-            }else {
 
+                url = "/index.jsp";
+            } else {
+                request.setAttribute("errorR","Đăng kí không thành công");
+                request.setAttribute("actionR","class=\"active\"");
+
+                url = "/sinup";
             }
 
-        } else {
+        } else if ("login".equals(command)) {
             //Login
+            email = request.getParameter("emailLogin");
+            password = request.getParameter("passwordLogin");
+            users = usersDao.login(email, UsersDao.encryption(password));
+            if (users != null) {
+                HttpSession session = request.getSession();
+                session.setAttribute("user", users);
+                url = "/index.jsp";
+            } else {
+                request.setAttribute("errorL", "Email hoặc mât khẩu không đúng");
+                request.setAttribute("actionL","class=\"active\"");
+                url = "/sinup";
+            }
         }
-
+        RequestDispatcher rd = getServletContext().getRequestDispatcher(url);
+        rd.forward(request, response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -1,6 +1,7 @@
 <%@ page import="vn.haui.web.command.PostDao" %>
 <%@ page import="vn.haui.web.common.WebConstant" %>
 <%@ page import="vn.haui.web.model.Post" %>
+<%@ page import="java.util.ArrayList" %>
 <%--
   Created by IntelliJ IDEA.
   User: Admin
@@ -12,10 +13,24 @@
 <%
     PostDao postDao = new PostDao();
 
-    String category_id = "";
-    if (request.getParameter("category") != null) {
-        category_id = request.getParameter("category");
+    int category_id = 0;
+    int total = 0;
+    if (request.getParameter("categoryID") != null) {
+        category_id = Integer.parseInt(request.getParameter("categoryID"));
+        total = postDao.getCountPostByCategoy(category_id);
     }
+    int pages = 0, firstResult = 0, maxResult = 0;
+    if (request.getParameter("pages") != null) {
+        pages = Integer.parseInt(request.getParameter("pages"));
+    }
+    if (total <= WebConstant.postNumber) {
+        firstResult = 0;
+        maxResult = total;
+    } else {
+        firstResult = (pages - 1) * WebConstant.postNumber;
+        maxResult = WebConstant.postNumber;
+    }
+    ArrayList<Post> listPost = postDao.getListProductByPages(category_id, firstResult, maxResult);
 %>
 <jsp:include page="header.jsp"/>
 <div class="breadcrumbs-wrap">
@@ -37,7 +52,8 @@
         <div class="col-8 main-content">
             <h2 class="main-heading">Chuyên đề: <strong>Business</strong></h2>
             <div class="posts-list listing-alt">
-                <% for (Post p : postDao.getListPostByCategory(WebConstant.textCategoryID, Integer.parseInt(category_id))) {%>
+                <%-- for (Post p : postDao.getListPostByCategory(WebConstant.textCategoryID, category_id))--%>
+                <% for (Post p : listPost) {%>
                 <article
                         class="post-<%=p.getPostID()%> post type-post status-publish format-standard has-post-thumbnail category-business category-lifestyle tag-culture tag-fashion tag-fitness tag-leisure tag-lifestyle">
                     <div class="post-wrap">
@@ -60,19 +76,44 @@
                             </div>
                             <div class="excerpt">
                                 <%--content--%>
-                                <%=p.getPostContent().substring(0,50)%><%=WebConstant.tobeContime%>
+                                <%=p.getPostContent().substring(0, 50)%><%=WebConstant.tobeContime%>
                             </div>
                         </div>
                     </div>
                 </article>
                 <%}%>
             </div>
-            <div class="main-pagination"><span class='page-numbers current'>1</span>
-                <a class='page-numbers' href='page/2/index.html'>2</a>
-                <a class="next page-numbers" href="page/2/index.html">
+            <div class="main-pagination">
+                <%int cout=total / WebConstant.postNumber;
+                    if (pages > 1) {%>
+                <a class="prev page-numbers" href="category.jsp?categoryID=<%=category_id%>&pages=<%=pages-1%>">
+                    <i class="fa fa-angle-left"></i>
+                    <span class="visuallyhidden">Previous</span>
+                </a>
+                <%}%>
+                <%
+                    for (int i = 1; i <= (cout) + 1; i++) {
+                        if (i == pages) {
+                %>
+                <span class='page-numbers current'><%=i%></span>
+                <%
+                } else {
+                %>
+                <a class='page-numbers' href='category.jsp?categoryID=<%=category_id%>&pages=<%=i%>'><%=i%>
+                </a>
+                <%
+                        }
+                    }
+                    if (pages >= cout&&cout>1) {
+                %>
+                <a class="next page-numbers" href="category.jsp?categoryID=<%=category_id%>&pages=<%=pages+1%>">
                     <span class="visuallyhidden">Next</span>
                     <i class="fa fa-angle-right"></i>
                 </a>
+                <%
+                    }
+                %>
+
             </div>
         </div>
         <jsp:include page="sidebar-category.jsp"/>
