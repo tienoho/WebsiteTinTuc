@@ -6,28 +6,42 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="root" value="${pageContext.request.contextPath}"/>
 <footer>
     <p>Tien</p>
 </footer>
 <!-- /#wrapper -->
 
 <!-- jQuery -->
-<script src="./vendor/jquery/jquery.min.js"></script>
+<script src="${root}/Admincp/vendor/jquery/jquery.min.js"></script>
 
 <!-- Bootstrap Core JavaScript -->
-<script src="./vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="${root}/Admincp/vendor/bootstrap/js/bootstrap.min.js"></script>
 
 <!-- Metis Menu Plugin JavaScript -->
-<script src="./vendor/metisMenu/metisMenu.min.js"></script>
+<script src="${root}/Admincp/vendor/metisMenu/metisMenu.min.js"></script>
 
 <!-- Morris Charts JavaScript -->
-<script src="./vendor/raphael/raphael.min.js"></script>
-<script src="./vendor/morrisjs/morris.min.js"></script>
-<script src="./data/morris-data.js"></script>
+<%--<script src="${root}/Admincp/vendor/raphael/raphael.min.js"></script>--%>
+<%--<script src="${root}/Admincp/vendor/morrisjs/morris.min.js"></script>--%>
+<%--<script src="${root}/Admincp/data/morris-data.js"></script>--%>
+<!-- DataTables JavaScript -->
+<script src="${root}/Admincp/vendor/datatables/js/jquery.dataTables.min.js"></script>
+<script src="${root}/Admincp/vendor/datatables-plugins/dataTables.bootstrap.min.js"></script>
+<script src="${root}/Admincp/vendor/datatables-responsive/dataTables.responsive.js"></script>
+
 
 <!-- Custom Theme JavaScript -->
-<script src="./dist/js/sb-admin-2.js"></script>
-
+<script src="${root}/Admincp/dist/js/sb-admin-2.js"></script>
+<!-- Page-Level Demo Scripts - Tables - Use for reference -->
+<script>
+    $(document).ready(function() {
+        $('#dataTables-example').DataTable({
+            responsive: true
+        });
+    });
+</script>
 </body>
 
 </html>

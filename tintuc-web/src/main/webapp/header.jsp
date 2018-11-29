@@ -152,6 +152,8 @@
                                         <li id="menu-item-578"
                                             class="menu-item menu-item-type-custom menu-item-object-custom menu-item-<%=category.getCategoryID()%>">
                                             <a href="category.jsp?categoryID=<%=category.getCategoryID()%>&pages=1"><%=category.getCategoryName()%></a>
+                                        <%----%>
+                                            <%--CategoryServlet?categoryID=<%=category.getCategoryID()%>&pages=1--%>
                                         </li>
                                         <%}%>
                                     </ul>

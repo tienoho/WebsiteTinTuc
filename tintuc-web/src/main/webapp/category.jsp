@@ -16,12 +16,14 @@
     int category_id = 0;
     int total = 0;
     if (request.getParameter("categoryID") != null) {
-        category_id = Integer.parseInt(request.getParameter("categoryID"));
+       category_id = Integer.parseInt(request.getParameter("categoryID"));
+        //category_id = Integer.parseInt(request.getAttribute("categoryID").toString());
         total = postDao.getCountPostByCategoy(category_id);
     }
     int pages = 0, firstResult = 0, maxResult = 0;
     if (request.getParameter("pages") != null) {
         pages = Integer.parseInt(request.getParameter("pages"));
+        //pages = Integer.parseInt(request.getAttribute("pages").toString());
     }
     if (total <= WebConstant.postNumber) {
         firstResult = 0;

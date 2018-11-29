@@ -37,7 +37,6 @@ public class SinupServlet extends HttpServlet {
             if (usersDao.insertUser(users)) {
                 HttpSession session = request.getSession();
                 session.setAttribute("user", users);
-
                 url = "/index.jsp";
             } else {
                 request.setAttribute("errorR","Đăng kí không thành công");
@@ -61,8 +60,9 @@ public class SinupServlet extends HttpServlet {
                 url = "/sinup";
             }
         }
-        RequestDispatcher rd = getServletContext().getRequestDispatcher(url);
-        rd.forward(request, response);
+        response.sendRedirect(url);
+//        RequestDispatcher rd = getServletContext().getRequestDispatcher(url);
+//        rd.forward(request, response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

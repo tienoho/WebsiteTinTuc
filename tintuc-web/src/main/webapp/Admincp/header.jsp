@@ -6,6 +6,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="root" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html lang="vi">
 
@@ -20,19 +22,23 @@
     <title>SB Admin 2 - Bootstrap Admin Theme</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="./vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="${root}/Admincp/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- MetisMenu CSS -->
-    <link href="./vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
+    <link href="${root}/Admincp/vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="./dist/css/sb-admin-2.css" rel="stylesheet">
+    <link href="${root}/Admincp/dist/css/sb-admin-2.css" rel="stylesheet">
 
+    <link href="${root}/Admincp/vendor/datatables-plugins/dataTables.bootstrap.css" rel="stylesheet">
+
+    <!-- DataTables Responsive CSS -->
+    <link href="${root}/Admincp/vendor/datatables-responsive/dataTables.responsive.css" rel="stylesheet">
     <!-- Morris Charts CSS -->
-    <link href="./vendor/morrisjs/morris.css" rel="stylesheet">
+    <%--<link href="${root}/Admincp/vendor/morrisjs/morris.css" rel="stylesheet">--%>
 
     <!-- Custom Fonts -->
-    <link href="./vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="${root}/Admincp/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -269,5 +275,5 @@
             <!-- /.dropdown -->
         </ul>
         <!-- /.navbar-top-links -->
-<jsp:include page="sidebar.jsp"></jsp:include>
+<jsp:include page="menu.jsp"></jsp:include>
     </nav>

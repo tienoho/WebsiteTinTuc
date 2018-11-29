@@ -26,15 +26,11 @@
         <url-pattern>/register/*</url-pattern>
     </servlet-mapping>
     <servlet>
-        <servlet-name>Admin</servlet-name>
-        <jsp-file>/Admincp/index.jsp</jsp-file>
+        <servlet-name>Categorya</servlet-name>
+        <jsp-file>/category.jsp</jsp-file>
     </servlet>
     <servlet-mapping>
-        <servlet-name>Admin</servlet-name>
-        <url-pattern>/Admin/*</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>Admin</servlet-name>
-        <url-pattern>/admin/*</url-pattern>
+        <servlet-name>Categorya</servlet-name>
+        <url-pattern>/Category/*</url-pattern>
     </servlet-mapping>
 </web-app>

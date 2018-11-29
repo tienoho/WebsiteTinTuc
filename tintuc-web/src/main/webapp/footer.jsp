@@ -166,7 +166,7 @@
     <div class="lower-foot">
         <div class="wrap">
             <div class="widgets">
-                <div class="textwidget">Copyright &copy; 2017. Designed by <a href="http://theme-sphere.com/">ThemeSphere</a>.
+                <div class="textwidget">Copyright &copy; 2018. Designed by <a href="http://theme-sphere.com/">Tien</a>.
                 </div>
                 <div class="menu-footer-right-container">
                     <ul id="menu-footer-right" class="menu">
@@ -180,7 +180,7 @@
                         </li>
                         <li id="menu-item-145"
                             class="menu-item menu-item-type-custom menu-item-object-custom menu-item-145">
-                            <a href="#">Contact</a>
+                            <a href="#">Liên hệ</a>
                         </li>
                     </ul>
                 </div>
