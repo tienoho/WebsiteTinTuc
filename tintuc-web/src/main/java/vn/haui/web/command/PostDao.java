@@ -73,4 +73,15 @@ public class PostDao {
         }
         return count;
     }
+    public int getCategoyID(String slug) throws SQLException {
+        Connection connection = DBConnect.getConnecttion();
+        String sql = "SELECT category_id FROM category WHERE category_slug = '" + slug + "'";
+        PreparedStatement ps = connection.prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
+        int count = 0;
+        while (rs.next()) {
+            count = rs.getInt(1);
+        }
+        return count;
+    }
 }

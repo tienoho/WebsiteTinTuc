@@ -13,14 +13,22 @@
 <%
     PostDao postDao = new PostDao();
 
-    int category_id = 0;
+    String categorySlug="http://localhost:8080/Category/asp_net";
+    System.out.println(categorySlug);
+    categorySlug=categorySlug.substring(categorySlug.lastIndexOf("/")+1);
+    System.out.println(categorySlug);
+    //int category_id = 0;
+    int category_id = postDao.getCategoyID(categorySlug);
+    System.out.println(category_id);
+
     int total = 0;
     if (request.getParameter("categoryID") != null) {
        category_id = Integer.parseInt(request.getParameter("categoryID"));
         //category_id = Integer.parseInt(request.getAttribute("categoryID").toString());
         total = postDao.getCountPostByCategoy(category_id);
     }
-    int pages = 0, firstResult = 0, maxResult = 0;
+    total = postDao.getCountPostByCategoy(category_id);
+    int pages = 1, firstResult = 0, maxResult = 0;
     if (request.getParameter("pages") != null) {
         pages = Integer.parseInt(request.getParameter("pages"));
         //pages = Integer.parseInt(request.getAttribute("pages").toString());
@@ -52,7 +60,7 @@
 <div class="main wrap cf">
     <div class="row">
         <div class="col-8 main-content">
-            <h2 class="main-heading">Chuyên đề: <strong>Business</strong></h2>
+            <h2 class="main-heading">Chuyên đề: <strong>${pageContext.request.requestURI}</strong></h2>
             <div class="posts-list listing-alt">
                 <%-- for (Post p : postDao.getListPostByCategory(WebConstant.textCategoryID, category_id))--%>
                 <% for (Post p : listPost) {%>
@@ -61,11 +69,11 @@
                     <div class="post-wrap">
                         <a href="single.jsp?post=<%=p.getPostID()%>" class="image-link">
                             <img width="312" height="198"
-                                 src="<%=p.getPostImg()%>"
+                                 src="${root}/<%=p.getPostImg()%>"
                                  class="attachment-list-block size-list-block wp-post-image"
                                  alt="shutterstock_485005621"
                                  title="Rachel Runs a Business by Her Own Set of Rules"
-                                 srcset="<%=p.getPostImg().replace(".jpg","-312x198.jpg")%> 312w, <%=p.getPostImg().replace(".jpg","-163x102.jpg")%> 163w"
+                                 srcset="${root}/<%=p.getPostImg().replace(".jpg","-312x198.jpg")%> 312w, ${root}/<%=p.getPostImg().replace(".jpg","-163x102.jpg")%> 163w"
                                  sizes="(max-width: 312px) 100vw, 312px"/> </a>
                         <div class="content">
                             <a href="single.jsp?post=<%=p.getPostID()%>"

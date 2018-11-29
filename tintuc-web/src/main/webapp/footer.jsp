@@ -1,10 +1,12 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="root" value="${pageContext.request.contextPath}"/>
  <footer class="main-footer">
     <div class="wrap">
         <ul class="widgets row cf">
             <li class="widget col-4 bunyad-about">
                 <h3 class="widgettitle">About</h3>
                 <div class="about-widget">
-                    <img src="images/sm-logo-footer.png"/>
+                    <img src="${root}/images/sm-logo-footer.png"/>
                     <p>Your source for the lifestyle news. This demo is crafted specifically to exhibit the use of
                         the theme as a lifestyle site. Visit our main page for more demos.</p>
                     <p>
@@ -43,11 +45,11 @@
                 <ul class="posts-list">
                     <li>
                         <a href="2017/01/10/easy-boho-style-without-looking-like-a-coachella-victim/index.html">
-                            <img width="104" height="69" src="images/shutterstock_275843885-104x69.jpg"
+                            <img width="104" height="69" src="${root}/images/shutterstock_275843885-104x69.jpg"
                                  class="attachment-post-thumbnail size-post-thumbnail wp-post-image"
                                  alt="shutterstock_275843885"
                                  title="Easy Boho Style: Without Looking Like a Coachella Victim"
-                                 srcset="images/shutterstock_275843885-104x69.jpg 104w, images/shutterstock_275843885-300x200.jpg 300w, images/shutterstock_275843885-1000x667.jpg 1000w, images/shutterstock_275843885-702x459.jpg 702w, images/shutterstock_275843885-214x140.jpg 214w, images/shutterstock_275843885-104x69@2x.jpg 208w, images/shutterstock_275843885-300x200@2x.jpg 600w, images/shutterstock_275843885-1000x667@2x.jpg 2000w, images/shutterstock_275843885-702x459@2x.jpg 1404w, images/shutterstock_275843885-214x140@2x.jpg 428w"
+                                 srcset="${root}/images/shutterstock_275843885-104x69.jpg 104w, ${root}/images/shutterstock_275843885-300x200.jpg 300w, ${root}/images/shutterstock_275843885-1000x667.jpg 1000w, ${root}/images/shutterstock_275843885-702x459.jpg 702w, ${root}/images/shutterstock_275843885-214x140.jpg 214w"
                                  sizes="(max-width: 104px) 100vw, 104px"/>
                         </a>
                         <div class="content">
@@ -61,11 +63,11 @@
                     </li>
                     <li>
                         <a href="2017/01/10/15-creative-methods-to-sharpen-your-interior-decor/index.html">
-                            <img width="104" height="69" src="images/shutterstock_48352300-104x69.jpg"
+                            <img width="104" height="69" src="${root}/images/shutterstock_48352300-104x69.jpg"
                                  class="attachment-post-thumbnail size-post-thumbnail wp-post-image"
                                  alt="shutterstock_48352300"
                                  title="15 Creative Methods to Sharpen Your Interior Decor"
-                                 srcset="images/shutterstock_48352300-104x69.jpg 104w, images/shutterstock_48352300-300x200.jpg 300w, images/shutterstock_48352300-1000x667.jpg 1000w, images/shutterstock_48352300-702x459.jpg 702w, images/shutterstock_48352300-214x140.jpg 214w, images/shutterstock_48352300-104x69@2x.jpg 208w, images/shutterstock_48352300-300x200@2x.jpg 600w, images/shutterstock_48352300-1000x667@2x.jpg 2000w, images/shutterstock_48352300-702x459@2x.jpg 1404w, images/shutterstock_48352300-214x140@2x.jpg 428w"
+                                 srcset="${root}/images/shutterstock_48352300-104x69.jpg 104w, ${root}/images/shutterstock_48352300-300x200.jpg 300w, ${root}/images/shutterstock_48352300-1000x667.jpg 1000w, ${root}/images/shutterstock_48352300-702x459.jpg 702w, ${root}/images/shutterstock_48352300-214x140.jpg 214w"
                                  sizes="(max-width: 104px) 100vw, 104px"/>
                         </a>
                         <div class="content">
@@ -79,10 +81,10 @@
                     </li>
                     <li>
                         <a href="2017/01/10/an-update-for-the-top-puma-style-garments/index.html">
-                            <img width="104" height="69" src="images/StockSnap_HBI15KEJR3-104x69.jpg"
+                            <img width="104" height="69" src="${root}/images/StockSnap_HBI15KEJR3-104x69.jpg"
                                  class="attachment-post-thumbnail size-post-thumbnail wp-post-image"
                                  alt="StockSnap_HBI15KEJR3" title="An Update for the Top Puma Style Garments"
-                                 srcset="images/StockSnap_HBI15KEJR3-104x69.jpg 104w, images/StockSnap_HBI15KEJR3-300x200.jpg 300w, images/StockSnap_HBI15KEJR3-1000x667.jpg 1000w, images/StockSnap_HBI15KEJR3-702x459.jpg 702w, images/StockSnap_HBI15KEJR3-214x140.jpg 214w, images/StockSnap_HBI15KEJR3-104x69@2x.jpg 208w, images/StockSnap_HBI15KEJR3-300x200@2x.jpg 600w, images/StockSnap_HBI15KEJR3-1000x667@2x.jpg 2000w, images/StockSnap_HBI15KEJR3-702x459@2x.jpg 1404w, images/StockSnap_HBI15KEJR3-214x140@2x.jpg 428w"
+                                 srcset="${root}/images/StockSnap_HBI15KEJR3-104x69.jpg 104w, ${root}/images/StockSnap_HBI15KEJR3-300x200.jpg 300w, ${root}/images/StockSnap_HBI15KEJR3-1000x667.jpg 1000w, ${root}/images/StockSnap_HBI15KEJR3-702x459.jpg 702w, ${root}/images/StockSnap_HBI15KEJR3-214x140.jpg 214w"
                                  sizes="(max-width: 104px) 100vw, 104px"/>
                         </a>
                         <div class="content">
@@ -101,62 +103,62 @@
                 <div class="flickr-widget">
                     <div class="flickr_badge_image">
                         <a href="http://www.flickr.com/photos/53228952@N08/43393062345/">
-                            <img src="images/static/43393062345_1ddb2dcc98_s.jpg" alt="Ascend"/>
+                            <img src="${root}/images/static/43393062345_1ddb2dcc98_s.jpg" alt="Ascend"/>
                         </a>
                     </div>
                     <div class="flickr_badge_image">
                         <a href="http://www.flickr.com/photos/53228952@N08/35635796836/">
-                            <img src="images/static/35635796836_ca0a463fa2_s.jpg" alt="terns"/>
+                            <img src="${root}/images/static/35635796836_ca0a463fa2_s.jpg" alt="terns"/>
                         </a>
                     </div>
                     <div class="flickr_badge_image">
                         <a href="http://www.flickr.com/photos/53228952@N08/31501807183/">
-                            <img src="images/static/31501807183_fbf20ecb7e_s.jpg" alt="casual"/>
+                            <img src="${root}/images/static/31501807183_fbf20ecb7e_s.jpg" alt="casual"/>
                         </a>
                     </div>
                     <div class="flickr_badge_image">
                         <a href="http://www.flickr.com/photos/53228952@N08/27665237533/">
-                            <img src="images/static/27665237533_674219b6b9_s.jpg" alt="riders on the storm"/>
+                            <img src="${root}/images/static/27665237533_674219b6b9_s.jpg" alt="riders on the storm"/>
                         </a>
                     </div>
                     <div class="flickr_badge_image">
                         <a href="http://www.flickr.com/photos/53228952@N08/23774500140/">
-                            <img src="images/static/23774500140_5a2c4858c4_s.jpg" alt="chairman"/>
+                            <img src="${root}/images/static/23774500140_5a2c4858c4_s.jpg" alt="chairman"/>
                         </a>
                     </div>
                     <div class="flickr_badge_image">
                         <a href="http://www.flickr.com/photos/53228952@N08/24070220745/">
-                            <img src="images/static/24070220745_ffca32f781_s.jpg" alt="mood"/>
+                            <img src="${root}/images/static/24070220745_ffca32f781_s.jpg" alt="mood"/>
                         </a>
                     </div>
                     <div class="flickr_badge_image">
                         <a href="http://www.flickr.com/photos/53228952@N08/23702470069/">
-                            <img src="images/static/23702470069_c00dd38001_s.jpg" alt="monument"/>
+                            <img src="${root}/images/static/23702470069_c00dd38001_s.jpg" alt="monument"/>
                         </a>
                     </div>
                     <div class="flickr_badge_image">
                         <a href="http://www.flickr.com/photos/53228952@N08/23987688351/">
-                            <img src="images/static/23987688351_7967fb2e21_s.jpg" alt="liquid cancer"/>
+                            <img src="${root}/images/static/23987688351_7967fb2e21_s.jpg" alt="liquid cancer"/>
                         </a>
                     </div>
                     <div class="flickr_badge_image">
                         <a href="http://www.flickr.com/photos/53228952@N08/23702464939/">
-                            <img src="images/static/23702464939_3178441198_s.jpg" alt="blue"/>
+                            <img src="${root}/images/static/23702464939_3178441198_s.jpg" alt="blue"/>
                         </a>
                     </div>
                     <div class="flickr_badge_image">
                         <a href="http://www.flickr.com/photos/53228952@N08/23961993242/">
-                            <img src="images/static/23961993242_4591cddafa_s.jpg" alt="basement"/>
+                            <img src="${root}/images/static/23961993242_4591cddafa_s.jpg" alt="basement"/>
                         </a>
                     </div>
                     <div class="flickr_badge_image">
                         <a href="http://www.flickr.com/photos/53228952@N08/24044103816/">
-                            <img src="images/static/24044103816_43d4ea4e25_s.jpg" alt="ditch"/>
+                            <img src="${root}/images/static/24044103816_43d4ea4e25_s.jpg" alt="ditch"/>
                         </a>
                     </div>
                     <div class="flickr_badge_image">
                         <a href="http://www.flickr.com/photos/53228952@N08/23962165962/">
-                            <img src="images/static/23962165962_43b337129f_s.jpg" alt="stars"/>
+                            <img src="${root}/images/static/23962165962_43b337129f_s.jpg" alt="stars"/>
                         </a>
                     </div>
                 </div>
@@ -189,6 +191,6 @@
     </div>
 </footer>
 </div>
-<script type="text/javascript" defer src="js/mainjs.js"></script>
+<script type="text/javascript" defer src="${root}/js/mainjs.js"></script>
 </body>
 </html>

@@ -3,12 +3,14 @@
 <%@ page import="vn.haui.web.model.Category" %>
 <%@ page import="vn.haui.web.model.Users" %>
 <%@ page import="vn.haui.web.common.WebConstant" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="root" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html lang="vi-VN">
 <head>
     <meta charset="UTF-8"/>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <link type="text/css" media="all" href="css/style.css" rel="stylesheet"/>
+    <link type="text/css" media="all" href="${root}/css/style.css" rel="stylesheet"/>
     <!--<link rel='stylesheet' id='rs-plugin-settings-css' href='http://localhost/wp-content/plugins/revslider/public/assets/css/settings.css?ver=5.3.1.5' type='text/css' media='all' />
     <style id='rs-plugin-settings-inline-css' type='text/css'>
         #rs-demo-id {
@@ -22,7 +24,7 @@
     <link rel='stylesheet' id='smartmag-skin-css' href='http://localhost/wp-content/themes/smart-mag/css/skin-trendy.css?ver=4.9.8' type='text/css' media='all' />-->
     <title>SmartMag Trendy &mdash; Premium Theme Demo</title>
 
-    <script type='text/javascript' src='js/jquery.js'></script>
+    <script type='text/javascript' src='${root}/js/jquery.js'></script>
     <script>document.querySelector('head').innerHTML += '<style class="bunyad-img-effects-css">.main img, .main-footer img { opacity: 0; }</style>';</script>
 </head>
 <body class="home page-template page-template-page-blocks page-template-page-blocks-php page page-id-11 page-builder right-sidebar full skin-tech has-featured img-effects has-nav-light-b has-nav-full has-head-tech has-mobile-head">
@@ -99,10 +101,10 @@
             <div class="mobile-head">
                 <div class="menu-icon"><a href="#"><i class="fa fa-bars"></i></a></div>
                 <div class="title">
-                    <a href="index.html" title="SmartMag Trendy" rel="home" class="is-logo-mobile">
-                        <img src="images/sm-logo-mobile.png" class="logo-mobile" width="0" height="0"/>
-                        <img src="images/sm-logo-1.png" class="logo-image" alt="SmartMag Trendy"
-                             srcset="images/sm-logo-1.png ,images/sm-logo2x-1.png 2x"/>
+                    <a href="${root}/" title="SmartMag Trendy" rel="home" class="is-logo-mobile">
+                        <img src="${root}/images/sm-logo-mobile.png" class="logo-mobile" width="0" height="0"/>
+                        <img src="${root}/images/sm-logo-1.png" class="logo-image" alt="SmartMag Trendy"
+                             srcset="${root}/images/sm-logo-1.png ,${root}/images/sm-logo2x-1.png 2x"/>
                     </a>
                 </div>
                 <div class="search-overlay">
@@ -112,15 +114,15 @@
             <header class="tech">
                 <div class="title">
                     <a href="<%=WebConstant.localHost%>" title="SmartMag Trendy" rel="home" class="is-logo-mobile">
-                        <img src="images/sm-logo-mobile.png" class="logo-mobile" width="0" height="0"/>
-                        <img src="images/sm-logo-1.png" class="logo-image" alt="SmartMag Trendy"
-                             srcset="images/sm-logo-1.png ,images/sm-logo2x-1.png 2x"/>
+                        <img src="${root}/images/sm-logo-mobile.png" class="logo-mobile" width="0" height="0"/>
+                        <img src="${root}/images/sm-logo-1.png" class="logo-image" alt="SmartMag Trendy"
+                             srcset="${root}/images/sm-logo-1.png ,${root}/images/sm-logo2x-1.png 2x"/>
                     </a>
                 </div>
                 <div class="right">
                     <div class="a-widget">
                         <a href="#">
-                            <img src="images/sm-728x90.jpg" width="728" height="90" alt="Banner"/>
+                            <img src="${root}/images/sm-728x90.jpg" width="728" height="90" alt="Banner"/>
                         </a>
                     </div>
                 </div>
@@ -149,10 +151,10 @@
                                             for(Category category:categoryDao.getListCategory())
                                             {
                                         %>
-                                        <li id="menu-item-578"
+                                        <li id="menu-item-<%=category.getCategoryID()%>"
                                             class="menu-item menu-item-type-custom menu-item-object-custom menu-item-<%=category.getCategoryID()%>">
-                                            <a href="category.jsp?categoryID=<%=category.getCategoryID()%>&pages=1"><%=category.getCategoryName()%></a>
-                                        <%----%>
+                                            <a href="Category/<%=category.getCategorySlug()%>"><%=category.getCategoryName()%></a>
+                                        <%--category.jsp?categoryID=<%=category.getCategoryID()%>&pages=1--%>
                                             <%--CategoryServlet?categoryID=<%=category.getCategoryID()%>&pages=1--%>
                                         </li>
                                         <%}%>
