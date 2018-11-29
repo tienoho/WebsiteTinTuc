@@ -535,11 +535,11 @@
                                                            title="Summer Style: Chunky Knit For Leather Suits"
                                                            class="image-link">
                                                             <img width="336" height="200"
-                                                                 src="images/shutterstock_350007890-336x200.jpg"
+                                                                 src="${root}/images/shutterstock_350007890-336x200.jpg"
                                                                  class="image wp-post-image"
                                                                  alt="shutterstock_350007890"
                                                                  title="Summer Style: Chunky Knit For Leather Suits"
-                                                                 srcset="images/shutterstock_350007890-336x200.jpg 336w, images/shutterstock_350007890-336x200@2x.jpg 672w"
+                                                                 srcset="${root}/images/shutterstock_350007890-336x200.jpg 336w"
                                                                  sizes="(max-width: 336px) 100vw, 336px"/>
                                                         </a>
                                                         <h2 class="post-title">
@@ -568,11 +568,11 @@
                                                     <div class="post">
                                                         <a href="2017/01/08/fashion-chic-x-latest-mejuri-jewelry-collection-of-2017-2/index.html">
                                                             <img width="104" height="69"
-                                                                 src="images/shutterstock_536935141-104x69.jpg"
+                                                                 src="${root}/images/shutterstock_536935141-104x69.jpg"
                                                                  class="attachment-post-thumbnail size-post-thumbnail wp-post-image"
                                                                  alt="shutterstock_536935141"
                                                                  title="Fashion Chic X Mejuri Jewelry Collection of 2017"
-                                                                 srcset="images/shutterstock_536935141-104x69.jpg 104w, images/shutterstock_536935141-300x196.jpg 300w, images/shutterstock_536935141-1000x653.jpg 1000w, images/shutterstock_536935141-702x459.jpg 702w, images/shutterstock_536935141-214x140.jpg 214w, images/shutterstock_536935141-104x69@2x.jpg 208w, images/shutterstock_536935141-300x196@2x.jpg 600w, images/shutterstock_536935141-1000x653@2x.jpg 2000w, images/shutterstock_536935141-702x459@2x.jpg 1404w, images/shutterstock_536935141-214x140@2x.jpg 428w"
+                                                                 srcset="${root}/images/shutterstock_536935141-104x69.jpg 104w, ${root}/images/shutterstock_536935141-300x196.jpg 300w, ${root}/images/shutterstock_536935141-1000x653.jpg 1000w, ${root}/images/shutterstock_536935141-702x459.jpg 702w, ${root}/images/shutterstock_536935141-214x140.jpg 214w"
                                                                  sizes="(max-width: 104px) 100vw, 104px"/>
                                                         </a>
                                                         <div class="content">
@@ -591,11 +591,11 @@
                                                     <div class="post">
                                                         <a href="2017/01/08/trending-bodysuits-and-faded-friendship-jeans-2/index.html">
                                                             <img width="104" height="69"
-                                                                 src="images/shutterstock_518581786-104x69.jpg"
+                                                                 src="${root}/images/shutterstock_518581786-104x69.jpg"
                                                                  class="attachment-post-thumbnail size-post-thumbnail wp-post-image"
                                                                  alt="shutterstock_518581786"
                                                                  title="Trending: Bodysuits and Faded Friendship Jeans"
-                                                                 srcset="images/shutterstock_518581786-104x69.jpg 104w, images/shutterstock_518581786-300x200.jpg 300w, images/shutterstock_518581786-1000x667.jpg 1000w, images/shutterstock_518581786-702x459.jpg 702w, images/shutterstock_518581786-214x140.jpg 214w, images/shutterstock_518581786-104x69@2x.jpg 208w, images/shutterstock_518581786-300x200@2x.jpg 600w, images/shutterstock_518581786-1000x667@2x.jpg 2000w, images/shutterstock_518581786-702x459@2x.jpg 1404w, images/shutterstock_518581786-214x140@2x.jpg 428w"
+                                                                 srcset="${root}/images/shutterstock_518581786-104x69.jpg 104w, ${root}/images/shutterstock_518581786-300x200.jpg 300w, ${root}/images/shutterstock_518581786-1000x667.jpg 1000w, ${root}/images/shutterstock_518581786-702x459.jpg 702w, ${root}/images/shutterstock_518581786-214x140.jpg 214w, ${root}/images/shutterstock_518581786-104x69@2x.jpg 208w"
                                                                  sizes="(max-width: 104px) 100vw, 104px"/>
                                                         </a>
                                                         <div class="content">
@@ -614,11 +614,11 @@
                                                     <div class="post">
                                                         <a href="2017/01/08/summer-style-chunky-knit-for-leather-suits-2/index.html">
                                                             <img width="104" height="69"
-                                                                 src="images/shutterstock_350007890-104x69.jpg"
+                                                                 src="${root}/images/shutterstock_350007890-104x69.jpg"
                                                                  class="attachment-post-thumbnail size-post-thumbnail wp-post-image"
                                                                  alt="shutterstock_350007890"
                                                                  title="Summer Style: Chunky Knit For Leather Suits"
-                                                                 srcset="images/shutterstock_350007890-104x69.jpg 104w, images/shutterstock_350007890-300x200.jpg 300w, images/shutterstock_350007890-1000x667.jpg 1000w, images/shutterstock_350007890-702x459.jpg 702w, images/shutterstock_350007890-214x140.jpg 214w, images/shutterstock_350007890-104x69@2x.jpg 208w, images/shutterstock_350007890-300x200@2x.jpg 600w, images/shutterstock_350007890-1000x667@2x.jpg 2000w, images/shutterstock_350007890-702x459@2x.jpg 1404w, images/shutterstock_350007890-214x140@2x.jpg 428w"
+                                                                 srcset="${root}/images/shutterstock_350007890-104x69.jpg 104w, ${root}/images/shutterstock_350007890-300x200.jpg 300w, ${root}/images/shutterstock_350007890-1000x667.jpg 1000w, ${root}/images/shutterstock_350007890-702x459.jpg 702w, ${root}/images/shutterstock_350007890-214x140.jpg 214w"
                                                                  sizes="(max-width: 104px) 100vw, 104px"/>
                                                         </a>
                                                         <div class="content">

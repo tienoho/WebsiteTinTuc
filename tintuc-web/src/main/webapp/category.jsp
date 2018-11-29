@@ -10,14 +10,21 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<c:set var="pageUrl" scope="request">
+    <c:out value="${pageContext.request.scheme}://${request.getRequestURL}"/>
+    <c:if test="${pageContext.request.serverPort != '80'}">
+        <c:out value=":${pageContext.request.serverPort}"/>
+    </c:if>
+    <c:out value="${requestScope['javax.servlet.forward.request_uri']}"/>
+</c:set>W
 <%
     PostDao postDao = new PostDao();
 
     String categorySlug="http://localhost:8080/Category/asp_net";
-    System.out.println(categorySlug);
+    //System.out.println(categorySlug);
     categorySlug=categorySlug.substring(categorySlug.lastIndexOf("/")+1);
-    System.out.println(categorySlug);
-    //int category_id = 0;
+    System.out.println(request.getRequestURL());
+    //int category_id = 0;=
     int category_id = postDao.getCategoyID(categorySlug);
     System.out.println(category_id);
 
