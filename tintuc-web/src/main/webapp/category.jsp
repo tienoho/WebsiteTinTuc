@@ -10,17 +10,17 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<c:set var="pageUrl" scope="request">
-    <c:out value="${pageContext.request.scheme}://${request.getRequestURL}"/>
-    <c:if test="${pageContext.request.serverPort != '80'}">
-        <c:out value=":${pageContext.request.serverPort}"/>
-    </c:if>
-    <c:out value="${requestScope['javax.servlet.forward.request_uri']}"/>
-</c:set>W
+<%--<c:set var="pageUrl" scope="request">--%>
+    <%--<c:out value="${pageContext.request.scheme}://${request.getRequestURL}"/>--%>
+    <%--<c:if test="${pageContext.request.serverPort != '80'}">--%>
+        <%--<c:out value=":${pageContext.request.serverPort}"/>--%>
+    <%--</c:if>--%>
+    <%--<c:out value="${requestScope['javax.servlet.forward.request_uri']}"/>--%>
+<%--</c:set>--%>
 <%
     PostDao postDao = new PostDao();
 
-    String categorySlug="http://localhost:8080/Category/asp_net";
+    String categorySlug=request.getRequestURL().toString();
     //System.out.println(categorySlug);
     categorySlug=categorySlug.substring(categorySlug.lastIndexOf("/")+1);
     System.out.println(request.getRequestURL());
