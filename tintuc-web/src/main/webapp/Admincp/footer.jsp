@@ -29,7 +29,7 @@
 <!-- DataTables JavaScript -->
 <script src="${root}/Admincp/vendor/datatables/js/jquery.dataTables.min.js"></script>
 <script src="${root}/Admincp/vendor/datatables-plugins/dataTables.bootstrap.min.js"></script>
-<script src="${root}/Admincp/vendor/datatables-responsive/dataTables.responsive.js"></script>
+<%--<script src="${root}/Admincp/vendor/datatables-responsive/dataTables.responsive.js"></script>--%>
 
 
 <!-- Custom Theme JavaScript -->

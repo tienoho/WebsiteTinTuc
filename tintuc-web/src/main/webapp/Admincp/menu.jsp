@@ -23,7 +23,25 @@
                 <!-- /input-group -->
             </li>
             <li>
-                <a href="${root}/Admin/"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                <a href="${root}/Admincp/"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+            </li>
+            <li>
+                <a href="#"><i class="fa fa-book fa-fw"></i> Bài viết<span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    <li>
+                        <a href="${root}/Admincp/post.jsp">Tất cả bài viết</a>
+                    </li>
+                    <li>
+                        <a href="${root}/Admincp/edit-post.jsp">Bài viết mới</a>
+                    </li>
+                    <li>
+                        <a href="${root}/Admincp/category.jsp">Chuyên mục</a>
+                    </li>
+                    <li>
+                        <a href="${root}/Admincp/tag.jsp">Thẻ</a>
+                    </li>
+                </ul>
+                <!-- /.nav-second-level -->
             </li>
             <li>
                 <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Charts<span class="fa arrow"></span></a>

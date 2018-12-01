@@ -1,24 +1,34 @@
 package vn.haui.web.model;
 
 public class Category {
-    private long categoryID;
+    private int categoryID;
     private String categoryName;
+    private String categoryDes;
     private String categorySlug;
 
     public Category() {
     }
 
-    public Category(long categoryID, String categoryName, String categorySlug) {
+    public Category(int categoryID, String categoryName, String categoryDes, String categorySlug) {
         this.categoryID = categoryID;
         this.categoryName = categoryName;
+        this.categoryDes = categoryDes;
         this.categorySlug = categorySlug;
     }
 
-    public long getCategoryID() {
+    public String getCategoryDes() {
+        return categoryDes;
+    }
+
+    public void setCategoryDes(String categoryDes) {
+        this.categoryDes = categoryDes;
+    }
+
+    public int getCategoryID() {
         return categoryID;
     }
 
-    public void setCategoryID(long categoryID) {
+    public void setCategoryID(int categoryID) {
         this.categoryID = categoryID;
     }
 
