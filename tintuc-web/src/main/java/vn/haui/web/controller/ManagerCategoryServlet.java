@@ -64,6 +64,10 @@ public class ManagerCategoryServlet extends HttpServlet {
                         result = "Cập nhập thành công";
                         //response.sendRedirect(WebConstant.localHost + "/Admincp/category.jsp");
                         break;
+                    case "delete":
+                        categoryDao.delete(Integer.parseInt(request.getParameter("category-ID")));
+                        //response.sendRedirect(WebConstant.localHost + "/Admincp/category.jsp");
+                        break;
                     default:
                         result = "Thêm không thành công";
                         //response.sendRedirect(WebConstant.localHost + "/Admincp/category.jsp");
@@ -86,7 +90,7 @@ public class ManagerCategoryServlet extends HttpServlet {
         response.setCharacterEncoding("utf-8");
         String url = "", error = "";
         String command = request.getParameter("action");
-        String categoryName = request.getParameter("category-name");
+        String categoryID = request.getParameter("category-id");
         switch (command) {
             case "delete":
                 break;

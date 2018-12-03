@@ -31,6 +31,17 @@
         }
     });
 </script>
+<script>
+    function delete_category_ajax(category_ID) {
+        $.post('${root}/MCategoryServlet', {'category-ID': category_ID,'command': "delete"},function (data) {
+            $("#category-slug-result").html(data);
+        });
+        $('#item-'+category_ID).click(function(){
+            $(this).remove();
+            return false;
+        });
+    }
+</script>
 <%
     CategoryDao categoryDao = new CategoryDao();
     ArrayList<Category> categories = categoryDao.getListCategory();
@@ -112,11 +123,10 @@
                             </thead>
                             <tbody>
                             <%for (Category c : categories) {%>
-                            <tr>
-                                <td><%=c.getCategoryID()%>
-                                </td>
+                            <tr id="item-<%=c.getCategoryID()%>">
+                                <td><%=c.getCategoryID()%></td>
                                 <td>
-                                    <a href="category.jsp?category=<%=c.getCategoryID()%>&action=edit"><%=c.getCategoryName()%>
+                                    <a href="edit-category.jsp?category=<%=c.getCategoryID()%>&action=edit"><%=c.getCategoryName()%>
                                     </a>
                                     <div class="row-actions">
                                         <span class="edit"><a href="edit-category.jsp?category=<%=c.getCategoryID()%>&action=edit"
@@ -141,10 +151,8 @@
                                                         Bạn có chắc chắn muốn xóa chuyên mục này không ?
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <button type="button" class="btn btn-default"
-                                                                data-dismiss="modal">Close
-                                                        </button>
-                                                        <button type="button" class="btn btn-primary">Delete</button>
+                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                        <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="delete_category_ajax(<%=c.getCategoryID()%>)">Delete</button>
                                                     </div>
                                                 </div>
                                                 <!-- /.modal-content -->
