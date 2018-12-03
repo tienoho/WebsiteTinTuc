@@ -40,9 +40,9 @@
 <body>
 <%
     String errorL=(String)request.getAttribute("errorL");
-    String errorR=(String)request.getAttribute("errorR");
-    String actionL=(String)request.getAttribute("actionL");
-    String actionR=(String)request.getAttribute("actionR");
+   // String errorR=(String)request.getAttribute("errorR");
+//    String actionL=(String)request.getAttribute("actionL");
+//    String actionR=(String)request.getAttribute("actionR");
 
 %>
 <div class="container">
@@ -51,13 +51,13 @@
             <div class="panel panel-login">
                 <div class="panel-heading">
                     <div class="row">
-                        <div class="col-xs-6">
+                        <div class="col-xs-12">
                             <%--class="active"--%>
-                            <a href="#" <%=(actionL!=null&&actionR==null?actionL:"")%> id="login-form-link">Đăng nhập</a>
+                            <a href="#" class="active" id="login-form-link">Đăng nhập</a>
                         </div>
-                        <div class="col-xs-6">
-                            <a href="#" <%=(actionR!=null&&actionL==null?actionR:"")%> id="register-form-link">Đăng ký</a>
-                        </div>
+                        <%--<div class="col-xs-6">--%>
+                            <%--<a href="#" <%=(actionR!=null&&actionL==null?actionR:"")%> id="register-form-link">Đăng ký</a>--%>
+                        <%--</div>--%>
                     </div>
                     <hr>
                 </div>
@@ -95,34 +95,43 @@
                                         </div>
                                     </div>
                                 </div>
-                            </form>
-                            <form id="register-form" action="SinupServlet" method="post" role="form" style="display: none;">
-                                <div class="form-group">
-                                    <p style="color: red;"><%=(errorR!=null)?errorR:""%></p>
-                                </div>
-                                <div class="form-group">
-                                    <input type="email" name="email" id="email" tabindex="1" class="form-control" placeholder="Địa chỉ Email" value="">
-                                    <span id="user-result"></span>
-                                </div>
-                                <div class="form-group">
-                                    <input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password">
-                                </div>
-                                <div class="form-group">
-                                    <input type="password" name="confirm-password" id="confirm-password" tabindex="2" class="form-control" placeholder="Nhập lại Password">
-                                    <span id="message"></span>
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" name="fullname" id="fullname" tabindex="2" class="form-control" placeholder="Le Van A">
-                                </div>
-                                <input type="hidden" hidden="hidden" name="command" value="insert"/>
                                 <div class="form-group">
                                     <div class="row">
-                                        <div class="col-sm-6 col-sm-offset-3">
-                                            <input type="submit" name="register-submit"  id="register-submit" tabindex="4" class="form-control btn btn-register" value="Đăng ký">
+                                        <div class="col-lg-12">
+                                            <div class="text-center">
+                                                Nếu bạn chưa có tài khoản ? hãy <a href="registered.jsp" tabindex="5" class="btn-register">Đăng ký</a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </form>
+                            <%--<form id="register-form" action="SinupServlet" method="post" role="form" style="display: none;">--%>
+                                <%--<div class="form-group">--%>
+                                    <%--<p style="color: red;"><%=(errorR!=null)?errorR:""%></p>--%>
+                                <%--</div>--%>
+                                <%--<div class="form-group">--%>
+                                    <%--<input type="email" name="email" id="email" tabindex="1" class="form-control" placeholder="Địa chỉ Email" value="">--%>
+                                    <%--<span id="user-result"></span>--%>
+                                <%--</div>--%>
+                                <%--<div class="form-group">--%>
+                                    <%--<input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password">--%>
+                                <%--</div>--%>
+                                <%--<div class="form-group">--%>
+                                    <%--<input type="password" name="confirm-password" id="confirm-password" tabindex="2" class="form-control" placeholder="Nhập lại Password">--%>
+                                    <%--<span id="message"></span>--%>
+                                <%--</div>--%>
+                                <%--<div class="form-group">--%>
+                                    <%--<input type="text" name="fullname" id="fullname" tabindex="2" class="form-control" placeholder="Le Van A">--%>
+                                <%--</div>--%>
+                                <%--<input type="hidden" hidden="hidden" name="command" value="insert"/>--%>
+                                <%--<div class="form-group">--%>
+                                    <%--<div class="row">--%>
+                                        <%--<div class="col-sm-6 col-sm-offset-3">--%>
+                                            <%--<input type="submit" name="register-submit"  id="register-submit" tabindex="4" class="form-control btn btn-register" value="Đăng ký">--%>
+                                        <%--</div>--%>
+                                    <%--</div>--%>
+                                <%--</div>--%>
+                            <%--</form>--%>
                         </div>
                     </div>
                 </div>
@@ -130,14 +139,5 @@
         </div>
     </div>
 </div>
-<script type="text/javascript">
-    //check confirm password
-    $('#password, #confirm-password').on('keyup', function () {
-        if ($('#password').val() == $('#confirm-password').val()) {
-            $('#message').html('Matching').css('color', 'green');
-        } else
-            $('#message').html('Not Matching').css('color', 'red');
-    });
-</script>
 </body>
 </html>

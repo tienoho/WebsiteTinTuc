@@ -39,10 +39,9 @@ public class SinupServlet extends HttpServlet {
                 session.setAttribute("user", users);
                 url = "/index.jsp";
             } else {
-                request.setAttribute("errorR","Đăng kí không thành công");
-                request.setAttribute("actionR","class=\"active\"");
-
-                url = "/sinup";
+                request.setAttribute("errorR", "Đăng kí không thành công");
+                request.setAttribute("actionR", "class=\"active\"");
+                url = "/register";
             }
 
         } else if ("login".equals(command)) {
@@ -56,13 +55,13 @@ public class SinupServlet extends HttpServlet {
                 url = "/index.jsp";
             } else {
                 request.setAttribute("errorL", "Email hoặc mât khẩu không đúng");
-                request.setAttribute("actionL","class=\"active\"");
-                url = "/sinup";
+//                request.setAttribute("actionL","class=\"active\"");
+                url = "/login";
             }
         }
-        response.sendRedirect(url);
-//        RequestDispatcher rd = getServletContext().getRequestDispatcher(url);
-//        rd.forward(request, response);
+        //response.sendRedirect(url);
+        RequestDispatcher rd = getServletContext().getRequestDispatcher(url);
+        rd.forward(request, response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

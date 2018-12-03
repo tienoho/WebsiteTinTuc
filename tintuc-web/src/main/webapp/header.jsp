@@ -49,7 +49,7 @@
                         <%}else {%>
                         <li id="menu-item-4"
                             class="menu-item menu-item-type-custom menu-item-object-custom menu-item-4">
-                            <a href="/sinup">Đăng nhập</a>
+                            <a href="/login">Đăng nhập</a>
                         </li>
                         <%}%>
                         <li id="menu-item-5"
