@@ -97,4 +97,19 @@ public class UsersDao {
         }
         return null;
     }
+    public String getName(int userId) {
+        Connection con = DBConnect.getConnecttion();
+        String sql = "select * from user where userid='" + userId + "'";
+        PreparedStatement ps;
+        try {
+            ps = (PreparedStatement) con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getString("fullname");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

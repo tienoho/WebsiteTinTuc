@@ -44,6 +44,10 @@
                 <!-- /.nav-second-level -->
             </li>
             <li>
+                <a href="${root}/Admincp/upload.jsp"><i class="fa fa-upload fa-fw"></i> Thư viện<span class="fa arrow"></span></a>
+                <!-- /.nav-second-level -->
+            </li>
+            <li>
                 <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Charts<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li>

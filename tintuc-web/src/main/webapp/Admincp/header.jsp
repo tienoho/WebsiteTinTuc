@@ -47,6 +47,8 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" type="text/javascript"></script>
+    <script src="<c:url value="${root}/ckeditor/ckeditor.js" />"></script>
+    <script src="<c:url value="${root}/ckfinder/ckfinder.js" />"></script>
 
 </head>
 

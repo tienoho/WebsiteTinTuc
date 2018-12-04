@@ -3,18 +3,33 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="vn.haui.web.model.Post" %>
 <%@ page import="vn.haui.web.command.PostDao" %>
+<%@ page import="vn.haui.web.command.UsersDao" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="root" value="${pageContext.request.contextPath}"/>
 <jsp:include page="header.jsp"/>
 <%
     PostDao postDao = new PostDao();
+    UsersDao usersDao=new UsersDao();
     ArrayList<Post> posts = postDao.getListAllPost();
 %>
+<script>
+    function delete_post_ajax(Post_ID) {
+        $.post('${root}/ManagerPostServlet', {'post-ID': Post_ID,'command': "delete"},function (data) {
+            $("#myModalLabel").html(data);
+        });
+        //xóa thẻ sau 2 giây
+        setTimeout(function(){
+            if ($('#item-post-'+Post_ID).length > 0) {
+                $('#item-post-'+Post_ID).remove();
+            }
+        }, 2000)
+    }
+</script>
 <div id="page-wrapper">
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header">Tables</h1>
+            <h1 class="page-header">Bài viết</h1>
         </div>
         <!-- /.col-lg-12 -->
     </div>
@@ -39,11 +54,11 @@
                         </thead>
                         <tbody>
                         <%for (Post c : posts) {%>
-                        <tr class="odd gradeX">
+                        <tr class="odd gradeX" id="item-post-<%=c.getPostID()%>">
                             <td><%=c.getPostID()%></td>
                             <td><a href="post.jsp?post=<%=c.getPostID()%>&action=edit"><%=c.getPostTitle()%></a>
                                 <div class="row-actions">
-                                    <span class="edit"><a href="post.jsp?post=<%=c.getPostID()%>&action=edit" aria-label="Sửa “Beauty”">Chỉnh sửa</a> | </span>
+                                    <span class="edit"><a href="edit-post.jsp?post=<%=c.getPostID()%>&action=edit" aria-label="Sửa “Beauty”">Chỉnh sửa</a> | </span>
                                     <span class="delete"><a href="" class="delete-tag aria-button-if-js" data-toggle="modal" data-target="#delete<%=c.getPostID()%>" aria-label="Xóa “Beauty”" role="button">Xóa</a> | </span>
                                     <!-- Modal -->
                                     <div class="modal fade" id="delete<%=c.getPostID()%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -54,11 +69,11 @@
                                                     <h4 class="modal-title" id="myModalLabel">Delete</h4>
                                                 </div>
                                                 <div class="modal-body">
-                                                    Bạn có chắc chắn muốn xóa chuyên mục này không ?
+                                                    Bạn có chắc chắn muốn xóa bài viết này không ?
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                    <button type="button" class="btn btn-primary">Delete</button>
+                                                    <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="delete_post_ajax(<%=c.getPostID()%>)">Delete</button>
                                                 </div>
                                             </div>
                                             <!-- /.modal-content -->
@@ -69,7 +84,7 @@
                                     <span class="view"><a href="" aria-label="Xem lưu trữ “Beauty”">Xem</a></span>
                                 </div>
                             </td>
-                            <td><%=c.getAuthorID()%></td>
+                            <td><%=usersDao.getName(c.getAuthorID())%></td>
                             <td><%=c.getCategoryID()%></td>
                             <td><%=c.getPostDate()%></td>
                         </tr>

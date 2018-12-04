@@ -34,12 +34,14 @@
 <script>
     function delete_category_ajax(category_ID) {
         $.post('${root}/MCategoryServlet', {'category-ID': category_ID,'command': "delete"},function (data) {
-            $("#category-slug-result").html(data);
+            $("#myModalLabel").html(data);
         });
-        $('#item-'+category_ID).click(function(){
-            $(this).remove();
-            return false;
-        });
+        //xóa thẻ sau 2 giây
+        setTimeout(function(){
+            if ($('#item-'+category_ID).length > 0) {
+                $('#item-'+category_ID).remove();
+            }
+        }, 2000)
     }
 </script>
 <%
@@ -68,14 +70,14 @@
             <form role="form" action="${root}/MCategoryServlet" method="post">
                 <div class="form-group">
                     <label>Tên chuyên mục</label>
-                    <span name="category-name-result" class="danger"><%=error%></span>
+                    <span name="category-name-result" class="text-danger"><%=error%></span>
                     <input class="form-control" id="category-name" name="category-name">
                     <p class="help-block">Tên riêng sẽ hiển thị trên trang mạng của bạn.</p>
                 </div>
                 <div class="form-group">
                     <label>Chuỗi cho đường dẫn tĩnh</label>
                     <input class="form-control" id="category-slug" name="category-slug"><span
-                        id="category-slug-result"><%=error_slug%></span>
+                        id="category-slug-result" class="text-danger"><%=error_slug%></span>
                     <p class="help-block">Chuỗi cho đường dẫn tĩnh là phiên bản của tên hợp chuẩn với Đường dẫn (URL).
                         Chuỗi này bao gồm chữ cái thường, số và dấu gạch ngang (-).</p>
                 </div>
@@ -99,7 +101,7 @@
                         vài giao diện có thể hiển thị mô tả này.</p>
                 </div>
                 <input hidden="hidden" name="command" value="insert">
-                <span name="category-result"><%=result%></span>
+                <span name="category-result" class="text-success"><%=result%></span>
                 <button type="submit" class="btn btn-success">Thêm chuyên mục</button>
             </form>
         </div>

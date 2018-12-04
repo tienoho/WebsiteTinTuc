@@ -9,6 +9,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="root" value="${pageContext.request.contextPath}"/>
 <jsp:include page="header.jsp"/>
+<%
+    String action = "";
+    if (request.getParameter("action") != null)
+        action = request.getParameter("action");
+
+%>
 <div id="page-wrapper">
     <div class="row">
         <div class="col-lg-12">
@@ -18,54 +24,196 @@
     </div>
     <!-- /.row -->
     <div class="row">
-        <div class="col-lg-10">
-            <form role="form" action="${root}/MCategoryServlet" method="post">
+        <form role="form" action="${root}/ManagerPostServlet" method="post">
+            <div class="col-lg-9">
                 <div class="form-group">
                     <label>Tên chuyên mục</label>
-                    <span name="category-name-result" class="danger"></span>
-                    <input class="form-control" id="category-name" name="category-name">
+                    <span name="post-title-result" class="text-danger"></span>
+                    <input class="form-control" id="post-title" name="post-title" placeholder="Nhập tiêu đề tại đây">
                     <p class="help-block">Tên riêng sẽ hiển thị trên trang mạng của bạn.</p>
                 </div>
+                <%if (action.equals("edit")) {%>
                 <div class="form-group">
-                    <label>Chuỗi cho đường dẫn tĩnh</label>
-                    <input class="form-control" id="category-slug" name="category-slug">
-                    <span id="category-slug-result"></span>
+                    <label>liên kết tĩnh</label>
+                    <input class="form-control" id="post-slug" name="post-slug">
+                    <span id="post-slug-result"></span>
                     <p class="help-block">Chuỗi cho đường dẫn tĩnh là phiên bản của tên hợp chuẩn với Đường dẫn (URL).
                         Chuỗi này bao gồm chữ cái thường, số và dấu gạch ngang (-).</p>
                 </div>
+                <%}%>
+
 
                 <div class="form-group">
-                    <label>Mô tả</label>
-                    <textarea class="form-control" rows="3" id="category-des" name="category-des"></textarea>
-                    <p class="help-block">Thông thường mô tả này không được sử dụng trong các giao diện, tuy nhiên có
-                        vài giao diện có thể hiển thị mô tả này.</p>
+                    <label>Nội dung</label>
+                    <textarea class="form-control" rows="5" id="post-content" name="post-content"></textarea>
+                    <script type="text/javascript" language="javascript">
+                        var editer=CKEDITOR.replace('post-content', {width: '100%',height: '300px'},{editorConfig: '/ckeditor/config.js'});
+                        CKFinder.setupCKEditor(editer,'${root}/ckfinder/');
+                    </script>
+                    <p class="help-block"></p>
                 </div>
-                <input hidden="hidden" name="command" value="insert">
+                <div class="form-group">
+                    <label>Tóm tắt</label>
+                    <textarea class="form-control" rows="2" id="post-des" name="post-des"></textarea>
+                    <p class="help-block"></p>
+                </div>
+                <input hidden="hidden" name="command" value="<%=action=="edit"?"update":"insert"%>">
                 <span name="category-result"></span>
-                <button type="submit" class="btn btn-success">Thêm chuyên mục</button>
-            </form>
-        </div>
-        <!-- /.col-lg-4 (nested) -->
-        <div class="col-lg-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    Kitchen Sink
-                </div>
-                <!-- /.panel-heading -->
-                <div class="panel-body">
-                    <div class="table-responsive">
 
-                    </div>
-                    <!-- /.table-responsive -->
-                </div>
-                <!-- /.panel-body -->
             </div>
-            <!-- /.panel -->
-        </div>
-        <!-- /.col-lg-6 -->
+            <!-- /.col-lg-4 (nested) -->
+            <div class="col-lg-3">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <i class="fa fa-bell fa-fw"></i> Đăng
+                    </div>
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">
+                        <div class="list-group">
+                            <a href="#" class="list-group-item">
+                                <i class="fa fa-comment fa-fw"></i> New Comment
+                                <span class="pull-right text-muted small"><em>4 minutes ago</em>
+                                    </span>
+                            </a>
+                            <a href="#" class="list-group-item">
+                                <i class="fa fa-twitter fa-fw"></i> 3 New Followers
+                                <span class="pull-right text-muted small"><em>12 minutes ago</em>
+                                    </span>
+                            </a>
+                        </div>
+                        <!-- /.list-group -->
+                        <button type="submit" class="btn btn-success"><%=action == "edit" ? "Cập nhập" : "Đăng"%>
+                        </button>
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+                <!-- /.panel -->
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <i class="fa fa-bell fa-fw"></i> Chuyên mục
+                    </div>
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">
+                        <div class="list-group">
+                            <a href="#" class="list-group-item">
+                                <i class="fa fa-comment fa-fw"></i> New Comment
+                                <span class="pull-right text-muted small"><em>4 minutes ago</em>
+                                    </span>
+                            </a>
+                            <a href="#" class="list-group-item">
+                                <i class="fa fa-twitter fa-fw"></i> 3 New Followers
+                                <span class="pull-right text-muted small"><em>12 minutes ago</em>
+                                    </span>
+                            </a>
+                        </div>
+                        <!-- /.list-group -->
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+                <!-- /.panel -->
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <i class="fa fa-bell fa-fw"></i>Thẻ
+                    </div>
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <input id="btn-input" type="text" class="form-control input-sm"
+                                       placeholder="tag here..."/>
+                                <span class="input-group-btn">
+                                    <button class="btn btn-warning btn-sm" id="btn-chat">
+                                        Thêm
+                                    </button>
+                                </span>
+                            </div>
+                            <p class="help-block">Phân cách các thẻ bằng dấu phẩy (,).</p>
+                        </div>
+                        <ul class="tagchecklist"  role="list">
+                            <li>a</li>
+                            <li>d</li>
+                        </ul>
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+                <!-- /.panel -->
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <i class="fa fa-bell fa-fw"></i>Ảnh đại diện
+                    </div>
+                    <script>
+                        function BrowseServer( startupPath, functionData )
+                        {
+                            // You can use the "CKFinder" class to render CKFinder in a page:
+                            var finder = new CKFinder();
 
+                            //Startup path in a form: "Type:/path/to/directory/"
+                            finder.startupPath = startupPath;
+
+                            // Name of a function which is called when a file is selected in CKFinder.
+                            finder.selectActionFunction = SetFileField;
+
+                            // Additional data to be passed to the selectActionFunction in a second argument.
+                            // We'll use this feature to pass the Id of a field that will be updated.
+                            finder.selectActionData = functionData;
+
+                            // Name of a function which is called when a thumbnail is selected in CKFinder.
+                            finder.selectThumbnailActionFunction = ShowThumbnails;
+
+                            // Launch CKFinder
+                            finder.popup();
+                        }
+
+                        // This is a sample function which is called when a file is selected in CKFinder.
+                        function SetFileField( fileUrl, data )
+                        {
+                            document.getElementById( data["selectActionData"] ).value = fileUrl;
+
+                        }
+
+                        // This is a sample function which is called when a thumbnail is selected in CKFinder.
+                        function ShowThumbnails( fileUrl, data )
+                        {   // this = CKFinderAPI
+                            var sFileName = this.getSelectedFile().name;
+                            document.getElementById( 'thumbnails' ).innerHTML +=
+                                '<div class="thumb">' +
+                                '<img src="' + fileUrl + '" />' +
+                                '<div class="caption">' +
+                                '<a href="' + data["fileUrl"] + '" target="_blank">' + sFileName + '</a> (' + data["fileSize"] + 'KB)' +
+                                '</div>' +
+                                '</div>';
+                            document.getElementById( 'preview' ).style.display = "";
+                            // It is not required to return any value.
+                            // When false is returned, CKFinder will not close automatically.
+                            return false;
+                        }
+
+                    </script>
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">
+                        <div id="preview" style="display:none">
+                            <strong>Selected Thumbnails</strong><br/>
+                            <div id="thumbnails"></div>
+                        </div>
+                        <strong>Selected Image URL</strong><br/>
+                        <input id="xImagePath" name="ImagePath" type="text" />
+                        <input type="button" value="Browse Server" onclick="BrowseServer( 'Images:/', 'xImagePath' );" />
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+                <!-- /.panel -->
+            </div>
+            <!-- /.col-lg-6 -->
+        </form>
     </div>
     <!-- /.row -->
 </div>
+<script>
+    $(document).ready( function() {
+        $("#xImagePath").change(function() {
+            document.getElementById( 'preview' ).style.display = "";}
+        );
+    });
+</script>
 <!-- /#page-wrapper -->
 <jsp:include page="footer.jsp"/>

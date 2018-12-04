@@ -7,7 +7,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.Normalizer;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.regex.Pattern;
 
 public class PostDao {
     //lấy ra danh sách các post
@@ -107,11 +113,29 @@ public class PostDao {
         }
         return count;
     }
+    //kiểm tra xem post_slug  đã tồn tại hay chưa
+    public boolean checkPostSlug(String post_slug) {
+        Connection connection = DBConnect.getConnecttion();
+        String sql = "SELECT * FROM post WHERE post_slug='" + post_slug + "'";
+        PreparedStatement preparedStatement;
+        try {
+            preparedStatement = connection.prepareStatement(sql);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                connection.close();
+                return true;
+            }
+        } catch (SQLException e) {
+            Logger.getLogger(CategoryDao.class.getName()).log(Level.SEVERE, null, e);
+            e.printStackTrace();
+        }
+        return false;
+    }
     public boolean insert(Post c) throws SQLException {
         try {
             Connection connection = DBConnect.getConnecttion();
             String sql = "INSERT INTO Post(author_id, post_date, post_edit_date, post_content, post_title, post_status, post_slug, post_img, category_id) VALUE(?,?,?,?,?,?,?,?)";
-            PreparedStatement ps = connection.prepareCall(sql);
+            PreparedStatement ps = connection.prepareStatement(sql);
             ps.setString(1, c.getPostTitle());
             ps.setInt(2, c.getAuthorID());
             ps.setString(3, c.getPostSlug());
@@ -126,7 +150,7 @@ public class PostDao {
         try {
             Connection connection = DBConnect.getConnecttion();
             String sql = "UPDATE Post set category_name=?, category_des=?, category_slug=? where category_id=?";
-            PreparedStatement ps = connection.prepareCall(sql);
+            PreparedStatement ps = connection.prepareStatement(sql);
             ps.setString(1, c.getPostTitle());
             ps.setInt(2, c.getAuthorID());
             ps.setString(3, c.getPostSlug());
@@ -143,12 +167,29 @@ public class PostDao {
         try {
             Connection connection = DBConnect.getConnecttion();
             String sql = "DELETE FROM Post WHERE post_id = ?";
-            PreparedStatement ps = connection.prepareCall(sql);
+            PreparedStatement ps = connection.prepareStatement(sql);
             ps.setLong(1, post_id);
             int temp = ps.executeUpdate();
             return temp == 1;
         } catch (Exception e) {
             return false;
         }
+    }
+    public String createPostSlug(String categoryName)
+    {
+        Calendar cal = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");
+        String dateTimeNow=sdf.format(cal.getTime());
+        try {
+            String temp = Normalizer.normalize(categoryName, Normalizer.Form.NFD);
+            Pattern pattern = Pattern.compile("\\p{InCombiningDiacriticalMarks}+");
+            String slug= pattern.matcher(temp).replaceAll("").toLowerCase().replaceAll(" ", "-").replaceAll("đ", "d");
+            if(checkPostSlug(slug))
+                slug=slug+"-"+dateTimeNow;
+            return slug;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return "";
     }
 }
