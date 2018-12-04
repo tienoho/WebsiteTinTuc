@@ -32,7 +32,7 @@ public class ManagerPostServlet extends HttpServlet {
             switch (command) {
                 case "insert":
                     if (postTitle.equals("") || postTitle == null) {
-                        error = "Không thể bỏ trống tên danh mục !";
+                        error = "Không thể bỏ trống tên tiêu đề !";
                     } else {
                         post = new Post();
                         post.setPostTitle(postTitle);
@@ -41,21 +41,39 @@ public class ManagerPostServlet extends HttpServlet {
                         } else {
                             post.setPostSlug(postDao.createPostSlug(postTitle));
                         }
-                        post.setPostContent(request.getParameter("category-des"));
+                        post.setPostContent(request.getParameter("post-content"));
+                        post.setPostDate(postDao.GetDateNow());
+                        post.setAuthorID(1);
+                        post.setPostImg(request.getParameter("ImagePath"));
+                        post.setCategoryID(1);
+                        post.setPostStatus("Public");
                         //request.getParameter("category-father");
                         postDao.insert(post);
                         result = "Thêm thành công";
                     }
                     break;
                 case "edit":
-                    post = new Post();
-                    post.setPostTitle(request.getParameter("category-name"));
-                    post.setPostSlug(request.getParameter("category-slug"));
-                    post.setPostContent(request.getParameter("category-des"));
-                    post.setCategoryID(Integer.parseInt(request.getParameter("categoryID")));
-                    //request.getParameter("category-father");
-                    postDao.update(post);
-                    result = "Cập nhập thành công";
+                    if (postTitle.equals("") || postTitle == null) {
+                        error = "Không thể bỏ trống tên tiêu đề !";
+                    } else {
+                        post = new Post();
+                        post.setPostTitle(postTitle);
+                        if (!postSlug.equals("")) {
+                            post.setPostSlug(postSlug);
+                        } else {
+                            post.setPostSlug(postDao.createPostSlug(postTitle));
+                        }
+                        post.setPostContent(request.getParameter("post-content"));
+                        post.setPostDate(postDao.GetDateNow());
+                        post.setAuthorID(1);
+                        post.setPostImg(request.getParameter("ImagePath"));
+                        post.setCategoryID(1);
+                        post.setPostStatus("Public");
+                        //request.getParameter("category-father");
+                        postDao.update(post);
+                        result = "Cập nhập thành công";
+                    }
+
                     break;
                 case "delete":
                     postDao.delete(Integer.parseInt(request.getParameter("post-ID")));

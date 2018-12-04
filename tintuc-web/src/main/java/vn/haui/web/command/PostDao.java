@@ -134,12 +134,18 @@ public class PostDao {
     public boolean insert(Post c) throws SQLException {
         try {
             Connection connection = DBConnect.getConnecttion();
-            String sql = "INSERT INTO Post(author_id, post_date, post_edit_date, post_content, post_title, post_status, post_slug, post_img, category_id) VALUE(?,?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO Post(author_id, post_date, post_edit_date, post_content, post_title, post_status, post_slug, post_img, category_id) " +
+                    "VALUE(?,?,?,?,?,?,?,?,?)";
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setString(1, c.getPostTitle());
-            ps.setInt(2, c.getAuthorID());
-            ps.setString(3, c.getPostSlug());
-            ps.setInt(4, c.getCategoryID());
+            ps.setInt(1, c.getAuthorID());
+            ps.setDate(2,c.getPostDate());
+            ps.setDate(3,c.getPostEditDate());
+            ps.setString(4, c.getPostContent());
+            ps.setString(5, c.getPostTitle());
+            ps.setString(6, c.getPostStatus());
+            ps.setString(7, c.getPostSlug());
+            ps.setString(8, c.getPostImg());
+            ps.setInt(9, c.getCategoryID());
             int temp = ps.executeUpdate();
             return temp == 1;
         } catch (Exception e) {
@@ -149,12 +155,17 @@ public class PostDao {
     public boolean update(Post c) throws SQLException {
         try {
             Connection connection = DBConnect.getConnecttion();
-            String sql = "UPDATE Post set category_name=?, category_des=?, category_slug=? where category_id=?";
+            String sql = "UPDATE Post set post_edit_date=?, post_content=?, post_title=?," +
+                    " post_slug=?,post_img=?,post_status=? ,category_id=? where post_id=?";
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setString(1, c.getPostTitle());
-            ps.setInt(2, c.getAuthorID());
-            ps.setString(3, c.getPostSlug());
-            ps.setInt(4, c.getCategoryID());
+            ps.setDate(1,c.getPostEditDate());
+            ps.setString(2, c.getPostContent());
+            ps.setString(3, c.getPostTitle());
+            ps.setString(4, c.getPostSlug());
+            ps.setString(5, c.getPostImg());
+            ps.setString(6, c.getPostStatus());
+            ps.setInt(7, c.getCategoryID());
+            ps.setInt(8, c.getPostID());
             int temp = ps.executeUpdate();
             return temp == 1;
         } catch (Exception e) {
@@ -175,13 +186,13 @@ public class PostDao {
             return false;
         }
     }
-    public String createPostSlug(String categoryName)
+    public String createPostSlug(String postTitle)
     {
         Calendar cal = Calendar.getInstance();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");
         String dateTimeNow=sdf.format(cal.getTime());
         try {
-            String temp = Normalizer.normalize(categoryName, Normalizer.Form.NFD);
+            String temp = Normalizer.normalize(postTitle, Normalizer.Form.NFD);
             Pattern pattern = Pattern.compile("\\p{InCombiningDiacriticalMarks}+");
             String slug= pattern.matcher(temp).replaceAll("").toLowerCase().replaceAll(" ", "-").replaceAll("đ", "d");
             if(checkPostSlug(slug))
@@ -191,5 +202,11 @@ public class PostDao {
             ex.printStackTrace();
         }
         return "";
+    }
+    public java.sql.Date GetDateNow()
+    {
+        java.util.Date myDate = (Calendar.getInstance().getTime());
+        java.sql.Date sqlDateNow = new java.sql.Date(myDate.getTime());
+        return sqlDateNow;
     }
 }
