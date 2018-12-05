@@ -90,7 +90,27 @@ public class PostDao {
         }
         return list;
     }
-
+    public Post getPost(int postID) throws SQLException {
+        Connection connection = DBConnect.getConnecttion();
+        String sql = "SELECT * FROM post WHERE post_id = '" + postID + "'";
+        PreparedStatement ps = connection.prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
+        Post post=null;
+        while (rs.next()) {
+            post = new Post();
+            post.setPostID(rs.getInt("post_id"));
+            post.setAuthorID(rs.getInt("author_id"));
+            post.setPostDate(rs.getDate("post_date"));
+            post.setPostEditDate(rs.getDate("post_edit_date"));
+            post.setPostContent(rs.getString("post_content"));
+            post.setPostTitle(rs.getString("post_title"));
+            post.setPostStatus(rs.getString("post_status"));
+            post.setPostSlug(rs.getString("post_slug"));
+            post.setPostImg(rs.getString("post_img"));
+            post.setCategoryID(rs.getInt("category_id"));
+        }
+        return post;
+    }
     public int getCountPostByCategoy(int categoryID) throws SQLException {
         Connection connection = DBConnect.getConnecttion();
         String sql = "SELECT count(post_id) FROM post WHERE category_id = '" + categoryID + "'";

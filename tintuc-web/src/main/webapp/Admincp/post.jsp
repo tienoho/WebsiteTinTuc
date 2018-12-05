@@ -10,8 +10,10 @@
 <jsp:include page="header.jsp"/>
 <%
     PostDao postDao = new PostDao();
+    CategoryDao categoryDao=new CategoryDao();
     UsersDao usersDao=new UsersDao();
     ArrayList<Post> posts = postDao.getListAllPost();
+    ArrayList<Category> categories=categoryDao.getListCategory();
 %>
 <script>
     function delete_post_ajax(Post_ID) {
@@ -38,7 +40,7 @@
         <div class="col-lg-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    DataTables Advanced Tables
+                    Dữ liệu bài viết
                 </div>
                 <!-- /.panel-heading -->
                 <div class="panel-body">
@@ -53,15 +55,15 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <%for (Post c : posts) {%>
-                        <tr class="odd gradeX" id="item-post-<%=c.getPostID()%>">
-                            <td><%=c.getPostID()%></td>
-                            <td><a href="post.jsp?post=<%=c.getPostID()%>&action=edit"><%=c.getPostTitle()%></a>
+                        <%for (Post p : posts) {%>
+                        <tr class="odd gradeX" id="item-post-<%=p.getPostID()%>">
+                            <td><%=p.getPostID()%></td>
+                            <td><a href="edit-post.jsp?post=<%=p.getPostID()%>&action=edit"><%=p.getPostTitle()%></a>
                                 <div class="row-actions">
-                                    <span class="edit"><a href="edit-post.jsp?post=<%=c.getPostID()%>&action=edit" aria-label="Sửa “Beauty”">Chỉnh sửa</a> | </span>
-                                    <span class="delete"><a href="" class="delete-tag aria-button-if-js" data-toggle="modal" data-target="#delete<%=c.getPostID()%>" aria-label="Xóa “Beauty”" role="button">Xóa</a> | </span>
+                                    <span class="edit"><a href="edit-post.jsp?post=<%=p.getPostID()%>&action=edit" aria-label="Sửa “Beauty”">Chỉnh sửa</a> | </span>
+                                    <span class="delete"><a href="" class="delete-tag aria-button-if-js" data-toggle="modal" data-target="#delete<%=p.getPostID()%>" aria-label="Xóa “Beauty”" role="button">Xóa</a> | </span>
                                     <!-- Modal -->
-                                    <div class="modal fade" id="delete<%=c.getPostID()%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                    <div class="modal fade" id="delete<%=p.getPostID()%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <div class="modal-header">
@@ -73,7 +75,7 @@
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                    <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="delete_post_ajax(<%=c.getPostID()%>)">Delete</button>
+                                                    <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="delete_post_ajax(<%=p.getPostID()%>)">Delete</button>
                                                 </div>
                                             </div>
                                             <!-- /.modal-content -->
@@ -84,9 +86,15 @@
                                     <span class="view"><a href="" aria-label="Xem lưu trữ “Beauty”">Xem</a></span>
                                 </div>
                             </td>
-                            <td><%=usersDao.getName(c.getAuthorID())%></td>
-                            <td><%=c.getCategoryID()%></td>
-                            <td><%=c.getPostDate()%></td>
+                            <td><%=usersDao.getName(p.getAuthorID())%></td>
+                            <td>
+                                <%for(Category c:categories)
+                                {if(c.getCategoryID()==p.getCategoryID()){
+                                %>
+                                    <%=c.getCategoryName()%>
+                                <%}}%>
+                            </td>
+                            <td><%=p.getPostDate()%></td>
                         </tr>
                         <%}%>
                         </tbody>

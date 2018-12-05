@@ -1,4 +1,7 @@
-<%--
+<%@ page import="vn.haui.web.command.PostDao" %>
+<%@ page import="vn.haui.web.model.Post" %>
+<%@ page import="vn.haui.web.command.CategoryDao" %>
+<%@ page import="vn.haui.web.model.Category" %><%--
   Created by IntelliJ IDEA.
   User: Admin
   Date: 29/11/2018
@@ -10,15 +13,23 @@
 <c:set var="root" value="${pageContext.request.contextPath}"/>
 <jsp:include page="header.jsp"/>
 <%
-    String action = "";
+    String action = "",postId="";
+
     if (request.getParameter("action") != null)
         action = request.getParameter("action");
-
+    PostDao postDao=new PostDao();
+    CategoryDao categoryDao=new CategoryDao();
+    Post post=new Post();
+    if(action.equals("edit"))
+    {
+        postId= request.getParameter("post");
+        post=postDao.getPost(Integer.parseInt(postId));
+    }
 %>
 <div id="page-wrapper">
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header">Bài viết mới</h1>
+            <h1 class="page-header"><%=action.equals("edit")?"Cập nhập bài viết":"Bài viết mới"%></h1>
         </div>
         <!-- /.col-lg-12 -->
     </div>
@@ -27,25 +38,25 @@
         <form role="form" action="${root}/ManagerPostServlet" method="post">
             <div class="col-lg-9">
                 <div class="form-group">
-                    <label>Tên chuyên mục</label>
+                    <label>Tiêu đề bài viết</label>
                     <span name="post-title-result" class="text-danger"></span>
-                    <input class="form-control" id="post-title" name="post-title" placeholder="Nhập tiêu đề tại đây">
+                    <input class="form-control" id="post-title" name="post-title" placeholder="Nhập tiêu đề tại đây" value="<%=action.equals("edit")?post.getPostTitle():""%>">
                     <p class="help-block">Tên riêng sẽ hiển thị trên trang mạng của bạn.</p>
                 </div>
                 <%if (action.equals("edit")) {%>
                 <div class="form-group">
-                    <label>liên kết tĩnh</label>
-                    <input class="form-control" id="post-slug" name="post-slug">
+                    <label>Liên kết tĩnh</label>
+                    <input class="form-control" id="post-slug" name="post-slug" value="<%=action.equals("edit")?post.getPostSlug():""%>">
                     <span id="post-slug-result"></span>
                     <p class="help-block">Chuỗi cho đường dẫn tĩnh là phiên bản của tên hợp chuẩn với Đường dẫn (URL).
                         Chuỗi này bao gồm chữ cái thường, số và dấu gạch ngang (-).</p>
                 </div>
                 <%}%>
-
-
                 <div class="form-group">
                     <label>Nội dung</label>
-                    <textarea class="form-control" rows="5" id="post-content" name="post-content"></textarea>
+                    <textarea class="form-control" rows="5" id="post-content" name="post-content">
+                        <%=action.equals("edit")?post.getPostContent():""%>
+                    </textarea>
                     <script type="text/javascript" language="javascript">
                         var editer=CKEDITOR.replace('post-content', {width: '100%',height: '300px'},{editorConfig: '/ckeditor/config.js'});
                         CKFinder.setupCKEditor(editer,'${root}/ckfinder/');
@@ -57,7 +68,7 @@
                     <textarea class="form-control" rows="2" id="post-des" name="post-des"></textarea>
                     <p class="help-block"></p>
                 </div>
-                <input hidden="hidden" name="command" value="<%=action=="edit"?"update":"insert"%>">
+                <input hidden="hidden" name="command" value="<%=action.equals("edit")?"update":"insert"%>">
                 <span name="category-result"></span>
 
             </div>
@@ -65,52 +76,68 @@
             <div class="col-lg-3">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <i class="fa fa-bell fa-fw"></i> Đăng
+                        <i class="fa fa-bell fa-fw"></i> <%=action.equals("edit")?"Cập nhập":"Đăng"%>
                     </div>
                     <!-- /.panel-heading -->
                     <div class="panel-body">
                         <div class="list-group">
                             <a href="#" class="list-group-item">
-                                <i class="fa fa-comment fa-fw"></i> New Comment
-                                <span class="pull-right text-muted small"><em>4 minutes ago</em>
+                                <i class="fa fa-comment fa-fw"></i> Trạng thái
+                                <span class="pull-right text-muted small"><em><%=action.equals("edit") ? post.getPostStatus() : "Công khai"%></em>
                                     </span>
                             </a>
                             <a href="#" class="list-group-item">
-                                <i class="fa fa-twitter fa-fw"></i> 3 New Followers
-                                <span class="pull-right text-muted small"><em>12 minutes ago</em>
+                                <i class="fa fa-twitter fa-fw"></i> Ngày đăng
+                                <span class="pull-right text-muted small"><em><%=action.equals("edit") ? post.getPostDate() : "Ngay bây giờ"%></em>
                                     </span>
                             </a>
                         </div>
                         <!-- /.list-group -->
-                        <button type="submit" class="btn btn-success"><%=action == "edit" ? "Cập nhập" : "Đăng"%>
+                        <%if(action.equals("edit")){%>
+                        <a href="${root}/ManagerPostServlet?post=<%=post.getPostID()%>&action=delete" class="text-danger">Xóa</a>
+                        <%}%>
+                        <button type="submit" class="btn btn-success"><%=action.equals("edit") ? "Cập nhập" : "Đăng"%>
                         </button>
                     </div>
                     <!-- /.panel-body -->
                 </div>
                 <!-- /.panel -->
-                <div class="panel panel-default">
+                <div class="chat-panel panel panel-default">
                     <div class="panel-heading">
-                        <i class="fa fa-bell fa-fw"></i> Chuyên mục
+                        <i class="fa fa-comments fa-fw"></i> Chuyên mục
+                        <div class="btn-group pull-right">
+                            <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+                                <i class="fa fa-chevron-down"></i>
+                            </button>
+                            <ul class="dropdown-menu slidedown">
+                                <li>
+                                    <a href="#">
+                                        <i class="fa fa-refresh fa-fw"></i> Làm mới
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="fa fa-check-circle fa-fw"></i> Available
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                     <!-- /.panel-heading -->
-                    <div class="panel-body">
-                        <div class="list-group">
-                            <a href="#" class="list-group-item">
-                                <i class="fa fa-comment fa-fw"></i> New Comment
-                                <span class="pull-right text-muted small"><em>4 minutes ago</em>
-                                    </span>
-                            </a>
-                            <a href="#" class="list-group-item">
-                                <i class="fa fa-twitter fa-fw"></i> 3 New Followers
-                                <span class="pull-right text-muted small"><em>12 minutes ago</em>
-                                    </span>
-                            </a>
-                        </div>
-                        <!-- /.list-group -->
+                    <div class="panel-body" style="height: 200px;">
+                        <ul class="chat">
+                            <%for(Category c:categoryDao.getListCategory()){%>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="category-item-<%=c.getCategoryID()%>" value="<%=c.getCategoryID()%>"><%=c.getCategoryName()%>
+                                </label>
+                            </div>
+                            <%}%>
+                        </ul>
                     </div>
                     <!-- /.panel-body -->
                 </div>
-                <!-- /.panel -->
+                <!-- /.panel .chat-panel -->
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <i class="fa fa-bell fa-fw"></i>Thẻ
@@ -196,7 +223,7 @@
                             <div id="thumbnails"></div>
                         </div>
                         <strong>Selected Image URL</strong><br/>
-                        <input id="xImagePath" name="ImagePath" type="text" />
+                        <input id="xImagePath" name="ImagePath" type="text" value="<%=action.equals("edit")?post.getPostImg():""%>"/>
                         <input type="button" value="Browse Server" onclick="BrowseServer( 'Images:/', 'xImagePath' );" />
                     </div>
                     <!-- /.panel-body -->
