@@ -45,7 +45,7 @@ public class ManagerCategoryServlet extends HttpServlet {
                             category.setCategorySlug(categoryDao.createCategorySlug(categoryName));
                         }
                         category.setCategoryDes(request.getParameter("category-des"));
-                        //request.getParameter("category-father");
+                        category.setCategoryParent(Integer.parseInt(request.getParameter("category-parent")));
                         categoryDao.insert(category);
                         result = "Thêm thành công";
                     }
@@ -56,6 +56,7 @@ public class ManagerCategoryServlet extends HttpServlet {
                     category.setCategorySlug(request.getParameter("category-slug"));
                     category.setCategoryDes(request.getParameter("category-des"));
                     category.setCategoryID(Integer.parseInt(request.getParameter("categoryID")));
+                    category.setCategoryParent(Integer.parseInt(request.getParameter("category-parent")));
                     //request.getParameter("category-father");
                     categoryDao.update(category);
                     result = "Cập nhập thành công";

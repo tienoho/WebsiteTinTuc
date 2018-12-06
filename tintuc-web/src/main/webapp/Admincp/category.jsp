@@ -1,6 +1,7 @@
 <%@ page import="vn.haui.web.command.CategoryDao" %>
 <%@ page import="vn.haui.web.model.Category" %>
-<%@ page import="java.util.ArrayList" %><%--
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="vn.haui.web.common.WebConstant" %><%--
   Created by IntelliJ IDEA.
   User: Admin
   Date: 29/11/2018
@@ -47,6 +48,8 @@
 <%
     CategoryDao categoryDao = new CategoryDao();
     ArrayList<Category> categories = categoryDao.getListCategory();
+    ArrayList<Category> categoriesParent = categoryDao.getListCategoryParent();
+    //ArrayList<Category> categoriesChildren = categoryDao.getListCategoryChildren();
     String error = "",result="",error_slug="";
     out.print(request.getAttribute("error"));
     out.print(request.getAttribute("result"));
@@ -83,7 +86,7 @@
                 </div>
                 <div class="form-group">
                     <label>Chuyên mục hiện tại</label>
-                    <select class="form-control" id="category-father" name="category-father">
+                    <select class="form-control" id="category-parent" name="category-parent">
                         <option value="0">Trống</option>
                         <%for (Category c : categories) {%>
                         <option value="<%=c.getCategoryID()%>"><%=c.getCategoryName()%>
@@ -121,17 +124,19 @@
                                 <th>Name</th>
                                 <th>Des</th>
                                 <th>Slug</th>
+                                <th>Parent</th>
                             </tr>
                             </thead>
                             <tbody>
+                            <%--<%for (Category c : categories) {%>--%>
                             <%for (Category c : categories) {%>
                             <tr id="item-<%=c.getCategoryID()%>">
                                 <td><%=c.getCategoryID()%></td>
                                 <td>
-                                    <a href="edit-category.jsp?category=<%=c.getCategoryID()%>&action=edit"><%=c.getCategoryName()%>
+                                    <a href="${root}/Admincp/edit-category.jsp?category=<%=c.getCategoryID()%>&action=edit"><%=c.getCategoryName()%>
                                     </a>
                                     <div class="row-actions">
-                                        <span class="edit"><a href="edit-category.jsp?category=<%=c.getCategoryID()%>&action=edit"
+                                        <span class="edit"><a href="${root}/Admincp/edit-category.jsp?category=<%=c.getCategoryID()%>&action=edit"
                                                               aria-label="Sửa “Beauty”">Chỉnh sửa</a> | </span>
                                         <span class="delete"><a href="" class="delete-tag aria-button-if-js"
                                                                 data-toggle="modal"
@@ -140,14 +145,14 @@
                                                                 role="button">Xóa</a> | </span>
                                         <!-- Modal -->
                                         <div class="modal fade" id="delete<%=c.getCategoryID()%>" tabindex="-1"
-                                             role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                             role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
                                                         <button type="button" class="close" data-dismiss="modal"
                                                                 aria-hidden="true">&times;
                                                         </button>
-                                                        <h4 class="modal-title" id="myModalLabel">Delete</h4>
+                                                        <h4 class="modal-title" id="myModalLabel1">Delete</h4>
                                                     </div>
                                                     <div class="modal-body">
                                                         Bạn có chắc chắn muốn xóa chuyên mục này không ?
@@ -168,6 +173,10 @@
                                 <td><%=c.getCategoryDes() == null ? "" : c.getCategoryDes()%>
                                 </td>
                                 <td><%=c.getCategorySlug()%>
+                                </td>
+                                <td><%for (Category c2 : categories) {
+                                            if(c2.getCategoryID()==c.getCategoryParent()){%>
+                                    <%=c2.getCategoryName()%><%}}%>
                                 </td>
                             </tr>
                             <%}%>

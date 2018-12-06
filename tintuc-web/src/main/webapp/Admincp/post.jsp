@@ -40,7 +40,7 @@
         <div class="col-lg-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    Dữ liệu bài viết
+                    <a href="edit-post.jsp" class="font-italic" >Thêm bài viết mới</a>
                 </div>
                 <!-- /.panel-heading -->
                 <div class="panel-body">
@@ -58,7 +58,7 @@
                         <%for (Post p : posts) {%>
                         <tr class="odd gradeX" id="item-post-<%=p.getPostID()%>">
                             <td><%=p.getPostID()%></td>
-                            <td><a href="edit-post.jsp?post=<%=p.getPostID()%>&action=edit"><%=p.getPostTitle()%></a>
+                            <td><a href="edit-post.jsp?post=<%=p.getPostID()%>&action=edit" class="font-weight-bold"><%=p.getPostTitle()%></a>
                                 <div class="row-actions">
                                     <span class="edit"><a href="edit-post.jsp?post=<%=p.getPostID()%>&action=edit" aria-label="Sửa “Beauty”">Chỉnh sửa</a> | </span>
                                     <span class="delete"><a href="" class="delete-tag aria-button-if-js" data-toggle="modal" data-target="#delete<%=p.getPostID()%>" aria-label="Xóa “Beauty”" role="button">Xóa</a> | </span>

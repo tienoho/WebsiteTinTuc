@@ -27,11 +27,45 @@ public class CategoryDao {
             category.setCategoryName(rs.getString("category_name"));
             category.setCategoryDes(rs.getString("category_des"));
             category.setCategorySlug(rs.getString("category_slug"));
+            category.setCategoryParent(rs.getInt("category_parent"));
             list.add(category);
         }
         return list;
     }
-
+    public ArrayList<Category> getListCategoryParent() throws SQLException {
+        Connection connection = DBConnect.getConnecttion();
+        String sql = "SELECT * FROM CATEGORY where category_parent=0";
+        Statement st = connection.createStatement();
+        ResultSet rs = st.executeQuery(sql);
+        ArrayList<Category> list = new ArrayList<Category>();
+        while (rs.next()) {
+            Category category = new Category();
+            category.setCategoryID(rs.getInt("category_id"));
+            category.setCategoryName(rs.getString("category_name"));
+            category.setCategoryDes(rs.getString("category_des"));
+            category.setCategorySlug(rs.getString("category_slug"));
+            category.setCategoryParent(rs.getInt("category_parent"));
+            list.add(category);
+        }
+        return list;
+    }
+    public ArrayList<Category> getListCategoryChildren(int categoryParent) throws SQLException {
+        Connection connection = DBConnect.getConnecttion();
+        String sql = "SELECT * FROM CATEGORY where category_parent="+categoryParent;
+        Statement st = connection.createStatement();
+        ResultSet rs = st.executeQuery(sql);
+        ArrayList<Category> list = new ArrayList<Category>();
+        while (rs.next()) {
+            Category category = new Category();
+            category.setCategoryID(rs.getInt("category_id"));
+            category.setCategoryName(rs.getString("category_name"));
+            category.setCategoryDes(rs.getString("category_des"));
+            category.setCategorySlug(rs.getString("category_slug"));
+            category.setCategoryParent(rs.getInt("category_parent"));
+            list.add(category);
+        }
+        return list;
+    }
     public Category getCategory(int category_id) throws SQLException {
         Connection connection = DBConnect.getConnecttion();
         String sql = "SELECT * FROM CATEGORY WHERE category_id="+category_id;
@@ -44,6 +78,7 @@ public class CategoryDao {
             category.setCategoryName(rs.getString("category_name"));
             category.setCategoryDes(rs.getString("category_des"));
             category.setCategorySlug(rs.getString("category_slug"));
+            category.setCategoryParent(rs.getInt("category_parent"));
         }
         return category;
     }
@@ -70,11 +105,13 @@ public class CategoryDao {
     public boolean insert(Category c) throws SQLException {
         try {
             Connection connection = DBConnect.getConnecttion();
-            String sql = "INSERT INTO CATEGORY(category_name, category_des, category_slug) VALUE(?,?,?)";
+            String sql = "INSERT INTO CATEGORY(category_name, category_des, category_slug,category_parent) VALUE(?,?,?,?)";
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setString(1, c.getCategoryName());
             ps.setString(2, c.getCategoryDes());
             ps.setString(3, c.getCategorySlug());
+            ps.setInt(4, c.getCategoryParent());
+
             int temp = ps.executeUpdate();
             return temp == 1;
         } catch (Exception e) {
@@ -85,12 +122,13 @@ public class CategoryDao {
     public boolean update(Category c) throws SQLException {
         try {
             Connection connection = DBConnect.getConnecttion();
-            String sql = "UPDATE CATEGORY set category_name=?, category_des=?, category_slug=? where category_id=?";
+            String sql = "UPDATE CATEGORY set category_name=?, category_des=?, category_slug=?,category_parent=? where category_id=?";
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setString(1, c.getCategoryName());
             ps.setString(2, c.getCategoryDes());
             ps.setString(3, c.getCategorySlug());
-            ps.setInt(4, c.getCategoryID());
+            ps.setInt(4, c.getCategoryParent());
+            ps.setInt(5, c.getCategoryID());
             int temp = ps.executeUpdate();
             return temp == 1;
         } catch (Exception e) {
@@ -129,5 +167,29 @@ public class CategoryDao {
         }
         return "";
     }
+    public ArrayList<Category> S() throws SQLException {
+        ArrayList<Category>categoriesParent= new CategoryDao().getListCategoryParent();
+        ArrayList<Category>categories= new ArrayList<>();
+        for (Category c:categoriesParent) {
+            categories.add(c);
+            for(Category c1:new CategoryDao().getListCategoryChildren(c.getCategoryID()))
+            {
+                categories.add(c1);
+                for(Category c2:new CategoryDao().getListCategoryChildren(c1.getCategoryID()))
+                    {
+                    categories.add(c2);
+                }
+            }
+        }
+        return categories;
+    }
 
+    public static void main(String[] args) throws SQLException {
+        CategoryDao categoryDao=new CategoryDao();
+        ArrayList<Category>categories= new ArrayList<>();
+        for(Category c:categoryDao.S())
+        {
+            System.out.println(c.getCategoryID()+"-"+c.getCategoryName()+"-"+c.getCategoryParent());
+        }
+    }
 }

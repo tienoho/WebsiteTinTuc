@@ -1,7 +1,8 @@
 <%@ page import="vn.haui.web.command.PostDao" %>
 <%@ page import="vn.haui.web.model.Post" %>
 <%@ page import="vn.haui.web.command.CategoryDao" %>
-<%@ page import="vn.haui.web.model.Category" %><%--
+<%@ page import="vn.haui.web.model.Category" %>
+<%@ page import="java.sql.SQLException" %><%--
   Created by IntelliJ IDEA.
   User: Admin
   Date: 29/11/2018
@@ -13,7 +14,7 @@
 <c:set var="root" value="${pageContext.request.contextPath}"/>
 <jsp:include page="header.jsp"/>
 <%
-    String action = "",postId="";
+    String action = "",postId="",result="",error="";
 
     if (request.getParameter("action") != null)
         action = request.getParameter("action");
@@ -23,12 +24,29 @@
     if(action.equals("edit"))
     {
         postId= request.getParameter("post");
-        post=postDao.getPost(Integer.parseInt(postId));
+        try {
+            post=postDao.getPost(Integer.parseInt(postId));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        if(session.getAttribute("result")!=null)
+        {
+            result=(String)session.getAttribute("result");
+            session.removeAttribute("result");
+        }
+        if(session.getAttribute("error")!=null)
+        {
+            error=(String)session.getAttribute("error");
+            session.removeAttribute("error");
+        }
     }
 %>
 <div id="page-wrapper">
     <div class="row">
         <div class="col-lg-12">
+            <%if(!result.equals("")){%>
+            <h3 class="text-success"><%=result%></h3>
+            <%}%>
             <h1 class="page-header"><%=action.equals("edit")?"Cập nhập bài viết":"Bài viết mới"%></h1>
         </div>
         <!-- /.col-lg-12 -->
@@ -39,7 +57,7 @@
             <div class="col-lg-9">
                 <div class="form-group">
                     <label>Tiêu đề bài viết</label>
-                    <span name="post-title-result" class="text-danger"></span>
+                    <span name="post-title-result" class="text-danger"><%=error%></span>
                     <input class="form-control" id="post-title" name="post-title" placeholder="Nhập tiêu đề tại đây" value="<%=action.equals("edit")?post.getPostTitle():""%>">
                     <p class="help-block">Tên riêng sẽ hiển thị trên trang mạng của bạn.</p>
                 </div>
@@ -65,7 +83,7 @@
                 </div>
                 <div class="form-group">
                     <label>Tóm tắt</label>
-                    <textarea class="form-control" rows="2" id="post-des" name="post-des"></textarea>
+                    <textarea class="form-control" rows="2" id="post-summary" name="post-summary"></textarea>
                     <p class="help-block"></p>
                 </div>
                 <input hidden="hidden" name="command" value="<%=action.equals("edit")?"update":"insert"%>">
@@ -129,7 +147,7 @@
                             <%for(Category c:categoryDao.getListCategory()){%>
                             <div class="checkbox">
                                 <label>
-                                    <input type="checkbox" name="category-item-<%=c.getCategoryID()%>" value="<%=c.getCategoryID()%>"><%=c.getCategoryName()%>
+                                    <input type="checkbox" name="category" id="category-item-<%=c.getCategoryID()%>" value="<%=c.getCategoryID()%>"><%=c.getCategoryName()%>
                                 </label>
                             </div>
                             <%}%>

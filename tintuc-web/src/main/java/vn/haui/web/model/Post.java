@@ -13,11 +13,12 @@ public class Post {
     private String postSlug;
     private String postImg;
     private int categoryID;
+    private String postSummary;
 
     public Post() {
     }
 
-    public Post(int postID, int authorID, Date postDate, Date postEditDate, String postContent, String postTitle, String postStatus, String postSlug, String postImg, int categoryID) {
+    public Post(int postID, int authorID, Date postDate, Date postEditDate, String postContent, String postTitle, String postStatus, String postSlug, String postImg, int categoryID, String postSummary) {
         this.postID = postID;
         this.authorID = authorID;
         this.postDate = postDate;
@@ -28,8 +29,16 @@ public class Post {
         this.postSlug = postSlug;
         this.postImg = postImg;
         this.categoryID = categoryID;
+        this.postSummary = postSummary;
     }
 
+    public String getPostSummary() {
+        return postSummary;
+    }
+
+    public void setPostSummary(String postSummary) {
+        this.postSummary = postSummary;
+    }
     public int getPostID() {
         return postID;
     }

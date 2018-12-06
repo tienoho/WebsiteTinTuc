@@ -78,12 +78,14 @@
                 </div>
                 <div class="form-group">
                     <label>Chuyên mục hiện tại</label>
-                    <select class="form-control" id="category-father" name="category-father">
+                    <select class="form-control" id="category-parent" name="category-parent">
                         <option value="0">Trống</option>
-                        <%for (Category c : categories) {%>
-                        <option value="<%=c.getCategoryID()%>"><%=c.getCategoryName()%>
+                        <%for (Category c : categories) {
+                        if(c.getCategoryID()!=category.getCategoryID()){
+                        %>
+                        <option  value="<%=c.getCategoryID()%>" <%if(category.getCategoryParent()==c.getCategoryID()){%> selected="selected"<%}%>><%=c.getCategoryName()%>
                         </option>
-                        <%}%>
+                        <%}}%>
                         <%-- <%=(c.getCategoryID()==category.getCategoryID())?"selected=\"selected\"":""%>--%>
                     </select>
                     <p class="help-block">Chuyên mục khác với thẻ, bạn có thể sử dụng nhiều cấp chuyên mục. Ví dụ: Trong
@@ -92,7 +94,7 @@
                 </div>
                 <div class="form-group">
                     <label>Mô tả</label>
-                    <textarea class="form-control" rows="3" id="category-des" name="category-des" value="<%=category.getCategoryDes()%>"></textarea>
+                    <textarea class="form-control" rows="3" id="category-des" name="category-des" value=""><%=category.getCategoryDes()%></textarea>
                     <p class="help-block">Thông thường mô tả này không được sử dụng trong các giao diện, tuy nhiên có
                         vài giao diện có thể hiển thị mô tả này.</p>
                 </div>

@@ -5,16 +5,27 @@ public class Category {
     private String categoryName;
     private String categoryDes;
     private String categorySlug;
-
+    private int categoryParent;
     public Category() {
     }
 
-    public Category(int categoryID, String categoryName, String categoryDes, String categorySlug) {
+    public Category(int categoryID, String categoryName, String categoryDes, String categorySlug, int categoryParent) {
         this.categoryID = categoryID;
         this.categoryName = categoryName;
         this.categoryDes = categoryDes;
         this.categorySlug = categorySlug;
+        this.categoryParent = categoryParent;
     }
+
+    public int getCategoryParent() {
+        return categoryParent;
+    }
+
+    public void setCategoryParent(int categoryParent) {
+        this.categoryParent = categoryParent;
+    }
+
+
 
     public String getCategoryDes() {
         return categoryDes;
