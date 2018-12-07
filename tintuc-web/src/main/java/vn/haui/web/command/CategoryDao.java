@@ -30,6 +30,7 @@ public class CategoryDao {
             category.setCategoryParent(rs.getInt("category_parent"));
             list.add(category);
         }
+        connection.close();
         return list;
     }
     public ArrayList<Category> getListCategoryParent() throws SQLException {
@@ -47,6 +48,7 @@ public class CategoryDao {
             category.setCategoryParent(rs.getInt("category_parent"));
             list.add(category);
         }
+        connection.close();
         return list;
     }
     public ArrayList<Category> getListCategoryChildren(int categoryParent) throws SQLException {
@@ -64,6 +66,7 @@ public class CategoryDao {
             category.setCategoryParent(rs.getInt("category_parent"));
             list.add(category);
         }
+        connection.close();
         return list;
     }
     public Category getCategory(int category_id) throws SQLException {
@@ -103,8 +106,9 @@ public class CategoryDao {
     }
 
     public boolean insert(Category c) throws SQLException {
+        Connection connection = null;
         try {
-            Connection connection = DBConnect.getConnecttion();
+            connection = DBConnect.getConnecttion();
             String sql = "INSERT INTO CATEGORY(category_name, category_des, category_slug,category_parent) VALUE(?,?,?,?)";
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setString(1, c.getCategoryName());
@@ -113,15 +117,18 @@ public class CategoryDao {
             ps.setInt(4, c.getCategoryParent());
 
             int temp = ps.executeUpdate();
+            connection.close();
             return temp == 1;
         } catch (Exception e) {
+            connection.close();
             return false;
         }
     }
 
     public boolean update(Category c) throws SQLException {
+        Connection connection = null;
         try {
-            Connection connection = DBConnect.getConnecttion();
+            connection = DBConnect.getConnecttion();
             String sql = "UPDATE CATEGORY set category_name=?, category_des=?, category_slug=?,category_parent=? where category_id=?";
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setString(1, c.getCategoryName());
@@ -130,22 +137,27 @@ public class CategoryDao {
             ps.setInt(4, c.getCategoryParent());
             ps.setInt(5, c.getCategoryID());
             int temp = ps.executeUpdate();
+            connection.close();
             return temp == 1;
         } catch (Exception e) {
+            connection.close();
             return false;
         }
     }
 
 
     public boolean delete(int category_id) throws SQLException {
+        Connection connection = null;
         try {
-            Connection connection = DBConnect.getConnecttion();
+            connection = DBConnect.getConnecttion();
             String sql = "DELETE FROM CATEGORY WHERE category_id = ?";
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setLong(1, category_id);
             int temp = ps.executeUpdate();
+            connection.close();
             return temp == 1;
         } catch (Exception e) {
+            connection.close();
             return false;
         }
     }

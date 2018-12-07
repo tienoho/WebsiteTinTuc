@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Calendar;
 
 
@@ -34,21 +35,29 @@ public class SinupServlet extends HttpServlet {
             java.util.Date myDate = (Calendar.getInstance().getTime());
             java.sql.Date sqlDateNow = new java.sql.Date(myDate.getTime());
             users = new Users(email, password, fullName, sqlDateNow, 1);
-            if (usersDao.insertUser(users)) {
-                HttpSession session = request.getSession();
-                session.setAttribute("user", users);
-                url = "/index.jsp";
-            } else {
-                request.setAttribute("errorR", "Đăng kí không thành công");
-                request.setAttribute("actionR", "class=\"active\"");
-                url = "/register";
+            try {
+                if (usersDao.insertUser(users)) {
+                    HttpSession session = request.getSession();
+                    session.setAttribute("user", users);
+                    url = "/index.jsp";
+                } else {
+                    request.setAttribute("errorR", "Đăng kí không thành công");
+                    request.setAttribute("actionR", "class=\"active\"");
+                    url = "/register";
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
 
         } else if ("login".equals(command)) {
             //Login
             email = request.getParameter("emailLogin");
             password = request.getParameter("passwordLogin");
-            users = usersDao.login(email, UsersDao.encryption(password));
+            try {
+                users = usersDao.login(email, UsersDao.encryption(password));
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
             if (users != null) {
                 HttpSession session = request.getSession();
                 session.setAttribute("user", users);

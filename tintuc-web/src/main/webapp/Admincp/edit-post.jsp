@@ -2,7 +2,9 @@
 <%@ page import="vn.haui.web.model.Post" %>
 <%@ page import="vn.haui.web.command.CategoryDao" %>
 <%@ page import="vn.haui.web.model.Category" %>
-<%@ page import="java.sql.SQLException" %><%--
+<%@ page import="java.sql.SQLException" %>
+<%@ page import="vn.haui.web.command.TermsRelationshipsDao" %>
+<%@ page import="vn.haui.web.model.TermsRelationships" %><%--
   Created by IntelliJ IDEA.
   User: Admin
   Date: 29/11/2018
@@ -20,14 +22,18 @@
         action = request.getParameter("action");
     PostDao postDao=new PostDao();
     CategoryDao categoryDao=new CategoryDao();
+    TermsRelationshipsDao termsRelationshipsDao=new TermsRelationshipsDao();
     Post post=new Post();
     if(action.equals("edit"))
     {
-        postId= request.getParameter("post");
-        try {
-            post=postDao.getPost(Integer.parseInt(postId));
-        } catch (SQLException e) {
-            e.printStackTrace();
+        if(request.getParameter("post")!=null)
+        {
+            postId= request.getParameter("post");
+            try {
+                post=postDao.getPost(Integer.parseInt(postId));
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
         if(session.getAttribute("result")!=null)
         {
@@ -86,7 +92,7 @@
                     <textarea class="form-control" rows="2" id="post-summary" name="post-summary"></textarea>
                     <p class="help-block"></p>
                 </div>
-                <input hidden="hidden" name="command" value="<%=action.equals("edit")?"update":"insert"%>">
+
                 <span name="category-result"></span>
 
             </div>
@@ -113,7 +119,9 @@
                         <!-- /.list-group -->
                         <%if(action.equals("edit")){%>
                         <a href="${root}/ManagerPostServlet?post=<%=post.getPostID()%>&action=delete" class="text-danger">Xóa</a>
+                        <input hidden="hidden" name="postID" value="<%=post.getPostID()%>">
                         <%}%>
+                        <input hidden="hidden" name="command" value="<%=action.equals("edit")?"update":"insert"%>">
                         <button type="submit" class="btn btn-success"><%=action.equals("edit") ? "Cập nhập" : "Đăng"%>
                         </button>
                     </div>
@@ -147,7 +155,11 @@
                             <%for(Category c:categoryDao.getListCategory()){%>
                             <div class="checkbox">
                                 <label>
-                                    <input type="checkbox" name="category" id="category-item-<%=c.getCategoryID()%>" value="<%=c.getCategoryID()%>"><%=c.getCategoryName()%>
+                                    <input type="checkbox" name="category" id="category-item-<%=c.getCategoryID()%>"
+                                        <%for (TermsRelationships t:termsRelationshipsDao.getListTermsRelationshipsByPostID(post.getPostID())){
+                                            if(t.getCategoryID()==c.getCategoryID()){%> checked="checked"
+                                        <%}}%>
+                                           value="<%=c.getCategoryID()%>"><%=c.getCategoryName()%>
                                 </label>
                             </div>
                             <%}%>

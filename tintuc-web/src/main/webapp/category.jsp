@@ -2,6 +2,7 @@
 <%@ page import="vn.haui.web.common.WebConstant" %>
 <%@ page import="vn.haui.web.model.Post" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="vn.haui.web.utils.tool" %>
 <%--
   Created by IntelliJ IDEA.
   User: Admin
@@ -10,19 +11,21 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="root" value="${pageContext.request.contextPath}"/>
 <%--<c:set var="pageUrl" scope="request">--%>
-    <%--<c:out value="${pageContext.request.scheme}://${request.getRequestURL}"/>--%>
-    <%--<c:if test="${pageContext.request.serverPort != '80'}">--%>
-        <%--<c:out value=":${pageContext.request.serverPort}"/>--%>
-    <%--</c:if>--%>
-    <%--<c:out value="${requestScope['javax.servlet.forward.request_uri']}"/>--%>
+<%--<c:out value="${pageContext.request.scheme}://${request.getRequestURL}"/>--%>
+<%--<c:if test="${pageContext.request.serverPort != '80'}">--%>
+<%--<c:out value=":${pageContext.request.serverPort}"/>--%>
+<%--</c:if>--%>
+<%--<c:out value="${requestScope['javax.servlet.forward.request_uri']}"/>--%>
 <%--</c:set>--%>
 <%
     PostDao postDao = new PostDao();
 
-    String categorySlug=request.getRequestURL().toString();
+    String categorySlug = request.getRequestURL().toString();
     //System.out.println(categorySlug);
-    categorySlug=categorySlug.substring(categorySlug.lastIndexOf("/")+1);
+    categorySlug = categorySlug.substring(categorySlug.lastIndexOf("/") + 1);
     System.out.println(request.getRequestURL());
     //int category_id = 0;=
     int category_id = postDao.getCategoyID(categorySlug);
@@ -30,11 +33,15 @@
 
     int total = 0;
     if (request.getParameter("categoryID") != null) {
-       category_id = Integer.parseInt(request.getParameter("categoryID"));
+        category_id = Integer.parseInt(request.getParameter("categoryID"));
         //category_id = Integer.parseInt(request.getAttribute("categoryID").toString());
-        total = postDao.getCountPostByCategoy(category_id);
+        //total = postDao.getCountPostByCategoy(category_id);
+        total = postDao.getCountPostByCategoyTerm(category_id);
+    } else {
+        // total = postDao.getCountPostByCategoy(category_id);
+        total = postDao.getCountPostByCategoyTerm(category_id);
     }
-    total = postDao.getCountPostByCategoy(category_id);
+
     int pages = 1, firstResult = 0, maxResult = 0;
     if (request.getParameter("pages") != null) {
         pages = Integer.parseInt(request.getParameter("pages"));
@@ -47,7 +54,8 @@
         firstResult = (pages - 1) * WebConstant.postNumber;
         maxResult = WebConstant.postNumber;
     }
-    ArrayList<Post> listPost = postDao.getListProductByPages(category_id, firstResult, maxResult);
+    //ArrayList<Post> listPost = postDao.getListProductByPages(category_id, firstResult, maxResult);
+    ArrayList<Post> listPost = postDao.getListProductByPagesInTerm(category_id, firstResult, maxResult);
 %>
 <jsp:include page="header.jsp"/>
 <div class="breadcrumbs-wrap">
@@ -74,7 +82,7 @@
                 <article
                         class="post-<%=p.getPostID()%> post type-post status-publish format-standard has-post-thumbnail category-business category-lifestyle tag-culture tag-fashion tag-fitness tag-leisure tag-lifestyle">
                     <div class="post-wrap">
-                        <a href="single.jsp?post=<%=p.getPostID()%>" class="image-link">
+                        <a href="${root}/single.jsp?post=<%=p.getPostID()%>" class="image-link">
                             <img width="312" height="198"
                                  src="${root}/<%=p.getPostImg()%>"
                                  class="attachment-list-block size-list-block wp-post-image"
@@ -93,7 +101,7 @@
                             </div>
                             <div class="excerpt">
                                 <%--content--%>
-                                <%=p.getPostContent().substring(0, 50)%><%=WebConstant.tobeContime%>
+                                <%=tool.html2text(p.getPostContent()).substring(0, 50)%><%=WebConstant.tobeContime%>
                             </div>
                         </div>
                     </div>
@@ -101,9 +109,12 @@
                 <%}%>
             </div>
             <div class="main-pagination">
-                <%int cout=total / WebConstant.postNumber;
-                    if (pages > 1) {%>
-                <a class="prev page-numbers" href="category.jsp?categoryID=<%=category_id%>&pages=<%=pages-1%>">
+                <%
+                    int cout = total / WebConstant.postNumber;
+                    if (pages > 1) {
+                %>
+                <a class="prev page-numbers"
+                   href="${root}/Category/categorySlug?categoryID=<%=category_id%>&pages=<%=pages-1%>">
                     <i class="fa fa-angle-left"></i>
                     <span class="visuallyhidden">Previous</span>
                 </a>
@@ -116,14 +127,16 @@
                 <%
                 } else {
                 %>
-                <a class='page-numbers' href='category.jsp?categoryID=<%=category_id%>&pages=<%=i%>'><%=i%>
+                <a class='page-numbers'
+                   href='${root}/Category/categorySlug?categoryID=<%=category_id%>&pages=<%=i%>'><%=i%>
                 </a>
                 <%
                         }
                     }
-                    if (pages >= cout&&cout>1) {
+                    if (pages >= cout && cout > 1) {
                 %>
-                <a class="next page-numbers" href="category.jsp?categoryID=<%=category_id%>&pages=<%=pages+1%>">
+                <a class="next page-numbers"
+                   href="${root}/Category/categorySlug?categoryID=<%=category_id%>&pages=<%=pages+1%>">
                     <span class="visuallyhidden">Next</span>
                     <i class="fa fa-angle-right"></i>
                 </a>

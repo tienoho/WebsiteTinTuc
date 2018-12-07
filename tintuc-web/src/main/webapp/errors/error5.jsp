@@ -8,9 +8,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>lỗi 500</title>
 </head>
 <body>
-
+<h1>Lỗi 500</h1>
 </body>
 </html>

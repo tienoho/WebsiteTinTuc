@@ -2,6 +2,7 @@ package vn.haui.web.controller;
 
 import vn.haui.web.command.PostDao;
 import vn.haui.web.command.TermsRelationshipsDao;
+import vn.haui.web.common.WebConstant;
 import vn.haui.web.model.Post;
 import vn.haui.web.model.TermsRelationships;
 
@@ -27,7 +28,7 @@ public class ManagerPostServlet extends HttpServlet {
         Post post;
         TermsRelationships termsRelationships;
 
-        String url ="/Admincp/edit-post.jsp", error = "", result = "", error_slug = "";
+        String url =WebConstant.localHost+"/Admincp/edit-post.jsp", error = "", result = "", error_slug = "";
         String command = request.getParameter("command");
         String postTitle = request.getParameter("post-title");
         String postSlug = "";
@@ -65,21 +66,22 @@ public class ManagerPostServlet extends HttpServlet {
                             termsRelationshipsDao.insert(termsRelationships);
                         }
                         result = "Thêm thành công";
-                        url = "/Admincp/edit-post.jsp?post=" + postID + "&action=edit";
+                        url = WebConstant.localHost+"/Admincp/edit-post.jsp?post=" + postID + "&action=edit";
                         //if request is not from HttpServletRequest, you should do a typecast before
                         //save message in session
                         session.setAttribute("result", result);
                     }
                     break;
-                case "edit":
+                case "update":
                     if (postTitle.equals("") || postTitle == null) {
                         error = "Không thể bỏ trống tên tiêu đề !";
                         //request.setAttribute("error", error);
                         session.setAttribute("error", error);
                     } else {
                         post = new Post();
+
                         post.setPostTitle(postTitle);
-                        request.getParameter("post-slug");
+                        postSlug=request.getParameter("post-slug");
                         if (!postSlug.equals("")) {
                             post.setPostSlug(postSlug);
                         } else {
@@ -91,14 +93,29 @@ public class ManagerPostServlet extends HttpServlet {
                         post.setPostImg(request.getParameter("ImagePath"));
                         post.setCategoryID(1);
                         post.setPostStatus("Public");
+                        if(request.getParameter("postID")!=null)
+                        {
+                            post.setPostID(Integer.parseInt(request.getParameter("postID")));
+                        }
                         //request.getParameter("category-father");
                         postDao.update(post);
+                        String[] selectedCategoryList = request.getParameterValues("category");
+                        if(selectedCategoryList!=null){
+                            termsRelationshipsDao.delete(post.getPostID());
+                            for (String s : selectedCategoryList) {
+                                termsRelationships = new TermsRelationships(post.getPostID(), Integer.parseInt(s), 0);
+                                termsRelationshipsDao.insert(termsRelationships);
+                            }
+                        }
+
                         result = "Cập nhập thành công";
                         session.setAttribute("result", result);
+                        url = WebConstant.localHost+"/Admincp/edit-post.jsp?post=" + post.getPostID() + "&action=edit";
                     }
                     break;
                 case "delete":
                     postDao.delete(Integer.parseInt(request.getParameter("post-ID")));
+                    termsRelationshipsDao.delete(Integer.parseInt(request.getParameter("post-ID")));
                     //url = "/Admincp/post.jsp";
                     break;
                 default:
@@ -108,6 +125,8 @@ public class ManagerPostServlet extends HttpServlet {
             }
         } catch (Exception ex) {
             ex.printStackTrace();
+            result = "Cập không thành công";
+            session.setAttribute("result", result);
         }
         response.sendRedirect(url);
         //request.setAttribute("result", result);
@@ -123,7 +142,8 @@ public class ManagerPostServlet extends HttpServlet {
             case "delete":
                 try {
                     postDao.delete(Integer.parseInt(request.getParameter("post")));
-                    url = "/Admincp/post.jsp";
+                    termsRelationshipsDao.delete(Integer.parseInt(request.getParameter("post")));
+                    url = WebConstant.localHost+ "/Admincp/post.jsp";
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }

@@ -39,6 +39,7 @@ public class PostDao {
             post.setCategoryID(rs.getInt("category_id"));
             list.add(post);
         }
+        connection.close();
         return list;
     }
     //Get All
@@ -63,6 +64,7 @@ public class PostDao {
             post.setCategoryID(rs.getInt("category_id"));
             list.add(post);
         }
+        connection.close();
         return list;
     }
     //phan trang cho arraylist
@@ -88,6 +90,39 @@ public class PostDao {
             post.setCategoryID(rs.getInt("category_id"));
             list.add(post);
         }
+        connection.close();
+        return list;
+    }
+    public ArrayList<Post> getListProductByPagesInTerm(int categoryID, int firstResult, int maxResult) throws SQLException {
+        Connection connection = DBConnect.getConnecttion();
+        String sql = "SELECT * FROM post WHERE category_id = '" + categoryID + "' limit ?,?";
+        String sql2="SELECT post.* FROM post,\n" +
+                "  (SELECT post_id FROM terms_relationships\n" +
+                "    inner join category\n" +
+                "      on category.category_id=terms_relationships.category_id\n" +
+                "         and category.category_id='"+categoryID+"')\n" +
+                "  as term where post.post_id=term.post_id\n" +
+                "order by term.post_id desc  limit ?,?";
+        PreparedStatement ps = connection.prepareStatement(sql2);
+        ps.setInt(1, firstResult);
+        ps.setInt(2, maxResult);
+        ResultSet rs = ps.executeQuery();
+        ArrayList<Post> list = new ArrayList<Post>();
+        while (rs.next()) {
+            Post post = new Post();
+            post.setPostID(rs.getInt("post_id"));
+            post.setAuthorID(rs.getInt("author_id"));
+            post.setPostDate(rs.getDate("post_date"));
+            post.setPostEditDate(rs.getDate("post_edit_date"));
+            post.setPostContent(rs.getString("post_content"));
+            post.setPostTitle(rs.getString("post_title"));
+            post.setPostStatus(rs.getString("post_status"));
+            post.setPostSlug(rs.getString("post_slug"));
+            post.setPostImg(rs.getString("post_img"));
+            post.setCategoryID(rs.getInt("category_id"));
+            list.add(post);
+        }
+        connection.close();
         return list;
     }
     public Post getPost(int postID) throws SQLException {
@@ -109,19 +144,40 @@ public class PostDao {
             post.setPostImg(rs.getString("post_img"));
             post.setCategoryID(rs.getInt("category_id"));
         }
+        connection.close();
         return post;
     }
     public int getCountPostByCategoy(int categoryID) throws SQLException {
         Connection connection = DBConnect.getConnecttion();
         String sql = "SELECT count(post_id) FROM post WHERE category_id = '" + categoryID + "'";
+
         PreparedStatement ps = connection.prepareStatement(sql);
         ResultSet rs = ps.executeQuery();
         int count = 0;
         while (rs.next()) {
             count = rs.getInt(1);
         }
+        connection.close();
         return count;
-
+    }
+    public int getCountPostByCategoyTerm(int categoryID) throws SQLException {
+        Connection connection = DBConnect.getConnecttion();
+        String sql = "SELECT count(post_id) FROM post WHERE category_id = '" + categoryID + "'";
+        String sql2="SELECT count(post.post_id) FROM post,\n" +
+                "  (SELECT post_id FROM terms_relationships\n" +
+                "    inner join category\n" +
+                "      on category.category_id=terms_relationships.category_id\n" +
+                "         and category.category_id='"+categoryID+"')\n" +
+                "  as term where post.post_id=term.post_id\n" +
+                "order by term.post_id desc";
+        PreparedStatement ps = connection.prepareStatement(sql2);
+        ResultSet rs = ps.executeQuery();
+        int count = 0;
+        while (rs.next()) {
+            count = rs.getInt(1);
+        }
+        connection.close();
+        return count;
     }
     public int getPostIDBySlug(String slug) throws SQLException {
         Connection connection = DBConnect.getConnecttion();
@@ -132,6 +188,7 @@ public class PostDao {
         while (rs.next()) {
             id = rs.getInt(1);
         }
+        connection.close();
         return id;
     }
     public int getCategoyID(String slug) throws SQLException {
@@ -143,6 +200,7 @@ public class PostDao {
         while (rs.next()) {
             count = rs.getInt(1);
         }
+        connection.close();
         return count;
     }
     //kiểm tra xem post_slug  đã tồn tại hay chưa
@@ -160,12 +218,18 @@ public class PostDao {
         } catch (SQLException e) {
             Logger.getLogger(CategoryDao.class.getName()).log(Level.SEVERE, null, e);
             e.printStackTrace();
+            try {
+                connection.close();
+            } catch (SQLException e1) {
+                e1.printStackTrace();
+            }
         }
         return false;
     }
     public boolean insert(Post c) throws SQLException {
+        Connection connection=null;
         try {
-            Connection connection = DBConnect.getConnecttion();
+            connection = DBConnect.getConnecttion();
             String sql = "INSERT INTO Post(author_id, post_date, post_edit_date, post_content, post_title, post_status, post_slug, post_img, category_id,post_summary) " +
                     "VALUE(?,?,?,?,?,?,?,?,?,?)";
             PreparedStatement ps = connection.prepareStatement(sql);
@@ -180,14 +244,17 @@ public class PostDao {
             ps.setInt(9, c.getCategoryID());
             ps.setString(10, c.getPostSummary());
             int temp = ps.executeUpdate();
+            connection.close();
             return temp == 1;
         } catch (Exception e) {
+            connection.close();
             return false;
         }
     }
     public boolean update(Post c) throws SQLException {
+        Connection connection=null;
         try {
-            Connection connection = DBConnect.getConnecttion();
+            connection = DBConnect.getConnecttion();
             String sql = "UPDATE Post set post_edit_date=?, post_content=?, post_title=?," +
                     " post_slug=?,post_img=?,post_status=? ,category_id=?,post_summary=? where post_id=?";
             PreparedStatement ps = connection.prepareStatement(sql);
@@ -201,22 +268,27 @@ public class PostDao {
             ps.setString(8, c.getPostSummary());
             ps.setInt(9, c.getPostID());
             int temp = ps.executeUpdate();
+            connection.close();
             return temp == 1;
         } catch (Exception e) {
+            connection.close();
             return false;
         }
     }
 
 
     public boolean delete(int post_id) throws SQLException {
+        Connection connection=null;
         try {
-            Connection connection = DBConnect.getConnecttion();
+            connection = DBConnect.getConnecttion();
             String sql = "DELETE FROM Post WHERE post_id = ?";
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setLong(1, post_id);
             int temp = ps.executeUpdate();
+            connection.close();
             return temp == 1;
         } catch (Exception e) {
+            connection.close();
             return false;
         }
     }

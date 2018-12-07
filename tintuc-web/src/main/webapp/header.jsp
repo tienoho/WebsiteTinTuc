@@ -22,7 +22,7 @@
     <link rel='stylesheet' id='pretty-photo-css' href='http://localhost/wp-content/themes/smart-mag/css/prettyPhoto.css?ver=3.0.2' type='text/css' media='all' />
     <link rel='stylesheet' id='smartmag-font-awesome-css' href='http://localhost/wp-content/themes/smart-mag/css/fontawesome/css/font-awesome.min.css?ver=3.0.2' type='text/css' media='all' />
     <link rel='stylesheet' id='smartmag-skin-css' href='http://localhost/wp-content/themes/smart-mag/css/skin-trendy.css?ver=4.9.8' type='text/css' media='all' />-->
-    <title>SmartMag Trendy &mdash; Premium Theme Demo</title>
+    <title>Website Tin tức - JSP </title>
 
     <script type='text/javascript' src='${root}/js/jquery.js'></script>
     <script>document.querySelector('head').innerHTML += '<style class="bunyad-img-effects-css">.main img, .main-footer img { opacity: 0; }</style>';</script>
@@ -153,7 +153,7 @@
                                         %>
                                         <li id="menu-item-<%=category.getCategoryID()%>"
                                             class="menu-item menu-item-type-custom menu-item-object-custom menu-item-<%=category.getCategoryID()%>">
-                                            <a href="Category/<%=category.getCategorySlug()%>"><%=category.getCategoryName()%></a>
+                                            <a href="${root}/Category/<%=category.getCategorySlug()%>"><%=category.getCategoryName()%></a>
                                         <%--category.jsp?categoryID=<%=category.getCategoryID()%>&pages=1--%>
                                             <%--CategoryServlet?categoryID=<%=category.getCategoryID()%>&pages=1--%>
                                         </li>

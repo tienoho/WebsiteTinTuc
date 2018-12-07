@@ -33,6 +33,7 @@ public class UsersDao {
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
+
         return str;
 
     }
@@ -53,11 +54,16 @@ public class UsersDao {
             Logger.getLogger(UsersDao.class.getName()).log(Level.SEVERE, null, e);
             e.printStackTrace();
         }
+        try {
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return false;
     }
 
     //insert tai khoan
-    public boolean insertUser(Users user) {
+    public boolean insertUser(Users user) throws SQLException {
         Connection connection = DBConnect.getConnecttion();
         String sql = "INSERT INTO user(email,password,fullname,createddate,roleid) values(?,?,?,?,?)";
 
@@ -69,46 +75,52 @@ public class UsersDao {
             ps.setDate(4, user.getCreatedDate());
             ps.setInt(5, user.getRoleId());
             ps.executeUpdate();
+            connection.close();
             return true;
         } catch (SQLException e) {
             Logger.getLogger(UsersDao.class.getName()).log(Level.SEVERE, null, e);
             e.printStackTrace();
+            connection.close();
         }
+
         return false;
     }
     //Login
-    public Users login(String email, String password) {
-        Connection con = DBConnect.getConnecttion();
+    public Users login(String email, String password) throws SQLException {
+        Connection connection = DBConnect.getConnecttion();
         String sql = "select * from user where email='" + email + "' and password='" + password + "'";
         PreparedStatement ps;
         try {
-            ps = (PreparedStatement) con.prepareStatement(sql);
+            ps = (PreparedStatement) connection.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 Users users=new Users();
                 users.setEmail(rs.getString("email"));
                 users.setFullName(rs.getString("fullname"));
                 users.setRoleId(rs.getInt("roleid"));
-                con.close();
+                connection.close();
                 return users;
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            connection.close();
         }
         return null;
     }
-    public String getName(int userId) {
-        Connection con = DBConnect.getConnecttion();
+    public String getName(int userId) throws SQLException {
+        Connection connection = DBConnect.getConnecttion();
         String sql = "select * from user where userid='" + userId + "'";
         PreparedStatement ps;
         try {
-            ps = (PreparedStatement) con.prepareStatement(sql);
+            ps = (PreparedStatement) connection.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 return rs.getString("fullname");
             }
+            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
+            connection.close();
         }
         return null;
     }
