@@ -7,4 +7,6 @@ public class tool {
     public static String html2text(String html) {
         return Jsoup.parse(html).text();
     }
+
+
 }

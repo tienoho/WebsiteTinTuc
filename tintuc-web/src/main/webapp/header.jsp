@@ -160,348 +160,34 @@
                                         <%}%>
                                     </ul>
                                 </li>
-                                <li id="menu-item-10"
+                                <li id="menu-item-home"
                                     class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home menu-item-10">
                                     <a href="<%=WebConstant.localHost%>">Home</a>
                                 </li>
-                                <li id="menu-item-586"
-                                    class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-586">
-                                    <a href="#">Features</a>
+                                <%for(Category cMenu:categoryDao.getListCategoryParent()){%>
+                                <li id="menu-item-<%=cMenu.getCategoryID()%>"
+                                    class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-<%=cMenu.getCategoryID()%>">
+                                    <a href="${root}/Category/<%=cMenu.getCategorySlug()%>"><%=cMenu.getCategoryName()%></a>
                                     <ul class="sub-menu">
-                                        <li id="menu-item-587"
-                                            class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-587">
-                                            <a href="#">Post Styles</a>
+                                        <%for (Category cSubMenu:categoryDao.getListCategoryChildren(cMenu.getCategoryID())) {%>
+                                        <li id="menu-item-<%=cSubMenu.getCategoryID()%>"
+                                            class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-<%=cSubMenu.getCategoryID()%>">
+                                            <a href="${root}/Category/<%=cSubMenu.getCategorySlug()%>"><%=cSubMenu.getCategoryName()%></a>
                                             <ul class="sub-menu">
-                                                <li id="menu-item-588"
-                                                    class="menu-item menu-item-type-custom menu-item-object-custom menu-item-588">
-                                                    <a href="2016/12/28/25-things-every-proud-owner-of-pc-should-do-2-2/index.html">
-                                                        Classic
-                                                        Style
+                                                <%for (Category cSub2Menu:categoryDao.getListCategoryChildren(cSubMenu.getCategoryID())) {%>
+                                                <li id="menu-item-<%=cSub2Menu.getCategoryID()%>"
+                                                    class="menu-item menu-item-type-custom menu-item-object-custom menu-item-<%=cSub2Menu.getCategoryID()%>">
+                                                    <a href="${root}/Category/<%=cSub2Menu.getCategorySlug()%>">
+                                                        <%=cSub2Menu.getCategoryName()%>
                                                     </a>
                                                 </li>
-                                                <li id="menu-item-589"
-                                                    class="menu-item menu-item-type-custom menu-item-object-custom menu-item-589">
-                                                    <a href="2017/01/08/annie-ziegler-is-designing-clothes-for-girls-just-like-her-2-2/index.html">
-                                                        Modern
-                                                        Style
-                                                    </a>
-                                                </li>
-                                                <li id="menu-item-590"
-                                                    class="menu-item menu-item-type-custom menu-item-object-custom menu-item-590">
-                                                    <a href="2017/01/08/annie-ziegler-is-designing-clothes-for-girls-just-like-her-2-2/index4514.html?post_layout=modern-b">
-                                                        Modern
-                                                        Simple
-                                                    </a>
-                                                </li>
-                                                <li id="menu-item-591"
-                                                    class="menu-item menu-item-type-custom menu-item-object-custom menu-item-591">
-                                                    <a href="2016/12/29/workouts-everyone-should-try-once-in-a-while-2/index.html">
-                                                        Post
-                                                        Cover
-                                                    </a>
-                                                </li>
-                                                <li id="menu-item-592"
-                                                    class="menu-item menu-item-type-custom menu-item-object-custom menu-item-592">
-                                                    <a href="2016/12/28/25-things-every-proud-owner-of-pc-should-do-2-2/index9f72.html?post_layout=classic-above">
-                                                        Classic
-                                                        Alt
-                                                    </a>
-                                                </li>
-                                                <li id="menu-item-593"
-                                                    class="menu-item menu-item-type-custom menu-item-object-custom menu-item-593">
-                                                    <a href="2016/12/28/25-things-every-proud-owner-of-pc-should-do-2-2/index09cf.html?layout=full">
-                                                        Classic
-                                                        Full
-                                                    </a>
-                                                </li>
-                                                <li id="menu-item-594"
-                                                    class="menu-item menu-item-type-custom menu-item-object-custom menu-item-594">
-                                                    <a href="2017/01/08/annie-ziegler-is-designing-clothes-for-girls-just-like-her-2-2/index8554.html?no_featured=1">
-                                                        No
-                                                        Featured
-                                                    </a>
-                                                </li>
-                                                <li id="menu-item-595"
-                                                    class="menu-item menu-item-type-custom menu-item-object-custom menu-item-595">
-                                                    <a href="2017/01/05/places-everyone-should-visit-in-their-life-before-2018/index.html">Multi-page</a>
-                                                </li>
-                                                <li id="menu-item-596"
-                                                    class="menu-item menu-item-type-custom menu-item-object-custom menu-item-596">
-                                                    <a href="2017/01/06/gadget-are-causing-an-effect-known-as-fomo/index.html">
-                                                        Video
-                                                        Post
-                                                    </a>
-                                                </li>
-                                                <li id="menu-item-597"
-                                                    class="menu-item menu-item-type-custom menu-item-object-custom menu-item-597">
-                                                    <a href="2017/01/05/music-of-the-previous-generations-is-hot-again-this-year/index.html">
-                                                        Audio
-                                                        Post
-                                                    </a>
-                                                </li>
-                                                <li id="menu-item-598"
-                                                    class="menu-item menu-item-type-custom menu-item-object-custom menu-item-598">
-                                                    <a href="2017/01/06/things-to-let-go-now-for-a-healthy-new-year-2/index.html">
-                                                        Gallery
-                                                        Post
-                                                    </a>
-                                                </li>
+                                            <%}%>
                                             </ul>
                                         </li>
-                                        <li id="menu-item-599"
-                                            class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-599">
-                                            <a href="#">Category Layouts</a>
-                                            <ul class="sub-menu">
-                                                <li id="menu-item-600"
-                                                    class="menu-item menu-item-type-custom menu-item-object-custom menu-item-600">
-                                                    <a href="category/leisure/index.html">Top Featured: Grid B</a>
-                                                </li>
-                                                <li id="menu-item-601"
-                                                    class="menu-item menu-item-type-custom menu-item-object-custom menu-item-601">
-                                                    <a href="category/leisure/indexf525.html?cat_featured=grid">
-                                                        Top
-                                                        Featured: Grid
-                                                    </a>
-                                                </li>
-                                                <li id="menu-item-602"
-                                                    class="menu-item menu-item-type-custom menu-item-object-custom menu-item-602">
-                                                    <a href="category/fashion/indexf5f9.html?cat_layout=modern">
-                                                        Modern
-                                                        Listing
-                                                    </a>
-                                                </li>
-                                                <li id="menu-item-603"
-                                                    class="menu-item menu-item-type-custom menu-item-object-custom menu-item-603">
-                                                    <a href="category/fashion/indexc6ff.html?cat_layout=modern&amp;layout=full">
-                                                        Modern
-                                                        3 Columns
-                                                    </a>
-                                                </li>
-                                                <li id="menu-item-604"
-                                                    class="menu-item menu-item-type-custom menu-item-object-custom menu-item-604">
-                                                    <a href="category/fashion/index.html">Blog Listing</a>
-                                                </li>
-                                                <li id="menu-item-605"
-                                                    class="menu-item menu-item-type-custom menu-item-object-custom menu-item-605">
-                                                    <a href="category/fashion/indexe2d6.html?cat_layout=classic">
-                                                        Classic
-                                                        Large
-                                                    </a>
-                                                </li>
-                                                <li id="menu-item-606"
-                                                    class="menu-item menu-item-type-custom menu-item-object-custom menu-item-606">
-                                                    <a href="category/fashion/index3f0c.html?cat_layout=grid-overlay">
-                                                        Grid
-                                                        Overlay
-                                                    </a>
-                                                </li>
-                                                <li id="menu-item-607"
-                                                    class="menu-item menu-item-type-custom menu-item-object-custom menu-item-607">
-                                                    <a href="category/fashion/index308b.html?cat_layout=grid-overlay&amp;layout=full">
-                                                        Overlay
-                                                        3 Cols
-                                                    </a>
-                                                </li>
-                                                <li id="menu-item-608"
-                                                    class="menu-item menu-item-type-custom menu-item-object-custom menu-item-608">
-                                                    <a href="category/beauty/index20ec.html?cat_layout=tall-overlay">
-                                                        Tall
-                                                        Grid
-                                                    </a>
-                                                </li>
-                                                <li id="menu-item-609"
-                                                    class="menu-item menu-item-type-custom menu-item-object-custom menu-item-609">
-                                                    <a href="category/fashion/indexcb15.html?cat_layout=timeline">Timeline</a>
-                                                </li>
-                                                <li id="menu-item-610"
-                                                    class="menu-item menu-item-type-custom menu-item-object-custom menu-item-610">
-                                                    <a href="category/opinion/index.html">Infinite Scroll</a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li id="menu-item-611"
-                                            class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-611">
-                                            <a href="#">Review Posts</a>
-                                            <ul class="sub-menu">
-                                                <li id="menu-item-612"
-                                                    class="menu-item menu-item-type-custom menu-item-object-custom menu-item-612">
-                                                    <a href="2016/12/28/review-of-a-beautiful-product-we-highly-recommend/index.html">
-                                                        Points
-                                                        Review
-                                                    </a>
-                                                </li>
-                                                <li id="menu-item-613"
-                                                    class="menu-item menu-item-type-custom menu-item-object-custom menu-item-613">
-                                                    <a href="2016/12/28/review-of-a-beautiful-product-we-highly-recommend/index53bb.html?review_type=percent">
-                                                        Percent
-                                                        Review
-                                                    </a>
-                                                </li>
-                                                <li id="menu-item-614"
-                                                    class="menu-item menu-item-type-custom menu-item-object-custom menu-item-614">
-                                                    <a href="2016/12/28/review-of-a-beautiful-product-we-highly-recommend/index86a3.html?review_type=stars">
-                                                        Stars
-                                                        Review
-                                                    </a>
-                                                </li>
-                                                <li id="menu-item-615"
-                                                    class="menu-item menu-item-type-custom menu-item-object-custom menu-item-615">
-                                                    <a href="2016/12/28/review-of-a-beautiful-product-we-highly-recommend/indexce45.html?review_pos=top">
-                                                        Top
-                                                        Position
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li id="menu-item-616"
-                                            class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-616">
-                                            <a href="#">Header Styles</a>
-                                            <ul class="sub-menu">
-                                                <li id="menu-item-617"
-                                                    class="menu-item menu-item-type-custom menu-item-object-custom menu-item-617">
-                                                    <a target="_blank" href="http://theme-sphere.com/smart-mag/">
-                                                        Classic
-                                                        Style
-                                                    </a>
-                                                </li>
-                                                <li id="menu-item-618"
-                                                    class="menu-item menu-item-type-custom menu-item-object-custom menu-item-618">
-                                                    <a target="_blank" href="../tech/index.html">Tech Style</a>
-                                                </li>
-                                                <li id="menu-item-619"
-                                                    class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home menu-item-619">
-                                                    <a href="index.html">Trendy Style</a>
-                                                </li>
-                                                <li id="menu-item-620"
-                                                    class="menu-item menu-item-type-custom menu-item-object-custom menu-item-620">
-                                                    <a target="_blank" href="../zine/index.html">Dark Style</a>
-                                                </li>
-                                                <li id="menu-item-621"
-                                                    class="menu-item menu-item-type-custom menu-item-object-custom menu-item-621">
-                                                    <a href="index1522.html?header_style=centered">Centered Logo</a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li id="menu-item-622"
-                                            class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-622">
-                                            <a href="#">Pages &#038; Templates</a>
-                                            <ul class="sub-menu">
-                                                <li id="menu-item-623"
-                                                    class="menu-item menu-item-type-custom menu-item-object-custom menu-item-623">
-                                                    <a href="typography/index.html">Normal Page</a>
-                                                </li>
-                                                <li id="menu-item-624"
-                                                    class="menu-item menu-item-type-custom menu-item-object-custom menu-item-624">
-                                                    <a href="typography/index09cf.html?layout=full">Full Width Page</a>
-                                                </li>
-                                                <li id="menu-item-625"
-                                                    class="menu-item menu-item-type-custom menu-item-object-custom menu-item-625">
-                                                    <a href="author/trendy/index.html">Author Page</a>
-                                                </li>
-                                                <li id="menu-item-626"
-                                                    class="menu-item menu-item-type-custom menu-item-object-custom menu-item-626">
-                                                    <a href="our-authors/index.html">Authors List</a>
-                                                </li>
-                                                <li id="menu-item-627"
-                                                    class="menu-item menu-item-type-custom menu-item-object-custom menu-item-627">
-                                                    <a href="sitemap/index.html">Sitemap Page</a>
-                                                </li>
-                                                <li id="menu-item-628"
-                                                    class="menu-item menu-item-type-custom menu-item-object-custom menu-item-628">
-                                                    <a href="index723a.html?p=1000000">404 Example</a>
-                                                </li>
-                                                <li id="menu-item-629"
-                                                    class="menu-item menu-item-type-custom menu-item-object-custom menu-item-629">
-                                                    <a href="indexcf59.html?s=test">Search Results</a>
-                                                </li>
-                                                <li id="menu-item-630"
-                                                    class="menu-item menu-item-type-custom menu-item-object-custom menu-item-630">
-                                                    <a href="get-in-touch/index.html">Contact Us</a>
-                                                </li>
-                                                <li id="menu-item-631"
-                                                    class="menu-item menu-item-type-custom menu-item-object-custom menu-item-631">
-                                                    <a href="typography/index.html">Typography</a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li id="menu-item-632"
-                                            class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-632">
-                                            <a href="#">Other Archives</a>
-                                            <ul class="sub-menu">
-                                                <li id="menu-item-633"
-                                                    class="menu-item menu-item-type-custom menu-item-object-custom menu-item-633">
-                                                    <a href="tag/lifestyle/index.html">Tag Archive</a>
-                                                </li>
-                                                <li id="menu-item-634"
-                                                    class="menu-item menu-item-type-custom menu-item-object-custom menu-item-634">
-                                                    <a href="2017/01/index.html">Date Archive</a>
-                                                </li>
-                                                <li id="menu-item-635"
-                                                    class="menu-item menu-item-type-custom menu-item-object-custom menu-item-635">
-                                                    <a href="indexcf59.html?s=test">Search Results</a>
-                                                </li>
-                                                <li id="menu-item-636"
-                                                    class="menu-item menu-item-type-custom menu-item-object-custom menu-item-636">
-                                                    <a href="author/trendy/index.html">Author Archive</a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li id="menu-item-637"
-                                            class="menu-item menu-item-type-custom menu-item-object-custom menu-item-637">
-                                            <a href="2017/01/05/places-everyone-should-visit-in-their-life-before-2018/index.html">
-                                                Multipage
-                                                Slideshow
-                                            </a>
-                                        </li>
-                                        <li id="menu-item-638"
-                                            class="menu-item menu-item-type-custom menu-item-object-custom menu-item-638">
-                                            <a href="http://theme-sphere.com/smart-mag/shop/">Shop/WooCommerce</a>
-                                        </li>
-                                        <li id="menu-item-639"
-                                            class="menu-item menu-item-type-custom menu-item-object-custom menu-item-639">
-                                            <a href="http://theme-sphere.com/smart-mag/forums/">bbPress Forums</a>
-                                        </li>
-                                        <li id="menu-item-640"
-                                            class="menu-item menu-item-type-custom menu-item-object-custom menu-item-640">
-                                            <a href="home-blocks/index.html">Home Blocks</a>
-                                        </li>
-                                        <li id="menu-item-641"
-                                            class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-641">
-                                            <a href="#">More Demos</a>
-                                            <ul class="sub-menu">
-                                                <li id="menu-item-642"
-                                                    class="menu-item menu-item-type-custom menu-item-object-custom menu-item-642">
-                                                    <a target="_blank" href="../zine/index.html">TheZine</a>
-                                                </li>
-                                                <li id="menu-item-643"
-                                                    class="menu-item menu-item-type-custom menu-item-object-custom menu-item-643">
-                                                    <a target="_blank"
-                                                       href="http://theme-sphere.com/smart-mag/">Classic</a>
-                                                </li>
-                                                <li id="menu-item-644"
-                                                    class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home menu-item-644">
-                                                    <a href="index.html">Lifestyle</a>
-                                                </li>
-                                                <li id="menu-item-645"
-                                                    class="menu-item menu-item-type-custom menu-item-object-custom menu-item-645">
-                                                    <a target="_blank" href="../tech/index.html">Tech Demo</a>
-                                                </li>
-                                            </ul>
-                                        </li>
+                                    <%}%>
                                     </ul>
                                 </li>
-                                <li id="menu-item-39"
-                                    class="menu-item menu-item-type-taxonomy menu-item-object-category menu-cat-12 menu-item-39">
-                                    <a href="category/leisure/index.html">Leisure</a>
-                                </li>
-                                <li id="menu-item-36"
-                                    class="menu-item menu-item-type-taxonomy menu-item-object-category menu-cat-8 menu-item-36">
-                                    <a href="category/business/index.html">Business</a>
-                                </li>
-                                <li id="menu-item-37"
-                                    class="menu-item menu-item-type-taxonomy menu-item-object-category menu-cat-7 menu-item-37">
-                                    <a href="category/celebrities/index.html">Celebrities</a>
-                                </li>
+                                <%}%>
                                 <li id="menu-item-38"
                                     class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-cat-4 menu-item-38">
                                     <a href="category/fashion/index.html">Fashion</a>
@@ -638,10 +324,6 @@
                                             </section>
                                         </div>
                                     </div>
-                                </li>
-                                <li id="menu-item-40"
-                                    class="menu-item menu-item-type-taxonomy menu-item-object-category menu-cat-13 menu-item-40">
-                                    <a href="category/opinion/index.html">Opinion</a>
                                 </li>
                             </ul>
                         </div>

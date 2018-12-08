@@ -34,6 +34,14 @@
         <url-pattern>/Category/*</url-pattern>
     </servlet-mapping>
     <servlet>
+        <servlet-name>CategoryPost</servlet-name>
+        <servlet-class>vn.haui.web.controller.PostServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CategoryPost</servlet-name>
+        <url-pattern>/Category/post/*</url-pattern>
+    </servlet-mapping>
+    <servlet>
         <servlet-name>ConnectorServlet</servlet-name>
         <servlet-class>com.ckfinder.connector.ConnectorServlet</servlet-class>
         <init-param>
@@ -57,4 +65,5 @@
         <error-code>500</error-code>
         <location>/errors/error5.jsp</location>
     </error-page>
+
 </web-app>

@@ -36,7 +36,6 @@ public class PostDao {
             post.setPostStatus(rs.getString("post_status"));
             post.setPostSlug(rs.getString("post_slug"));
             post.setPostImg(rs.getString("post_img"));
-            post.setCategoryID(rs.getInt("category_id"));
             list.add(post);
         }
         connection.close();
@@ -61,7 +60,30 @@ public class PostDao {
             post.setPostStatus(rs.getString("post_status"));
             post.setPostSlug(rs.getString("post_slug"));
             post.setPostImg(rs.getString("post_img"));
-            post.setCategoryID(rs.getInt("category_id"));
+            list.add(post);
+        }
+        connection.close();
+        return list;
+    }
+    //Get All new
+    public ArrayList<Post> getListAllPostNew(int maxpost) throws SQLException {
+        Connection connection = DBConnect.getConnecttion();
+        String sql = "SELECT * FROM post  order by post_date desc limit 1,"+maxpost;
+        PreparedStatement st = connection.prepareStatement(sql);
+        // st.setInt(1,categoryID);
+        ResultSet rs = st.executeQuery(sql);
+        ArrayList<Post> list = new ArrayList<Post>();
+        while (rs.next()) {
+            Post post = new Post();
+            post.setPostID(rs.getInt("post_id"));
+            post.setAuthorID(rs.getInt("author_id"));
+            post.setPostDate(rs.getDate("post_date"));
+            post.setPostEditDate(rs.getDate("post_edit_date"));
+            post.setPostContent(rs.getString("post_content"));
+            post.setPostTitle(rs.getString("post_title"));
+            post.setPostStatus(rs.getString("post_status"));
+            post.setPostSlug(rs.getString("post_slug"));
+            post.setPostImg(rs.getString("post_img"));
             list.add(post);
         }
         connection.close();
@@ -87,7 +109,6 @@ public class PostDao {
             post.setPostStatus(rs.getString("post_status"));
             post.setPostSlug(rs.getString("post_slug"));
             post.setPostImg(rs.getString("post_img"));
-            post.setCategoryID(rs.getInt("category_id"));
             list.add(post);
         }
         connection.close();
@@ -96,8 +117,8 @@ public class PostDao {
     public ArrayList<Post> getListProductByPagesInTerm(int categoryID, int firstResult, int maxResult) throws SQLException {
         Connection connection = DBConnect.getConnecttion();
         String sql = "SELECT * FROM post WHERE category_id = '" + categoryID + "' limit ?,?";
-        String sql2="SELECT post.* FROM post,\n" +
-                "  (SELECT post_id FROM terms_relationships\n" +
+        String sql2="SELECT post.*,term.category_id FROM post,\n" +
+                "  (SELECT post_id,category.category_id FROM terms_relationships\n" +
                 "    inner join category\n" +
                 "      on category.category_id=terms_relationships.category_id\n" +
                 "         and category.category_id='"+categoryID+"')\n" +
@@ -120,6 +141,7 @@ public class PostDao {
             post.setPostSlug(rs.getString("post_slug"));
             post.setPostImg(rs.getString("post_img"));
             post.setCategoryID(rs.getInt("category_id"));
+
             list.add(post);
         }
         connection.close();
@@ -142,7 +164,6 @@ public class PostDao {
             post.setPostStatus(rs.getString("post_status"));
             post.setPostSlug(rs.getString("post_slug"));
             post.setPostImg(rs.getString("post_img"));
-            post.setCategoryID(rs.getInt("category_id"));
         }
         connection.close();
         return post;
@@ -230,8 +251,8 @@ public class PostDao {
         Connection connection=null;
         try {
             connection = DBConnect.getConnecttion();
-            String sql = "INSERT INTO Post(author_id, post_date, post_edit_date, post_content, post_title, post_status, post_slug, post_img, category_id,post_summary) " +
-                    "VALUE(?,?,?,?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO Post(author_id, post_date, post_edit_date, post_content, post_title, post_status, post_slug, post_img,post_summary) " +
+                    "VALUE(?,?,?,?,?,?,?,?,?)";
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, c.getAuthorID());
             ps.setDate(2,c.getPostDate());
@@ -241,8 +262,7 @@ public class PostDao {
             ps.setString(6, c.getPostStatus());
             ps.setString(7, c.getPostSlug());
             ps.setString(8, c.getPostImg());
-            ps.setInt(9, c.getCategoryID());
-            ps.setString(10, c.getPostSummary());
+            ps.setString(9, c.getPostSummary());
             int temp = ps.executeUpdate();
             connection.close();
             return temp == 1;
@@ -256,7 +276,7 @@ public class PostDao {
         try {
             connection = DBConnect.getConnecttion();
             String sql = "UPDATE Post set post_edit_date=?, post_content=?, post_title=?," +
-                    " post_slug=?,post_img=?,post_status=? ,category_id=?,post_summary=? where post_id=?";
+                    " post_slug=?,post_img=?,post_status=? ,post_summary=? where post_id=?";
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setDate(1,c.getPostEditDate());
             ps.setString(2, c.getPostContent());
@@ -264,9 +284,8 @@ public class PostDao {
             ps.setString(4, c.getPostSlug());
             ps.setString(5, c.getPostImg());
             ps.setString(6, c.getPostStatus());
-            ps.setInt(7, c.getCategoryID());
-            ps.setString(8, c.getPostSummary());
-            ps.setInt(9, c.getPostID());
+            ps.setString(7, c.getPostSummary());
+            ps.setInt(8, c.getPostID());
             int temp = ps.executeUpdate();
             connection.close();
             return temp == 1;

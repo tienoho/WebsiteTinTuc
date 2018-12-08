@@ -49,7 +49,6 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" type="text/javascript"></script>
     <script src="<c:url value="${root}/ckeditor/ckeditor.js" />"></script>
     <script src="<c:url value="${root}/ckfinder/ckfinder.js" />"></script>
-
 </head>
 
 <body>

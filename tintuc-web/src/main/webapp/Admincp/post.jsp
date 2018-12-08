@@ -88,11 +88,10 @@
                             </td>
                             <td><%=usersDao.getName(p.getAuthorID())%></td>
                             <td>
-                                <%for(Category c:categories)
-                                {if(c.getCategoryID()==p.getCategoryID()){
-                                %>
-                                    <%=c.getCategoryName()%>
-                                <%}}%>
+                                <%for(Category c:categoryDao.getListCategoryByPost(p.getPostID()))
+                                {%>
+                                    <%=c.getCategoryName()%> ,
+                                <%}%>
                             </td>
                             <td><%=p.getPostDate()%></td>
                         </tr>

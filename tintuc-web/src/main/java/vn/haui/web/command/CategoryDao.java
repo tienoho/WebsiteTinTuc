@@ -204,4 +204,25 @@ public class CategoryDao {
             System.out.println(c.getCategoryID()+"-"+c.getCategoryName()+"-"+c.getCategoryParent());
         }
     }
+    public ArrayList<Category> getListCategoryByPost(int postId) throws SQLException {
+        Connection connection = DBConnect.getConnecttion();
+        String sql = "SELECT category.* FROM terms_relationships inner join category " +
+                "on category.category_id=terms_relationships.category_id " +
+                "and post_id="+postId;
+        Statement st = connection.createStatement();
+        ResultSet rs = st.executeQuery(sql);
+        ArrayList<Category> list = new ArrayList<Category>();
+        while (rs.next()) {
+            Category category = new Category();
+            category.setCategoryID(rs.getInt("category_id"));
+            category.setCategoryName(rs.getString("category_name"));
+            category.setCategoryDes(rs.getString("category_des"));
+            category.setCategorySlug(rs.getString("category_slug"));
+            category.setCategoryParent(rs.getInt("category_parent"));
+            list.add(category);
+        }
+        connection.close();
+        return list;
+    }
 }
+//SELECT * FROM terms_relationships left join category on category.category_id=terms_relationships.category_id and post_id=

@@ -6,9 +6,12 @@
     PostDao postDao = new PostDao();
 
     String post_id = "";
-    if (request.getParameter("post") != null) {
-        post_id = request.getParameter("post");
+    if (request.getAttribute("postId1") != null) {
+
+        post_id = (String) request.getAttribute("postId1");
     }
+//    Post post222= (Post) request.getAttribute("postProduct");
+
 %>
 
 <%--header--%>
@@ -17,8 +20,8 @@
 <div class="main wrap cf">
     <div class="row">
         <div class="col-8 main-content">
-            <% for(Post p:postDao.getListPostByCategory(WebConstant.textPostID,Integer.parseInt(post_id))){
-                %>
+            <% for (Post p : postDao.getListPostByCategory(WebConstant.textPostID, Integer.parseInt(post_id))) {
+            %>
             <article id="post-<%=p.getPostID()%>"
                      class="post-<%=p.getPostID()%> post type-post status-publish format-standard has-post-thumbnail category-fashion tag-culture tag-fashion tag-featured tag-fitness tag-leisure tag-lifestyle">
                 <header class="post-header-b cf">
@@ -28,7 +31,8 @@
                             </span>
                     </div>
                     <div class="heading cf">
-                        <h1 class="post-title"><%=p.getPostTitle()%></h1>
+                        <h1 class="post-title"><%=p.getPostTitle()%>
+                        </h1>
                     </div>
                     <div class="post-meta-b cf">
                             <span class="author-img">
@@ -91,7 +95,7 @@
                 <%-- main content --%>
                 <div class="post-content post-dynamic">
                     <%--post-content --%>
-                        <%=p.getPostContent()%>
+                    <%=p.getPostContent()%>
                     <div class="tagcloud">
                         <a href="#" rel="tag">culture</a>
                         <a href="#" rel="tag">fashion</a>
@@ -233,7 +237,7 @@
                         <li class="comment even thread-even depth-1" id="li-comment-59">
                             <article id="comment-59" class="comment">
                                 <div class="comment-avatar">
-                                    <img src='../../../../../../../../cheerup.theme-sphere.com/beauty/wp-content/uploads/sites/3/2016/05/admin-avatar.jpg'
+                                    <img src='<%=WebConstant.localHost%>/images/admin-avatar.jpg'
                                          width="50" height="50" alt=""
                                          class="avatar avatar-50wp-user-avatar wp-user-avatar-50 alignnone photo avatar-default"/>
                                 </div>
@@ -296,7 +300,7 @@
                         <li class="comment even thread-odd thread-alt depth-1" id="li-comment-61">
                             <article id="comment-61" class="comment">
                                 <div class="comment-avatar">
-                                    <img src='../../../../../../../../cheerup.theme-sphere.com/beauty/wp-content/uploads/sites/3/2016/05/admin-avatar.jpg'
+                                    <img src='<%=WebConstant.localHost%>/images/admin-avatar.jpg'
                                          width="50" height="50" alt=""
                                          class="avatar avatar-50wp-user-avatar wp-user-avatar-50 alignnone photo avatar-default"/>
                                 </div>

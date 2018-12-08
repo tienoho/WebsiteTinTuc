@@ -22,11 +22,10 @@
 <%--</c:set>--%>
 <%
     PostDao postDao = new PostDao();
-
     String categorySlug = request.getRequestURL().toString();
     //System.out.println(categorySlug);
     categorySlug = categorySlug.substring(categorySlug.lastIndexOf("/") + 1);
-    System.out.println(request.getRequestURL());
+    System.out.println(request.getRequestURL                 ());
     //int category_id = 0;=
     int category_id = postDao.getCategoyID(categorySlug);
     System.out.println(category_id);
@@ -82,7 +81,7 @@
                 <article
                         class="post-<%=p.getPostID()%> post type-post status-publish format-standard has-post-thumbnail category-business category-lifestyle tag-culture tag-fashion tag-fitness tag-leisure tag-lifestyle">
                     <div class="post-wrap">
-                        <a href="${root}/single.jsp?post=<%=p.getPostID()%>" class="image-link">
+                        <a href="${root}/post/<%=p.getPostSlug()%>" class="image-link">
                             <img width="312" height="198"
                                  src="${root}/<%=p.getPostImg()%>"
                                  class="attachment-list-block size-list-block wp-post-image"

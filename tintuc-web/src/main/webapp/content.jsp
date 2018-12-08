@@ -1,16 +1,32 @@
+<%@ page import="vn.haui.web.model.Post" %>
+<%@ page import="vn.haui.web.command.PostDao" %>
+<%@ page import="vn.haui.web.utils.tool" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="root" value="${pageContext.request.contextPath}"/>
+<%
+    PostDao postDao=new PostDao();
+%>
 <div class="main-featured">
     <div class="wrap cf">
         <div class="featured-grid featured-grid-b" data-animation="fade" data-animation-speed="600"
              data-slide-delay="5000">
             <ul class="grid">
+                <%int dem=0;
+                    for(Post p:postDao.getListAllPostNew(4)){ String extendsImg=p.getPostImg();
+                    if(extendsImg.contains("."))
+                    {
+                        extendsImg=extendsImg.substring(extendsImg.lastIndexOf("."),extendsImg.length());
+                    }
+                        dem++;
+                if(dem==1){%>
                 <li class="first">
                     <div class="item large-item">
-                        <a href="2017/01/08/annie-ziegler-is-designing-clothes-for-girls-just-like-her-2-2/index.html"
-                           class="image-link">
-                            <img width="600" height="460" src="images/shutterstock_303461690-1-600x460.jpg"
+                        <a href="${root}/post/<%=p.getPostSlug()%>" class="image-link">
+
+                            <img width="600" height="460" src="${root}/<%=p.getPostImg()%>"
                                  class="attachment-grid-slider-b-large size-grid-slider-b-large wp-post-image"
                                  alt="Annie Ziegler to Wear the Designer Favorite Clothes at Oscars" title=""
-                                 srcset="images/shutterstock_303461690-1-600x460.jpg 600w, images/shutterstock_303461690-1-600x460@2x.jpg 1200w"
+                                 srcset="${root}/<%=p.getPostImg().replace(extendsImg,"-600x460"+extendsImg)%> 600w"
                                  sizes="(max-width: 600px) 100vw, 600px"/>
                         </a>
                         <div class="caption caption-large">
@@ -18,22 +34,22 @@
                                         <a href="category/fashion/index.html" title="Fashion">Fashion</a>
                                     </span>
                             <h3>
-                                <a href="2017/01/08/annie-ziegler-is-designing-clothes-for-girls-just-like-her-2-2/index.html"
-                                   class="item-heading">Annie Ziegler to Wear the Designer Favorite Clothes at
-                                    Oscars</a>
+                                <a href="${root}/post/<%=p.getPostSlug()%>"
+                                   class="item-heading"><%=p.getPostTitle()%></a>
                             </h3>
-                            <time class="the-date" datetime="2017-01-08T02:25:37+00:00">January 8, 2017</time>
+                            <time class="the-date" datetime="<%=p.getPostDate()%>"><%=p.getPostDate()%></time>
                         </div>
                     </div>
                 </li>
                 <li class="second">
+                <%}else if(dem==2){%>
                     <div class="item medium-item">
-                        <a href="2017/01/08/american-street-style-is-taking-over-in-2017/index.html"
+                        <a href="${root}/post/<%=p.getPostSlug()%>"
                            class="image-link">
-                            <img width="474" height="240" src="images/shutterstock_370070387-1-474x240.jpg"
+                            <img width="474" height="240" src="${root}/<%=p.getPostImg()%>"
                                  class="attachment-grid-slider-b-med size-grid-slider-b-med wp-post-image"
                                  alt="American Street Style is Taking Over in 2017" title=""
-                                 srcset="images/shutterstock_370070387-1-474x240.jpg 474w, images/shutterstock_370070387-1-474x240@2x.jpg 948w"
+                                 srcset="${root}/<%=p.getPostImg().replace(extendsImg,"-474x240"+extendsImg)%> 474w"
                                  sizes="(max-width: 474px) 100vw, 474px"/>
                         </a>
                         <div class="caption caption-small">
@@ -41,20 +57,20 @@
                                         <a href="category/fashion/index.html" title="Fashion">Fashion</a>
                                     </span>
                             <h3>
-                                <a href="2017/01/08/american-street-style-is-taking-over-in-2017/index.html"
-                                   class="item-heading heading-small">American Street Style is Taking Over in
-                                    2017</a>
+                                <a href="${root}/post/<%=p.getPostSlug()%>"
+                                   class="item-heading heading-small"><%=p.getPostTitle()%></a>
                             </h3>
-                            <time class="the-date" datetime="2017-01-08T02:19:55+00:00">January 8, 2017</time>
+                            <time class="the-date" datetime="<%=p.getPostDate()%>"><%=p.getPostDate()%></time>
                         </div>
                     </div>
+                <%}else {%>
                     <div class="col-6 item small-item">
-                        <a href="2017/01/08/the-perfect-fit-light-and-wooly-denim-jeans-2-2/index.html"
+                        <a href="${root}/post/<%=p.getPostSlug()%>"
                            class="image-link">
-                            <img width="235" height="216" src="images/shutterstock_271126073-235x216.jpg"
+                            <img width="235" height="216" src="${root}/<%=p.getPostImg()%>"
                                  class="attachment-grid-slider-b-small size-grid-slider-b-small wp-post-image"
                                  alt="The Perfect Fit: Light and Wooly Denim Jeans" title=""
-                                 srcset="images/shutterstock_271126073-235x216.jpg 235w, images/shutterstock_271126073-235x216@2x.jpg 470w"
+                                 srcset="${root}/<%=p.getPostImg().replace(extendsImg,"-235x216"+extendsImg)%> 235w"
                                  sizes="(max-width: 235px) 100vw, 235px"/>
                         </a>
                         <div class="caption caption-small">
@@ -62,33 +78,13 @@
                                         <a href="category/celebrities/index.html" title="Celebrities">Celebrities</a>
                                     </span>
                             <h3>
-                                <a href="2017/01/08/the-perfect-fit-light-and-wooly-denim-jeans-2-2/index.html"
-                                   class="item-heading heading-small">The Perfect Fit: Light and Wooly Denim
-                                    Jeans</a>
+                                <a href="${root}/post/<%=p.getPostSlug()%>"
+                                   class="item-heading heading-small"><%=p.getPostTitle()%></a>
                             </h3>
-                            <time class="the-date" datetime="2017-01-08T02:14:37+00:00">January 8, 2017</time>
+                            <time class="the-date" datetime="<%=p.getPostDate()%>"><%=p.getPostDate()%></time>
                         </div>
                     </div>
-                    <div class="col-6 item small-item">
-                        <a href="2017/01/08/hairstyle-tricks-for-success-2/index.html" class="image-link">
-                            <img width="235" height="216" src="images/shutterstock_278640137-235x216.jpg"
-                                 class="attachment-grid-slider-b-small size-grid-slider-b-small wp-post-image"
-                                 alt="Hairstyle Tips &#038; Tricks for Successful Winter" title=""
-                                 srcset="images/shutterstock_278640137-235x216.jpg 235w, images/shutterstock_278640137-235x216@2x.jpg 470w"
-                                 sizes="(max-width: 235px) 100vw, 235px"/>
-                        </a>
-                        <div class="caption caption-small">
-                                    <span class="cat-title cat-7">
-                                        <a href="category/celebrities/index.html" title="Celebrities">Celebrities</a>
-                                    </span>
-                            <h3>
-                                <a href="2017/01/08/hairstyle-tricks-for-success-2/index.html"
-                                   class="item-heading heading-small">Hairstyle Tips &#038; Tricks for Successful
-                                    Winter</a>
-                            </h3>
-                            <time class="the-date" datetime="2017-01-08T02:12:37+00:00">January 8, 2017</time>
-                        </div>
-                    </div>
+                <%}}%>
                 </li>
             </ul>
         </div>
