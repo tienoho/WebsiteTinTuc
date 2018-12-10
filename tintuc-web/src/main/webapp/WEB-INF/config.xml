@@ -72,6 +72,7 @@
 			<maxSize>0</maxSize>
 			<allowedExtensions>bmp,gif,jpeg,jpg,png</allowedExtensions>
 			<deniedExtensions></deniedExtensions>
+
 		</type>
 		<type name="Flash">
 			<url>%BASE_URL%flash/</url>
@@ -192,6 +193,13 @@
 				<param name="smallThumb" value="90x90"></param>
 				<param name="mediumThumb" value="120x120"></param>
 				<param name="largeThumb" value="180x180"></param>
+				<param name="w104" value="104x69"></param>
+				<param name="w150" value="150x150"></param>
+				<param name="w214" value="214x140"></param>
+				<param name="w300" value="300x200"></param>
+				<param name="w336" value="336x200"></param>
+				<param name="w702" value="702x459"></param>
+				<param name="w1000" value="1000x667"></param>
 			</params>
 		</plugin>
 		<plugin>

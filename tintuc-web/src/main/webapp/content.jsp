@@ -1,6 +1,7 @@
 <%@ page import="vn.haui.web.model.Post" %>
 <%@ page import="vn.haui.web.command.PostDao" %>
 <%@ page import="vn.haui.web.utils.tool" %>
+<%@ page import="vn.haui.web.common.WebConstant" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="root" value="${pageContext.request.contextPath}"/>
 <%
@@ -23,10 +24,10 @@
                     <div class="item large-item">
                         <a href="${root}/post/<%=p.getPostSlug()%>" class="image-link">
 
-                            <img width="600" height="460" src="${root}/<%=p.getPostImg()%>"
+                            <img width="600" height="460" src="<%=WebConstant.localHost%>/<%=p.getPostImg()%>"
                                  class="attachment-grid-slider-b-large size-grid-slider-b-large wp-post-image"
                                  alt="Annie Ziegler to Wear the Designer Favorite Clothes at Oscars" title=""
-                                 srcset="${root}/<%=p.getPostImg().replace(extendsImg,"-600x460"+extendsImg)%> 600w"
+                                 srcset="<%=WebConstant.localHost%>/<%=p.getPostImg().replace(extendsImg,"-600x460"+extendsImg)%> 600w"
                                  sizes="(max-width: 600px) 100vw, 600px"/>
                         </a>
                         <div class="caption caption-large">

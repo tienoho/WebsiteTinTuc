@@ -14,7 +14,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.sql.SQLException;
+import java.util.Scanner;
 
 @WebServlet("/ManagerPostServlet")
 public class ManagerPostServlet extends HttpServlet {
@@ -52,7 +56,10 @@ public class ManagerPostServlet extends HttpServlet {
                         post.setPostContent(request.getParameter("post-content"));
                         post.setPostDate(postDao.GetDateNow());
                         post.setAuthorID(1);
-                        post.setPostImg(request.getParameter("ImagePath"));
+                        String imgUrl=request.getParameter("ImagePath");
+                        if(imgUrl.startsWith("/"))
+                            imgUrl=imgUrl.substring(1,imgUrl.length());
+                        post.setPostImg(imgUrl);
                         post.setCategoryID(1);
                         post.setPostStatus("Public");
                         post.setPostSummary(request.getParameter("post-summary"));
@@ -71,6 +78,7 @@ public class ManagerPostServlet extends HttpServlet {
                         //save message in session
                         session.setAttribute("result", result);
                     }
+                    OpenUrl();
                     break;
                 case "update":
                     if (postTitle.equals("") || postTitle == null) {
@@ -90,7 +98,10 @@ public class ManagerPostServlet extends HttpServlet {
                         post.setPostContent(request.getParameter("post-content"));
                         post.setPostDate(postDao.GetDateNow());
                         post.setAuthorID(1);
-                        post.setPostImg(request.getParameter("ImagePath"));
+                        String imgUrl=request.getParameter("ImagePath");
+                        if(imgUrl.startsWith("/"))
+                            imgUrl=imgUrl.substring(1,imgUrl.length());
+                        post.setPostImg(imgUrl);
                         post.setCategoryID(1);
                         post.setPostStatus("Public");
                         if(request.getParameter("postID")!=null)
@@ -112,6 +123,7 @@ public class ManagerPostServlet extends HttpServlet {
                         session.setAttribute("result", result);
                         url = WebConstant.localHost+"/Admincp/edit-post.jsp?post=" + post.getPostID() + "&action=edit";
                     }
+                    OpenUrl();
                     break;
                 case "delete":
                     postDao.delete(Integer.parseInt(request.getParameter("post-ID")));
@@ -150,5 +162,29 @@ public class ManagerPostServlet extends HttpServlet {
                 break;
         }
         response.sendRedirect(url);
+    }
+    private void OpenUrl()
+    {
+        try {
+            URL myURL = new URL(WebConstant.localHost+"/test123");
+            URLConnection myURLConnection = myURL.openConnection();
+            myURLConnection.connect();
+            String content = null;
+            Scanner scanner = new Scanner(myURLConnection.getInputStream());
+            scanner.useDelimiter("\\Z");
+            content = scanner.next();
+            System.out.println(content);
+            System.out.println("Doneeee");
+        }
+        catch (MalformedURLException e) {
+            // new URL() failed
+            // ...
+            System.out.println("Url not format");
+        }
+        catch (IOException e) {
+            // openConnection() failed
+            // ...
+            System.out.println("Connection Failed");
+        }
     }
 }

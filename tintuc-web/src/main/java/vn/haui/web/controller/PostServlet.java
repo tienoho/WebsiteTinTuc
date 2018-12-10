@@ -1,6 +1,5 @@
 package vn.haui.web.controller;
 
-import com.ckfinder.connector.errors.ConnectorException;
 import vn.haui.web.command.PostDao;
 import vn.haui.web.model.Post;
 
@@ -16,7 +15,6 @@ import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 
-import static com.ckfinder.connector.ServletContextFactory.getServletContext;
 @WebServlet("/post/*")
 public class PostServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

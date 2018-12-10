@@ -65,5 +65,4 @@
         <error-code>500</error-code>
         <location>/errors/error5.jsp</location>
     </error-page>
-
 </web-app>

@@ -252,7 +252,7 @@
                                                 <span class="heading">Recent</span>
                                                 <div class="posts-list">
                                                     <div class="post">
-                                                        <a href="2017/01/08/fashion-chic-x-latest-mejuri-jewelry-collection-of-2017-2/index.html">
+                                                        <a href="">
                                                             <img width="104" height="69"
                                                                  src="${root}/images/shutterstock_536935141-104x69.jpg"
                                                                  class="attachment-post-thumbnail size-post-thumbnail wp-post-image"
@@ -262,7 +262,7 @@
                                                                  sizes="(max-width: 104px) 100vw, 104px"/>
                                                         </a>
                                                         <div class="content">
-                                                            <a href="2017/01/08/fashion-chic-x-latest-mejuri-jewelry-collection-of-2017-2/index.html">
+                                                            <a href="">
                                                                 Fashion
                                                                 Chic X Mejuri Jewelry Collection of 2017
                                                             </a>
@@ -275,7 +275,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="post">
-                                                        <a href="2017/01/08/trending-bodysuits-and-faded-friendship-jeans-2/index.html">
+                                                        <a href="">
                                                             <img width="104" height="69"
                                                                  src="${root}/images/shutterstock_518581786-104x69.jpg"
                                                                  class="attachment-post-thumbnail size-post-thumbnail wp-post-image"
@@ -285,7 +285,7 @@
                                                                  sizes="(max-width: 104px) 100vw, 104px"/>
                                                         </a>
                                                         <div class="content">
-                                                            <a href="2017/01/08/trending-bodysuits-and-faded-friendship-jeans-2/index.html">
+                                                            <a href="">
                                                                 Trending:
                                                                 Bodysuits and Faded Friendship Jeans
                                                             </a>
@@ -298,7 +298,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="post">
-                                                        <a href="2017/01/08/summer-style-chunky-knit-for-leather-suits-2/index.html">
+                                                        <a href="">
                                                             <img width="104" height="69"
                                                                  src="${root}/images/shutterstock_350007890-104x69.jpg"
                                                                  class="attachment-post-thumbnail size-post-thumbnail wp-post-image"
@@ -308,7 +308,7 @@
                                                                  sizes="(max-width: 104px) 100vw, 104px"/>
                                                         </a>
                                                         <div class="content">
-                                                            <a href="2017/01/08/summer-style-chunky-knit-for-leather-suits-2/index.html">
+                                                            <a href="">
                                                                 Summer
                                                                 Style: Chunky Knit For Leather Suits
                                                             </a>

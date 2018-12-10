@@ -11,6 +11,7 @@ CKFinder.customConfig = function (config) {
     // Sample configuration options:
     // config.uiColor = '#BDE31E';
     config.language = 'vi';
+    config.extraPlugins = 'imageresize,watermark';
     // config.removePlugins = 'basket';
 
 };

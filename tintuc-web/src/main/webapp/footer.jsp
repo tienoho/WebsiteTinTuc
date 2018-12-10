@@ -44,7 +44,7 @@
                 <h3 class="widgettitle">Popular Posts</h3>
                 <ul class="posts-list">
                     <li>
-                        <a href="2017/01/10/easy-boho-style-without-looking-like-a-coachella-victim/index.html">
+                        <a href="">
                             <img width="104" height="69" src="${root}/images/shutterstock_275843885-104x69.jpg"
                                  class="attachment-post-thumbnail size-post-thumbnail wp-post-image"
                                  alt="shutterstock_275843885"

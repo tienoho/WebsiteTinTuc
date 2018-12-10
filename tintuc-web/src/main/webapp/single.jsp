@@ -38,7 +38,7 @@
                             <span class="author-img">
                                 <img width="35" height="35" alt="Kate Hanson"
                                      class="avatar avatar-35 wp-user-avatar wp-user-avatar-35 alignnone photo"
-                                     srcset="images/3874418485_26e0893ff4_z-150x150.jpg"/>
+                                     srcset="${root}/images/3874418485_26e0893ff4_z-150x150.jpg"/>
                             </span>
                         <span class="posted-by">By <a href="#"
                                                       title="Posts by Kate Hanson" rel="author">Kate Hanson</a> </span>
@@ -81,13 +81,13 @@
                         <a href="#" class="show-more">+</a>
                     </div>
                     <div class="featured">
-                        <a href="<%=p.getPostImg()%>"
+                        <a href="${root}/<%=p.getPostImg()%>"
                            title="<%=p.getPostTitle()%>">
                             <img width="702" height="459" src="<%=p.getPostImg().replace(".jpg","-702x459.jpg")%>"
                                  class="attachment-main-featured size-main-featured wp-post-image"
                                  alt="shutterstock_303461690"
                                  title="<%=p.getPostTitle()%>"
-                                 srcset="<%=p.getPostImg().replace(".jpg","-702x459.jpg")%> 702w,<%=p.getPostImg().replace(".jpg","-104x69.jpg")%> 104w, <%=p.getPostImg().replace(".jpg","-214x140.jpg")%> 214w"
+                                 srcset="${root}/<%=p.getPostImg().replace(".jpg","-702x459.jpg")%> 702w,${root}/<%=p.getPostImg().replace(".jpg","-104x69.jpg")%> 104w, ${root}/<%=p.getPostImg().replace(".jpg","-214x140.jpg")%> 214w"
                                  sizes="(max-width: 702px) 100vw, 702px"/>
                         </a>
                     </div>
@@ -142,14 +142,14 @@
                             </i> Previous Article
                         </span>
                     <span class="link">
-                            <a href="../american-street-style-is-taking-over-in-2017/index.html" rel="prev">American Street Style is Taking Over in 2017</a>
+                            <a href="" rel="prev">American Street Style is Taking Over in 2017</a>
                         </span>
                 </div>
                 <div class="next">
                         <span class="main-color title">
                             Next Article <i class="fa fa-chevron-right"></i>
                         </span><span class="link">
-                            <a href="../love-in-style-for-the-proposal-of-timeless-relation/index.html" rel="next">Love In Style For The Proposal of Timeless Relation</a>
+                            <a href="" rel="next">Love In Style For The Proposal of Timeless Relation</a>
                         </span>
                 </div>
             </section>
@@ -158,11 +158,11 @@
                 <section class="author-info">
                     <img width="100" height="100" alt="Kate Hanson"
                          class="avatar avatar-100 wp-user-avatar wp-user-avatar-100 alignnone photo"
-                         srcset="images/3874418485_26e0893ff4_z-150x150.jpg"/>
-                    <div class="description"><a href="../../../../author/trendy/index.html" title="Posts by Kate Hanson"
-                                                rel="author">Kate Hanson</a>
+                         srcset="${root}/images/3874418485_26e0893ff4_z-150x150.jpg"/>
+                    <div class="description">
+                        <a href="" title="Posts by Kate Hanson" rel="author">Kate Hanson</a>
                         <ul class="social-icons">
-                            <li><a href="http://theme-sphere.com/" class="icon fa fa-home" title="Website"> <span
+                            <li><a href="${root}" class="icon fa fa-home" title="Website"> <span
                                     class="visuallyhidden">Website</span></a></li>
                             <li><a href="#" class="icon fa fa-facebook" title="Facebook"> <span class="visuallyhidden">Facebook</span></a>
                             </li>
@@ -181,14 +181,14 @@
             <section class="related-posts"><h3 class="section-head"><span class="color">Related</span> Posts</h3>
                 <ul class="highlights-box three-col related-posts">
                     <li class="highlights column one-third">
-                        <article><a href="../fashion-chic-x-latest-mejuri-jewelry-collection-of-2017-2/index.html"
+                        <article><a href=""
                                     title="Fashion Chic X Mejuri Jewelry Collection of 2017" class="image-link"> <img
-                                width="214" height="140" src="images/shutterstock_536935141-214x140.jpg"
+                                width="214" height="140" src="${root}/images/shutterstock_536935141-214x140.jpg"
                                 class="image wp-post-image" alt="shutterstock_536935141"
                                 title="Fashion Chic X Mejuri Jewelry Collection of 2017"
-                                srcset="images/shutterstock_536935141-214x140.jpg 214w, images/shutterstock_536935141-300x196.jpg 300w, images/shutterstock_536935141-1000x653.jpg 1000w, images/shutterstock_536935141-104x69.jpg 104w, images/shutterstock_536935141-702x459.jpg 702w"
+                                srcset="${root}/images/shutterstock_536935141-214x140.jpg 214w, ${root}/images/shutterstock_536935141-300x196.jpg 300w, ${root}/images/shutterstock_536935141-1000x653.jpg 1000w, ${root}/images/shutterstock_536935141-104x69.jpg 104w, ${root}/images/shutterstock_536935141-702x459.jpg 702w"
                                 sizes="(max-width: 214px) 100vw, 214px"/> </a>
-                            <h2><a href="../fashion-chic-x-latest-mejuri-jewelry-collection-of-2017-2/index.html"
+                            <h2><a href=""
                                    title="Fashion Chic X Mejuri Jewelry Collection of 2017">Fashion Chic X Mejuri
                                 Jewelry Collection of 2017</a></h2>
                             <div class="cf listing-meta meta below">
@@ -197,14 +197,14 @@
                         </article>
                     </li>
                     <li class="highlights column one-third">
-                        <article><a href="../trending-bodysuits-and-faded-friendship-jeans-2/index.html"
+                        <article><a href=""
                                     title="Trending: Bodysuits and Faded Friendship Jeans" class="image-link"> <img
-                                width="214" height="140" src="images/shutterstock_518581786-214x140.jpg"
+                                width="214" height="140" src="${root}/images/shutterstock_518581786-214x140.jpg"
                                 class="image wp-post-image" alt="shutterstock_518581786"
                                 title="Trending: Bodysuits and Faded Friendship Jeans"
-                                srcset="images/shutterstock_518581786-214x140.jpg 214w, images/shutterstock_518581786-104x69.jpg 104w, images/shutterstock_518581786-702x459.jpg 702w"
+                                srcset="${root}/images/shutterstock_518581786-214x140.jpg 214w, ${root}/images/shutterstock_518581786-104x69.jpg 104w, ${root}/images/shutterstock_518581786-702x459.jpg 702w"
                                 sizes="(max-width: 214px) 100vw, 214px"/> </a>
-                            <h2><a href="../trending-bodysuits-and-faded-friendship-jeans-2/index.html"
+                            <h2><a href=""
                                    title="Trending: Bodysuits and Faded Friendship Jeans">Trending: Bodysuits and Faded
                                 Friendship Jeans</a></h2>
                             <div class="cf listing-meta meta below">
@@ -213,14 +213,14 @@
                         </article>
                     </li>
                     <li class="highlights column one-third">
-                        <article><a href="../summer-style-chunky-knit-for-leather-suits-2/index.html"
+                        <article><a href=""
                                     title="Summer Style: Chunky Knit For Leather Suits" class="image-link"> <img
-                                width="214" height="140" src="images/shutterstock_350007890-214x140.jpg"
+                                width="214" height="140" src="${root}/images/shutterstock_350007890-214x140.jpg"
                                 class="image wp-post-image" alt="shutterstock_350007890"
                                 title="Summer Style: Chunky Knit For Leather Suits"
-                                srcset="images/shutterstock_350007890-214x140.jpg 214w, images/shutterstock_350007890-104x69.jpg 104w, images/shutterstock_350007890-702x459.jpg 702w"
+                                srcset="${root}/images/shutterstock_350007890-214x140.jpg 214w, ${root}/images/shutterstock_350007890-104x69.jpg 104w, ${root}/images/shutterstock_350007890-702x459.jpg 702w"
                                 sizes="(max-width: 214px) 100vw, 214px"/> </a>
-                            <h2><a href="../summer-style-chunky-knit-for-leather-suits-2/index.html"
+                            <h2><a href=""
                                    title="Summer Style: Chunky Knit For Leather Suits">Summer Style: Chunky Knit For
                                 Leather Suits</a></h2>
                             <div class="cf listing-meta meta below">
@@ -243,7 +243,7 @@
                                 </div>
                                 <div class="comment-meta">
                                         <span class="comment-author">
-                                            <a href='http://theme-sphere.com/' rel='external nofollow' class='url'>Sam Doe</a>
+                                            <a href='${root}/' rel='external nofollow' class='url'>Sam Doe</a>
                                         </span> on <a href="index.html#comment-59" class="comment-time"
                                                       title="January 19, 2017 at 8:30 pm">
                                     <time pubdate datetime="2017-01-19T20:30:47+00:00">January 19, 2017 8:30 pm</time>
@@ -253,24 +253,28 @@
                                     <p>That far ground rat pure from newt far panther crane lorikeet overlay alas cobra
                                         across much gosh less goldfinch ruthlessly alas examined and that more and the
                                         ouch jeez.</p>
-                                    <div class="reply"><a rel='nofollow' class='comment-reply-link'
+                                    <div class="reply">
+                                        <a rel='nofollow' class='comment-reply-link'
                                                           href='index7653.html?replytocom=59#respond'
                                                           onclick='return addComment.moveForm( "comment-59", "59", "respond", "146" )'
                                                           aria-label='Reply to Sam Doe'>Reply <i
-                                            class="fa fa-angle-right"></i></a></div>
+                                            class="fa fa-angle-right">
+                                    </i>
+                                    </a>
+                                    </div>
                                 </div>
                             </article>
                             <ul class="children">
                                 <li class="comment odd alt depth-2" id="li-comment-60">
                                     <article id="comment-60" class="comment">
                                         <div class="comment-avatar">
-                                            <img src='../../../../../../../../cheerup.theme-sphere.com/wp-content/uploads/2016/05/jane-doe.jpg'
+                                            <img src='${root}/images/jane-doe.jpg'
                                                  width="50" height="50" alt=""
                                                  class="avatar avatar-50wp-user-avatar wp-user-avatar-50 alignnone photo avatar-default"/>
                                         </div>
                                         <div class="comment-meta">
                                                 <span class="comment-author">
-                                                    <a href='http://theme-sphere.com/' rel='external nofollow'
+                                                    <a href='${root}' rel='external nofollow'
                                                        class='url'>Jane Doe</a>
                                                 </span> on <a href="index.html#comment-60" class="comment-time"
                                                               title="January 20, 2017 at 8:30 pm">
@@ -306,7 +310,7 @@
                                 </div>
                                 <div class="comment-meta">
                                         <span class="comment-author">
-                                            <a href='http://theme-sphere.com/' rel='external nofollow' class='url'>Sam Doe</a>
+                                            <a href='${root}' rel='external nofollow' class='url'>Sam Doe</a>
                                         </span> on <a href="index.html#comment-61" class="comment-time"
                                                       title="January 20, 2017 at 8:39 pm">
                                     <time pubdate datetime="2017-01-20T20:39:08+00:00">January 20, 2017 8:39 pm</time>
@@ -336,7 +340,7 @@
                                    style="display:none;">Cancel Reply</a>
                             </small>
                         </h3>
-                        <form action="http://theme-sphere.com/smart-mag/demos/trendy/wp-comments-post.php" method="post"
+                        <form action="comments-post.jsp" method="post"
                               id="commentform" class="comment-form" novalidate>
                             <p>
                                 <textarea name="comment" id="comment" cols="45" rows="8" aria-required="true"
