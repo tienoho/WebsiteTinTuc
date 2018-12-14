@@ -84,7 +84,9 @@ public class resizeImages {
         imageWHS.add(new ImageWH(474, 240));
         imageWHS.add(new ImageWH(235, 216));
         //600x460
+        //666x1000
         imageWHS.add(new ImageWH(600, 460));
+        imageWHS.add(new ImageWH(666, 1000));
         imageWHS.add(new ImageWH(702, 459));
         imageWHS.add(new ImageWH(1000, 667));
         return imageWHS;
