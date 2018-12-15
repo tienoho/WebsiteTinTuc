@@ -1,39 +1,40 @@
-<%@ page import="vn.haui.web.model.Post" %>
+<%@ page import="vn.haui.web.command.CategoryDao" %>
 <%@ page import="vn.haui.web.command.PostDao" %>
-<%@ page import="vn.haui.web.utils.tool" %>
 <%@ page import="vn.haui.web.common.WebConstant" %>
 <%@ page import="vn.haui.web.model.Category" %>
+<%@ page import="vn.haui.web.model.Post" %>
+<%@ page import="vn.haui.web.utils.tool" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="vn.haui.web.command.CategoryDao" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="root" value="${pageContext.request.contextPath}"/>
 <%
-    PostDao postDao=new PostDao();
-    CategoryDao categoryDao=new CategoryDao();
-    ArrayList<Category> categoriesParent= categoryDao.getListCategoryParent();
-    ArrayList<Post> postsNew=postDao.getListAllPostNew(8);
+    PostDao postDao = new PostDao();
+    CategoryDao categoryDao = new CategoryDao();
+    ArrayList<Category> categoriesParent = categoryDao.getListCategoryParent();
+    ArrayList<Post> postsNew = postDao.getListAllPostNew(8);
 %>
 <div class="main-featured">
     <div class="wrap cf">
         <div class="featured-grid featured-grid-b" data-animation="fade" data-animation-speed="600"
              data-slide-delay="5000">
             <ul class="grid">
-                <%int dem=0;
-                    for(Post p:postDao.getListAllPostNew(4)){ String extendsImg=p.getPostImg();
-                    if(extendsImg.contains("."))
-                    {
-                        extendsImg=extendsImg.substring(extendsImg.lastIndexOf("."),extendsImg.length());
-                    }
+                <%
+                    int dem = 0;
+                    for (Post p : postDao.getListAllPostNew(4)) {
+                        String extendsImg = p.getPostImg();
+                        if (extendsImg.contains(".")) {
+                            extendsImg = extendsImg.substring(extendsImg.lastIndexOf("."), extendsImg.length());
+                        }
                         dem++;
-                if(dem==1){%>
+                        if (dem == 1) {
+                %>
                 <li class="first">
                     <div class="item large-item">
                         <a href="${root}/post/<%=p.getPostSlug()%>" class="image-link">
-
                             <img width="600" height="460" src="<%=WebConstant.localHost%>/<%=p.getPostImg()%>"
                                  class="attachment-grid-slider-b-large size-grid-slider-b-large wp-post-image"
-                                 alt="Annie Ziegler to Wear the Designer Favorite Clothes at Oscars" title=""
+                                 alt="<%=p.getPostTitle()%>" title="<%=p.getPostTitle()%>"
                                  srcset="<%=WebConstant.localHost%>/<%=p.getPostImg().replace(extendsImg,"-600x460"+extendsImg)%> 600w"
                                  sizes="(max-width: 600px) 100vw, 600px"/>
                         </a>
@@ -41,22 +42,19 @@
                                     <span class="cat-title cat-4">
                                         <a href="category/fashion/index.html" title="Fashion">Fashion</a>
                                     </span>
-                            <h3>
-                                <a href="${root}/post/<%=p.getPostSlug()%>"
-                                   class="item-heading"><%=p.getPostTitle()%></a>
-                            </h3>
+                            <h3><a href="${root}/post/<%=p.getPostSlug()%>" class="item-heading"><%=p.getPostTitle()%></a></h3>
                             <time class="the-date" datetime="<%=p.getPostDate()%>"><%=p.getPostDate()%></time>
                         </div>
                     </div>
                 </li>
                 <li class="second">
-                <%}else if(dem==2){%>
+                    <%} else if (dem == 2) {%>
                     <div class="item medium-item">
                         <a href="${root}/post/<%=p.getPostSlug()%>"
                            class="image-link">
                             <img width="474" height="240" src="${root}/<%=p.getPostImg()%>"
                                  class="attachment-grid-slider-b-med size-grid-slider-b-med wp-post-image"
-                                 alt="American Street Style is Taking Over in 2017" title=""
+                                 alt="<%=p.getPostTitle()%>" title="<%=p.getPostTitle()%>"
                                  srcset="${root}/<%=p.getPostImg().replace(extendsImg,"-474x240"+extendsImg)%> 474w"
                                  sizes="(max-width: 474px) 100vw, 474px"/>
                         </a>
@@ -65,34 +63,33 @@
                                         <a href="category/fashion/index.html" title="Fashion">Fashion</a>
                                     </span>
                             <h3>
-                                <a href="${root}/post/<%=p.getPostSlug()%>"
-                                   class="item-heading heading-small"><%=p.getPostTitle()%></a>
+                                <a href="${root}/post/<%=p.getPostSlug()%>" class="item-heading heading-small"><%=p.getPostTitle()%></a>
                             </h3>
                             <time class="the-date" datetime="<%=p.getPostDate()%>"><%=p.getPostDate()%></time>
                         </div>
                     </div>
-                <%}else {%>
+                    <%} else {%>
                     <div class="col-6 item small-item">
                         <a href="${root}/post/<%=p.getPostSlug()%>"
                            class="image-link">
                             <img width="235" height="216" src="${root}/<%=p.getPostImg()%>"
                                  class="attachment-grid-slider-b-small size-grid-slider-b-small wp-post-image"
-                                 alt="The Perfect Fit: Light and Wooly Denim Jeans" title=""
+                                 alt="<%=p.getPostTitle()%>" title="<%=p.getPostTitle()%>"
                                  srcset="${root}/<%=p.getPostImg().replace(extendsImg,"-235x216"+extendsImg)%> 235w"
                                  sizes="(max-width: 235px) 100vw, 235px"/>
                         </a>
                         <div class="caption caption-small">
-                                    <span class="cat-title cat-7">
-                                        <a href="category/celebrities/index.html" title="Celebrities">Celebrities</a>
-                                    </span>
+                            <span class="cat-title cat-7"><a href="category/celebrities/index.html" title="Celebrities">Celebrities</a></span>
                             <h3>
-                                <a href="${root}/post/<%=p.getPostSlug()%>"
-                                   class="item-heading heading-small"><%=p.getPostTitle()%></a>
+                                <a href="${root}/post/<%=p.getPostSlug()%>" class="item-heading heading-small"><%=p.getPostTitle()%></a>
                             </h3>
                             <time class="the-date" datetime="<%=p.getPostDate()%>"><%=p.getPostDate()%></time>
                         </div>
                     </div>
-                <%}}%>
+                    <%
+                            }
+                        }
+                    %>
                 </li>
             </ul>
         </div>
@@ -107,57 +104,67 @@
                         <h3 class="heading">Bài viết mới nhất</h3>
                         <ul class="subcats filters">
                             <li><a href="#" data-id="0" class="active">All</a></li>
-                            <%for (Category c:categoriesParent){%>
-                            <li><a href="<%=WebConstant.localHost%>/Category/<%=c.getCategorySlug()%>" data-id="<%=c.getCategoryID()%>"><%=c.getCategoryName()%></a></li>
+                            <%for (Category c : categoriesParent) {%>
+                            <li><a href="<%=WebConstant.localHost%>/Category/<%=c.getCategorySlug()%>"
+                                   data-id="<%=c.getCategoryID()%>"><%=c.getCategoryName()%>
+                            </a></li>
                             <%}%>
-                            <%--<li><a href="category/fashion/index.html" data-id="4">Fashion</a></li>--%>
-                            <%--<li><a href="category/fitness/index.html" data-id="10">Fitness</a></li>--%>
-                            <%--<li><a href="category/leisure/travel/index.html" data-id="9">Travel</a></li>--%>
-                            <%--<li><a href="category/leisure/index.html" data-id="12">Leisure</a></li>--%>
                         </ul>
                     </div>
                     <div class="block-content">
                         <div class="container cf">
                             <div class="large b-row cf">
-                                <%int demPost=0; for (Post p: postsNew){
-                                    demPost++;
-                                    String extendsImgNew=p.getPostImg();
-                                    if(extendsImgNew.contains(".")){
-                                        extendsImgNew=extendsImgNew.substring(extendsImgNew.lastIndexOf("."),extendsImgNew.length());
-                                    }%>
+                                <%int demPost = 0;for (Post p : postsNew) {
+                                        demPost++;
+                                        String extendsImgNew = p.getPostImg();
+                                        if (extendsImgNew.contains(".")) {
+                                            extendsImgNew = extendsImgNew.substring(extendsImgNew.lastIndexOf("."), extendsImgNew.length());
+                                        }
+                                %>
                                 <div class="column half b-col">
                                     <article>
                                         <a href="<%=WebConstant.localHost%>/post/<%=p.getPostSlug()%>"
                                            title="<%=p.getPostTitle()%>"
                                            class="image-link">
-                                            <img width="336" height="200" src="<%=WebConstant.localHost%>/<%=p.getPostImg()%>"
-                                                 class="image wp-post-image" alt="<%=p.getPostImg().substring(p.getPostImg().lastIndexOf("/"))%>"
+                                            <img width="336" height="200"
+                                                 src="<%=WebConstant.localHost%>/<%=p.getPostImg()%>"
+                                                 class="image wp-post-image"
+                                                 alt="<%=p.getPostImg().substring(p.getPostImg().lastIndexOf("/"))%>"
                                                  title="<%=p.getPostTitle()%>"
                                                  srcset="<%=WebConstant.localHost%>/<%=p.getPostImg().replace(extendsImgNew,"-336x200"+extendsImgNew)%> 336w"
                                                  sizes="(max-width: 336px) 100vw, 336px"/>
                                         </a>
                                         <h2 class="post-title">
                                             <a href="<%=WebConstant.localHost%>/post/<%=p.getPostSlug()%>"
-                                                title="<%=p.getPostTitle()%>"><%=p.getPostTitle()%></a>
+                                               title="<%=p.getPostTitle()%>"><%=p.getPostTitle()%>
+                                            </a>
                                         </h2>
                                         <div class="cf listing-meta meta below">
                                             <span class="meta-item author">Bởi <a
-                                                href="author/trendy/index.html" title="Posts by Kate Hanson"
-                                                rel="author">Kate Hanson</a>
+                                                    href="author/trendy/index.html" title="Posts by Kate Hanson"
+                                                    rel="author">Kate Hanson</a>
                                             </span>
-                                            <time datetime="<%=p.getPostDate()%>" class="meta-item"><%=p.getPostDate()%></time>
+                                            <time datetime="<%=p.getPostDate()%>" class="meta-item"><%=p.getPostDate()%>
+                                            </time>
                                         </div>
-                                        <div class="excerpt"><p><%=tool.html2text(p.getPostContent()).substring(0, 50)%><%=WebConstant.tobeContime%></p></div>
+                                        <div class="excerpt">
+                                            <p><%=tool.html2text(p.getPostContent()).substring(0, 50)%><%=WebConstant.tobeContime%></p>
+                                        </div>
                                     </article>
                                 </div>
-                                <%if (demPost==2){break;}}%>
+                                <%if (demPost == 2) {break;}}%>
                             </div>
                             <ul class="b-row posts-list thumb">
-                                <%int demPost2=0;for  (Post p:postsNew){demPost2++;if(demPost2>2){
-                                    String extendsImgNew=p.getPostImg();
-                                    if(extendsImgNew.contains(".")){
-                                        extendsImgNew=extendsImgNew.substring(extendsImgNew.lastIndexOf("."),extendsImgNew.length());
-                                    }%>
+                                <%
+                                    int demPost2 = 0;
+                                    for (Post p : postsNew) {
+                                        demPost2++;
+                                        if (demPost2 > 2) {
+                                            String extendsImgNew = p.getPostImg();
+                                            if (extendsImgNew.contains(".")) {
+                                                extendsImgNew = extendsImgNew.substring(extendsImgNew.lastIndexOf("."), extendsImgNew.length());
+                                            }
+                                %>
                                 <li class="column half b-col">
                                     <article class="post cf">
                                         <a href="<%=WebConstant.localHost%>/post/<%=p.getPostSlug()%>"
@@ -172,178 +179,32 @@
                                         </a>
                                         <div class="content"><a
                                                 href="<%=WebConstant.localHost%>/post/<%=p.getPostSlug()%>"
-                                                title="<%=p.getPostTitle()%>"> <%=p.getPostTitle()%></a>
+                                                title="<%=p.getPostTitle()%>"><%=p.getPostTitle()%>
+                                        </a>
                                             <div class="cf listing-meta below">
-                                                <time datetime="<%=p.getPostDate()%>" class="meta-item"><%=p.getPostDate()%></time>
+                                                <time datetime="<%=p.getPostDate()%>"
+                                                      class="meta-item"><%=p.getPostDate()%>
+                                                </time>
                                             </div>
                                         </div>
                                     </article>
                                 </li>
-                                <%}}%>
-                                <%--<li class="column half b-col">--%>
-                                    <%--<article class="post cf">--%>
-                                        <%--<a href="2017/01/10/an-update-for-the-top-puma-style-garments/index.html"--%>
-                                           <%--class="image-link">--%>
-                                            <%--<img width="104" height="69"--%>
-                                                 <%--src="images/StockSnap_HBI15KEJR3-104x69.jpg"--%>
-                                                 <%--class="attachment-post-thumbnail size-post-thumbnail wp-post-image"--%>
-                                                 <%--alt="StockSnap_HBI15KEJR3"--%>
-                                                 <%--title="An Update for the Top Puma Style Garments"--%>
-                                                 <%--srcset="images/StockSnap_HBI15KEJR3-104x69.jpg 104w, images/StockSnap_HBI15KEJR3-300x200.jpg 300w, images/StockSnap_HBI15KEJR3-1000x667.jpg 1000w, images/StockSnap_HBI15KEJR3-702x459.jpg 702w, images/StockSnap_HBI15KEJR3-214x140.jpg 214w, images/StockSnap_HBI15KEJR3-104x69@2x.jpg 208w, images/StockSnap_HBI15KEJR3-300x200@2x.jpg 600w, images/StockSnap_HBI15KEJR3-1000x667@2x.jpg 2000w, images/StockSnap_HBI15KEJR3-702x459@2x.jpg 1404w, images/StockSnap_HBI15KEJR3-214x140@2x.jpg 428w"--%>
-                                                 <%--sizes="(max-width: 104px) 100vw, 104px"/>--%>
-                                        <%--</a>--%>
-                                        <%--<div class="content"><a--%>
-                                                <%--href="2017/01/10/an-update-for-the-top-puma-style-garments/index.html"--%>
-                                                <%--title="An Update for the Top Puma Style Garments"> An Update for the--%>
-                                            <%--Top Puma Style Garments</a>--%>
-                                            <%--<div class="cf listing-meta below">--%>
-                                                <%--<time datetime="2017-01-10T02:34:37+00:00" class="meta-item">January--%>
-                                                    <%--10, 2017--%>
-                                                <%--</time>--%>
-                                            <%--</div>--%>
-                                        <%--</div>--%>
-                                    <%--</article>--%>
-                                <%--</li>--%>
-                                <%--<li class="column half b-col">--%>
-                                    <%--<article class="post cf">--%>
-                                        <%--<a href="2017/01/10/amazing-muffin-desserts-are-coming-back-this-year/index.html"--%>
-                                           <%--class="image-link">--%>
-                                            <%--<img width="104" height="69"--%>
-                                                 <%--src="images/shutterstock_364829048-104x69.jpg"--%>
-                                                 <%--class="attachment-post-thumbnail size-post-thumbnail wp-post-image"--%>
-                                                 <%--alt="shutterstock_364829048"--%>
-                                                 <%--title="Amazing Muffin Desserts Are Coming Back This Year"--%>
-                                                 <%--srcset="images/shutterstock_364829048-104x69.jpg 104w, images/shutterstock_364829048-300x200.jpg 300w, images/shutterstock_364829048-1000x667.jpg 1000w, images/shutterstock_364829048-702x459.jpg 702w, images/shutterstock_364829048-214x140.jpg 214w, images/shutterstock_364829048-104x69@2x.jpg 208w, images/shutterstock_364829048-300x200@2x.jpg 600w, images/shutterstock_364829048-1000x667@2x.jpg 2000w, images/shutterstock_364829048-702x459@2x.jpg 1404w, images/shutterstock_364829048-214x140@2x.jpg 428w"--%>
-                                                 <%--sizes="(max-width: 104px) 100vw, 104px"/>--%>
-                                        <%--</a>--%>
-                                        <%--<div class="content">--%>
-                                            <%--<a href="2017/01/10/amazing-muffin-desserts-are-coming-back-this-year/index.html"--%>
-                                               <%--title="Amazing Muffin Desserts Are Coming Back This Year"> Amazing--%>
-                                                <%--Muffin Desserts Are Coming Back This Year</a>--%>
-                                            <%--<div class="cf listing-meta below">--%>
-                                                <%--<time datetime="2017-01-10T02:33:37+00:00" class="meta-item">January--%>
-                                                    <%--10, 2017--%>
-                                                <%--</time>--%>
-                                            <%--</div>--%>
-                                        <%--</div>--%>
-                                    <%--</article>--%>
-                                <%--</li>--%>
-                                <%--<li class="column half b-col">--%>
-                                    <%--<article class="post cf">--%>
-                                        <%--<a href="2017/01/10/rachel-runs-a-business-by-her-own-set-of-rules/index.html"--%>
-                                           <%--class="image-link">--%>
-                                            <%--<img width="104" height="69"--%>
-                                                 <%--src="images/shutterstock_485005621-104x69.jpg"--%>
-                                                 <%--class="attachment-post-thumbnail size-post-thumbnail wp-post-image"--%>
-                                                 <%--alt="shutterstock_485005621"--%>
-                                                 <%--title="Rachel Runs a Business by Her Own Set of Rules"--%>
-                                                 <%--srcset="images/shutterstock_485005621-104x69.jpg 104w, images/shutterstock_485005621-702x459.jpg 702w, images/shutterstock_485005621-214x140.jpg 214w, images/shutterstock_485005621-104x69@2x.jpg 208w, images/shutterstock_485005621-702x459@2x.jpg 1404w, images/shutterstock_485005621-214x140@2x.jpg 428w"--%>
-                                                 <%--sizes="(max-width: 104px) 100vw, 104px"/>--%>
-                                        <%--</a>--%>
-                                        <%--<div class="content">--%>
-                                            <%--<a href="2017/01/10/rachel-runs-a-business-by-her-own-set-of-rules/index.html"--%>
-                                               <%--title="Rachel Runs a Business by Her Own Set of Rules"> Rachel Runs a--%>
-                                                <%--Business by Her Own Set of Rules</a>--%>
-                                            <%--<div class="cf listing-meta below">--%>
-                                                <%--<time datetime="2017-01-10T02:32:37+00:00" class="meta-item">January--%>
-                                                    <%--10, 2017--%>
-                                                <%--</time>--%>
-                                            <%--</div>--%>
-                                        <%--</div>--%>
-                                    <%--</article>--%>
-                                <%--</li>--%>
-                                <%--<li class="column half b-col">--%>
-                                    <%--<article class="post cf">--%>
-                                        <%--<a href="2017/01/10/style-tips-from-top-designer-of-united-states/index.html"--%>
-                                           <%--class="image-link">--%>
-                                            <%--<img width="104" height="69"--%>
-                                                 <%--src="images/photo-1472850049317-a4983c094f5c-104x69.jpg"--%>
-                                                 <%--class="attachment-post-thumbnail size-post-thumbnail wp-post-image"--%>
-                                                 <%--alt="photo-1472850049317-a4983c094f5c"--%>
-                                                 <%--title="Style Tips From Top Designer of United States"--%>
-                                                 <%--srcset="images/photo-1472850049317-a4983c094f5c-104x69.jpg 104w, images/photo-1472850049317-a4983c094f5c-300x200.jpg 300w, images/photo-1472850049317-a4983c094f5c-1000x667.jpg 1000w, images/photo-1472850049317-a4983c094f5c-702x459.jpg 702w, images/photo-1472850049317-a4983c094f5c-214x140.jpg 214w, images/photo-1472850049317-a4983c094f5c-104x69@2x.jpg 208w, images/photo-1472850049317-a4983c094f5c-300x200@2x.jpg 600w, images/photo-1472850049317-a4983c094f5c-1000x667@2x.jpg 2000w, images/photo-1472850049317-a4983c094f5c-702x459@2x.jpg 1404w, images/photo-1472850049317-a4983c094f5c-214x140@2x.jpg 428w"--%>
-                                                 <%--sizes="(max-width: 104px) 100vw, 104px"/>--%>
-                                        <%--</a>--%>
-                                        <%--<div class="content">--%>
-                                            <%--<a href="2017/01/10/style-tips-from-top-designer-of-united-states/index.html"--%>
-                                               <%--title="Style Tips From Top Designer of United States"> Style Tips--%>
-                                                <%--From Top Designer of United States</a>--%>
-                                            <%--<div class="cf listing-meta below">--%>
-                                                <%--<time datetime="2017-01-10T02:32:37+00:00" class="meta-item">January--%>
-                                                    <%--10, 2017--%>
-                                                <%--</time>--%>
-                                            <%--</div>--%>
-                                        <%--</div>--%>
-                                    <%--</article>--%>
-                                <%--</li>--%>
-                                <%--<li class="column half b-col">--%>
-                                    <%--<article class="post cf">--%>
-                                        <%--<a href="2017/01/10/not-into-showing-skin-youre-in-good-company/index.html"--%>
-                                           <%--class="image-link">--%>
-                                            <%--<img width="104" height="69" src="images/pexels-photo-169652-104x69.jpg"--%>
-                                                 <%--class="attachment-post-thumbnail size-post-thumbnail wp-post-image"--%>
-                                                 <%--alt="pexels-photo-169652"--%>
-                                                 <%--title="Not Into Showing Skin? You&#8217;re in Good Company"--%>
-                                                 <%--srcset="images/pexels-photo-169652-104x69.jpg 104w, images/pexels-photo-169652-702x459.jpg 702w, images/pexels-photo-169652-214x140.jpg 214w, images/pexels-photo-169652-104x69@2x.jpg 208w, images/pexels-photo-169652-702x459@2x.jpg 1404w, images/pexels-photo-169652-214x140@2x.jpg 428w"--%>
-                                                 <%--sizes="(max-width: 104px) 100vw, 104px"/>--%>
-                                        <%--</a>--%>
-                                        <%--<div class="content">--%>
-                                            <%--<a href="2017/01/10/not-into-showing-skin-youre-in-good-company/index.html"--%>
-                                               <%--title="Not Into Showing Skin? You&#8217;re in Good Company"> Not Into--%>
-                                                <%--Showing Skin? You&#8217;re in Good Company</a>--%>
-                                            <%--<div class="cf listing-meta below">--%>
-                                                <%--<time datetime="2017-01-10T02:31:37+00:00" class="meta-item">January--%>
-                                                    <%--10, 2017--%>
-                                                <%--</time>--%>
-                                            <%--</div>--%>
-                                        <%--</div>--%>
-                                    <%--</article>--%>
-                                <%--</li>--%>
-                                <%--<li class="column half b-col">--%>
-                                    <%--<article class="post cf">--%>
-                                        <%--<a href="2017/01/10/how-to-refresh-your-purse-game-in-a-snap/index.html"--%>
-                                           <%--class="image-link">--%>
-                                            <%--<img width="104" height="69" src="images/pexels-photo-236287-104x69.jpg"--%>
-                                                 <%--class="attachment-post-thumbnail size-post-thumbnail wp-post-image"--%>
-                                                 <%--alt="pexels-photo-236287"--%>
-                                                 <%--title="How to Refresh Your Purse Game in a Snap"--%>
-                                                 <%--srcset="images/pexels-photo-236287-104x69.jpg 104w, images/pexels-photo-236287-300x200.jpg 300w, images/pexels-photo-236287-1000x667.jpg 1000w, images/pexels-photo-236287-702x459.jpg 702w, images/pexels-photo-236287-214x140.jpg 214w, images/pexels-photo-236287-104x69@2x.jpg 208w, images/pexels-photo-236287-300x200@2x.jpg 600w, images/pexels-photo-236287-1000x667@2x.jpg 2000w, images/pexels-photo-236287-702x459@2x.jpg 1404w, images/pexels-photo-236287-214x140@2x.jpg 428w"--%>
-                                                 <%--sizes="(max-width: 104px) 100vw, 104px"/>--%>
-                                        <%--</a>--%>
-                                        <%--<div class="content">--%>
-                                            <%--<a href="2017/01/10/how-to-refresh-your-purse-game-in-a-snap/index.html"--%>
-                                               <%--title="How to Refresh Your Purse Game in a Snap"> How to Refresh Your--%>
-                                                <%--Purse Game in a Snap</a>--%>
-                                            <%--<div class="cf listing-meta below">--%>
-                                                <%--<time datetime="2017-01-10T02:30:37+00:00" class="meta-item">January--%>
-                                                    <%--10, 2017--%>
-                                                <%--</time>--%>
-                                            <%--</div>--%>
-                                        <%--</div>--%>
-                                    <%--</article>--%>
-                                <%--</li>--%>
+                                <%
+                                        }
+                                    }
+                                %>
                             </ul>
                         </div>
                     </div>
                 </section>
                 <section class="block-wrap blog" data-id="2">
                     <div class="block-head cat-text-12">
-                        <h3 class="heading">
-                            <a href="category/leisure/index.html">Latest Leisure</a>
-                        </h3>
+                        <h3 class="heading"><a href="category/leisure/index.html">Latest Leisure</a></h3>
                         <ul class="subcats filters">
-                            <li>
-                                <a href="#" data-id="0" class="active">All</a>
-                            </li>
-                            <li>
-                                <a href="category/fitness/index.html" data-id="10">Fitness</a>
-                            </li>
-                            <li>
-                                <a href="category/leisure/travel/index.html" data-id="9">Travel</a>
-                            </li>
-                            <li>
-                                <a href="category/celebrities/index.html" data-id="7">Celebrities</a>
-                            </li>
+                            <li><a href="#" data-id="0" class="active">All</a></li>
+                            <li><a href="category/fitness/index.html" data-id="10">Fitness</a></li>
+                            <li><a href="category/leisure/travel/index.html" data-id="9">Travel</a></li>
+                            <li><a href="category/celebrities/index.html" data-id="7">Celebrities</a></li>
                         </ul>
                     </div>
                     <div class="block-content">
@@ -379,8 +240,7 @@
                                 </article>
                             </div>
                             <div class="column half b-col">
-                                <article
-                                        class="highlights post-110 post type-post status-publish format-standard has-post-thumbnail category-entertainment category-leisure category-opinion tag-culture tag-fashion tag-fitness tag-leisure tag-lifestyle">
+                                <article class="highlights post-110 post type-post status-publish format-standard has-post-thumbnail category-entertainment category-leisure category-opinion tag-culture tag-fashion tag-fitness tag-leisure tag-lifestyle">
                                     <a href="2017/01/08/on-the-go-pilot-sachtel-does-the-job-fearlessly-2-2/index.html"
                                        title="On the Go: Pilot Sachtel Does the Job Fearlessly" class="image-link">
                                         <img width="336" height="200" src="images/StockSnap_9MKVXCFYA5-336x200.jpg"
