@@ -118,7 +118,6 @@ public class ManagerPostServlet extends HttpServlet {
                                 termsRelationshipsDao.insert(termsRelationships);
                             }
                         }
-
                         result = "Cập nhập thành công";
                         session.setAttribute("result", result);
                         url = WebConstant.localHost+"/Admincp/edit-post.jsp?post=" + post.getPostID() + "&action=edit";

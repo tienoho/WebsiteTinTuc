@@ -2,10 +2,17 @@
 <%@ page import="vn.haui.web.command.PostDao" %>
 <%@ page import="vn.haui.web.utils.tool" %>
 <%@ page import="vn.haui.web.common.WebConstant" %>
+<%@ page import="vn.haui.web.model.Category" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="vn.haui.web.command.CategoryDao" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="root" value="${pageContext.request.contextPath}"/>
 <%
     PostDao postDao=new PostDao();
+    CategoryDao categoryDao=new CategoryDao();
+    ArrayList<Category> categoriesParent= categoryDao.getListCategoryParent();
+    ArrayList<Post> postsNew=postDao.getListAllPostNew(8);
 %>
 <div class="main-featured">
     <div class="wrap cf">
@@ -97,220 +104,224 @@
             <div id="post-11" class="page-content post-11 page type-page status-publish">
                 <section class="block-wrap highlights highlights-b" data-id="1">
                     <div class="block-head">
-                        <h3 class="heading">Latest Articles</h3>
+                        <h3 class="heading">Bài viết mới nhất</h3>
                         <ul class="subcats filters">
-                            <li>
-                                <a href="#" data-id="0" class="active">All</a>
-                            </li>
-                            <li><a href="category/fashion/index.html" data-id="4">Fashion</a></li>
-                            <li><a href="category/fitness/index.html" data-id="10">Fitness</a></li>
-                            <li>
-                                <a href="category/leisure/travel/index.html" data-id="9">Travel</a>
-                            </li>
-                            <li>
-                                <a href="category/leisure/index.html" data-id="12">Leisure</a>
-                            </li>
+                            <li><a href="#" data-id="0" class="active">All</a></li>
+                            <%for (Category c:categoriesParent){%>
+                            <li><a href="<%=WebConstant.localHost%>/Category/<%=c.getCategorySlug()%>" data-id="<%=c.getCategoryID()%>"><%=c.getCategoryName()%></a></li>
+                            <%}%>
+                            <%--<li><a href="category/fashion/index.html" data-id="4">Fashion</a></li>--%>
+                            <%--<li><a href="category/fitness/index.html" data-id="10">Fitness</a></li>--%>
+                            <%--<li><a href="category/leisure/travel/index.html" data-id="9">Travel</a></li>--%>
+                            <%--<li><a href="category/leisure/index.html" data-id="12">Leisure</a></li>--%>
                         </ul>
                     </div>
                     <div class="block-content">
                         <div class="container cf">
                             <div class="large b-row cf">
+                                <%int demPost=0; for (Post p: postsNew){
+                                    demPost++;
+                                    String extendsImgNew=p.getPostImg();
+                                    if(extendsImgNew.contains(".")){
+                                        extendsImgNew=extendsImgNew.substring(extendsImgNew.lastIndexOf("."),extendsImgNew.length());
+                                    }%>
                                 <div class="column half b-col">
                                     <article>
-                                        <a href="2017/01/10/easy-boho-style-without-looking-like-a-coachella-victim/index.html"
-                                           title="Easy Boho Style: Without Looking Like a Coachella Victim"
-                                           class="image-link"> <img width="336" height="200"
-                                                                    src="images/shutterstock_275843885-336x200.jpg"
-                                                                    class="image wp-post-image"
-                                                                    alt="shutterstock_275843885"
-                                                                    title="Easy Boho Style: Without Looking Like a Coachella Victim"
-                                                                    srcset="images/shutterstock_275843885-336x200.jpg 336w, images/shutterstock_275843885-336x200@2x.jpg 672w"
-                                                                    sizes="(max-width: 336px) 100vw, 336px"/> </a>
-                                        <h2 class="post-title"><a
-                                                href="2017/01/10/easy-boho-style-without-looking-like-a-coachella-victim/index.html"
-                                                title="Easy Boho Style: Without Looking Like a Coachella Victim">Easy
-                                            Boho Style: Without Looking Like a Coachella Victim</a></h2>
-                                        <div class="cf listing-meta meta below"><span class="meta-item author">By <a
+                                        <a href="<%=WebConstant.localHost%>/post/<%=p.getPostSlug()%>"
+                                           title="<%=p.getPostTitle()%>"
+                                           class="image-link">
+                                            <img width="336" height="200" src="<%=WebConstant.localHost%>/<%=p.getPostImg()%>"
+                                                 class="image wp-post-image" alt="<%=p.getPostImg().substring(p.getPostImg().lastIndexOf("/"))%>"
+                                                 title="<%=p.getPostTitle()%>"
+                                                 srcset="<%=WebConstant.localHost%>/<%=p.getPostImg().replace(extendsImgNew,"-336x200"+extendsImgNew)%> 336w"
+                                                 sizes="(max-width: 336px) 100vw, 336px"/>
+                                        </a>
+                                        <h2 class="post-title">
+                                            <a href="<%=WebConstant.localHost%>/post/<%=p.getPostSlug()%>"
+                                                title="<%=p.getPostTitle()%>"><%=p.getPostTitle()%></a>
+                                        </h2>
+                                        <div class="cf listing-meta meta below">
+                                            <span class="meta-item author">Bởi <a
                                                 href="author/trendy/index.html" title="Posts by Kate Hanson"
-                                                rel="author">Kate Hanson</a></span>
-                                            <time datetime="2017-01-10T02:35:37+00:00" class="meta-item">January 10,
-                                                2017
-                                            </time>
+                                                rel="author">Kate Hanson</a>
+                                            </span>
+                                            <time datetime="<%=p.getPostDate()%>" class="meta-item"><%=p.getPostDate()%></time>
                                         </div>
-                                        <div class="excerpt"><p>It is important to be chic. I love the 2000s because
-                                            everyone started to love&hellip;</p></div>
+                                        <div class="excerpt"><p><%=tool.html2text(p.getPostContent()).substring(0, 50)%><%=WebConstant.tobeContime%></p></div>
                                     </article>
                                 </div>
-                                <div class="column half b-col">
-                                    <article><a
-                                            href="2017/01/10/15-creative-methods-to-sharpen-your-interior-decor/index.html"
-                                            title="15 Creative Methods to Sharpen Your Interior Decor"
-                                            class="image-link"> <img width="336" height="200"
-                                                                     src="images/shutterstock_48352300-336x200.jpg"
-                                                                     class="image wp-post-image"
-                                                                     alt="shutterstock_48352300"
-                                                                     title="15 Creative Methods to Sharpen Your Interior Decor"
-                                                                     srcset="images/shutterstock_48352300-336x200.jpg 336w, images/shutterstock_48352300-336x200@2x.jpg 672w"
-                                                                     sizes="(max-width: 336px) 100vw, 336px"/> </a>
-                                        <h2 class="post-title"><a
-                                                href="2017/01/10/15-creative-methods-to-sharpen-your-interior-decor/index.html"
-                                                title="15 Creative Methods to Sharpen Your Interior Decor">15
-                                            Creative Methods to Sharpen Your Interior Decor</a></h2>
-                                        <div class="cf listing-meta meta below"><span class="meta-item author">By <a
-                                                href="author/trendy/index.html" title="Posts by Kate Hanson"
-                                                rel="author">Kate Hanson</a></span>
-                                            <time datetime="2017-01-10T02:35:37+00:00" class="meta-item">January 10,
-                                                2017
-                                            </time>
-                                        </div>
-                                        <div class="excerpt"><p>It is important to be chic. I love the 2000s because
-                                            everyone started to love&hellip;</p></div>
-                                    </article>
-                                </div>
+                                <%if (demPost==2){break;}}%>
                             </div>
                             <ul class="b-row posts-list thumb">
+                                <%int demPost2=0;for  (Post p:postsNew){demPost2++;if(demPost2>2){
+                                    String extendsImgNew=p.getPostImg();
+                                    if(extendsImgNew.contains(".")){
+                                        extendsImgNew=extendsImgNew.substring(extendsImgNew.lastIndexOf("."),extendsImgNew.length());
+                                    }%>
                                 <li class="column half b-col">
                                     <article class="post cf">
-                                        <a href="2017/01/10/an-update-for-the-top-puma-style-garments/index.html"
+                                        <a href="<%=WebConstant.localHost%>/post/<%=p.getPostSlug()%>"
                                            class="image-link">
                                             <img width="104" height="69"
-                                                 src="images/StockSnap_HBI15KEJR3-104x69.jpg"
-                                                 class="attachment-post-thumbnail size-post-thumbnail wp-post-image"
+                                                 src="<%=WebConstant.localHost%>/<%=p.getPostImg()%>"
+                                                 class="<%=p.getPostImg().substring(p.getPostImg().lastIndexOf("/"))%>"
                                                  alt="StockSnap_HBI15KEJR3"
-                                                 title="An Update for the Top Puma Style Garments"
-                                                 srcset="images/StockSnap_HBI15KEJR3-104x69.jpg 104w, images/StockSnap_HBI15KEJR3-300x200.jpg 300w, images/StockSnap_HBI15KEJR3-1000x667.jpg 1000w, images/StockSnap_HBI15KEJR3-702x459.jpg 702w, images/StockSnap_HBI15KEJR3-214x140.jpg 214w, images/StockSnap_HBI15KEJR3-104x69@2x.jpg 208w, images/StockSnap_HBI15KEJR3-300x200@2x.jpg 600w, images/StockSnap_HBI15KEJR3-1000x667@2x.jpg 2000w, images/StockSnap_HBI15KEJR3-702x459@2x.jpg 1404w, images/StockSnap_HBI15KEJR3-214x140@2x.jpg 428w"
+                                                 title="<%=p.getPostTitle()%>"
+                                                 srcset="<%=WebConstant.localHost%>/<%=p.getPostImg().replace(extendsImgNew,"-104x69"+extendsImgNew)%> 104w, <%=WebConstant.localHost%>/<%=p.getPostImg().replace(extendsImgNew,"-300x200"+extendsImgNew)%> 300w, <%=WebConstant.localHost%>/<%=p.getPostImg().replace(extendsImgNew,"-1000x667"+extendsImgNew)%> 1000w, <%=WebConstant.localHost%>/<%=p.getPostImg().replace(extendsImgNew,"-702x459"+extendsImgNew)%> 702w, <%=WebConstant.localHost%>/<%=p.getPostImg().replace(extendsImgNew,"-214x140"+extendsImgNew)%> 214w"
                                                  sizes="(max-width: 104px) 100vw, 104px"/>
                                         </a>
                                         <div class="content"><a
-                                                href="2017/01/10/an-update-for-the-top-puma-style-garments/index.html"
-                                                title="An Update for the Top Puma Style Garments"> An Update for the
-                                            Top Puma Style Garments</a>
+                                                href="<%=WebConstant.localHost%>/post/<%=p.getPostSlug()%>"
+                                                title="<%=p.getPostTitle()%>"> <%=p.getPostTitle()%></a>
                                             <div class="cf listing-meta below">
-                                                <time datetime="2017-01-10T02:34:37+00:00" class="meta-item">January
-                                                    10, 2017
-                                                </time>
+                                                <time datetime="<%=p.getPostDate()%>" class="meta-item"><%=p.getPostDate()%></time>
                                             </div>
                                         </div>
                                     </article>
                                 </li>
-                                <li class="column half b-col">
-                                    <article class="post cf">
-                                        <a href="2017/01/10/amazing-muffin-desserts-are-coming-back-this-year/index.html"
-                                           class="image-link">
-                                            <img width="104" height="69"
-                                                 src="images/shutterstock_364829048-104x69.jpg"
-                                                 class="attachment-post-thumbnail size-post-thumbnail wp-post-image"
-                                                 alt="shutterstock_364829048"
-                                                 title="Amazing Muffin Desserts Are Coming Back This Year"
-                                                 srcset="images/shutterstock_364829048-104x69.jpg 104w, images/shutterstock_364829048-300x200.jpg 300w, images/shutterstock_364829048-1000x667.jpg 1000w, images/shutterstock_364829048-702x459.jpg 702w, images/shutterstock_364829048-214x140.jpg 214w, images/shutterstock_364829048-104x69@2x.jpg 208w, images/shutterstock_364829048-300x200@2x.jpg 600w, images/shutterstock_364829048-1000x667@2x.jpg 2000w, images/shutterstock_364829048-702x459@2x.jpg 1404w, images/shutterstock_364829048-214x140@2x.jpg 428w"
-                                                 sizes="(max-width: 104px) 100vw, 104px"/>
-                                        </a>
-                                        <div class="content">
-                                            <a href="2017/01/10/amazing-muffin-desserts-are-coming-back-this-year/index.html"
-                                               title="Amazing Muffin Desserts Are Coming Back This Year"> Amazing
-                                                Muffin Desserts Are Coming Back This Year</a>
-                                            <div class="cf listing-meta below">
-                                                <time datetime="2017-01-10T02:33:37+00:00" class="meta-item">January
-                                                    10, 2017
-                                                </time>
-                                            </div>
-                                        </div>
-                                    </article>
-                                </li>
-                                <li class="column half b-col">
-                                    <article class="post cf">
-                                        <a href="2017/01/10/rachel-runs-a-business-by-her-own-set-of-rules/index.html"
-                                           class="image-link">
-                                            <img width="104" height="69"
-                                                 src="images/shutterstock_485005621-104x69.jpg"
-                                                 class="attachment-post-thumbnail size-post-thumbnail wp-post-image"
-                                                 alt="shutterstock_485005621"
-                                                 title="Rachel Runs a Business by Her Own Set of Rules"
-                                                 srcset="images/shutterstock_485005621-104x69.jpg 104w, images/shutterstock_485005621-702x459.jpg 702w, images/shutterstock_485005621-214x140.jpg 214w, images/shutterstock_485005621-104x69@2x.jpg 208w, images/shutterstock_485005621-702x459@2x.jpg 1404w, images/shutterstock_485005621-214x140@2x.jpg 428w"
-                                                 sizes="(max-width: 104px) 100vw, 104px"/>
-                                        </a>
-                                        <div class="content">
-                                            <a href="2017/01/10/rachel-runs-a-business-by-her-own-set-of-rules/index.html"
-                                               title="Rachel Runs a Business by Her Own Set of Rules"> Rachel Runs a
-                                                Business by Her Own Set of Rules</a>
-                                            <div class="cf listing-meta below">
-                                                <time datetime="2017-01-10T02:32:37+00:00" class="meta-item">January
-                                                    10, 2017
-                                                </time>
-                                            </div>
-                                        </div>
-                                    </article>
-                                </li>
-                                <li class="column half b-col">
-                                    <article class="post cf">
-                                        <a href="2017/01/10/style-tips-from-top-designer-of-united-states/index.html"
-                                           class="image-link">
-                                            <img width="104" height="69"
-                                                 src="images/photo-1472850049317-a4983c094f5c-104x69.jpg"
-                                                 class="attachment-post-thumbnail size-post-thumbnail wp-post-image"
-                                                 alt="photo-1472850049317-a4983c094f5c"
-                                                 title="Style Tips From Top Designer of United States"
-                                                 srcset="images/photo-1472850049317-a4983c094f5c-104x69.jpg 104w, images/photo-1472850049317-a4983c094f5c-300x200.jpg 300w, images/photo-1472850049317-a4983c094f5c-1000x667.jpg 1000w, images/photo-1472850049317-a4983c094f5c-702x459.jpg 702w, images/photo-1472850049317-a4983c094f5c-214x140.jpg 214w, images/photo-1472850049317-a4983c094f5c-104x69@2x.jpg 208w, images/photo-1472850049317-a4983c094f5c-300x200@2x.jpg 600w, images/photo-1472850049317-a4983c094f5c-1000x667@2x.jpg 2000w, images/photo-1472850049317-a4983c094f5c-702x459@2x.jpg 1404w, images/photo-1472850049317-a4983c094f5c-214x140@2x.jpg 428w"
-                                                 sizes="(max-width: 104px) 100vw, 104px"/>
-                                        </a>
-                                        <div class="content">
-                                            <a href="2017/01/10/style-tips-from-top-designer-of-united-states/index.html"
-                                               title="Style Tips From Top Designer of United States"> Style Tips
-                                                From Top Designer of United States</a>
-                                            <div class="cf listing-meta below">
-                                                <time datetime="2017-01-10T02:32:37+00:00" class="meta-item">January
-                                                    10, 2017
-                                                </time>
-                                            </div>
-                                        </div>
-                                    </article>
-                                </li>
-                                <li class="column half b-col">
-                                    <article class="post cf">
-                                        <a href="2017/01/10/not-into-showing-skin-youre-in-good-company/index.html"
-                                           class="image-link">
-                                            <img width="104" height="69" src="images/pexels-photo-169652-104x69.jpg"
-                                                 class="attachment-post-thumbnail size-post-thumbnail wp-post-image"
-                                                 alt="pexels-photo-169652"
-                                                 title="Not Into Showing Skin? You&#8217;re in Good Company"
-                                                 srcset="images/pexels-photo-169652-104x69.jpg 104w, images/pexels-photo-169652-702x459.jpg 702w, images/pexels-photo-169652-214x140.jpg 214w, images/pexels-photo-169652-104x69@2x.jpg 208w, images/pexels-photo-169652-702x459@2x.jpg 1404w, images/pexels-photo-169652-214x140@2x.jpg 428w"
-                                                 sizes="(max-width: 104px) 100vw, 104px"/>
-                                        </a>
-                                        <div class="content">
-                                            <a href="2017/01/10/not-into-showing-skin-youre-in-good-company/index.html"
-                                               title="Not Into Showing Skin? You&#8217;re in Good Company"> Not Into
-                                                Showing Skin? You&#8217;re in Good Company</a>
-                                            <div class="cf listing-meta below">
-                                                <time datetime="2017-01-10T02:31:37+00:00" class="meta-item">January
-                                                    10, 2017
-                                                </time>
-                                            </div>
-                                        </div>
-                                    </article>
-                                </li>
-                                <li class="column half b-col">
-                                    <article class="post cf">
-                                        <a href="2017/01/10/how-to-refresh-your-purse-game-in-a-snap/index.html"
-                                           class="image-link">
-                                            <img width="104" height="69" src="images/pexels-photo-236287-104x69.jpg"
-                                                 class="attachment-post-thumbnail size-post-thumbnail wp-post-image"
-                                                 alt="pexels-photo-236287"
-                                                 title="How to Refresh Your Purse Game in a Snap"
-                                                 srcset="images/pexels-photo-236287-104x69.jpg 104w, images/pexels-photo-236287-300x200.jpg 300w, images/pexels-photo-236287-1000x667.jpg 1000w, images/pexels-photo-236287-702x459.jpg 702w, images/pexels-photo-236287-214x140.jpg 214w, images/pexels-photo-236287-104x69@2x.jpg 208w, images/pexels-photo-236287-300x200@2x.jpg 600w, images/pexels-photo-236287-1000x667@2x.jpg 2000w, images/pexels-photo-236287-702x459@2x.jpg 1404w, images/pexels-photo-236287-214x140@2x.jpg 428w"
-                                                 sizes="(max-width: 104px) 100vw, 104px"/>
-                                        </a>
-                                        <div class="content">
-                                            <a href="2017/01/10/how-to-refresh-your-purse-game-in-a-snap/index.html"
-                                               title="How to Refresh Your Purse Game in a Snap"> How to Refresh Your
-                                                Purse Game in a Snap</a>
-                                            <div class="cf listing-meta below">
-                                                <time datetime="2017-01-10T02:30:37+00:00" class="meta-item">January
-                                                    10, 2017
-                                                </time>
-                                            </div>
-                                        </div>
-                                    </article>
-                                </li>
+                                <%}}%>
+                                <%--<li class="column half b-col">--%>
+                                    <%--<article class="post cf">--%>
+                                        <%--<a href="2017/01/10/an-update-for-the-top-puma-style-garments/index.html"--%>
+                                           <%--class="image-link">--%>
+                                            <%--<img width="104" height="69"--%>
+                                                 <%--src="images/StockSnap_HBI15KEJR3-104x69.jpg"--%>
+                                                 <%--class="attachment-post-thumbnail size-post-thumbnail wp-post-image"--%>
+                                                 <%--alt="StockSnap_HBI15KEJR3"--%>
+                                                 <%--title="An Update for the Top Puma Style Garments"--%>
+                                                 <%--srcset="images/StockSnap_HBI15KEJR3-104x69.jpg 104w, images/StockSnap_HBI15KEJR3-300x200.jpg 300w, images/StockSnap_HBI15KEJR3-1000x667.jpg 1000w, images/StockSnap_HBI15KEJR3-702x459.jpg 702w, images/StockSnap_HBI15KEJR3-214x140.jpg 214w, images/StockSnap_HBI15KEJR3-104x69@2x.jpg 208w, images/StockSnap_HBI15KEJR3-300x200@2x.jpg 600w, images/StockSnap_HBI15KEJR3-1000x667@2x.jpg 2000w, images/StockSnap_HBI15KEJR3-702x459@2x.jpg 1404w, images/StockSnap_HBI15KEJR3-214x140@2x.jpg 428w"--%>
+                                                 <%--sizes="(max-width: 104px) 100vw, 104px"/>--%>
+                                        <%--</a>--%>
+                                        <%--<div class="content"><a--%>
+                                                <%--href="2017/01/10/an-update-for-the-top-puma-style-garments/index.html"--%>
+                                                <%--title="An Update for the Top Puma Style Garments"> An Update for the--%>
+                                            <%--Top Puma Style Garments</a>--%>
+                                            <%--<div class="cf listing-meta below">--%>
+                                                <%--<time datetime="2017-01-10T02:34:37+00:00" class="meta-item">January--%>
+                                                    <%--10, 2017--%>
+                                                <%--</time>--%>
+                                            <%--</div>--%>
+                                        <%--</div>--%>
+                                    <%--</article>--%>
+                                <%--</li>--%>
+                                <%--<li class="column half b-col">--%>
+                                    <%--<article class="post cf">--%>
+                                        <%--<a href="2017/01/10/amazing-muffin-desserts-are-coming-back-this-year/index.html"--%>
+                                           <%--class="image-link">--%>
+                                            <%--<img width="104" height="69"--%>
+                                                 <%--src="images/shutterstock_364829048-104x69.jpg"--%>
+                                                 <%--class="attachment-post-thumbnail size-post-thumbnail wp-post-image"--%>
+                                                 <%--alt="shutterstock_364829048"--%>
+                                                 <%--title="Amazing Muffin Desserts Are Coming Back This Year"--%>
+                                                 <%--srcset="images/shutterstock_364829048-104x69.jpg 104w, images/shutterstock_364829048-300x200.jpg 300w, images/shutterstock_364829048-1000x667.jpg 1000w, images/shutterstock_364829048-702x459.jpg 702w, images/shutterstock_364829048-214x140.jpg 214w, images/shutterstock_364829048-104x69@2x.jpg 208w, images/shutterstock_364829048-300x200@2x.jpg 600w, images/shutterstock_364829048-1000x667@2x.jpg 2000w, images/shutterstock_364829048-702x459@2x.jpg 1404w, images/shutterstock_364829048-214x140@2x.jpg 428w"--%>
+                                                 <%--sizes="(max-width: 104px) 100vw, 104px"/>--%>
+                                        <%--</a>--%>
+                                        <%--<div class="content">--%>
+                                            <%--<a href="2017/01/10/amazing-muffin-desserts-are-coming-back-this-year/index.html"--%>
+                                               <%--title="Amazing Muffin Desserts Are Coming Back This Year"> Amazing--%>
+                                                <%--Muffin Desserts Are Coming Back This Year</a>--%>
+                                            <%--<div class="cf listing-meta below">--%>
+                                                <%--<time datetime="2017-01-10T02:33:37+00:00" class="meta-item">January--%>
+                                                    <%--10, 2017--%>
+                                                <%--</time>--%>
+                                            <%--</div>--%>
+                                        <%--</div>--%>
+                                    <%--</article>--%>
+                                <%--</li>--%>
+                                <%--<li class="column half b-col">--%>
+                                    <%--<article class="post cf">--%>
+                                        <%--<a href="2017/01/10/rachel-runs-a-business-by-her-own-set-of-rules/index.html"--%>
+                                           <%--class="image-link">--%>
+                                            <%--<img width="104" height="69"--%>
+                                                 <%--src="images/shutterstock_485005621-104x69.jpg"--%>
+                                                 <%--class="attachment-post-thumbnail size-post-thumbnail wp-post-image"--%>
+                                                 <%--alt="shutterstock_485005621"--%>
+                                                 <%--title="Rachel Runs a Business by Her Own Set of Rules"--%>
+                                                 <%--srcset="images/shutterstock_485005621-104x69.jpg 104w, images/shutterstock_485005621-702x459.jpg 702w, images/shutterstock_485005621-214x140.jpg 214w, images/shutterstock_485005621-104x69@2x.jpg 208w, images/shutterstock_485005621-702x459@2x.jpg 1404w, images/shutterstock_485005621-214x140@2x.jpg 428w"--%>
+                                                 <%--sizes="(max-width: 104px) 100vw, 104px"/>--%>
+                                        <%--</a>--%>
+                                        <%--<div class="content">--%>
+                                            <%--<a href="2017/01/10/rachel-runs-a-business-by-her-own-set-of-rules/index.html"--%>
+                                               <%--title="Rachel Runs a Business by Her Own Set of Rules"> Rachel Runs a--%>
+                                                <%--Business by Her Own Set of Rules</a>--%>
+                                            <%--<div class="cf listing-meta below">--%>
+                                                <%--<time datetime="2017-01-10T02:32:37+00:00" class="meta-item">January--%>
+                                                    <%--10, 2017--%>
+                                                <%--</time>--%>
+                                            <%--</div>--%>
+                                        <%--</div>--%>
+                                    <%--</article>--%>
+                                <%--</li>--%>
+                                <%--<li class="column half b-col">--%>
+                                    <%--<article class="post cf">--%>
+                                        <%--<a href="2017/01/10/style-tips-from-top-designer-of-united-states/index.html"--%>
+                                           <%--class="image-link">--%>
+                                            <%--<img width="104" height="69"--%>
+                                                 <%--src="images/photo-1472850049317-a4983c094f5c-104x69.jpg"--%>
+                                                 <%--class="attachment-post-thumbnail size-post-thumbnail wp-post-image"--%>
+                                                 <%--alt="photo-1472850049317-a4983c094f5c"--%>
+                                                 <%--title="Style Tips From Top Designer of United States"--%>
+                                                 <%--srcset="images/photo-1472850049317-a4983c094f5c-104x69.jpg 104w, images/photo-1472850049317-a4983c094f5c-300x200.jpg 300w, images/photo-1472850049317-a4983c094f5c-1000x667.jpg 1000w, images/photo-1472850049317-a4983c094f5c-702x459.jpg 702w, images/photo-1472850049317-a4983c094f5c-214x140.jpg 214w, images/photo-1472850049317-a4983c094f5c-104x69@2x.jpg 208w, images/photo-1472850049317-a4983c094f5c-300x200@2x.jpg 600w, images/photo-1472850049317-a4983c094f5c-1000x667@2x.jpg 2000w, images/photo-1472850049317-a4983c094f5c-702x459@2x.jpg 1404w, images/photo-1472850049317-a4983c094f5c-214x140@2x.jpg 428w"--%>
+                                                 <%--sizes="(max-width: 104px) 100vw, 104px"/>--%>
+                                        <%--</a>--%>
+                                        <%--<div class="content">--%>
+                                            <%--<a href="2017/01/10/style-tips-from-top-designer-of-united-states/index.html"--%>
+                                               <%--title="Style Tips From Top Designer of United States"> Style Tips--%>
+                                                <%--From Top Designer of United States</a>--%>
+                                            <%--<div class="cf listing-meta below">--%>
+                                                <%--<time datetime="2017-01-10T02:32:37+00:00" class="meta-item">January--%>
+                                                    <%--10, 2017--%>
+                                                <%--</time>--%>
+                                            <%--</div>--%>
+                                        <%--</div>--%>
+                                    <%--</article>--%>
+                                <%--</li>--%>
+                                <%--<li class="column half b-col">--%>
+                                    <%--<article class="post cf">--%>
+                                        <%--<a href="2017/01/10/not-into-showing-skin-youre-in-good-company/index.html"--%>
+                                           <%--class="image-link">--%>
+                                            <%--<img width="104" height="69" src="images/pexels-photo-169652-104x69.jpg"--%>
+                                                 <%--class="attachment-post-thumbnail size-post-thumbnail wp-post-image"--%>
+                                                 <%--alt="pexels-photo-169652"--%>
+                                                 <%--title="Not Into Showing Skin? You&#8217;re in Good Company"--%>
+                                                 <%--srcset="images/pexels-photo-169652-104x69.jpg 104w, images/pexels-photo-169652-702x459.jpg 702w, images/pexels-photo-169652-214x140.jpg 214w, images/pexels-photo-169652-104x69@2x.jpg 208w, images/pexels-photo-169652-702x459@2x.jpg 1404w, images/pexels-photo-169652-214x140@2x.jpg 428w"--%>
+                                                 <%--sizes="(max-width: 104px) 100vw, 104px"/>--%>
+                                        <%--</a>--%>
+                                        <%--<div class="content">--%>
+                                            <%--<a href="2017/01/10/not-into-showing-skin-youre-in-good-company/index.html"--%>
+                                               <%--title="Not Into Showing Skin? You&#8217;re in Good Company"> Not Into--%>
+                                                <%--Showing Skin? You&#8217;re in Good Company</a>--%>
+                                            <%--<div class="cf listing-meta below">--%>
+                                                <%--<time datetime="2017-01-10T02:31:37+00:00" class="meta-item">January--%>
+                                                    <%--10, 2017--%>
+                                                <%--</time>--%>
+                                            <%--</div>--%>
+                                        <%--</div>--%>
+                                    <%--</article>--%>
+                                <%--</li>--%>
+                                <%--<li class="column half b-col">--%>
+                                    <%--<article class="post cf">--%>
+                                        <%--<a href="2017/01/10/how-to-refresh-your-purse-game-in-a-snap/index.html"--%>
+                                           <%--class="image-link">--%>
+                                            <%--<img width="104" height="69" src="images/pexels-photo-236287-104x69.jpg"--%>
+                                                 <%--class="attachment-post-thumbnail size-post-thumbnail wp-post-image"--%>
+                                                 <%--alt="pexels-photo-236287"--%>
+                                                 <%--title="How to Refresh Your Purse Game in a Snap"--%>
+                                                 <%--srcset="images/pexels-photo-236287-104x69.jpg 104w, images/pexels-photo-236287-300x200.jpg 300w, images/pexels-photo-236287-1000x667.jpg 1000w, images/pexels-photo-236287-702x459.jpg 702w, images/pexels-photo-236287-214x140.jpg 214w, images/pexels-photo-236287-104x69@2x.jpg 208w, images/pexels-photo-236287-300x200@2x.jpg 600w, images/pexels-photo-236287-1000x667@2x.jpg 2000w, images/pexels-photo-236287-702x459@2x.jpg 1404w, images/pexels-photo-236287-214x140@2x.jpg 428w"--%>
+                                                 <%--sizes="(max-width: 104px) 100vw, 104px"/>--%>
+                                        <%--</a>--%>
+                                        <%--<div class="content">--%>
+                                            <%--<a href="2017/01/10/how-to-refresh-your-purse-game-in-a-snap/index.html"--%>
+                                               <%--title="How to Refresh Your Purse Game in a Snap"> How to Refresh Your--%>
+                                                <%--Purse Game in a Snap</a>--%>
+                                            <%--<div class="cf listing-meta below">--%>
+                                                <%--<time datetime="2017-01-10T02:30:37+00:00" class="meta-item">January--%>
+                                                    <%--10, 2017--%>
+                                                <%--</time>--%>
+                                            <%--</div>--%>
+                                        <%--</div>--%>
+                                    <%--</article>--%>
+                                <%--</li>--%>
                             </ul>
                         </div>
                     </div>

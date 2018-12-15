@@ -1,5 +1,7 @@
 package vn.haui.web.utils;
 
+import org.imgscalr.Scalr;
+
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -19,7 +21,13 @@ public class resizeImages {
         final Graphics2D graphics2D = bufferedImage.createGraphics();
         graphics2D.setComposite(AlphaComposite.Src);
         //below three lines are for RenderingHints for better image quality at cost of higher processing time
-        graphics2D.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+//        graphics2D.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+//        graphics2D.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+//        graphics2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
+        graphics2D.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BICUBIC);
+        graphics2D.setRenderingHint(RenderingHints.KEY_ALPHA_INTERPOLATION, RenderingHints.VALUE_ALPHA_INTERPOLATION_QUALITY);
+        graphics2D.setRenderingHint(RenderingHints.KEY_COLOR_RENDERING, RenderingHints.VALUE_COLOR_RENDER_QUALITY);
         graphics2D.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
         graphics2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         graphics2D.drawImage(image, 0, 0, width, height, null);
@@ -63,8 +71,10 @@ public class resizeImages {
                     }
                     if (check == 0) {
                         img = ImageIO.read(new File(pathIO));
+                        //tempJPG=ImageIO.read(new File(pathIO));
                         for (ImageWH hwList : imageWHList()) {
                             tempJPG = resizeImage(img, hwList.getWidth(), hwList.getHeight());
+                            //tempJPG= Scalr.resize((BufferedImage) img, Scalr.Method.ULTRA_QUALITY,hwList.getWidth(), hwList.getHeight());
                             newFile = new File(path + "/" + name + "-" + hwList.getWidth() + "x" + hwList.getHeight() + "." + extend);
                             ImageIO.write(tempJPG, extend, newFile);
                         }
@@ -83,8 +93,6 @@ public class resizeImages {
         imageWHS.add(new ImageWH(336, 200));
         imageWHS.add(new ImageWH(474, 240));
         imageWHS.add(new ImageWH(235, 216));
-        //600x460
-        //666x1000
         imageWHS.add(new ImageWH(600, 460));
         imageWHS.add(new ImageWH(666, 1000));
         imageWHS.add(new ImageWH(702, 459));

@@ -13,13 +13,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="root" value="${pageContext.request.contextPath}"/>
-<%--<c:set var="pageUrl" scope="request">--%>
-<%--<c:out value="${pageContext.request.scheme}://${request.getRequestURL}"/>--%>
-<%--<c:if test="${pageContext.request.serverPort != '80'}">--%>
-<%--<c:out value=":${pageContext.request.serverPort}"/>--%>
-<%--</c:if>--%>
-<%--<c:out value="${requestScope['javax.servlet.forward.request_uri']}"/>--%>
-<%--</c:set>--%>
 <%
     PostDao postDao = new PostDao();
     String categorySlug = request.getRequestURL().toString();
