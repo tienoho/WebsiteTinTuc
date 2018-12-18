@@ -123,7 +123,7 @@ public class PostDao {
                 "      on category.category_id=terms_relationships.category_id\n" +
                 "         and category.category_id='"+categoryID+"')\n" +
                 "  as term where post.post_id=term.post_id\n" +
-                "order by term.post_id desc  limit ?,?";
+                "order by post.post_date desc  limit ?,?";
         PreparedStatement ps = connection.prepareStatement(sql2);
         ps.setInt(1, firstResult);
         ps.setInt(2, maxResult);

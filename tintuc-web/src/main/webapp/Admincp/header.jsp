@@ -10,36 +10,26 @@
 <c:set var="root" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html lang="vi">
-
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-
     <title>SB Admin 2 - Bootstrap Admin Theme</title>
-
     <!-- Bootstrap Core CSS -->
     <link href="${root}/Admincp/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
     <!-- MetisMenu CSS -->
     <link href="${root}/Admincp/vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
-
     <!-- Custom CSS -->
     <link href="${root}/Admincp/dist/css/sb-admin-2.css" rel="stylesheet">
-
     <link href="${root}/Admincp/vendor/datatables-plugins/dataTables.bootstrap.css" rel="stylesheet">
-
     <!-- DataTables Responsive CSS -->
     <link href="${root}/Admincp/vendor/datatables-responsive/dataTables.responsive.css" rel="stylesheet">
     <!-- Morris Charts CSS -->
     <%--<link href="${root}/Admincp/vendor/morrisjs/morris.css" rel="stylesheet">--%>
-
     <!-- Custom Fonts -->
     <link href="${root}/Admincp/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -64,20 +54,13 @@
             <a class="navbar-brand" href="${root}">SB Admin v2.0</a>
         </div>
         <!-- /.navbar-header -->
-
         <ul class="nav navbar-top-links navbar-right">
             <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                    <i class="fa fa-envelope fa-fw"></i> <i class="fa fa-caret-down"></i>
-                </a>
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-envelope fa-fw"></i> <i class="fa fa-caret-down"></i></a>
                 <ul class="dropdown-menu dropdown-messages">
-                    <li>
-                        <a href="#">
-                            <div>
-                                <strong>John Smith</strong>
-                                <span class="pull-right text-muted">
-                                        <em>Yesterday</em>
-                                    </span>
+                    <li><a href="#">
+                            <div><strong>John Smith</strong>
+                                <span class="pull-right text-muted"><em>Yesterday</em></span>
                             </div>
                             <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
                         </a>
@@ -87,9 +70,7 @@
                         <a href="#">
                             <div>
                                 <strong>John Smith</strong>
-                                <span class="pull-right text-muted">
-                                        <em>Yesterday</em>
-                                    </span>
+                                <span class="pull-right text-muted"><em>Yesterday</em></span>
                             </div>
                             <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
                         </a>
@@ -99,9 +80,7 @@
                         <a href="#">
                             <div>
                                 <strong>John Smith</strong>
-                                <span class="pull-right text-muted">
-                                        <em>Yesterday</em>
-                                    </span>
+                                <span class="pull-right text-muted"><em>Yesterday</em></span>
                             </div>
                             <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
                         </a>
