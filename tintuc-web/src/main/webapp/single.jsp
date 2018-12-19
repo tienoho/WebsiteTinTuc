@@ -21,7 +21,8 @@
         e.printStackTrace();
     }
 
-    int hitsCount = hitCounter.getHitCounter();
+    int hitsCount = hitCounter.getHitCounter();//error
+
     if( hitsCount == 0 ){
         hitsCount = 1;
         hitCounter=new HitCounter(Integer.parseInt(post_id),hitsCount);
