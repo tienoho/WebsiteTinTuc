@@ -88,6 +88,7 @@ public class resizeImages {
         ArrayList<ImageWH> imageWHS = new ArrayList<>();
         imageWHS.add(new ImageWH(104, 69));
         imageWHS.add(new ImageWH(150, 150));
+        imageWHS.add(new ImageWH(163, 102));
         imageWHS.add(new ImageWH(214, 140));
         imageWHS.add(new ImageWH(300, 200));
         imageWHS.add(new ImageWH(336, 200));

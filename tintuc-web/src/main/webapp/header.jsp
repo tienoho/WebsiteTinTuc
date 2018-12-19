@@ -1,8 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page import="vn.haui.web.command.CategoryDao" %>
+<%@ page import="vn.haui.web.common.WebConstant" %>
 <%@ page import="vn.haui.web.model.Category" %>
 <%@ page import="vn.haui.web.model.Users" %>
-<%@ page import="vn.haui.web.common.WebConstant" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="root" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
@@ -22,8 +22,20 @@
     <link rel='stylesheet' id='pretty-photo-css' href='http://localhost/wp-content/themes/smart-mag/css/prettyPhoto.css?ver=3.0.2' type='text/css' media='all' />
     <link rel='stylesheet' id='smartmag-font-awesome-css' href='http://localhost/wp-content/themes/smart-mag/css/fontawesome/css/font-awesome.min.css?ver=3.0.2' type='text/css' media='all' />
     <link rel='stylesheet' id='smartmag-skin-css' href='http://localhost/wp-content/themes/smart-mag/css/skin-trendy.css?ver=4.9.8' type='text/css' media='all' />-->
-    <title>Website Tin tức - JSP </title>
-
+    <%
+        String head_title = "";
+        if (session.getAttribute("head_title") != null) {
+            head_title = (String) session.getAttribute("head_title");
+            session.removeAttribute("head_title");
+        }
+    %>
+    <%if (!head_title.equals("")) {%>
+    <title><%=head_title%> - <%=WebConstant.getBlogname()%>
+    </title>
+    <%} else {%>
+    <title><%=WebConstant.getBlogname()%> - <%=WebConstant.getBlogdescription()%>
+    </title>
+    <%}%>
     <script type='text/javascript' src='${root}/js/jquery.js'></script>
     <script>document.querySelector('head').innerHTML += '<style class="bunyad-img-effects-css">.main img, .main-footer img { opacity: 0; }</style>';</script>
 </head>
@@ -41,12 +53,13 @@
                 <span class="date"> Friday, November 23 </span>
                 <div class="menu-top-nav-container">
                     <ul id="menu-top-nav" class="menu">
-                        <%if(users!=null){%>
+                        <%if (users != null) {%>
                         <li id="menu-item-4"
                             class="menu-item menu-item-type-custom menu-item-object-custom menu-item-4">
-                            <a href="#"><%=users.getFullName()%></a>
+                            <a href="#"><%=users.getFullName()%>
+                            </a>
                         </li>
-                        <%}else {%>
+                        <%} else {%>
                         <li id="menu-item-4"
                             class="menu-item menu-item-type-custom menu-item-object-custom menu-item-4">
                             <a href="/login">Đăng nhập</a>
@@ -60,10 +73,10 @@
                             class="menu-item menu-item-type-custom menu-item-object-custom menu-item-7">
                             <a href="#">Contact</a>
                         </li>
-                        <%if(users!=null){%>
+                        <%if (users != null) {%>
                         <li id="menu-item-4"
                             class="menu-item menu-item-type-custom menu-item-object-custom menu-item-4">
-                            <a action="SinOut" method="post">Đăng xuất</a>
+                            <a href="<%=WebConstant.getLocalHost()%>/logout">Đăng xuất</a>
                         </li>
                         <%}%>
                     </ul>
@@ -113,9 +126,9 @@
             </div>
             <header class="tech">
                 <div class="title">
-                    <a href="<%=WebConstant.localHost%>" title="SmartMag Trendy" rel="home" class="is-logo-mobile">
+                    <a href="<%=WebConstant.getLocalHost()%>" title="Website tin tức" rel="home" class="is-logo-mobile">
                         <img src="${root}/images/sm-logo-mobile.png" class="logo-mobile" width="0" height="0"/>
-                        <img src="${root}/images/sm-logo-1.png" class="logo-image" alt="SmartMag Trendy"
+                        <img src="${root}/images/sm-logo-1.png" class="logo-image" alt="Website tin tức"
                              srcset="${root}/images/sm-logo-1.png ,${root}/images/sm-logo2x-1.png 2x"/>
                     </a>
                 </div>
@@ -148,13 +161,13 @@
                                     </a>
                                     <ul class="sub-menu">
                                         <%
-                                            for(Category category:categoryDao.getListCategory())
-                                            {
+                                            for (Category category : categoryDao.getListCategory()) {
                                         %>
                                         <li id="menu-item-<%=category.getCategoryID()%>"
                                             class="menu-item menu-item-type-custom menu-item-object-custom menu-item-<%=category.getCategoryID()%>">
-                                            <a href="${root}/Category/<%=category.getCategorySlug()%>"><%=category.getCategoryName()%></a>
-                                        <%--category.jsp?categoryID=<%=category.getCategoryID()%>&pages=1--%>
+                                            <a href="${root}/Category/<%=category.getCategorySlug()%>"><%=category.getCategoryName()%>
+                                            </a>
+                                            <%--category.jsp?categoryID=<%=category.getCategoryID()%>&pages=1--%>
                                             <%--CategoryServlet?categoryID=<%=category.getCategoryID()%>&pages=1--%>
                                         </li>
                                         <%}%>
@@ -162,29 +175,31 @@
                                 </li>
                                 <li id="menu-item-home"
                                     class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home menu-item-10">
-                                    <a href="<%=WebConstant.localHost%>">Home</a>
+                                    <a href="<%=WebConstant.getLocalHost()%>">Home</a>
                                 </li>
-                                <%for(Category cMenu:categoryDao.getListCategoryParent()){%>
+                                <%for (Category cMenu : categoryDao.getListCategoryParent()) {%>
                                 <li id="menu-item-<%=cMenu.getCategoryID()%>"
                                     class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-<%=cMenu.getCategoryID()%>">
-                                    <a href="${root}/Category/<%=cMenu.getCategorySlug()%>"><%=cMenu.getCategoryName()%></a>
+                                    <a href="${root}/Category/<%=cMenu.getCategorySlug()%>"><%=cMenu.getCategoryName()%>
+                                    </a>
                                     <ul class="sub-menu">
-                                        <%for (Category cSubMenu:categoryDao.getListCategoryChildren(cMenu.getCategoryID())) {%>
+                                        <%for (Category cSubMenu : categoryDao.getListCategoryChildren(cMenu.getCategoryID())) {%>
                                         <li id="menu-item-<%=cSubMenu.getCategoryID()%>"
                                             class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-<%=cSubMenu.getCategoryID()%>">
-                                            <a href="${root}/Category/<%=cSubMenu.getCategorySlug()%>"><%=cSubMenu.getCategoryName()%></a>
+                                            <a href="${root}/Category/<%=cSubMenu.getCategorySlug()%>"><%=cSubMenu.getCategoryName()%>
+                                            </a>
                                             <ul class="sub-menu">
-                                                <%for (Category cSub2Menu:categoryDao.getListCategoryChildren(cSubMenu.getCategoryID())) {%>
+                                                <%for (Category cSub2Menu : categoryDao.getListCategoryChildren(cSubMenu.getCategoryID())) {%>
                                                 <li id="menu-item-<%=cSub2Menu.getCategoryID()%>"
                                                     class="menu-item menu-item-type-custom menu-item-object-custom menu-item-<%=cSub2Menu.getCategoryID()%>">
                                                     <a href="${root}/Category/<%=cSub2Menu.getCategorySlug()%>">
                                                         <%=cSub2Menu.getCategoryName()%>
                                                     </a>
                                                 </li>
-                                            <%}%>
+                                                <%}%>
                                             </ul>
                                         </li>
-                                    <%}%>
+                                        <%}%>
                                     </ul>
                                 </li>
                                 <%}%>

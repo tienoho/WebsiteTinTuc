@@ -1,4 +1,4 @@
-package vn.haui.web.filter;
+package vn.haui.web.utils;
 
 import org.json.simple.JSONObject;
 import vn.haui.web.command.CategoryDao;
@@ -6,7 +6,6 @@ import vn.haui.web.command.PostDao;
 import vn.haui.web.common.WebConstant;
 import vn.haui.web.model.Category;
 import vn.haui.web.model.Post;
-import vn.haui.web.utils.tool;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -26,6 +25,7 @@ public class genJson {
         genJson genJson = new genJson();
         try {
             genJson.getCategoryData1();
+            genJson.getCategoryData2(WebConstant.getCategorySubOne());
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -34,6 +34,22 @@ public class genJson {
         obj1.put("1", genJson.objSubData1);
         obj1.put("2", genJson.objSubData2);
         System.out.println(obj1.toJSONString());
+        return;
+    }
+    public JSONObject jsonObject () throws SQLException {
+        genJson genJson = new genJson();
+        try {
+            genJson.getCategoryData1();
+            genJson.getCategoryData2(WebConstant.getCategorySubOne());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        JSONObject obj1 = new JSONObject();
+        obj1.put("1", genJson.objSubData1);
+        obj1.put("2", genJson.objSubData2);
+        //System.out.println(obj1.toJSONString());
+        return obj1;
     }
 
     //Data1
@@ -53,7 +69,7 @@ public class genJson {
         System.setProperty("file.encoding", "UTF-8");
         String content = "<section class=\"block-wrap highlights highlights-b\" data-id=\"" + c.getCategoryID() + "\">" +
                 " <div class=\"block-head\"><h3 class=\"heading\">" +
-                "<a href=\"" + WebConstant.localHost + "/Category/" + c.getCategorySlug() + "\">Bài viết mới</a>" +
+                "<a href=\"" + WebConstant.getLocalHost() + "/Category/" + c.getCategorySlug() + "\">Bài viết mới</a>" +
                 "    </h3></div><div class=\"block-content\"><div class=\"container cf\"><div class=\"large b-row cf\">";
         for (Post p : posts) {
             dem++;
@@ -62,21 +78,21 @@ public class genJson {
                 extendsImgNew = extendsImgNew.substring(extendsImgNew.lastIndexOf("."), extendsImgNew.length());
             }
             content += "<div class=\"column half b-col\"><article>" +
-                    "<a href=\"" + WebConstant.localHost + "/post/" + p.getPostSlug() + "\"" +
+                    "<a href=\"" + WebConstant.getLocalHost() + "/post/" + p.getPostSlug() + "\"" +
                     " title=\"" + p.getPostTitle() + "\" class=\"image-link\">" +
                     "<img width=\"336\" height=\"200\"" +
-                    " src=\"" + WebConstant.localHost + "/" + p.getPostImg() + "\"" +
+                    " src=\"" + WebConstant.getLocalHost() + "/" + p.getPostImg() + "\"" +
                     " class=\"image wp-post-image\"" +
                     " alt=\"" + p.getPostImg() + "\"" +
                     " title=\"" + p.getPostTitle() + "\"" +
                     " srcset=\"" + p.getPostImg().replace(extendsImgNew, "-336x200" + extendsImgNew) + " 336w\"" +
                     " sizes=\"(max-width: 336px) 100vw, 336px\"/></a>" +
                     "<h2 class=\"post-title\">" +
-                    "<a href=\"" + WebConstant.localHost + "/post/" + p.getPostSlug() + "\"" +
+                    "<a href=\"" + WebConstant.getLocalHost() + "/post/" + p.getPostSlug() + "\"" +
                     " title=\"" + p.getPostTitle() + "\">" + p.getPostTitle() + "</a>" +
                     "</h2>" +
                     "<div class=\"cf listing-meta meta below\">" +
-                    "<span class=\"meta-item author\">Bởi <a href=\"" + WebConstant.localHost + "/user" + "\"" +
+                    "<span class=\"meta-item author\">Bởi <a href=\"" + WebConstant.getLocalHost() + "/user" + "\"" +
                     " title=\"Posts by Kate Hanson\" rel=\"author\">Kate Hanson</a></span>" +
                     "<time datetime=\"" + p.getPostDate() + "\" class=\"meta-item\">" + p.getPostDate() + "</time>" +
                     "</div>" +
@@ -98,17 +114,17 @@ public class genJson {
                 }
                 content += "<li class=\"column half b-col\">" +
                         "<article class=\"post cf\">" +
-                        "<a href=\"" + WebConstant.localHost + "/post/" + p.getPostSlug() + "\"" +
+                        "<a href=\"" + WebConstant.getLocalHost() + "/post/" + p.getPostSlug() + "\"" +
                         " class=\"image-link\">" +
                         " <img width=\"104\" height=\"69\"" +
-                        " src=\"" + WebConstant.localHost + "/" + p.getPostImg() + "\"" +
+                        " src=\"" + WebConstant.getLocalHost() + "/" + p.getPostImg() + "\"" +
                         " class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\"" +
                         " alt=\"" + p.getPostImg() + "\"" +
                         " title=\"" + p.getPostTitle() + "\"" +
                         " srcset=\"" + p.getPostImg().replace(extendsImgNew, "-104x69" + extendsImgNew) + " 104w, " + p.getPostImg().replace(extendsImgNew, "-300x200" + extendsImgNew) + " 300w, " + p.getPostImg().replace(extendsImgNew, "-1000x667" + extendsImgNew) + " 1000w, " + p.getPostImg().replace(extendsImgNew, "-702x459" + extendsImgNew) + " 702w, " + p.getPostImg().replace(extendsImgNew, "-214x140" + extendsImgNew) + " 214w\"" +
                         " sizes=\"(max-width: 104px) 100vw, 104px\"/></a>" +
                         " <div class=\"content\"><a" +
-                        " href=\"" + WebConstant.localHost + "/post/" + p.getPostSlug() + "\"" +
+                        " href=\"" + WebConstant.getLocalHost() + "/post/" + p.getPostSlug() + "\"" +
                         " title=\"" + p.getPostTitle() + "\">" + p.getPostTitle() + "</a>" +
                         "<div class=\"cf listing-meta below\">" +
                         "<time datetime=\"" + p.getPostDate() + "\" class=\"meta-item\">" + p.getPostDate() + "</time>" +
@@ -135,7 +151,7 @@ public class genJson {
         System.setProperty("file.encoding", "UTF-8");
         String content = "<section class=\"block-wrap blog\" data-id=\"11\">" +
                 "    <div class=\"block-head\"><h3 class=\"heading\"><a" +
-                "            href=\""+WebConstant.localHost+"/Category/"+c.getCategorySlug()+"\">"+c.getCategoryName()+" mới nhất</a></h3></div>" +
+                "            href=\""+WebConstant.getLocalHost()+"/Category/"+c.getCategorySlug()+"\">"+c.getCategoryName()+" mới nhất</a></h3></div>" +
                 "    <div class=\"block-content\">" +
                 "        <div class=\"row b-row listing meta-below grid-2\">";
         for (Post p : posts) {
@@ -145,20 +161,20 @@ public class genJson {
             }
             content += "<div class=\"column half b-col\">" +
                     "<article class=\"highlights post-"+p.getPostID()+" post type-post status-publish format-standard has-post-thumbnail category-fitness category-lifestyle tag-culture tag-fashion tag-fitness tag-leisure tag-lifestyle\">" +
-                    "<a href=\""+WebConstant.localHost+"/"+p.getPostSlug()+"\"" +
+                    "<a href=\""+WebConstant.getLocalHost()+"/"+p.getPostSlug()+"\"" +
                     " title=\""+p.getPostTitle()+"\" class=\"image-link\">" +
                     "<img width=\"336\"" +
                     " height=\"200\"" +
-                    " src=\""+WebConstant.localHost+"/"+p.getPostImg()+"\"" +
+                    " src=\""+WebConstant.getLocalHost()+"/"+p.getPostImg()+"\"" +
                     " class=\"image wp-post-image\"" +
                     " alt=\""+p.getPostImg()+"\"" +
                     " title=\""+p.getPostTitle()+"\"" +
                     " srcset=\""+p.getPostImg().replace(extendsImgNew, "-336x200" + extendsImgNew)+" 336w\"" +
                     " sizes=\"(max-width: 336px) 100vw, 336px\"/></a>" +
                     "<h2 class=\"post-title\"><a" +
-                    " href=\""+WebConstant.localHost+"/"+p.getPostSlug()+"\">"+p.getPostTitle()+"</a></h2>" +
+                    " href=\""+WebConstant.getLocalHost()+"/"+p.getPostSlug()+"\">"+p.getPostTitle()+"</a></h2>" +
                     "<div class=\"cf listing-meta meta below\"><span class=\"meta-item author\">Bởi <a" +
-                    " href=\""+WebConstant.localHost+"/user"+"\"" +
+                    " href=\""+WebConstant.getLocalHost()+"/user"+"\"" +
                     " title=\"Posts by Kate Hanson\" rel=\"author\">Kate Hanson</a></span>" +
                     "<time datetime=\""+p.getPostDate()+"\" class=\"meta-item\">"+p.getPostDate()+"</time>" +
                     "</div>" +

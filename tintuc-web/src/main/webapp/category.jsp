@@ -39,12 +39,12 @@
         pages = Integer.parseInt(request.getParameter("pages"));
         //pages = Integer.parseInt(request.getAttribute("pages").toString());
     }
-    if (total <= WebConstant.postNumber) {
+    if (total <= WebConstant.getPostNumber()) {
         firstResult = 0;
         maxResult = total;
     } else {
-        firstResult = (pages - 1) * WebConstant.postNumber;
-        maxResult = WebConstant.postNumber;
+        firstResult = (pages - 1) * WebConstant.getPostNumber();
+        maxResult = WebConstant.getPostNumber();
     }
     //ArrayList<Post> listPost = postDao.getListProductByPages(category_id, firstResult, maxResult);
     ArrayList<Post> listPost = postDao.getListProductByPagesInTerm(category_id, firstResult, maxResult);
@@ -102,7 +102,7 @@
             </div>
             <div class="main-pagination">
                 <%
-                    int cout = total / WebConstant.postNumber;
+                    int cout = total / WebConstant.getPostNumber();
                     if (pages > 1) {
                 %>
                 <a class="prev page-numbers"

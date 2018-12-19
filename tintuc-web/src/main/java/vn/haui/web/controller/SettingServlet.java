@@ -20,35 +20,50 @@ public class SettingServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("utf-8");
         response.setCharacterEncoding("utf-8");
-        String url = "/Admincp/option.jsp", error = "", result = "", error_slug = "";
+        String url = "/Admincp/setting.jsp", error = "", result = "", error_slug = "";
         String blogname = request.getParameter("blogname");
         String blogdescription = request.getParameter("blogdescription");
         String siteurl = request.getParameter("siteurl");
         String admin_email = request.getParameter("admin_email");
         String post_home = request.getParameter("post_home");
         String post_category = request.getParameter("post_category");
-        if (blogname != null && blogname.equals("")) {
-            setting = new Setting(1, blogname, "blogname");
+        String post_home_sub = request.getParameter("post_home_sub");
+        String category_home_sub_one = request.getParameter("category_home_sub_one");
+
+        HttpSession session = request.getSession(false);
+        if (blogname != null && !blogname.equals("")) {
+            setting = new Setting(1, "blogname", blogname);
+            setSetting(setting);
+        }else {
+            session.setAttribute("error_blogname","Tên Website không thể để trống");
+        }
+        if (blogdescription != null && !blogdescription.equals("")) {
+            setting = new Setting(1, "blogdescription", blogdescription);
             setSetting(setting);
         }
-        if (blogdescription != null && blogdescription.equals("")) {
-            setting = new Setting(1, blogdescription, "blogdescription");
+        if (siteurl != null && !siteurl.equals("")) {
+            setting = new Setting(1, "siteurl", siteurl);
             setSetting(setting);
         }
-        if (siteurl != null && siteurl.equals("")) {
-            setting = new Setting(1, siteurl, "siteurl");
+        else {
+            session.setAttribute("error_siteurl","Không thể để trống địa chỉ website");
+        }
+        if (admin_email != null && !admin_email.equals("")) {
+            setting = new Setting(1, "admin_email", admin_email);
             setSetting(setting);
         }
-        if (admin_email != null && admin_email.equals("")) {
-            setting = new Setting(1, admin_email, "admin_email");
+        if (post_home != null && !post_home.equals("")) {
+            setting = new Setting(1, "post_home", post_home);
             setSetting(setting);
         }
-        if (post_home != null && post_home.equals("")) {
-            setting = new Setting(1, post_home, "post_home");
+        if (post_category != null && !post_category.equals("")) {
+            setting = new Setting(1, "post_category", post_category);
             setSetting(setting);
-        }
-        if (post_category != null && post_category.equals("")) {
-            setting = new Setting(1, post_category, "post_category");
+        }if (post_category != null && !post_category.equals("")) {
+            setting = new Setting(1, "post_home_sub", post_home_sub);
+            setSetting(setting);
+        }if (post_category != null && !post_category.equals("")) {
+            setting = new Setting(1, "category_home_sub_one", category_home_sub_one);
             setSetting(setting);
         }
         //HttpSession session = request.getSession(false);

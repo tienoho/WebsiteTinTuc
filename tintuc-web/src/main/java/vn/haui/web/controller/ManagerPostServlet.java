@@ -32,7 +32,7 @@ public class ManagerPostServlet extends HttpServlet {
         Post post;
         TermsRelationships termsRelationships;
 
-        String url =WebConstant.localHost+"/Admincp/edit-post.jsp", error = "", result = "", error_slug = "";
+        String url =WebConstant.getLocalHost()+"/Admincp/edit-post.jsp", error = "", result = "", error_slug = "";
         String command = request.getParameter("command");
         String postTitle = request.getParameter("post-title");
         String postSlug = "";
@@ -73,7 +73,7 @@ public class ManagerPostServlet extends HttpServlet {
                             termsRelationshipsDao.insert(termsRelationships);
                         }
                         result = "Thêm thành công";
-                        url = WebConstant.localHost+"/Admincp/edit-post.jsp?post=" + postID + "&action=edit";
+                        url = WebConstant.getLocalHost()+"/Admincp/edit-post.jsp?post=" + postID + "&action=edit";
                         //if request is not from HttpServletRequest, you should do a typecast before
                         //save message in session
                         session.setAttribute("result", result);
@@ -120,7 +120,7 @@ public class ManagerPostServlet extends HttpServlet {
                         }
                         result = "Cập nhập thành công";
                         session.setAttribute("result", result);
-                        url = WebConstant.localHost+"/Admincp/edit-post.jsp?post=" + post.getPostID() + "&action=edit";
+                        url = WebConstant.getLocalHost()+"/Admincp/edit-post.jsp?post=" + post.getPostID() + "&action=edit";
                     }
                     OpenUrl();
                     break;
@@ -154,7 +154,7 @@ public class ManagerPostServlet extends HttpServlet {
                 try {
                     postDao.delete(Integer.parseInt(request.getParameter("post")));
                     termsRelationshipsDao.delete(Integer.parseInt(request.getParameter("post")));
-                    url = WebConstant.localHost+ "/Admincp/post.jsp";
+                    url = WebConstant.getLocalHost()+ "/Admincp/post.jsp";
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
@@ -165,7 +165,7 @@ public class ManagerPostServlet extends HttpServlet {
     private void OpenUrl()
     {
         try {
-            URL myURL = new URL(WebConstant.localHost+"/test123");
+            URL myURL = new URL(WebConstant.getLocalHost()+"/test123");
             URLConnection myURLConnection = myURL.openConnection();
             myURLConnection.connect();
             String content = null;

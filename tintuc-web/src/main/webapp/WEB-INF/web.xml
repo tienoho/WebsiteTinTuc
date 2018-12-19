@@ -65,4 +65,29 @@
         <error-code>500</error-code>
         <location>/errors/error5.jsp</location>
     </error-page>
+
+    <filter>
+        <filter-name>ConfigFilter</filter-name>
+        <filter-class>vn.haui.web.filter.filterConfig</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>ConfigFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    <filter>
+        <filter-name>PostFilter</filter-name>
+        <filter-class>vn.haui.web.filter.filterPost</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>PostFilter</filter-name>
+        <url-pattern>/post/*</url-pattern>
+    </filter-mapping>
+    <filter>
+        <filter-name>CategoryFilter</filter-name>
+        <filter-class>vn.haui.web.filter.filterCategory</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>CategoryFilter</filter-name>
+        <url-pattern>/Category/*</url-pattern>
+    </filter-mapping>
 </web-app>

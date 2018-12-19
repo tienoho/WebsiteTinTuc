@@ -2,6 +2,9 @@
 <%@ page import="vn.haui.web.command.PostDao" %>
 <%@ page import="vn.haui.web.common.WebConstant" %>
 <%@ page import="vn.haui.web.model.Post" %>
+<%@ page import="vn.haui.web.command.HitCounterDao" %>
+<%@ page import="vn.haui.web.model.HitCounter" %>
+<%@ page import="java.sql.SQLException" %>
 <%
     PostDao postDao = new PostDao();
 
@@ -10,8 +13,25 @@
 
         post_id = (String) request.getAttribute("postId1");
     }
-//    Post post222= (Post) request.getAttribute("postProduct");
+    HitCounterDao hitCounterDao=new HitCounterDao();
+    HitCounter hitCounter=null;
+    try {
+        hitCounter=hitCounterDao.getHitCounter(Integer.parseInt(post_id));
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
 
+    int hitsCount = hitCounter.getHitCounter();
+    if( hitsCount == 0 ){
+        hitsCount = 1;
+        hitCounter=new HitCounter(Integer.parseInt(post_id),hitsCount);
+        hitCounterDao.insert(hitCounter);
+    }else{
+        hitsCount = hitCounterDao.getCountHitCounter(Integer.parseInt(post_id));
+        hitsCount += 1;
+        hitCounter=new HitCounter(Integer.parseInt(post_id),hitsCount);
+        hitCounterDao.update(hitCounter);
+    }
 %>
 
 <%--header--%>
@@ -45,8 +65,8 @@
                         <span class="posted-on">
                                 <time class="post-date" datetime="2017-01-08T02:25:37+00:00">January 8, 2017</time>
                             </span> <a href="index.html#comments" class="comments">
-                        <i class="fa fa-comments-o">
-                        </i>3 Comments
+                        <i class="fa fa-comments-o"></i>3 Comments
+                        <i class="fa fa-street-view"></i><%=hitsCount%> Lượt xem
                     </a>
                     </div>
                     <div class="post-share-b cf">
@@ -237,7 +257,7 @@
                         <li class="comment even thread-even depth-1" id="li-comment-59">
                             <article id="comment-59" class="comment">
                                 <div class="comment-avatar">
-                                    <img src='<%=WebConstant.localHost%>/images/admin-avatar.jpg'
+                                    <img src='<%=WebConstant.getLocalHost()%>/images/admin-avatar.jpg'
                                          width="50" height="50" alt=""
                                          class="avatar avatar-50wp-user-avatar wp-user-avatar-50 alignnone photo avatar-default"/>
                                 </div>
@@ -304,7 +324,7 @@
                         <li class="comment even thread-odd thread-alt depth-1" id="li-comment-61">
                             <article id="comment-61" class="comment">
                                 <div class="comment-avatar">
-                                    <img src='<%=WebConstant.localHost%>/images/admin-avatar.jpg'
+                                    <img src='<%=WebConstant.getLocalHost()%>/images/admin-avatar.jpg'
                                          width="50" height="50" alt=""
                                          class="avatar avatar-50wp-user-avatar wp-user-avatar-50 alignnone photo avatar-default"/>
                                 </div>

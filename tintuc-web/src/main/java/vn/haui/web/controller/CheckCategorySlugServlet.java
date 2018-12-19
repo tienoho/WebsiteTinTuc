@@ -17,9 +17,9 @@ public class CheckCategorySlugServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         if (categoryDao.checkCategorySlug(request.getParameter("category-slug"))) {
-            response.getWriter().write("<img src=\"" + WebConstant.localHost + "/img/not-available.png\" />");
+            response.getWriter().write("<img src=\"" + WebConstant.getLocalHost() + "/img/not-available.png\" />");
         } else {
-            response.getWriter().write("<img src=\"" + WebConstant.localHost + "/img/available.png\" />");
+            response.getWriter().write("<img src=\"" + WebConstant.getLocalHost() + "/img/available.png\" />");
         }
 //        String command = request.getParameter("command");
 //        switch (command) {
