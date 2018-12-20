@@ -56,7 +56,7 @@ public class HitCounterDao {
         Connection connection = null;
         try {
             connection = DBConnect.getConnecttion();
-            String sql = "INSERT INTO hit_counter_post(id_post,hit_counter) VALUE (id_post=?,hit_counter=?)";
+            String sql = "INSERT INTO hit_counter_post(id_post,hit_counter) VALUE (?,?)";
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, c.getIdPost());
             ps.setInt(2, c.getHitCounter());

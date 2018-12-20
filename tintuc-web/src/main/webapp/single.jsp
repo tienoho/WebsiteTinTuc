@@ -1,9 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="vn.haui.web.command.HitCounterDao" %>
 <%@ page import="vn.haui.web.command.PostDao" %>
 <%@ page import="vn.haui.web.common.WebConstant" %>
-<%@ page import="vn.haui.web.model.Post" %>
-<%@ page import="vn.haui.web.command.HitCounterDao" %>
 <%@ page import="vn.haui.web.model.HitCounter" %>
+<%@ page import="vn.haui.web.model.Post" %>
 <%@ page import="java.sql.SQLException" %>
 <%
     PostDao postDao = new PostDao();
@@ -13,24 +13,24 @@
 
         post_id = (String) request.getAttribute("postId1");
     }
-    HitCounterDao hitCounterDao=new HitCounterDao();
-    HitCounter hitCounter=null;
+    HitCounterDao hitCounterDao = new HitCounterDao();
+    HitCounter hitCounter = null;
+    int hitsCount = 0;
     try {
-        hitCounter=hitCounterDao.getHitCounter(Integer.parseInt(post_id));
+        //hitCounter = hitCounterDao.getHitCounter(Integer.parseInt(post_id));
+        hitsCount = hitCounterDao.getCountHitCounter(Integer.parseInt(post_id));//error
     } catch (SQLException e) {
         e.printStackTrace();
     }
 
-    int hitsCount = hitCounter.getHitCounter();//error
-
-    if( hitsCount == 0 ){
+    if (hitsCount == 0) {
         hitsCount = 1;
-        hitCounter=new HitCounter(Integer.parseInt(post_id),hitsCount);
+        hitCounter = new HitCounter(Integer.parseInt(post_id), hitsCount);
         hitCounterDao.insert(hitCounter);
-    }else{
-        hitsCount = hitCounterDao.getCountHitCounter(Integer.parseInt(post_id));
+    } else {
+        //hitsCount = hitCounterDao.getCountHitCounter(Integer.parseInt(post_id));
         hitsCount += 1;
-        hitCounter=new HitCounter(Integer.parseInt(post_id),hitsCount);
+        hitCounter = new HitCounter(Integer.parseInt(post_id), hitsCount);
         hitCounterDao.update(hitCounter);
     }
 %>
@@ -276,12 +276,12 @@
                                         ouch jeez.</p>
                                     <div class="reply">
                                         <a rel='nofollow' class='comment-reply-link'
-                                                          href='index7653.html?replytocom=59#respond'
-                                                          onclick='return addComment.moveForm( "comment-59", "59", "respond", "146" )'
-                                                          aria-label='Reply to Sam Doe'>Reply <i
-                                            class="fa fa-angle-right">
-                                    </i>
-                                    </a>
+                                           href='index7653.html?replytocom=59#respond'
+                                           onclick='return addComment.moveForm( "comment-59", "59", "respond", "146" )'
+                                           aria-label='Reply to Sam Doe'>Reply <i
+                                                class="fa fa-angle-right">
+                                        </i>
+                                        </a>
                                     </div>
                                 </div>
                             </article>
