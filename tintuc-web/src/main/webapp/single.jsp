@@ -5,6 +5,9 @@
 <%@ page import="vn.haui.web.model.HitCounter" %>
 <%@ page import="vn.haui.web.model.Post" %>
 <%@ page import="java.sql.SQLException" %>
+<%@ page import="vn.haui.web.command.CommentDao" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="vn.haui.web.model.Comment" %>
 <%
     PostDao postDao = new PostDao();
 
@@ -253,10 +256,14 @@
             </section>
             <div class="comments">
                 <div id="comments">
-                    <h3 class="section-head"> 3 Comments</h3>
+                    <% CommentDao commentDao=new CommentDao();
+                        ArrayList<Comment> comments=commentDao.getListCommentByPost(Integer.parseInt(post_id));
+                    %>
+                    <h3 class="section-head"> <%=comments.size()%> bình luận</h3>
                     <ol class="comments-list">
+                        <%for(Comment cComment:comments){%>
                         <li class="comment even thread-even depth-1" id="li-comment-59">
-                            <article id="comment-59" class="comment">
+                            <article id="comment-<%=cComment.getComment_id()%>" class="comment">
                                 <div class="comment-avatar">
                                     <img src='<%=WebConstant.getLocalHost()%>/images/admin-avatar.jpg'
                                          width="50" height="50" alt=""
@@ -264,21 +271,19 @@
                                 </div>
                                 <div class="comment-meta">
                                         <span class="comment-author">
-                                            <a href='${root}/' rel='external nofollow' class='url'>Sam Doe</a>
-                                        </span> on <a href="index.html#comment-59" class="comment-time"
-                                                      title="January 19, 2017 at 8:30 pm">
-                                    <time pubdate datetime="2017-01-19T20:30:47+00:00">January 19, 2017 8:30 pm</time>
+                                            <a href='${root}/' rel='external nofollow' class='url'><%=cComment.getComment_author()%></a>
+                                        </span> on <a href="#comment-<%=cComment.getComment_id()%>" class="comment-time"
+                                                      title="<%=cComment.getComment_date()%>">
+                                    <time pubdate datetime="<%=cComment.getComment_date()%>"><%=cComment.getComment_date()%></time>
                                 </a>
                                 </div>
                                 <div class="comment-content">
-                                    <p>That far ground rat pure from newt far panther crane lorikeet overlay alas cobra
-                                        across much gosh less goldfinch ruthlessly alas examined and that more and the
-                                        ouch jeez.</p>
+                                    <p><%=cComment.getComment_content()%></p>
                                     <div class="reply">
                                         <a rel='nofollow' class='comment-reply-link'
-                                           href='index7653.html?replytocom=59#respond'
-                                           onclick='return addComment.moveForm( "comment-59", "59", "respond", "146" )'
-                                           aria-label='Reply to Sam Doe'>Reply <i
+                                           href='?replytocom=<%=cComment.getComment_id()%>#respond'
+                                           onclick='return addComment.moveForm( "comment-<%=cComment.getComment_id()%>", "<%=cComment.getComment_id()%>", "respond", "146" )'
+                                           aria-label='Reply to <%=cComment.getComment_author()%>'>Trả lời <i
                                                 class="fa fa-angle-right">
                                         </i>
                                         </a>
@@ -286,8 +291,9 @@
                                 </div>
                             </article>
                             <ul class="children">
-                                <li class="comment odd alt depth-2" id="li-comment-60">
-                                    <article id="comment-60" class="comment">
+                                <%for (Comment commentChildren:commentDao.getListCommentByParent(cComment.getComment_id())){%>
+                                <li class="comment odd alt depth-2" id="li-comment-<%=commentChildren.getComment_id()%>">
+                                    <article id="comment-<%=commentChildren.getComment_id()%>" class="comment">
                                         <div class="comment-avatar">
                                             <img src='${root}/images/jane-doe.jpg'
                                                  width="50" height="50" alt=""
@@ -295,94 +301,58 @@
                                         </div>
                                         <div class="comment-meta">
                                                 <span class="comment-author">
-                                                    <a href='${root}' rel='external nofollow'
-                                                       class='url'>Jane Doe</a>
-                                                </span> on <a href="index.html#comment-60" class="comment-time"
-                                                              title="January 20, 2017 at 8:30 pm">
-                                            <time pubdate datetime="2017-01-20T20:30:48+00:00">January 20, 2017 8:30
-                                                pm
+                                                    <a href='${root}' rel='external nofollow' class='url'><%=commentChildren.getComment_author()%></a>
+                                                </span> on <a href="index.html#comment-<%=commentChildren.getComment_id()%>" class="comment-time"
+                                                              title="<%=commentChildren.getComment_date()%>">
+                                            <time pubdate datetime="<%=commentChildren.getComment_date()%>"><%=commentChildren.getComment_date()%>
                                             </time>
                                         </a>
                                         </div>
                                         <div class="comment-content">
-                                            <p>Coquettish darn pernicious foresaw therefore much amongst lingeringly
-                                                shed much due antagonistically alongside so then more and about
-                                                turgid.</p>
+                                            <p><%=commentChildren.getComment_content()%></p>
                                             <div class="reply">
                                                 <a rel='nofollow' class='comment-reply-link'
-                                                   href='index2096.html?replytocom=60#respond'
-                                                   onclick='return addComment.moveForm( "comment-60", "60", "respond", "146" )'
-                                                   aria-label='Reply to Jane Doe'>
+                                                   href='?replytocom=<%=commentChildren.getComment_id()%>#respond'
+                                                   onclick='return addComment.moveForm( "comment-<%=commentChildren.getComment_id()%>", "<%=commentChildren.getComment_id()%>", "respond", "146" )'
+                                                   aria-label='Trả lời tới <%=commentChildren.getComment_author()%>'>
                                                     Reply <i class="fa fa-angle-right"></i>
                                                 </a>
                                             </div>
                                         </div>
                                     </article>
                                 </li>
+                                <%}%>
                             </ul>
                         </li>
-
-                        <li class="comment even thread-odd thread-alt depth-1" id="li-comment-61">
-                            <article id="comment-61" class="comment">
-                                <div class="comment-avatar">
-                                    <img src='<%=WebConstant.getLocalHost()%>/images/admin-avatar.jpg'
-                                         width="50" height="50" alt=""
-                                         class="avatar avatar-50wp-user-avatar wp-user-avatar-50 alignnone photo avatar-default"/>
-                                </div>
-                                <div class="comment-meta">
-                                        <span class="comment-author">
-                                            <a href='${root}' rel='external nofollow' class='url'>Sam Doe</a>
-                                        </span> on <a href="index.html#comment-61" class="comment-time"
-                                                      title="January 20, 2017 at 8:39 pm">
-                                    <time pubdate datetime="2017-01-20T20:39:08+00:00">January 20, 2017 8:39 pm</time>
-                                </a>
-                                </div>
-                                <div class="comment-content">
-                                    <p>Crud much unstinting violently pessimistically far camel inanimately a remade
-                                        dove disagreed hellish one concisely before with this erotic frivolous.</p>
-                                    <div class="reply">
-                                        <a rel='nofollow' class='comment-reply-link'
-                                           href='index504c.html?replytocom=61#respond'
-                                           onclick='return addComment.moveForm( "comment-61", "61", "respond", "146" )'
-                                           aria-label='Reply to Sam Doe'>
-                                            Reply <i class="fa fa-angle-right">
-                                        </i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </article>
-                        </li>
+                        <%}%>
                     </ol>
                     <div id="respond" class="comment-respond">
                         <h3 id="reply-title" class="comment-reply-title">
-                            <span class="section-head">Leave A Reply</span>
+                            <span class="section-head">Bình luận</span>
                             <small>
-                                <a rel="nofollow" id="cancel-comment-reply-link" href="index.html#respond"
+                                <a rel="nofollow" id="cancel-comment-reply-link" href="#respond"
                                    style="display:none;">Cancel Reply</a>
                             </small>
                         </h3>
-                        <form action="comments-post.jsp" method="post"
+                        <form action="<%=WebConstant.getLocalHost()%>/ManagerCommentServlet" method="post"
                               id="commentform" class="comment-form" novalidate>
                             <p>
                                 <textarea name="comment" id="comment" cols="45" rows="8" aria-required="true"
-                                          placeholder="Your Comment"></textarea>
+                                          placeholder="Nội dung"></textarea>
                             </p>
                             <p>
                                 <input name="author" id="author" type="text" size="30" aria-required="true"
-                                       placeholder="Your Name" value=""/>
+                                       placeholder="Tên bạn" value=""/>
                             </p>
                             <p>
                                 <input name="email" id="email" type="text" size="30" aria-required="true"
-                                       placeholder="Your Email" value=""/>
-                            </p>
-                            <p>
-                                <input name="url" id="url" type="text" size="30" placeholder="Your Website" value=""/>
+                                       placeholder="Email" value=""/>
                             </p>
                             <p class="form-submit">
                                 <input name="submit" type="submit" id="comment-submit" class="submit"
                                        value="Post Comment"/>
-                                <input type='hidden' name='comment_post_ID' value='146' id='comment_post_ID'/>
-                                <input type='hidden' name='comment_parent' id='comment_parent' value='0'/>
+                                <input type='hidden' name='comment-post-id' value='<%=post_id%>' id='comment-post-id'/>
+                                <input type='hidden' name='comment-parent' id='comment-parent' value='0'/>
                             </p>
                         </form>
                     </div>

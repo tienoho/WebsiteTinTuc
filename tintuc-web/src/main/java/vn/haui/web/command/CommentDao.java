@@ -45,6 +45,29 @@ public class CommentDao {
             list.add(comment);
         }
         connection.close();
+
+        return list;
+    }
+    public ArrayList<Comment> getListCommentByParent(int comment_parent) throws SQLException {
+        Connection connection = DBConnect.getConnecttion();
+        String sql = "SELECT * FROM comments where comment_parent=?";
+        PreparedStatement ps = connection.prepareStatement(sql);
+        ps.setInt(1, comment_parent);
+        ResultSet rs = ps.executeQuery();
+        ArrayList<Comment> list = new ArrayList<Comment>();
+        while (rs.next()) {
+            Comment comment=new Comment();
+            comment.setComment_id(rs.getInt("comment_id"));
+            comment.setComment_post_id(rs.getInt("comment_post_id"));
+            comment.setComment_author(rs.getString("comment_author"));
+            comment.setComment_author_email(rs.getString("comment_author_email"));
+            comment.setComment_date(rs.getDate("comment_date"));
+            comment.setComment_content(rs.getString("comment_content"));
+            comment.setComment_parent(rs.getInt("comment_parent"));
+            list.add(comment);
+        }
+        connection.close();
+
         return list;
     }
     public Comment getComment(int comment_id) throws SQLException {
@@ -92,15 +115,14 @@ public class CommentDao {
         Connection connection = null;
         try {
             connection = DBConnect.getConnecttion();
-            String sql = "UPDATE comments set comment_post_id=?,comment_author=?,comment_author_email=?,comment_date=?,comment_content=?,comment_parent=? where comment_id=?";
+            String sql = "UPDATE comments set comment_post_id=?,comment_author=?,comment_author_email=?,comment_content=?,comment_parent=? where comment_id=?";
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, c.getComment_post_id());
             ps.setString(2, c.getComment_author());
             ps.setString(3, c.getComment_author_email());
-            ps.setDate(4, c.getComment_date());
-            ps.setString(5, c.getComment_content());
-            ps.setInt(6, c.getComment_parent());
-            ps.setInt(7, c.getComment_id());
+            ps.setString(4, c.getComment_content());
+            ps.setInt(5, c.getComment_parent());
+            ps.setInt(6, c.getComment_id());
             int temp = ps.executeUpdate();
             connection.close();
             return temp == 1;
