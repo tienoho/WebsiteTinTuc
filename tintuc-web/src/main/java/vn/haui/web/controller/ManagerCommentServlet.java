@@ -3,11 +3,8 @@ package vn.haui.web.controller;
 import vn.haui.web.command.CommentDao;
 import vn.haui.web.common.WebConstant;
 import vn.haui.web.model.Comment;
-import vn.haui.web.model.Post;
-import vn.haui.web.model.TermsRelationships;
 import vn.haui.web.utils.tool;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -21,12 +18,15 @@ import java.sql.SQLException;
 
 public class ManagerCommentServlet extends HttpServlet {
     Comment comment;
-    CommentDao commentDao=new CommentDao();
+    CommentDao commentDao = new CommentDao();
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("utf-8");
         response.setCharacterEncoding("utf-8");
-        String url =WebConstant.getLocalHost()+"/Admincp/edit-commnet.jsp", error = "", result = "", error_slug = "";
+        String url = WebConstant.getLocalHost() + "/Admincp/edit-comment.jsp", error = "", result = "", error_slug = "";
         String command = request.getParameter("command");
+        String urlPath = request.getParameter("urlPath");
+        System.out.println(urlPath);
         String commentContent = request.getParameter("comment-content");
 
         HttpSession session = request.getSession(false);
@@ -42,11 +42,12 @@ public class ManagerCommentServlet extends HttpServlet {
                         comment.setComment_parent(Integer.parseInt(request.getParameter("comment-parent")));
                         comment.setComment_date(tool.GetDateNow());
                         comment.setComment_author_email(request.getParameter("comment-email"));
-                        comment.setComment_post_id(Integer.parseInt(request.getParameter("comment_post_id")));
+                        comment.setComment_post_id(Integer.parseInt(request.getParameter("comment-post-id")));
                         comment.setComment_author(request.getParameter("comment-author"));
                         commentDao.insert(comment);
                         //save message in session
                         session.setAttribute("result", result);
+                        url = urlPath;
                     }
                     break;
                 case "update":
@@ -65,7 +66,7 @@ public class ManagerCommentServlet extends HttpServlet {
                         commentDao.update(comment);
                         result = "Cập nhập thành công";
                         session.setAttribute("result", result);
-                        url = WebConstant.getLocalHost()+"/Admincp/edit-commnent.jsp?comment=" + comment.getComment_id() + "&action=edit";
+                        url = WebConstant.getLocalHost() + "/Admincp/edit-comment.jsp?comment=" + comment.getComment_id() + "&action=edit";
                     }
                     break;
                 case "delete":
@@ -86,12 +87,12 @@ public class ManagerCommentServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String command = request.getParameter("command");
-        String url=WebConstant.getLocalHost()+"/Admincp/commnent.jsp";
+        String url = WebConstant.getLocalHost() + "/Admincp/comment.jsp";
         switch (command) {
             case "delete":
                 try {
                     commentDao.delete(Integer.parseInt(request.getParameter("comment-id")));
-                    url = WebConstant.getLocalHost()+ "/Admincp/comment.jsp";
+                    url = WebConstant.getLocalHost() + "/Admincp/comment.jsp";
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }

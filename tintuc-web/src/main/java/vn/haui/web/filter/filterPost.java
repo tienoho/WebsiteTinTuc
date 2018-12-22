@@ -30,7 +30,6 @@ public class filterPost implements Filter {
 
         String servletPath = req.getRequestURL().toString();
         String slug = servletPath.substring(servletPath.lastIndexOf("/") + 1, servletPath.length());
-
         List<Post> postList = null;
         try {
             postList = new PostDao().getListAllPost();
@@ -42,9 +41,9 @@ public class filterPost implements Filter {
                 .findAny()
                 .orElse(null);
         if (post != null) {
-            HttpSession session = ((HttpServletRequest) request).getSession(false);
+            HttpSession session = ((HttpServletRequest) request).getSession();
+            session.setAttribute("urlPathPost", servletPath);
             session.setAttribute("head_title", post.getPostTitle());
-
         }
         // Cho phép request được đi tiếp. (Vượt qua Filter này).
         chain.doFilter(request, response);

@@ -12,6 +12,7 @@
 <%@ page import="vn.haui.web.command.CommentDao" %>
 <%@ page import="vn.haui.web.model.Users" %>
 <%@ page import="vn.haui.web.model.Comment" %>
+<%@ page import="vn.haui.web.common.WebConstant" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="root" value="${pageContext.request.contextPath}"/>
@@ -27,7 +28,7 @@
 %>
 <script>
     function delete_commnet_ajax(commnet_ID) {
-        $.post('${root}/ManagerCommentServlet', {'commnet-ID': Post_ID,'command': "delete"},function (data) {
+        $.post('${root}/ManagerCommentServlet', {'comment-id': Post_ID,'command': "delete"},function (data) {
             $("#myModalLabel").html(data);
         });
         //xóa thẻ sau 2 giây
@@ -94,11 +95,12 @@
                                         <!-- /.modal-dialog -->
                                     </div>
                                     <!-- /.modal -->
-                                    <span class="view"><a href="" aria-label="Xem lưu trữ “Beauty”">Xem</a></span>
+                                    <span class="view"><a href="" aria-label="Xem lưu trữ ">Xem</a></span>
                                 </div>
                             </td>
-                            <td><%=c.getComment_post_id()%></td>
-                            <td></td>
+                            <td><%Post pC=postDao.getPost(c.getComment_post_id());%>
+                                <a href="<%=WebConstant.getLocalHost()%>/post/<%=pC.getPostSlug()%>"><%=pC.getPostTitle()%></a>
+                            </td>
                             <td><%=c.getComment_date()%></td>
                         </tr>
                         <%}%>

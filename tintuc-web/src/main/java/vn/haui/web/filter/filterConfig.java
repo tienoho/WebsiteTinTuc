@@ -59,6 +59,9 @@ public class filterConfig implements Filter {
                     case "category_home_sub_one":
                         WebConstant.setCategorySubOne(Integer.parseInt(s.getOptionValue()));
                         break;
+                    case "comment":
+                        WebConstant.setComment(s.getOptionValue());
+                        break;
                 }
             }
         }

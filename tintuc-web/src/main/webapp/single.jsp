@@ -1,21 +1,30 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="vn.haui.web.command.CommentDao" %>
 <%@ page import="vn.haui.web.command.HitCounterDao" %>
 <%@ page import="vn.haui.web.command.PostDao" %>
 <%@ page import="vn.haui.web.common.WebConstant" %>
+<%@ page import="vn.haui.web.model.Comment" %>
 <%@ page import="vn.haui.web.model.HitCounter" %>
 <%@ page import="vn.haui.web.model.Post" %>
 <%@ page import="java.sql.SQLException" %>
-<%@ page import="vn.haui.web.command.CommentDao" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="vn.haui.web.model.Comment" %>
+<%@ page import="java.util.List" %>
+<%@ page import="vn.haui.web.model.TermsRelationships" %>
+<%@ page import="vn.haui.web.command.TermsRelationshipsDao" %>
 <%
     PostDao postDao = new PostDao();
-
+    TermsRelationshipsDao termsRelationshipsDao =  new TermsRelationshipsDao();
+    String urlPath = "";
     String post_id = "";
     if (request.getAttribute("postId1") != null) {
 
         post_id = (String) request.getAttribute("postId1");
     }
+    if (request.getAttribute("urlPathPost") != null) {
+
+        urlPath = (String) request.getAttribute("urlPathPost");
+    }
+    System.out.println(urlPath);
     HitCounterDao hitCounterDao = new HitCounterDao();
     HitCounter hitCounter = null;
     int hitsCount = 0;
@@ -204,65 +213,39 @@
             </div>
             <section class="related-posts"><h3 class="section-head"><span class="color">Related</span> Posts</h3>
                 <ul class="highlights-box three-col related-posts">
+                    <%List<TermsRelationships> termsRelationships=termsRelationshipsDao.getListTermsRelationshipsByPostID(Integer.parseInt(post_id));
+                        for(Post pInterdepend : postDao.getListInPostInterdepend(termsRelationships.get(0).getCategoryID(), 1, 3,Integer.parseInt(post_id))){
+                            String extendsImgNew = pInterdepend.getPostImg();
+                            if (extendsImgNew.contains(".")) {
+                                extendsImgNew = extendsImgNew.substring(extendsImgNew.lastIndexOf("."), extendsImgNew.length());
+                            }
+                    %>
                     <li class="highlights column one-third">
-                        <article><a href=""
-                                    title="Fashion Chic X Mejuri Jewelry Collection of 2017" class="image-link"> <img
-                                width="214" height="140" src="${root}/images/shutterstock_536935141-214x140.jpg"
-                                class="image wp-post-image" alt="shutterstock_536935141"
-                                title="Fashion Chic X Mejuri Jewelry Collection of 2017"
-                                srcset="${root}/images/shutterstock_536935141-214x140.jpg 214w, ${root}/images/shutterstock_536935141-300x196.jpg 300w, ${root}/images/shutterstock_536935141-1000x653.jpg 1000w, ${root}/images/shutterstock_536935141-104x69.jpg 104w, ${root}/images/shutterstock_536935141-702x459.jpg 702w"
-                                sizes="(max-width: 214px) 100vw, 214px"/> </a>
-                            <h2><a href=""
-                                   title="Fashion Chic X Mejuri Jewelry Collection of 2017">Fashion Chic X Mejuri
-                                Jewelry Collection of 2017</a></h2>
+                        <article>
+                            <a href="" title="<%=pInterdepend.getPostTitle()%>" class="image-link">
+                                <img width="214" height="140" src="<%=WebConstant.getLocalHost()%>/<%=pInterdepend.getPostImg().replace(extendsImgNew,"-214x140"+extendsImgNew)%>"
+                                     class="image wp-post-image" alt="shutterstock_536935141"
+                                     title="<%=pInterdepend.getPostTitle()%>"
+                                     srcset="<%=WebConstant.getLocalHost()%>/<%=pInterdepend.getPostImg().replace(extendsImgNew,"-214x140"+extendsImgNew)%> 214w, <%=WebConstant.getLocalHost()%>/<%=pInterdepend.getPostImg().replace(extendsImgNew,"-300x196"+extendsImgNew)%> 300w, <%=WebConstant.getLocalHost()%>/<%=pInterdepend.getPostImg().replace(extendsImgNew,"-1000x653"+extendsImgNew)%> 1000w, <%=WebConstant.getLocalHost()%>/<%=pInterdepend.getPostImg().replace(extendsImgNew,"-104x69"+extendsImgNew)%> 104w, <%=WebConstant.getLocalHost()%>/<%=pInterdepend.getPostImg().replace(extendsImgNew,"-702x459"+extendsImgNew)%> 702w"
+                                     sizes="(max-width: 214px) 100vw, 214px"/> </a>
+                            <h2><a href="" title="<%=pInterdepend.getPostTitle()%>"><%=pInterdepend.getPostTitle()%></a></h2>
                             <div class="cf listing-meta meta below">
-                                <time datetime="2017-01-08T02:34:37+00:00" class="meta-item">January 8, 2017</time>
+                                <time datetime="<%=pInterdepend.getPostDate()%>" class="meta-item"><%=pInterdepend.getPostDate()%></time>
                             </div>
                         </article>
                     </li>
-                    <li class="highlights column one-third">
-                        <article><a href=""
-                                    title="Trending: Bodysuits and Faded Friendship Jeans" class="image-link"> <img
-                                width="214" height="140" src="${root}/images/shutterstock_518581786-214x140.jpg"
-                                class="image wp-post-image" alt="shutterstock_518581786"
-                                title="Trending: Bodysuits and Faded Friendship Jeans"
-                                srcset="${root}/images/shutterstock_518581786-214x140.jpg 214w, ${root}/images/shutterstock_518581786-104x69.jpg 104w, ${root}/images/shutterstock_518581786-702x459.jpg 702w"
-                                sizes="(max-width: 214px) 100vw, 214px"/> </a>
-                            <h2><a href=""
-                                   title="Trending: Bodysuits and Faded Friendship Jeans">Trending: Bodysuits and Faded
-                                Friendship Jeans</a></h2>
-                            <div class="cf listing-meta meta below">
-                                <time datetime="2017-01-08T02:33:37+00:00" class="meta-item">January 8, 2017</time>
-                            </div>
-                        </article>
-                    </li>
-                    <li class="highlights column one-third">
-                        <article><a href=""
-                                    title="Summer Style: Chunky Knit For Leather Suits" class="image-link"> <img
-                                width="214" height="140" src="${root}/images/shutterstock_350007890-214x140.jpg"
-                                class="image wp-post-image" alt="shutterstock_350007890"
-                                title="Summer Style: Chunky Knit For Leather Suits"
-                                srcset="${root}/images/shutterstock_350007890-214x140.jpg 214w, ${root}/images/shutterstock_350007890-104x69.jpg 104w, ${root}/images/shutterstock_350007890-702x459.jpg 702w"
-                                sizes="(max-width: 214px) 100vw, 214px"/> </a>
-                            <h2><a href=""
-                                   title="Summer Style: Chunky Knit For Leather Suits">Summer Style: Chunky Knit For
-                                Leather Suits</a></h2>
-                            <div class="cf listing-meta meta below">
-                                <time datetime="2017-01-08T02:30:37+00:00" class="meta-item">January 8, 2017</time>
-                            </div>
-                        </article>
-                    </li>
+                    <%}%>
                 </ul>
             </section>
             <div class="comments">
                 <div id="comments">
-                    <% CommentDao commentDao=new CommentDao();
-                        ArrayList<Comment> comments=commentDao.getListCommentByPost(Integer.parseInt(post_id));
+                    <% CommentDao commentDao = new CommentDao();
+                        ArrayList<Comment> comments = commentDao.getListCommentByPost(Integer.parseInt(post_id));
                     %>
-                    <h3 class="section-head"> <%=comments.size()%> bình luận</h3>
+                    <h3 class="section-head"><%=comments.size()%> bình luận</h3>
                     <ol class="comments-list">
-                        <%for(Comment cComment:comments){%>
-                        <li class="comment even thread-even depth-1" id="li-comment-59">
+                        <%for (Comment cComment : comments) {%>
+                        <li class="comment even thread-even depth-1" id="li-comment-<%=cComment.getComment_id()%>">
                             <article id="comment-<%=cComment.getComment_id()%>" class="comment">
                                 <div class="comment-avatar">
                                     <img src='<%=WebConstant.getLocalHost()%>/images/admin-avatar.jpg'
@@ -271,18 +254,22 @@
                                 </div>
                                 <div class="comment-meta">
                                         <span class="comment-author">
-                                            <a href='${root}/' rel='external nofollow' class='url'><%=cComment.getComment_author()%></a>
+                                            <a href='${root}/' rel='external nofollow'
+                                               class='url'><%=cComment.getComment_author()%></a>
                                         </span> on <a href="#comment-<%=cComment.getComment_id()%>" class="comment-time"
                                                       title="<%=cComment.getComment_date()%>">
-                                    <time pubdate datetime="<%=cComment.getComment_date()%>"><%=cComment.getComment_date()%></time>
+                                    <time pubdate
+                                          datetime="<%=cComment.getComment_date()%>"><%=cComment.getComment_date()%>
+                                    </time>
                                 </a>
                                 </div>
                                 <div class="comment-content">
-                                    <p><%=cComment.getComment_content()%></p>
+                                    <p><%=cComment.getComment_content()%>
+                                    </p>
                                     <div class="reply">
                                         <a rel='nofollow' class='comment-reply-link'
-                                           href='?replytocom=<%=cComment.getComment_id()%>#respond'
-                                           onclick='return addComment.moveForm( "comment-<%=cComment.getComment_id()%>", "<%=cComment.getComment_id()%>", "respond", "146" )'
+                                           href=''
+                                           onclick='return addComment.moveForm( "comment-<%=cComment.getComment_id()%>", "<%=cComment.getComment_id()%>", "respond", "<%=post_id%>" )'
                                            aria-label='Reply to <%=cComment.getComment_author()%>'>Trả lời <i
                                                 class="fa fa-angle-right">
                                         </i>
@@ -291,8 +278,9 @@
                                 </div>
                             </article>
                             <ul class="children">
-                                <%for (Comment commentChildren:commentDao.getListCommentByParent(cComment.getComment_id())){%>
-                                <li class="comment odd alt depth-2" id="li-comment-<%=commentChildren.getComment_id()%>">
+                                <%for (Comment commentChildren : commentDao.getListCommentByParent(cComment.getComment_id())) {%>
+                                <li class="comment odd alt depth-2"
+                                    id="li-comment-<%=commentChildren.getComment_id()%>">
                                     <article id="comment-<%=commentChildren.getComment_id()%>" class="comment">
                                         <div class="comment-avatar">
                                             <img src='${root}/images/jane-doe.jpg'
@@ -301,21 +289,26 @@
                                         </div>
                                         <div class="comment-meta">
                                                 <span class="comment-author">
-                                                    <a href='${root}' rel='external nofollow' class='url'><%=commentChildren.getComment_author()%></a>
-                                                </span> on <a href="index.html#comment-<%=commentChildren.getComment_id()%>" class="comment-time"
-                                                              title="<%=commentChildren.getComment_date()%>">
-                                            <time pubdate datetime="<%=commentChildren.getComment_date()%>"><%=commentChildren.getComment_date()%>
+                                                    <a href='${root}' rel='external nofollow'
+                                                       class='url'><%=commentChildren.getComment_author()%></a>
+                                                </span> on <a
+                                                href="#comment-<%=commentChildren.getComment_id()%>"
+                                                class="comment-time"
+                                                title="<%=commentChildren.getComment_date()%>">
+                                            <time pubdate
+                                                  datetime="<%=commentChildren.getComment_date()%>"><%=commentChildren.getComment_date()%>
                                             </time>
                                         </a>
                                         </div>
                                         <div class="comment-content">
-                                            <p><%=commentChildren.getComment_content()%></p>
+                                            <p><%=commentChildren.getComment_content()%>
+                                            </p>
                                             <div class="reply">
                                                 <a rel='nofollow' class='comment-reply-link'
-                                                   href='?replytocom=<%=commentChildren.getComment_id()%>#respond'
-                                                   onclick='return addComment.moveForm( "comment-<%=commentChildren.getComment_id()%>", "<%=commentChildren.getComment_id()%>", "respond", "146" )'
+                                                   href=''
+                                                   onclick='return addComment.moveForm( "comment-<%=commentChildren.getComment_id()%>", "<%=commentChildren.getComment_id()%>", "respond", "<%=post_id%>" )'
                                                    aria-label='Trả lời tới <%=commentChildren.getComment_author()%>'>
-                                                    Reply <i class="fa fa-angle-right"></i>
+                                                    Trả lời <i class="fa fa-angle-right"></i>
                                                 </a>
                                             </div>
                                         </div>
@@ -331,28 +324,33 @@
                             <span class="section-head">Bình luận</span>
                             <small>
                                 <a rel="nofollow" id="cancel-comment-reply-link" href="#respond"
-                                   style="display:none;">Cancel Reply</a>
+                                   style="display:none;">Hủy</a>
                             </small>
                         </h3>
                         <form action="<%=WebConstant.getLocalHost()%>/ManagerCommentServlet" method="post"
                               id="commentform" class="comment-form" novalidate>
                             <p>
-                                <textarea name="comment" id="comment" cols="45" rows="8" aria-required="true"
+                                <textarea name="comment-content" id="comment-content" cols="45" rows="8"
+                                          aria-required="true"
                                           placeholder="Nội dung"></textarea>
                             </p>
                             <p>
-                                <input name="author" id="author" type="text" size="30" aria-required="true"
+                                <input name="comment-author" id="comment-author" type="text" size="30"
+                                       aria-required="true"
                                        placeholder="Tên bạn" value=""/>
                             </p>
                             <p>
-                                <input name="email" id="email" type="text" size="30" aria-required="true"
+                                <input name="comment-email" id="comment-email" type="text" size="30"
+                                       aria-required="true"
                                        placeholder="Email" value=""/>
                             </p>
                             <p class="form-submit">
-                                <input name="submit" type="submit" id="comment-submit" class="submit"
-                                       value="Post Comment"/>
                                 <input type='hidden' name='comment-post-id' value='<%=post_id%>' id='comment-post-id'/>
                                 <input type='hidden' name='comment-parent' id='comment-parent' value='0'/>
+                                <input type='hidden' name='command' id='command' value='insert'/>
+                                <input type='hidden' name='urlPath' value='<%=urlPath%>'/>
+                                <input name="submit" type="submit" id="comment-submit" class="submit"
+                                       value="Post Comment"/>
                             </p>
                         </form>
                     </div>

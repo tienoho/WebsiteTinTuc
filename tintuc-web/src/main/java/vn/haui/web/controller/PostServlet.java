@@ -48,6 +48,7 @@ public class PostServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //String servletPath = request.getServletPath();
         String servletPath=request.getPathInfo();
+        String urlPathPost3=request.getRequestURL().toString();
         List<Post> postList=null;
         try {
             postList=new PostDao().getListAllPost();
@@ -68,7 +69,7 @@ public class PostServlet extends HttpServlet {
             //String url="/index.jsp";
             String postID= String.valueOf(post.getPostID());
             request.setAttribute("postId1",postID);
-            //request.setAttribute("postProduct",post);
+            request.setAttribute("urlPathPost",urlPathPost3);
             rd = getServletContext().getRequestDispatcher(url);
             rd.forward(request, response);
         }

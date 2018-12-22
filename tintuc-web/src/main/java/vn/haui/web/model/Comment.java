@@ -1,4 +1,5 @@
 package vn.haui.web.model;
+
 import java.sql.Date;
 
 public class Comment {
@@ -9,11 +10,12 @@ public class Comment {
     private Date comment_date;
     private String comment_content;
     private int comment_parent;
+    private int comment_status;//1 là yêu câu xác nhận bình luận,0 là không cần xác nhận bình luận
 
     public Comment() {
     }
 
-    public Comment(int comment_id, int comment_post_id, String comment_author, String comment_author_email, Date comment_date, String comment_content, int comment_parent) {
+    public Comment(int comment_id, int comment_post_id, String comment_author, String comment_author_email, Date comment_date, String comment_content, int comment_parent, int comment_status) {
         this.comment_id = comment_id;
         this.comment_post_id = comment_post_id;
         this.comment_author = comment_author;
@@ -21,6 +23,15 @@ public class Comment {
         this.comment_date = comment_date;
         this.comment_content = comment_content;
         this.comment_parent = comment_parent;
+        this.comment_status = comment_status;
+    }
+
+    public int getComment_status() {
+        return comment_status;
+    }
+
+    public void setComment_status(int comment_status) {
+        this.comment_status = comment_status;
     }
 
     public int getComment_id() {

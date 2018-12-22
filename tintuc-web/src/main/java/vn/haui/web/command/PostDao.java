@@ -123,7 +123,7 @@ public class PostDao {
                 "      on category.category_id=terms_relationships.category_id\n" +
                 "         and category.category_id='"+categoryID+"')\n" +
                 "  as term where post.post_id=term.post_id\n" +
-                "order by post.post_date desc  limit ?,?";
+                "order by post.post_date desc limit ?,?";
         PreparedStatement ps = connection.prepareStatement(sql2);
         ps.setInt(1, firstResult);
         ps.setInt(2, maxResult);
@@ -147,6 +147,41 @@ public class PostDao {
         connection.close();
         return list;
     }
+    //Get cac bai viet lien quan
+    public ArrayList<Post> getListInPostInterdepend(int categoryID, int firstResult, int maxResult,int post_id) throws SQLException {
+        Connection connection = DBConnect.getConnecttion();
+        String sql = "SELECT * FROM post WHERE category_id = '" + categoryID + "' limit ?,?";
+        String sql2="SELECT post.*,term.category_id FROM post,\n" +
+                "  (SELECT post_id,category.category_id FROM terms_relationships\n" +
+                "    inner join category\n" +
+                "      on category.category_id=terms_relationships.category_id\n" +
+                "         and category.category_id='"+categoryID+"')\n" +
+                "  as term where post.post_id!="+post_id+" and post.post_id=term.post_id\n" +
+                "order by post.post_date desc limit ?,?";
+        PreparedStatement ps = connection.prepareStatement(sql2);
+        ps.setInt(1, firstResult);
+        ps.setInt(2, maxResult);
+        ResultSet rs = ps.executeQuery();
+        ArrayList<Post> list = new ArrayList<Post>();
+        while (rs.next()) {
+            Post post = new Post();
+            post.setPostID(rs.getInt("post_id"));
+            post.setAuthorID(rs.getInt("author_id"));
+            post.setPostDate(rs.getDate("post_date"));
+            post.setPostEditDate(rs.getDate("post_edit_date"));
+            post.setPostContent(rs.getString("post_content"));
+            post.setPostTitle(rs.getString("post_title"));
+            post.setPostStatus(rs.getString("post_status"));
+            post.setPostSlug(rs.getString("post_slug"));
+            post.setPostImg(rs.getString("post_img"));
+            post.setCategoryID(rs.getInt("category_id"));
+
+            list.add(post);
+        }
+        connection.close();
+        return list;
+    }
+    //
     public ArrayList<Post> getListProductByPagesInTermChildren(int categoryParentID, int firstResult, int maxResult) throws SQLException {
         Connection connection = DBConnect.getConnecttion();
         String sql2="SELECT post.*,term.category_id FROM post,\n" +
