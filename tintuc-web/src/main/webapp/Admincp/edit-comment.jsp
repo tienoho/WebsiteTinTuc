@@ -94,12 +94,12 @@
                                     <label>Trạng thái</label>
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" name="comment-status" id="optionsRadios1" value="0" checked>Được chấp thuận
+                                            <input type="radio" name="comment-status" id="comment-status-1" value="0" <%=comment.getComment_status()==0?"checked":""%>>Được chấp thuận
                                         </label>
                                     </div>
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" name="comment-status" id="optionsRadios2" value="1">Chờ xác nhận
+                                            <input type="radio" name="comment-status" id="comment-status-2" value="1" <%=comment.getComment_status()==1?"checked":""%>>Chờ xác nhận
                                         </label>
                                     </div>
                                 </div>
@@ -115,7 +115,7 @@
                         <a href="${root}/ManagerCommentServlet?comment=<%=comment.getComment_id()%>&action=delete" class="text-danger">Xóa</a>
                         <input hidden="hidden" name="postID" value="<%=comment.getComment_id()%>">
                         <input hidden="hidden" name="command" value=update">
-                        <button type="submit" class="btn btn-success">Đăng</button>
+                        <button type="submit" class="btn btn-success">Cập nhập</button>
                     </div>
                     <!-- /.panel-body -->
                 </div>
@@ -126,21 +126,5 @@
     </div>
     <!-- /.row -->
 </div>
-<script>
-    $(document).ready( function() {
-        if (jQuery('#xImagePath').val() == '') {
-
-        } else {
-            var urlImage = $('#xImagePath').val();
-            var htmlll='<div class="thumb">' +
-                '<img height= "150px" width= "150px" src="${root}/' + urlImage + '" />' +
-                '</div>';
-            document.getElementById('thumbnails').innerHTML+=htmlll;
-            document.getElementById('preview').style.display = "";
-
-        }
-    });
-
-</script>
 <!-- /#page-wrapper -->
 <jsp:include page="footer.jsp"/>

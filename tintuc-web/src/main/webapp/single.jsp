@@ -267,8 +267,7 @@
                                     <p><%=cComment.getComment_content()%>
                                     </p>
                                     <div class="reply">
-                                        <a rel='nofollow' class='comment-reply-link'
-                                           href=''
+                                        <a rel='nofollow' class='comment-reply-link' href=''
                                            onclick='return addComment.moveForm( "comment-<%=cComment.getComment_id()%>", "<%=cComment.getComment_id()%>", "respond", "<%=post_id%>" )'
                                            aria-label='Reply to <%=cComment.getComment_author()%>'>Trả lời <i
                                                 class="fa fa-angle-right">
@@ -292,8 +291,7 @@
                                                     <a href='${root}' rel='external nofollow'
                                                        class='url'><%=commentChildren.getComment_author()%></a>
                                                 </span> on <a
-                                                href="#comment-<%=commentChildren.getComment_id()%>"
-                                                class="comment-time"
+                                                href="#comment-<%=commentChildren.getComment_id()%>" class="comment-time"
                                                 title="<%=commentChildren.getComment_date()%>">
                                             <time pubdate
                                                   datetime="<%=commentChildren.getComment_date()%>"><%=commentChildren.getComment_date()%>
@@ -323,34 +321,26 @@
                         <h3 id="reply-title" class="comment-reply-title">
                             <span class="section-head">Bình luận</span>
                             <small>
-                                <a rel="nofollow" id="cancel-comment-reply-link" href="#respond"
-                                   style="display:none;">Hủy</a>
+                                <a rel="nofollow" id="cancel-comment-reply-link" href="#respond" style="display:none;">Hủy</a>
                             </small>
                         </h3>
                         <form action="<%=WebConstant.getLocalHost()%>/ManagerCommentServlet" method="post"
                               id="commentform" class="comment-form" novalidate>
-                            <p>
-                                <textarea name="comment-content" id="comment-content" cols="45" rows="8"
-                                          aria-required="true"
-                                          placeholder="Nội dung"></textarea>
+                            <p><textarea name="comment-content" id="comment-content" cols="45" rows="8"
+                                          aria-required="true" placeholder="Nội dung"></textarea>
                             </p>
-                            <p>
-                                <input name="comment-author" id="comment-author" type="text" size="30"
-                                       aria-required="true"
-                                       placeholder="Tên bạn" value=""/>
+                            <p><input name="comment-author" id="comment-author" type="text" size="30"
+                                       aria-required="true" placeholder="Tên bạn" value=""/>
                             </p>
-                            <p>
-                                <input name="comment-email" id="comment-email" type="text" size="30"
-                                       aria-required="true"
-                                       placeholder="Email" value=""/>
+                            <p><input name="comment-email" id="comment-email" type="text" size="30"
+                                       aria-required="true" placeholder="Email" value=""/>
                             </p>
                             <p class="form-submit">
                                 <input type='hidden' name='comment-post-id' value='<%=post_id%>' id='comment-post-id'/>
                                 <input type='hidden' name='comment-parent' id='comment-parent' value='0'/>
                                 <input type='hidden' name='command' id='command' value='insert'/>
                                 <input type='hidden' name='urlPath' value='<%=urlPath%>'/>
-                                <input name="submit" type="submit" id="comment-submit" class="submit"
-                                       value="Post Comment"/>
+                                <input name="submit" type="submit" id="comment-submit" class="submit" value="Post Comment"/>
                             </p>
                         </form>
                     </div>

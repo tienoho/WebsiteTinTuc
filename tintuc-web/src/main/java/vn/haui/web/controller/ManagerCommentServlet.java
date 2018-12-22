@@ -44,6 +44,7 @@ public class ManagerCommentServlet extends HttpServlet {
                         comment.setComment_author_email(request.getParameter("comment-email"));
                         comment.setComment_post_id(Integer.parseInt(request.getParameter("comment-post-id")));
                         comment.setComment_author(request.getParameter("comment-author"));
+                        comment.setComment_status(WebConstant.getComment().equals("true")?1:0);
                         commentDao.insert(comment);
                         //save message in session
                         session.setAttribute("result", result);
@@ -63,6 +64,7 @@ public class ManagerCommentServlet extends HttpServlet {
                         comment.setComment_author_email(request.getParameter("comment-email"));
                         comment.setComment_post_id(Integer.parseInt(request.getParameter("comment_post_id")));
                         comment.setComment_author(request.getParameter("comment-author"));
+                        comment.setComment_status(Integer.parseInt(request.getParameter("comment-status")));
                         commentDao.update(comment);
                         result = "Cập nhập thành công";
                         session.setAttribute("result", result);
@@ -74,6 +76,7 @@ public class ManagerCommentServlet extends HttpServlet {
                     break;
                 default:
                     result = "Không thành công";
+                    session.setAttribute("result", result);
                     break;
             }
         } catch (Exception ex) {
