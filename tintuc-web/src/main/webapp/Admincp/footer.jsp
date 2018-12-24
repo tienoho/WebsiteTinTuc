@@ -30,7 +30,7 @@
 <script src="${root}/Admincp/vendor/datatables/js/jquery.dataTables.min.js"></script>
 <script src="${root}/Admincp/vendor/datatables-plugins/dataTables.bootstrap.min.js"></script>
 <%--<script src="${root}/Admincp/vendor/datatables-responsive/dataTables.responsive.js"></script>--%>
-
+<script src="${root}/Admincp/js/bootstrap-select.js"></script>
 
 <!-- Custom Theme JavaScript -->
 <script src="${root}/Admincp/dist/js/sb-admin-2.js"></script>

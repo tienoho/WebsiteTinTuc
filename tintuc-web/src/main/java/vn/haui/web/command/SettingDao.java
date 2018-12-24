@@ -40,5 +40,21 @@ public class SettingDao {
             return false;
         }
     }
+    public ArrayList<Setting> getTable(String table) throws SQLException {
+        Connection connection = DBConnect.getConnecttion();
+        String sql = "SELECT * FROM "+table;
+        Statement st = connection.createStatement();
+        ResultSet rs = st.executeQuery(sql);
+        ArrayList<Setting> list = new ArrayList<Setting>();
+        while (rs.next()) {
+            Setting  setting = new Setting();
+            setting.setOptionId(rs.getInt("footer_id"));
+            setting.setOptionName(rs.getString("footer_name"));
+            setting.setOptionValue(rs.getString("footer_value"));
+            list.add(setting);
+        }
+        connection.close();
+        return list;
+    }
 
 }

@@ -62,6 +62,9 @@ public class SinupServlet extends HttpServlet {
                 HttpSession session = request.getSession();
                 session.setAttribute("user", users);
                 url = "/index.jsp";
+                if(users.getRoleId()==1){
+                    url="/Admincp";
+                }
             } else {
                 request.setAttribute("errorL", "Email hoặc mât khẩu không đúng");
 //                request.setAttribute("actionL","class=\"active\"");

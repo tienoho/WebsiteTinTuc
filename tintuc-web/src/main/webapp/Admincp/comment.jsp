@@ -72,8 +72,11 @@
                             <td><%=c.getComment_author()%></td>
                             <td><a href="edit-comment.jsp?comment=<%=c.getComment_id()%>&action=edit" class="font-weight-bold"><%=c.getComment_content()%></a>
                                 <div class="row-actions">
-                                    <span class="edit"><a href="edit-comment.jsp?comment=<%=c.getComment_id()%>&action=edit" aria-label="Sửa">Chỉnh sửa</a> | </span>
-                                    <span class="delete"><a href="" class="delete-tag aria-button-if-js" data-toggle="modal" data-target="#delete<%=c.getComment_id()%>" aria-label="Xóa" role="button">Xóa</a> | </span>
+                                    <%if(c.getComment_status()==1){%>
+                                    <span class="activate"><a class="text-success" href="edit-comment.jsp?comment=<%=c.getComment_id()%>&action=activate" aria-label="Xem lưu trữ ">Chấp nhận</a></span>
+                                    <%}%>
+                                    <span class="edit"><a class="text-info" href="edit-comment.jsp?comment=<%=c.getComment_id()%>&action=edit" aria-label="Sửa">Chỉnh sửa</a> | </span>
+                                    <span class="delete"><a href="" class="delete-tag aria-button-if-js text-danger" data-toggle="modal" data-target="#delete<%=c.getComment_id()%>" aria-label="Xóa" role="button">Xóa</a></span>
                                     <!-- Modal -->
                                     <div class="modal fade" id="delete<%=c.getComment_id()%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                         <div class="modal-dialog">
@@ -95,7 +98,6 @@
                                         <!-- /.modal-dialog -->
                                     </div>
                                     <!-- /.modal -->
-                                    <span class="view"><a href="" aria-label="Xem lưu trữ ">Xem</a></span>
                                 </div>
                             </td>
                             <td><%Post pC=postDao.getPost(c.getComment_post_id());%>

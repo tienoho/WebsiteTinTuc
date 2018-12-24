@@ -23,6 +23,11 @@
     <link rel='stylesheet' id='smartmag-font-awesome-css' href='http://localhost/wp-content/themes/smart-mag/css/fontawesome/css/font-awesome.min.css?ver=3.0.2' type='text/css' media='all' />
     <link rel='stylesheet' id='smartmag-skin-css' href='http://localhost/wp-content/themes/smart-mag/css/skin-trendy.css?ver=4.9.8' type='text/css' media='all' />-->
     <%
+        Users users = null;
+        if (session.getAttribute("user") != null) {
+            users = (Users) session.getAttribute("user");
+        }
+        CategoryDao categoryDao = new CategoryDao();
         String head_title = "";
         if (session.getAttribute("head_title") != null) {
             head_title = (String) session.getAttribute("head_title");
@@ -38,19 +43,67 @@
     <%}%>
     <script type='text/javascript' src='${root}/js/jquery.js'></script>
     <script>document.querySelector('head').innerHTML += '<style class="bunyad-img-effects-css">.main img, .main-footer img { opacity: 0; }</style>';</script>
-</head>
-<body class="home page-template page-template-page-blocks page-template-page-blocks-php page page-id-11 page-builder right-sidebar full skin-tech has-featured img-effects has-nav-light-b has-nav-full has-head-tech has-mobile-head">
-    <%Users users=null;
-    if(session.getAttribute("user")!=null)
-        {
-            users=(Users)session.getAttribute("user");
+    <script>
+        // Hàm khởi tạo đồng hồ
+        function startTime() {
+            // Lấy Object ngày hiện tại
+            var today = new Date();
+            //lấy ngày, tháng, năm
+            var day = today.getDay();
+            var date = today.getDate();
+            var month = today.getMonth();
+            var year = today.getFullYear();
+            // Giờ, phút, giây hiện tại
+            var h = today.getHours();
+            var m = today.getMinutes();
+            var s = today.getSeconds();
+            // Chuyển đổi sang dạng 01, 02, 03
+            m = checkTime(m);
+            s = checkTime(s);
+            // Ghi ra trình duyệt
+            document.getElementById('timer').innerHTML = h + ":" + m + ":" + s + " | " + getDay(day) + ", " + date + "/" + month + "/" + year;
+            // Dùng hàm setTimeout để thiết lập gọi lại 0.5 giây / lần
+            var t = setTimeout(function () {
+                startTime();
+            }, 500);
         }
-    CategoryDao categoryDao=new CategoryDao();%>
+
+        // Hàm này có tác dụng chuyển những số bé hơn 10 thành dạng 01, 02, 03, ...
+        function checkTime(i) {
+            if (i < 10) {
+                i = "0" + i;
+            }
+            return i;
+        }
+
+        //hàm lấy thứ trong tuần
+        function getDay(i) {
+            switch (i) {
+                case 0:
+                    return "Thứ 2";
+                case 1:
+                    return "Thứ 3";
+                case 2:
+                    return "Thứ 4";
+                case 3:
+                    return "Thứ 5";
+                case 4:
+                    return "Thứ 6";
+                case 5:
+                    return "Thứ 7";
+                case 6:
+                    return "Chủ nhật";
+            }
+        }
+    </script>
+</head>
+<body onload="startTime()"
+      class="home page-template page-template-page-blocks page-template-page-blocks-php page page-id-11 page-builder right-sidebar full skin-tech has-featured img-effects has-nav-light-b has-nav-full has-head-tech has-mobile-head">
 <div class="main-wrap">
     <div class="top-bar dark">
         <div class="wrap">
             <section class="top-bar-content cf">
-                <span class="date"> Friday, November 23 </span>
+                <span id="timer" class="date">  </span>
                 <div class="menu-top-nav-container">
                     <ul id="menu-top-nav" class="menu">
                         <%if (users != null) {%>
@@ -62,7 +115,7 @@
                         <%} else {%>
                         <li id="menu-item-4"
                             class="menu-item menu-item-type-custom menu-item-object-custom menu-item-4">
-                            <a href="/login">Đăng nhập</a>
+                            <a href="<%=WebConstant.getLocalHost()%>/login">Đăng nhập</a>
                         </li>
                         <%}%>
                         <li id="menu-item-5"

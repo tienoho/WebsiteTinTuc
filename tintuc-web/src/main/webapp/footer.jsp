@@ -1,101 +1,68 @@
+<%@ page import="vn.haui.web.command.SocialDao" %>
+<%@ page import="vn.haui.web.model.Social" %>
+<%@ page import="vn.haui.web.utils.FooterHeader" %>
+<%@ page import="vn.haui.web.common.WebConstant" %>
+<%@ page import="vn.haui.web.common.WebFooter" %>
+<%@ page import="vn.haui.web.model.Post" %>
+<%@ page import="java.util.List" %>
+<%@ page import="vn.haui.web.command.PostDao" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="root" value="${pageContext.request.contextPath}"/>
- <footer class="main-footer">
+<%
+    new FooterHeader().getFooter();
+    PostDao postDao=new PostDao();
+    List<Post> posts=postDao.getListProductByPagesInTerm(WebFooter.getCategory_id(),1,WebFooter.getCategory_number());
+    SocialDao socialDao=new SocialDao();
+
+%>
+<footer class="main-footer">
     <div class="wrap">
         <ul class="widgets row cf">
             <li class="widget col-4 bunyad-about">
                 <h3 class="widgettitle">About</h3>
                 <div class="about-widget">
                     <img src="${root}/images/sm-logo-footer.png"/>
-                    <p>Your source for the lifestyle news. This demo is crafted specifically to exhibit the use of
-                        the theme as a lifestyle site. Visit our main page for more demos.</p>
+                    <p><%=WebFooter.getSlogan()%></p>
                     <p>
-                        We're social, connect with us:<br/>
+                        Liên kết mạng xã hội:<br/>
                     <ul class="social-icons cf">
+                    <%for (Social social:socialDao.getListSocial()){%>
                         <li>
-                            <a href="http://facebook.com/themesphere" class="icon fa fa-facebook" title="Facebook">
-                                <span class="visuallyhidden">Facebook</span>
+                            <a href="<%=social.getSocial_url()%>" class="icon fa <%=social.getSocial_icon()%>" title="<%=social.getSocial_title()%>">
+                                <span class="visuallyhidden"><%=social.getSocial_name()%></span>
                             </a>
                         </li>
-                        <li>
-                            <a href="http://twitter.com/Theme_Sphere" class="icon fa fa-twitter" title="Twitter">
-                                <span class="visuallyhidden">Twitter</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="icon fa fa-google-plus" title="Google+">
-                                <span class="visuallyhidden">Google+</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="icon fa fa-linkedin" title="LinkedIn">
-                                <span class="visuallyhidden">LinkedIn</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="icon fa fa-vk" title="VK">
-                                <span class="visuallyhidden">VK</span>
-                            </a>
-                        </li>
+                    <%}%>
                     </ul>
                 </div>
             </li>
             <li class="widget col-4 latest-posts">
-                <h3 class="widgettitle">Popular Posts</h3>
+                <h3 class="widgettitle">Tin tức phổ biến</h3>
                 <ul class="posts-list">
+                    <%for(Post pFooter:posts){
+                        String extendsImg = pFooter.getPostImg();
+                        if (extendsImg.contains(".")) {
+                            extendsImg = extendsImg.substring(extendsImg.lastIndexOf("."), extendsImg.length());
+                        }
+                    %>
                     <li>
-                        <a href="">
-                            <img width="104" height="69" src="${root}/images/shutterstock_275843885-104x69.jpg"
+                        <a href="<%=WebConstant.getLocalHost()+"/post/"+pFooter.getPostSlug()%>">
+                            <img width="104" height="69" src="<%=WebConstant.getLocalHost()%>/<%=pFooter.getPostImg().replace(extendsImg,"-104x69"+extendsImg)%>"
                                  class="attachment-post-thumbnail size-post-thumbnail wp-post-image"
-                                 alt="shutterstock_275843885"
-                                 title="Easy Boho Style: Without Looking Like a Coachella Victim"
-                                 srcset="${root}/images/shutterstock_275843885-104x69.jpg 104w, ${root}/images/shutterstock_275843885-300x200.jpg 300w, ${root}/images/shutterstock_275843885-1000x667.jpg 1000w, ${root}/images/shutterstock_275843885-702x459.jpg 702w, ${root}/images/shutterstock_275843885-214x140.jpg 214w"
+                                 alt="<%=pFooter.getPostTitle()%>"
+                                 title="<%=pFooter.getPostTitle()%>"
+                                 srcset="<%=WebConstant.getLocalHost()%>/<%=pFooter.getPostImg().replace(extendsImg,"-104x69"+extendsImg)%> 104w, <%=WebConstant.getLocalHost()%>/<%=pFooter.getPostImg().replace(extendsImg,"-300x200"+extendsImg)%> 300w, <%=WebConstant.getLocalHost()%>/<%=pFooter.getPostImg().replace(extendsImg,"-1000x667"+extendsImg)%> 1000w, <%=WebConstant.getLocalHost()%>/<%=pFooter.getPostImg().replace(extendsImg,"-702x459"+extendsImg)%> 702w, <%=WebConstant.getLocalHost()%>/<%=pFooter.getPostImg().replace(extendsImg,"-214x140"+extendsImg)%> 214w"
                                  sizes="(max-width: 104px) 100vw, 104px"/>
                         </a>
                         <div class="content">
-                            <a href="2017/01/10/easy-boho-style-without-looking-like-a-coachella-victim/index.html"
-                               title="Easy Boho Style: Without Looking Like a Coachella Victim"> Easy Boho Style:
-                                Without Looking Like a Coachella Victim</a>
+                            <a href="<%=WebConstant.getLocalHost()+"/post/"+pFooter.getPostSlug()%>"
+                               title="<%=pFooter.getPostTitle()%>"><%=pFooter.getPostTitle()%></a>
                             <div class="cf listing-meta meta below">
-                                <time datetime="2017-01-10T02:35:37+00:00" class="meta-item">January 10, 2017</time>
+                                <time datetime="<%=pFooter.getPostDate()%>" class="meta-item"><%=pFooter.getPostDate()%></time>
                             </div>
                         </div>
                     </li>
-                    <li>
-                        <a href="2017/01/10/15-creative-methods-to-sharpen-your-interior-decor/index.html">
-                            <img width="104" height="69" src="${root}/images/shutterstock_48352300-104x69.jpg"
-                                 class="attachment-post-thumbnail size-post-thumbnail wp-post-image"
-                                 alt="shutterstock_48352300"
-                                 title="15 Creative Methods to Sharpen Your Interior Decor"
-                                 srcset="${root}/images/shutterstock_48352300-104x69.jpg 104w, ${root}/images/shutterstock_48352300-300x200.jpg 300w, ${root}/images/shutterstock_48352300-1000x667.jpg 1000w, ${root}/images/shutterstock_48352300-702x459.jpg 702w, ${root}/images/shutterstock_48352300-214x140.jpg 214w"
-                                 sizes="(max-width: 104px) 100vw, 104px"/>
-                        </a>
-                        <div class="content">
-                            <a href="2017/01/10/15-creative-methods-to-sharpen-your-interior-decor/index.html"
-                               title="15 Creative Methods to Sharpen Your Interior Decor"> 15 Creative Methods to
-                                Sharpen Your Interior Decor</a>
-                            <div class="cf listing-meta meta below">
-                                <time datetime="2017-01-10T02:35:37+00:00" class="meta-item">January 10, 2017</time>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <a href="2017/01/10/an-update-for-the-top-puma-style-garments/index.html">
-                            <img width="104" height="69" src="${root}/images/StockSnap_HBI15KEJR3-104x69.jpg"
-                                 class="attachment-post-thumbnail size-post-thumbnail wp-post-image"
-                                 alt="StockSnap_HBI15KEJR3" title="An Update for the Top Puma Style Garments"
-                                 srcset="${root}/images/StockSnap_HBI15KEJR3-104x69.jpg 104w, ${root}/images/StockSnap_HBI15KEJR3-300x200.jpg 300w, ${root}/images/StockSnap_HBI15KEJR3-1000x667.jpg 1000w, ${root}/images/StockSnap_HBI15KEJR3-702x459.jpg 702w, ${root}/images/StockSnap_HBI15KEJR3-214x140.jpg 214w"
-                                 sizes="(max-width: 104px) 100vw, 104px"/>
-                        </a>
-                        <div class="content">
-                            <a href="2017/01/10/an-update-for-the-top-puma-style-garments/index.html"
-                               title="An Update for the Top Puma Style Garments"> An Update for the Top Puma Style
-                                Garments</a>
-                            <div class="cf listing-meta meta below">
-                                <time datetime="2017-01-10T02:34:37+00:00" class="meta-item">January 10, 2017</time>
-                            </div>
-                        </div>
-                    </li>
+                    <%}%>
                 </ul>
             </li>
             <li class="widget col-4 bunyad-flickr">
@@ -168,7 +135,7 @@
     <div class="lower-foot">
         <div class="wrap">
             <div class="widgets">
-                <div class="textwidget">Copyright &copy; 2018. Designed by <a href="http://theme-sphere.com/">Tien</a>.
+                <div class="textwidget"><a href="<%=WebConstant.getLocalHost()%>"><%=WebFooter.getCopyright()%></a>.
                 </div>
                 <div class="menu-footer-right-container">
                     <ul id="menu-footer-right" class="menu">

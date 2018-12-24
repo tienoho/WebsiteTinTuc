@@ -5,12 +5,9 @@ import vn.haui.web.common.WebConstant;
 import vn.haui.web.model.Setting;
 
 import javax.servlet.*;
-import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
-import javax.servlet.Filter;
 
 public class filterConfig implements Filter {
     @Override
@@ -27,17 +24,16 @@ public class filterConfig implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
             throws IOException, ServletException {
 
-        SettingDao settingDao=new SettingDao();
-        ArrayList<Setting> settings=null;
+        SettingDao settingDao = new SettingDao();
+        ArrayList<Setting> settings = null;
         try {
-            settings=settingDao.getSetting();
+            settings = settingDao.getSetting();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        if(settings!=null)
-        {
-            for (Setting s:settings){
-                switch (s.getOptionName()){
+        if (settings != null) {
+            for (Setting s : settings) {
+                switch (s.getOptionName()) {
                     case "siteurl":
                         WebConstant.setLocalHost(s.getOptionValue());
                         break;
@@ -61,6 +57,15 @@ public class filterConfig implements Filter {
                         break;
                     case "comment":
                         WebConstant.setComment(s.getOptionValue());
+                        break;
+                    case "post_number_view":
+                        WebConstant.setPostView(Integer.parseInt(s.getOptionValue()));
+                        break;
+                    case "category_miss":
+                        WebConstant.setPostMissId(Integer.parseInt(s.getOptionValue()));
+                        break;
+                    case "post_miss_number":
+                        WebConstant.setPostMissNumber(Integer.parseInt(s.getOptionValue()));
                         break;
                 }
             }

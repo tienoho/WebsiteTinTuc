@@ -259,7 +259,6 @@
 <script>
     $(document).ready( function() {
         if (jQuery('#xImagePath').val() == '') {
-
         } else {
             var urlImage = $('#xImagePath').val();
             var htmlll='<div class="thumb">' +
@@ -267,7 +266,6 @@
                 '</div>';
             document.getElementById('thumbnails').innerHTML+=htmlll;
             document.getElementById('preview').style.display = "";
-
         }
     });
 

@@ -4,6 +4,7 @@
 <%@ page import="vn.haui.web.model.Post" %>
 <%@ page import="vn.haui.web.command.PostDao" %>
 <%@ page import="vn.haui.web.command.UsersDao" %>
+<%@ page import="vn.haui.web.common.WebConstant" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="root" value="${pageContext.request.contextPath}"/>
@@ -40,7 +41,7 @@
         <div class="col-lg-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <a href="edit-post.jsp" class="font-italic" >Thêm bài viết mới</a>
+                    <a href="edit-post.jsp" class="font-italic" ><strong>Thêm bài viết mới</strong></a>
                 </div>
                 <!-- /.panel-heading -->
                 <div class="panel-body">
@@ -58,10 +59,10 @@
                         <%for (Post p : posts) {%>
                         <tr class="odd gradeX" id="item-post-<%=p.getPostID()%>">
                             <td><%=p.getPostID()%></td>
-                            <td><a href="edit-post.jsp?post=<%=p.getPostID()%>&action=edit" class="font-weight-bold"><%=p.getPostTitle()%></a>
+                            <td><a href="edit-post.jsp?post=<%=p.getPostID()%>&action=edit" class="font-weight-bold"><strong><%=p.getPostTitle()%></strong></a>
                                 <div class="row-actions">
-                                    <span class="edit"><a href="edit-post.jsp?post=<%=p.getPostID()%>&action=edit" aria-label="Sửa “Beauty”">Chỉnh sửa</a> | </span>
-                                    <span class="delete"><a href="" class="delete-tag aria-button-if-js" data-toggle="modal" data-target="#delete<%=p.getPostID()%>" aria-label="Xóa “Beauty”" role="button">Xóa</a> | </span>
+                                    <span class="edit"><a class="text-primary" href="edit-post.jsp?post=<%=p.getPostID()%>&action=edit" aria-label="Sửa">Chỉnh sửa</a> | </span>
+                                    <span class="delete"><a href="" class="delete-tag aria-button-if-js text-danger" data-toggle="modal" data-target="#delete<%=p.getPostID()%>" aria-label="Xóa" role="button">Xóa</a> | </span>
                                     <!-- Modal -->
                                     <div class="modal fade" id="delete<%=p.getPostID()%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                         <div class="modal-dialog">
@@ -83,7 +84,7 @@
                                         <!-- /.modal-dialog -->
                                     </div>
                                     <!-- /.modal -->
-                                    <span class="view"><a href="" aria-label="Xem lưu trữ “Beauty”">Xem</a></span>
+                                    <span class="view"><a href="<%=WebConstant.getLocalHost()+"/post/"+p.getPostSlug()%>" class="text-success" aria-label="Xem">Xem</a></span>
                                 </div>
                             </td>
                             <td><%=usersDao.getName(p.getAuthorID())%></td>

@@ -28,7 +28,7 @@ public class CommentDao {
     }
     public ArrayList<Comment> getListCommentByPost(int post_id) throws SQLException {
         Connection connection = DBConnect.getConnecttion();
-        String sql = "SELECT * FROM comments where comment_post_id=? and comment_status=0";
+        String sql = "SELECT * FROM comments where comment_post_id=? and comment_status=0 and comment_parent=0";
         PreparedStatement ps = connection.prepareStatement(sql);
         ps.setInt(1, post_id);
         ResultSet rs = ps.executeQuery();

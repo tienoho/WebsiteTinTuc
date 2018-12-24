@@ -181,6 +181,32 @@ public class PostDao {
         connection.close();
         return list;
     }
+    //Get cac bai viet xem nhieu nhat
+    public ArrayList<Post> getListInPostView(int number) throws SQLException {
+        Connection connection = DBConnect.getConnecttion();
+        String sql2="SELECT post.* FROM post left join hit_counter_post on post.post_id=hit_counter_post.id_post " +
+                "order by hit_counter desc limit ?";
+        PreparedStatement ps = connection.prepareStatement(sql2);
+        ps.setInt(1, number);
+        ResultSet rs = ps.executeQuery();
+        ArrayList<Post> list = new ArrayList<Post>();
+        while (rs.next()) {
+            Post post = new Post();
+            post.setPostID(rs.getInt("post_id"));
+            post.setAuthorID(rs.getInt("author_id"));
+            post.setPostDate(rs.getDate("post_date"));
+            post.setPostEditDate(rs.getDate("post_edit_date"));
+            post.setPostContent(rs.getString("post_content"));
+            post.setPostTitle(rs.getString("post_title"));
+            post.setPostStatus(rs.getString("post_status"));
+            post.setPostSlug(rs.getString("post_slug"));
+            post.setPostImg(rs.getString("post_img"));
+            list.add(post);
+        }
+        connection.close();
+        return list;
+    }
+
     //
     public ArrayList<Post> getListProductByPagesInTermChildren(int categoryParentID, int firstResult, int maxResult) throws SQLException {
         Connection connection = DBConnect.getConnecttion();
@@ -359,8 +385,6 @@ public class PostDao {
             return false;
         }
     }
-
-
     public boolean delete(int post_id) throws SQLException {
         Connection connection=null;
         try {
@@ -376,8 +400,7 @@ public class PostDao {
             return false;
         }
     }
-    public String createPostSlug(String postTitle)
-    {
+    public String createPostSlug(String postTitle)    {
         Calendar cal = Calendar.getInstance();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");
         String dateTimeNow=sdf.format(cal.getTime());
@@ -393,8 +416,7 @@ public class PostDao {
         }
         return "";
     }
-    public java.sql.Date GetDateNow()
-    {
+    public java.sql.Date GetDateNow()    {
         java.util.Date myDate = (Calendar.getInstance().getTime());
         java.sql.Date sqlDateNow = new java.sql.Date(myDate.getTime());
         return sqlDateNow;

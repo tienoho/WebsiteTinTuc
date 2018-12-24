@@ -29,13 +29,16 @@ public class SettingServlet extends HttpServlet {
         String post_category = request.getParameter("post_category");
         String post_home_sub = request.getParameter("post_home_sub");
         String category_home_sub_one = request.getParameter("category_home_sub_one");
+        String post_miss_id = request.getParameter("post_miss_id");
+        String post_miss_number = request.getParameter("post_miss_number");
+        String post_view_number = request.getParameter("post_view_number");
 
         HttpSession session = request.getSession(false);
         if (blogname != null && !blogname.equals("")) {
             setting = new Setting(1, "blogname", blogname);
             setSetting(setting);
-        }else {
-            session.setAttribute("error_blogname","Tên Website không thể để trống");
+        } else {
+            session.setAttribute("error_blogname", "Tên Website không thể để trống");
         }
         if (blogdescription != null && !blogdescription.equals("")) {
             setting = new Setting(1, "blogdescription", blogdescription);
@@ -44,9 +47,8 @@ public class SettingServlet extends HttpServlet {
         if (siteurl != null && !siteurl.equals("")) {
             setting = new Setting(1, "siteurl", siteurl);
             setSetting(setting);
-        }
-        else {
-            session.setAttribute("error_siteurl","Không thể để trống địa chỉ website");
+        } else {
+            session.setAttribute("error_siteurl", "Không thể để trống địa chỉ website");
         }
         if (admin_email != null && !admin_email.equals("")) {
             setting = new Setting(1, "admin_email", admin_email);
@@ -59,11 +61,25 @@ public class SettingServlet extends HttpServlet {
         if (post_category != null && !post_category.equals("")) {
             setting = new Setting(1, "post_category", post_category);
             setSetting(setting);
-        }if (post_category != null && !post_category.equals("")) {
+        }
+        if (post_category != null && !post_category.equals("")) {
             setting = new Setting(1, "post_home_sub", post_home_sub);
             setSetting(setting);
-        }if (post_category != null && !post_category.equals("")) {
+        }
+        if (post_category != null && !post_category.equals("")) {
             setting = new Setting(1, "category_home_sub_one", category_home_sub_one);
+            setSetting(setting);
+        }
+        if (post_category != null && !post_category.equals("")) {
+            setting = new Setting(1, "post_miss_id", post_miss_id);
+            setSetting(setting);
+        }
+        if (post_category != null && !post_category.equals("")) {
+            setting = new Setting(1, "post_miss_number", post_miss_number);
+            setSetting(setting);
+        }
+        if (post_category != null && !post_category.equals("")) {
+            setting = new Setting(1, "post_view_number", post_view_number);
             setSetting(setting);
         }
         //HttpSession session = request.getSession(false);

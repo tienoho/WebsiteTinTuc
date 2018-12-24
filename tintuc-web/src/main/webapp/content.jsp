@@ -6,6 +6,7 @@
 <%@ page import="vn.haui.web.utils.tool" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="vn.haui.web.utils.genJson" %>
+<%@ page import="vn.haui.web.command.UsersDao" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="root" value="${pageContext.request.contextPath}"/>
@@ -14,6 +15,7 @@
     CategoryDao categoryDao = new CategoryDao();
     ArrayList<Category> categoriesParent = categoryDao.getListCategoryParent();
     ArrayList<Post> postsNew = postDao.getListAllPostNew(8);
+    UsersDao usersDao=new UsersDao();
 %>
 <script>
     $data = '<div class="aa"></div>';
@@ -150,8 +152,8 @@
                                         </h2>
                                         <div class="cf listing-meta meta below">
                                             <span class="meta-item author">Bởi <a
-                                                    href="author/trendy/index.html" title="Posts by Kate Hanson"
-                                                    rel="author">Kate Hanson</a>
+                                                    href="author/trendy/index.html" title="Posts by <%=usersDao.getName(p.getAuthorID())%>"
+                                                    rel="author"><%=usersDao.getName(p.getAuthorID())%></a>
                                             </span>
                                             <time datetime="<%=p.getPostDate()%>" class="meta-item"><%=p.getPostDate()%>
                                             </time>
@@ -238,8 +240,8 @@
                                     </h2>
                                     <div class="cf listing-meta meta below">
                                                 <span class="meta-item author">
-                                                    By <a href="author/trendy/index.html" title="Posts by Kate Hanson"
-                                                          rel="author">Kate Hanson</a>
+                                                    By <a href="author/trendy/index.html" title="Posts by <%=usersDao.getName(pSub.getAuthorID())%>"
+                                                          rel="author"><%=usersDao.getName(pSub.getAuthorID())%></a>
                                                 </span>
                                         <time datetime="<%=pSub.getPostDate()%>" class="meta-item"><%=pSub.getPostDate()%></time>
                                     </div>
@@ -372,7 +374,7 @@
                                     <div class="content">
                                         <a href="<%=WebConstant.getLocalHost()+"/post/"+pSection4.getPostSlug()%>" class="post-title"><%=pSection4.getPostTitle()%></a>
                                         <div class="cf listing-meta meta below"><span class="meta-item author">By <a
-                                                href="author/trendy/index.html" title="Posts by Kate Hanson" rel="author">Kate Hanson</a></span>
+                                                href="author/trendy/index.html" title="Posts by <%=usersDao.getName(pSection4.getAuthorID())%>" rel="author"><%=usersDao.getName(pSection4.getAuthorID())%></a></span>
                                             <time datetime="<%=pSection4.getPostDate()%>" class="meta-item"><%=pSection4.getPostDate()%></time>
                                         </div>
                                         <div class="excerpt"><p><%=tool.html2text(pSection4.getPostContent()).substring(0,200)%></p></div>

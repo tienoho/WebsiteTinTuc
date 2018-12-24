@@ -7,11 +7,38 @@ public class WebConstant {
     public static int postNumber = 10;
     public static int postNumberHome = 8;
     public static int postNumberHomeSub = 6;
+    public static int postMissNumber = 4;
+    public static int postMissId = 4;
     public static String localHost = "http://localhost:8080";
     public static int categorySubOne = 4;
+    public static int postView = 4;
     public static String blogdescription = "";
     public static String blogname = "";
     public static String comment = "false";
+
+    public static int getPostMissNumber() {
+        return postMissNumber;
+    }
+
+    public static void setPostMissNumber(int postMissNumber) {
+        WebConstant.postMissNumber = postMissNumber;
+    }
+
+    public static int getPostMissId() {
+        return postMissId;
+    }
+
+    public static void setPostMissId(int postMissId) {
+        WebConstant.postMissId = postMissId;
+    }
+
+    public static int getPostView() {
+        return postView;
+    }
+
+    public static void setPostView(int postView) {
+        WebConstant.postView = postView;
+    }
 
     public static String getComment() {
         return comment;

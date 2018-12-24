@@ -90,4 +90,12 @@
         <filter-name>CategoryFilter</filter-name>
         <url-pattern>/Category/*</url-pattern>
     </filter-mapping>
+    <filter>
+        <filter-name>AdminFilter</filter-name>
+        <filter-class>vn.haui.web.filter.filterAdmin</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>AdminFilter</filter-name>
+        <url-pattern>/Admincp/*</url-pattern>
+    </filter-mapping>
 </web-app>

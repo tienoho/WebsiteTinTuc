@@ -1,92 +1,46 @@
+<%@ page import="vn.haui.web.model.Post" %>
+<%@ page import="vn.haui.web.command.PostDao" %>
+<%@ page import="vn.haui.web.common.WebConstant" %>
+<%@ page import="vn.haui.web.model.Users" %>
+<%@ page import="vn.haui.web.command.UsersDao" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="root" value="${pageContext.request.contextPath}"/>
+
+<%
+    PostDao postDao=new PostDao();
+    UsersDao usersDao=new UsersDao();
+%>
+
 <aside class="col-4 sidebar" data-sticky="1">
     <div class="theiaStickySidebar">
         <ul>
             <li id="bunyad-latest-posts-widget-3" class="widget latest-posts">
-                <h3 class="widgettitle">Our Picks</h3>
+                <h3 class="widgettitle">Xem nhiều nhất</h3>
                 <ul class="posts-list">
-                    <li>
-                        <a href="">
-                            <img width="104" height="69" src="${root}/images/shutterstock_554776870-104x69.jpg"
+                    <%for(Post pView:postDao.getListInPostView(WebConstant.postView)){
+                        String extendsImgNew = pView.getPostImg();
+                        if (extendsImgNew.contains(".")) {
+                            extendsImgNew = extendsImgNew.substring(extendsImgNew.lastIndexOf("."), extendsImgNew.length());
+                        }
+                    %>
+                    <li><a href="<%=WebConstant.getLocalHost()+"/post/"+pView.getPostSlug()%>">
+                            <img width="104" height="69" src="<%=WebConstant.getLocalHost()%>/<%=pView.getPostImg().replace(extendsImgNew,"-104x69"+extendsImgNew)%>"
                                  class="attachment-post-thumbnail size-post-thumbnail wp-post-image"
-                                 alt="shutterstock_554776870"
-                                 title="Hairstyle Tips &#038; Tricks from Designer Edition"
-                                 srcset="${root}/images/shutterstock_554776870-104x69.jpg 104w, ${root}/images/shutterstock_554776870-300x200.jpg 300w, ${root}/images/shutterstock_554776870-1000x667.jpg 1000w, ${root}/images/shutterstock_554776870-702x459.jpg 702w, ${root}/images/shutterstock_554776870-214x140.jpg 214w"
+                                 alt="<%=pView.getPostImg()%>"
+                                 title="<%=pView.getPostTitle()%>"
+                                 srcset="<%=WebConstant.getLocalHost()%>/<%=pView.getPostImg().replace(extendsImgNew,"-104x69"+extendsImgNew)%> 104w, <%=WebConstant.getLocalHost()%>/<%=pView.getPostImg().replace(extendsImgNew,"-300x200"+extendsImgNew)%> 300w, <%=WebConstant.getLocalHost()%>/<%=pView.getPostImg().replace(extendsImgNew,"-1000x667"+extendsImgNew)%> 1000w, <%=WebConstant.getLocalHost()%>/<%=pView.getPostImg().replace(extendsImgNew,"-702x459"+extendsImgNew)%> 702w, <%=WebConstant.getLocalHost()%>/<%=pView.getPostImg().replace(extendsImgNew,"-214x140"+extendsImgNew)%> 214w"
                                  sizes="(max-width: 104px) 100vw, 104px"/>
                         </a>
                         <div class="content">
-                            <a href=""
-                               title="Hairstyle Tips &#038; Tricks from Designer Edition"> Hairstyle Tips
-                                &#038; Tricks from Designer Edition</a>
+                            <a href="<%=WebConstant.getLocalHost()+"/post/"+pView.getPostSlug()%>"
+                               title="<%=pView.getPostTitle()%>"><%=pView.getPostTitle()%></a>
                             <div class="cf listing-meta meta below">
-                                <time datetime="2017-01-06T02:15:37+00:00" class="meta-item">January 6,
-                                    2017
-                                </time>
+                                <time datetime="<%=pView.getPostDate()%>" class="meta-item"><%=pView.getPostDate()%></time>
                             </div>
                         </div>
                     </li>
-                    <li>
-                        <a href="">
-                            <img width="104" height="69" src="${root}/images/woman-1209592_1920-104x69.jpg"
-                                 class="attachment-post-thumbnail size-post-thumbnail wp-post-image"
-                                 alt="woman-1209592_1920"
-                                 title="Tom explains why Trendy Clothing is in style"
-                                 srcset="${root}/images/woman-1209592_1920-104x69.jpg 104w, ${root}/images/woman-1209592_1920-300x196.jpg 300w, ${root}/images/woman-1209592_1920-1000x654.jpg 1000w, ${root}/images/woman-1209592_1920-702x459.jpg 702w, ${root}/images/woman-1209592_1920-214x140.jpg 214w"
-                                 sizes="(max-width: 104px) 100vw, 104px"/>
-                        </a>
-                        <div class="content">
-                            <a href="2017/01/06/tom-explains-why-trendy-clothing-is-in-style/index.html"
-                               title="Tom explains why Trendy Clothing is in style"> Tom explains why Trendy
-                                Clothing is in style</a>
-                            <div class="cf listing-meta meta below">
-                                <time datetime="2017-01-06T02:13:37+00:00" class="meta-item">January 6,
-                                    2017
-                                </time>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <a href="">
-                            <img width="104" height="69" src="${root}/images/shutterstock_358043111-104x69.jpg"
-                                 class="attachment-post-thumbnail size-post-thumbnail wp-post-image"
-                                 alt="shutterstock_358043111"
-                                 title="15 Instagram Trends You Should Follow Today"
-                                 srcset="${root}/images/shutterstock_358043111-104x69.jpg 104w, ${root}/images/shutterstock_358043111-300x200.jpg 300w, ${root}/images/shutterstock_358043111-1000x665.jpg 1000w, ${root}/images/shutterstock_358043111-702x459.jpg 702w, ${root}/images/shutterstock_358043111-214x140.jpg 214w"
-                                 sizes="(max-width: 104px) 100vw, 104px"/>
-                        </a>
-                        <div class="content">
-                            <a href=""
-                               title="15 Instagram Trends You Should Follow Today"> 15 Instagram Trends You
-                                Should Follow Today</a>
-                            <div class="cf listing-meta meta below">
-                                <time datetime="2017-01-06T02:11:37+00:00" class="meta-item">January 6,
-                                    2017
-                                </time>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <a href="">
-                            <img width="104" height="69" src="${root}/images/shutterstock_530536855-104x69.jpg"
-                                 class="attachment-post-thumbnail size-post-thumbnail wp-post-image"
-                                 alt="shutterstock_530536855"
-                                 title="Things to Let Go Now for a Healthy New Year"
-                                 srcset="${root}/images/shutterstock_530536855-104x69.jpg 104w, ${root}/images/shutterstock_530536855-300x200.jpg 300w, ${root}/images/shutterstock_530536855-1000x667.jpg 1000w, ${root}/images/shutterstock_530536855-702x459.jpg 702w, ${root}/images/shutterstock_530536855-214x140.jpg 214w"
-                                 sizes="(max-width: 104px) 100vw, 104px"/>
-                        </a>
-                        <div class="content">
-                            <a href=""
-                               title="Things to Let Go Now for a Healthy New Year"> Things to Let Go Now for
-                                a Healthy New Year</a>
-                            <div class="cf listing-meta meta below">
-                                <time datetime="2017-01-06T02:11:37+00:00" class="meta-item">January 6,
-                                    2017
-                                </time>
-                            </div>
-                        </div>
-                    </li>
+                <%}%>
                 </ul>
             </li>
             <li id="bunyad-social-2" class="widget widget-social">
@@ -230,125 +184,41 @@
                 <h3 class="widgettitle">From Instagram</h3>Instagram has returned invalid data.
             </li>
             <li id="bunyad-blocks-widget-3" class="widget page-blocks">
-                <h3 class="widgettitle">Don&#8217;t Miss</h3>
+                <h3 class="widgettitle">Đừng bỏ lỡ</h3>
                 <section class="block-wrap blog" data-id="6">
                     <div class="block-content">
                         <div class="row b-row listing meta-below grid-2">
+                            <%for(Post pMiss:postDao.getListProductByPagesInTerm(WebConstant.getPostMissId(),1,WebConstant.getPostMissNumber())){
+                                String extendsImgNew = pMiss.getPostImg();
+                                if (extendsImgNew.contains(".")) {
+                                    extendsImgNew = extendsImgNew.substring(extendsImgNew.lastIndexOf("."), extendsImgNew.length());
+                                }
+                            %>
                             <div class="column half b-col">
-                                <article
-                                        class="highlights post-106 post type-post status-publish format-standard has-post-thumbnail category-lifestyle tag-culture tag-fashion tag-fitness tag-leisure tag-lifestyle">
-                                    <a href=""
-                                       title="Easy Boho Style: Without Looking Like a Coachella Victim"
-                                       class="image-link">
+                                <article class="highlights post-<%=pMiss.getPostID()%> post type-post status-publish format-standard has-post-thumbnail category-lifestyle tag-culture tag-fashion tag-fitness tag-leisure tag-lifestyle">
+                                    <a href="<%=WebConstant.getLocalHost()+"/post/"+pMiss.getPostSlug()%>"
+                                       title="<%=pMiss.getPostTitle()%>" class="image-link">
                                         <img width="336" height="200"
-                                             src="${root}/images/shutterstock_275843885-336x200.jpg"
-                                             class="image wp-post-image" alt="shutterstock_275843885"
-                                             title="Easy Boho Style: Without Looking Like a Coachella Victim"
-                                             srcset="${root}/images/shutterstock_275843885-336x200.jpg 336w"
+                                             src="<%=WebConstant.getLocalHost()%>/<%=pMiss.getPostImg().replace(extendsImgNew,"-336x200"+extendsImgNew)%>"
+                                             class="image wp-post-image" alt="<%=pMiss.getPostTitle()%>"
+                                             title="<%=pMiss.getPostTitle()%>"
+                                             srcset="<%=WebConstant.getLocalHost()%>/<%=pMiss.getPostImg().replace(extendsImgNew,"-336x200"+extendsImgNew)%> 336w"
                                              sizes="(max-width: 336px) 100vw, 336px"/>
                                     </a>
                                     <h2 class="post-title">
-                                        <a href="">Easy
-                                            Boho Style: Without Looking Like a Coachella Victim</a>
+                                        <a href="<%=WebConstant.getLocalHost()+"/post/"+pMiss.getPostSlug()%>"><%=pMiss.getPostTitle()%></a>
                                     </h2>
                                     <div class="cf listing-meta meta below">
                                                         <span class="meta-item author">
                                                             By <a href="author/trendy/index.html"
                                                                   title="Posts by Kate Hanson"
-                                                                  rel="author">Kate Hanson</a>
+                                                                  rel="author"><%=usersDao.getName(pMiss.getAuthorID())%></a>
                                                         </span>
-                                        <time datetime="2017-01-10T02:35:37+00:00" class="meta-item">January
-                                            10, 2017
-                                        </time>
+                                        <time datetime="<%=pMiss.getPostDate()%>" class="meta-item"><%=pMiss.getPostDate()%></time>
                                     </div>
                                 </article>
                             </div>
-                            <div class="column half b-col">
-                                <article
-                                        class="highlights post-64 post type-post status-publish format-standard has-post-thumbnail category-lifestyle tag-culture tag-fashion tag-fitness tag-leisure tag-lifestyle">
-                                    <a href=""
-                                       title="15 Creative Methods to Sharpen Your Interior Decor"
-                                       class="image-link">
-                                        <img width="336" height="200"
-                                             src="${root}/images/shutterstock_48352300-336x200.jpg"
-                                             class="image wp-post-image" alt="shutterstock_48352300"
-                                             title="15 Creative Methods to Sharpen Your Interior Decor"
-                                             srcset="${root}/images/shutterstock_48352300-336x200.jpg 336w"
-                                             sizes="(max-width: 336px) 100vw, 336px"/>
-                                    </a>
-                                    <h2 class="post-title">
-                                        <a href="">15
-                                            Creative Methods to Sharpen Your Interior Decor</a>
-                                    </h2>
-                                    <div class="cf listing-meta meta below">
-                                                        <span class="meta-item author">
-                                                            By <a href="author/trendy/index.html"
-                                                                  title="Posts by Kate Hanson"
-                                                                  rel="author">Kate Hanson</a>
-                                                        </span>
-                                        <time datetime="2017-01-10T02:35:37+00:00" class="meta-item">January
-                                            10, 2017
-                                        </time>
-                                    </div>
-                                </article>
-                            </div>
-                            <div class="column half b-col">
-                                <article
-                                        class="highlights post-62 post type-post status-publish format-standard has-post-thumbnail category-lifestyle tag-culture tag-fashion tag-fitness tag-leisure tag-lifestyle">
-                                    <a href=""
-                                       title="An Update for the Top Puma Style Garments" class="image-link">
-                                        <img width="336" height="200"
-                                             src="${root}/images/StockSnap_HBI15KEJR3-336x200.jpg"
-                                             class="image wp-post-image" alt="StockSnap_HBI15KEJR3"
-                                             title="An Update for the Top Puma Style Garments"
-                                             srcset="${root}/images/StockSnap_HBI15KEJR3-336x200.jpg 336w"
-                                             sizes="(max-width: 336px) 100vw, 336px"/>
-                                    </a>
-                                    <h2 class="post-title">
-                                        <a href="">An
-                                            Update for the Top Puma Style Garments</a>
-                                    </h2>
-                                    <div class="cf listing-meta meta below">
-                                                        <span class="meta-item author">
-                                                            By <a href="author/trendy/index.html"
-                                                                  title="Posts by Kate Hanson"
-                                                                  rel="author">Kate Hanson</a>
-                                                        </span>
-                                        <time datetime="2017-01-10T02:34:37+00:00" class="meta-item">January
-                                            10, 2017
-                                        </time>
-                                    </div>
-                                </article>
-                            </div>
-                            <div class="column half b-col">
-                                <article
-                                        class="highlights post-68 post type-post status-publish format-standard has-post-thumbnail category-lifestyle tag-culture tag-fashion tag-fitness tag-leisure tag-lifestyle">
-                                    <a href=""
-                                       title="Amazing Muffin Desserts Are Coming Back This Year"
-                                       class="image-link">
-                                        <img width="336" height="200"
-                                             src="${root}/images/shutterstock_364829048-336x200.jpg"
-                                             class="image wp-post-image" alt="shutterstock_364829048"
-                                             title="Amazing Muffin Desserts Are Coming Back This Year"
-                                             srcset="${root}/images/shutterstock_364829048-336x200.jpg 336w"
-                                             sizes="(max-width: 336px) 100vw, 336px"/>
-                                    </a>
-                                    <h2 class="post-title">
-                                        <a href="">Amazing
-                                            Muffin Desserts Are Coming Back This Year</a>
-                                    </h2>
-                                    <div class="cf listing-meta meta below">
-                                                        <span class="meta-item author">
-                                                            By <a href="author/trendy/index.html"
-                                                                  title="Posts by Kate Hanson"
-                                                                  rel="author">Kate Hanson</a>
-                                                        </span>
-                                        <time datetime="2017-01-10T02:33:37+00:00" class="meta-item">January
-                                            10, 2017
-                                        </time>
-                                    </div>
-                                </article>
-                            </div>
+                            <%}%>
                         </div>
                     </div>
                 </section>

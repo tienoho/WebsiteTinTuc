@@ -18,9 +18,7 @@
                 </div>
                 <!-- /input-group -->
             </li>
-            <li>
-                <a href="${root}/Admincp/"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
-            </li>
+            <li><a href="${root}/Admincp/"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a></li>
             <li>
                 <a href="#"><i class="fa fa-book fa-fw"></i> Bài viết<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
@@ -31,18 +29,17 @@
                 </ul>
                 <!-- /.nav-second-level -->
             </li>
+            <li><a href="${root}/Admincp/upload.jsp"><i class="fa fa-upload fa-fw"></i>Thư viện<span class="fa arrow"></span></a></li>
+            <li><a href="${root}/Admincp/setting.jsp"><i class="fa fa-wrench fa-fw"></i> Cài đặt</a></li>
+            <li><a href="${root}/Admincp/comment.jsp"><i class="fa fa-edit fa-fw"></i> Bình luận</a></li>
             <li>
-                <a href="${root}/Admincp/upload.jsp"><i class="fa fa-upload fa-fw"></i>Thư viện<span class="fa arrow"></span></a>
+                <a href="#"><i class="fa fa-user fa-fw"></i>Giao diện<span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    <li><a href="#">Header</a></li>
+                    <li><a href="${root}/Admincp/edit-footer.jsp">Footer</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
                 <!-- /.nav-second-level -->
-            </li>
-            <li>
-                <a href="${root}/Admincp/setting.jsp"><i class="fa fa-wrench fa-fw"></i> Cài đặt</a>
-            </li>
-            <li>
-                <a href="${root}/Admincp/pages/forms.html"><i class="fa fa-edit fa-fw"></i> Forms</a>
-            </li>
-            <li>
-                <a href="${root}/Admincp/comment.jsp"><i class="fa fa-edit fa-fw"></i> Bình luận</a>
             </li>
             <li>
                 <a href="#"><i class="fa fa-user fa-fw"></i> Thành viên<span class="fa arrow"></span></a>
@@ -53,18 +50,9 @@
                 </ul>
                 <!-- /.nav-second-level -->
             </li>
-            <li>
-                <a href="#"><i class="fa fa-sitemap fa-fw"></i>Phản hồi<span class="fa arrow"></span></a>
-                <!-- /.nav-second-level -->
-            </li>
-            <li>
-                <a href="#"><i class="fa fa-files-o fa-fw"></i> Sample Pages<span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level">
-                    <li><a href="${root}/Admincp/pages/blank.html">Blank Page</a></li>
-                    <li><a href="${root}/Admincp/pages/login.html">Login Page</a></li>
-                </ul>
-                <!-- /.nav-second-level -->
-            </li>
+            <li><a href="#"><i class="fa fa-sitemap fa-fw"></i>Phản hồi<span class="fa arrow"></span></a></li>
+            <li><a href="#"><i class="fa fa-sitemap fa-fw"></i>Quảng cáo<span class="fa arrow"></span></a></li>
+            <li><a href="${root}/Admincp/social.jsp"><i class="fa fa-sitemap fa-fw"></i>Mạng xã hội<span class="fa arrow"></span></a></li>
         </ul>
     </div>
     <!-- /.sidebar-collapse -->

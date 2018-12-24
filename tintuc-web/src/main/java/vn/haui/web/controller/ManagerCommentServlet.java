@@ -101,6 +101,16 @@ public class ManagerCommentServlet extends HttpServlet {
                 }
                 break;
         }
+        switch (command) {
+            case "activate":
+                try {
+                    commentDao.delete(Integer.parseInt(request.getParameter("comment-id")));
+                    url = WebConstant.getLocalHost() + "/Admincp/comment.jsp";
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+                break;
+        }
         response.sendRedirect(url);
     }
 }
