@@ -125,4 +125,21 @@ public class UsersDao {
         }
         return null;
     }
+    public String getNameRole(int roleId) throws SQLException {
+        Connection connection = DBConnect.getConnecttion();
+        String sql = "select * from role where roleid='" + roleId + "'";
+        PreparedStatement ps;
+        try {
+            ps = (PreparedStatement) connection.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getString("name");
+            }
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            connection.close();
+        }
+        return null;
+    }
 }

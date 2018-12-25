@@ -1,19 +1,17 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="vn.haui.web.command.CommentDao" %>
-<%@ page import="vn.haui.web.command.HitCounterDao" %>
-<%@ page import="vn.haui.web.command.PostDao" %>
+<%@ page import="vn.haui.web.command.*" %>
 <%@ page import="vn.haui.web.common.WebConstant" %>
 <%@ page import="vn.haui.web.model.Comment" %>
 <%@ page import="vn.haui.web.model.HitCounter" %>
 <%@ page import="vn.haui.web.model.Post" %>
+<%@ page import="vn.haui.web.model.TermsRelationships" %>
 <%@ page import="java.sql.SQLException" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.util.List" %>
-<%@ page import="vn.haui.web.model.TermsRelationships" %>
-<%@ page import="vn.haui.web.command.TermsRelationshipsDao" %>
 <%
+    UsersDao usersDao = new UsersDao();
     PostDao postDao = new PostDao();
-    TermsRelationshipsDao termsRelationshipsDao =  new TermsRelationshipsDao();
+    TermsRelationshipsDao termsRelationshipsDao = new TermsRelationshipsDao();
     String urlPath = "";
     String post_id = "";
     if (request.getAttribute("postId1") != null) {
@@ -45,6 +43,8 @@
         hitCounter = new HitCounter(Integer.parseInt(post_id), hitsCount);
         hitCounterDao.update(hitCounter);
     }
+    CommentDao commentDao = new CommentDao();
+    ArrayList<Comment> comments = commentDao.getListCommentByPost(Integer.parseInt(post_id));
 %>
 
 <%--header--%>
@@ -69,16 +69,18 @@
                     </div>
                     <div class="post-meta-b cf">
                             <span class="author-img">
-                                <img width="35" height="35" alt="Kate Hanson"
+                                <img width="35" height="35" alt="<%=usersDao.getName(p.getAuthorID())%>"
                                      class="avatar avatar-35 wp-user-avatar wp-user-avatar-35 alignnone photo"
                                      srcset="${root}/images/3874418485_26e0893ff4_z-150x150.jpg"/>
                             </span>
-                        <span class="posted-by">By <a href="#"
-                                                      title="Posts by Kate Hanson" rel="author">Kate Hanson</a> </span>
+                        <span class="posted-by">bởi <a href="#"
+                                                       title="Posts by <%=usersDao.getName(p.getAuthorID())%>"
+                                                       rel="author"><%=usersDao.getName(p.getAuthorID())%></a> </span>
                         <span class="posted-on">
-                                <time class="post-date" datetime="2017-01-08T02:25:37+00:00">January 8, 2017</time>
-                            </span> <a href="index.html#comments" class="comments">
-                        <i class="fa fa-comments-o"></i>3 Comments
+                                <time class="post-date" datetime="<%=p.getPostDate()%>"><%=p.getPostDate()%></time>
+                            </span>
+                        <a href="index.html#comments" class="comments">
+                        <i class="fa fa-comments-o"></i><%=comments.size()%> Bình luận
                         <i class="fa fa-street-view"></i><%=hitsCount%> Lượt xem
                     </a>
                     </div>
@@ -87,7 +89,7 @@
                             <i class="fa fa-facebook"></i>
                             <span class="label">Share</span>
                         </a>
-                        <a href="h#" class="cf service twitter" target="_blank">
+                        <a href="#" class="cf service twitter" target="_blank">
                             <i class="fa fa-twitter"></i>
                             <span class="label">Tweet</span>
                         </a>
@@ -114,13 +116,13 @@
                         <a href="#" class="show-more">+</a>
                     </div>
                     <div class="featured">
-                        <a href="${root}/<%=p.getPostImg()%>"
+                        <a href="<%=WebConstant.getLocalHost()%>/<%=p.getPostImg()%>"
                            title="<%=p.getPostTitle()%>">
-                            <img width="702" height="459" src="<%=p.getPostImg().replace(".jpg","-702x459.jpg")%>"
+                            <img width="702" height="459" src="<%=WebConstant.getLocalHost()%>/<%=p.getPostImg().replace(".jpg","-702x459.jpg")%>"
                                  class="attachment-main-featured size-main-featured wp-post-image"
                                  alt="shutterstock_303461690"
                                  title="<%=p.getPostTitle()%>"
-                                 srcset="${root}/<%=p.getPostImg().replace(".jpg","-702x459.jpg")%> 702w,${root}/<%=p.getPostImg().replace(".jpg","-104x69.jpg")%> 104w, ${root}/<%=p.getPostImg().replace(".jpg","-214x140.jpg")%> 214w"
+                                 srcset="<%=WebConstant.getLocalHost()%>/<%=p.getPostImg().replace(".jpg","-702x459.jpg")%> 702w,<%=WebConstant.getLocalHost()%>/<%=p.getPostImg().replace(".jpg","-104x69.jpg")%> 104w, <%=WebConstant.getLocalHost()%>/<%=p.getPostImg().replace(".jpg","-214x140.jpg")%> 214w"
                                  sizes="(max-width: 702px) 100vw, 702px"/>
                         </a>
                     </div>
@@ -187,11 +189,11 @@
                 </div>
             </section>
             <div class="author-box">
-                <h3 class="section-head">About Author</h3>
+                <h3 class="section-head">Thông tin tác giả</h3>
                 <section class="author-info">
                     <img width="100" height="100" alt="Kate Hanson"
                          class="avatar avatar-100 wp-user-avatar wp-user-avatar-100 alignnone photo"
-                         srcset="${root}/images/3874418485_26e0893ff4_z-150x150.jpg"/>
+                         srcset="<%=WebConstant.getLocalHost()%>/images/3874418485_26e0893ff4_z-150x150.jpg"/>
                     <div class="description">
                         <a href="" title="Posts by Kate Hanson" rel="author">Kate Hanson</a>
                         <ul class="social-icons">
@@ -211,10 +213,13 @@
                             perfectionism are fearful of failure, fearful of criticism.</p></div>
                 </section>
             </div>
-            <section class="related-posts"><h3 class="section-head"><span class="color">Related</span> Posts</h3>
+            <section class="related-posts">
+                <h3 class="section-head">
+                    <span class="color">Tin tức</span> liên quan</h3>
                 <ul class="highlights-box three-col related-posts">
-                    <%List<TermsRelationships> termsRelationships=termsRelationshipsDao.getListTermsRelationshipsByPostID(Integer.parseInt(post_id));
-                        for(Post pInterdepend : postDao.getListInPostInterdepend(termsRelationships.get(0).getCategoryID(), 1, 3,Integer.parseInt(post_id))){
+                    <%
+                        List<TermsRelationships> termsRelationships = termsRelationshipsDao.getListTermsRelationshipsByPostID(Integer.parseInt(post_id));
+                        for (Post pInterdepend : postDao.getListInPostInterdepend(termsRelationships.get(0).getCategoryID(), 1, 3, Integer.parseInt(post_id))) {
                             String extendsImgNew = pInterdepend.getPostImg();
                             if (extendsImgNew.contains(".")) {
                                 extendsImgNew = extendsImgNew.substring(extendsImgNew.lastIndexOf("."), extendsImgNew.length());
@@ -223,14 +228,18 @@
                     <li class="highlights column one-third">
                         <article>
                             <a href="" title="<%=pInterdepend.getPostTitle()%>" class="image-link">
-                                <img width="214" height="140" src="<%=WebConstant.getLocalHost()%>/<%=pInterdepend.getPostImg().replace(extendsImgNew,"-214x140"+extendsImgNew)%>"
+                                <img width="214" height="140"
+                                     src="<%=WebConstant.getLocalHost()%>/<%=pInterdepend.getPostImg().replace(extendsImgNew,"-214x140"+extendsImgNew)%>"
                                      class="image wp-post-image" alt="shutterstock_536935141"
                                      title="<%=pInterdepend.getPostTitle()%>"
                                      srcset="<%=WebConstant.getLocalHost()%>/<%=pInterdepend.getPostImg().replace(extendsImgNew,"-214x140"+extendsImgNew)%> 214w, <%=WebConstant.getLocalHost()%>/<%=pInterdepend.getPostImg().replace(extendsImgNew,"-300x196"+extendsImgNew)%> 300w, <%=WebConstant.getLocalHost()%>/<%=pInterdepend.getPostImg().replace(extendsImgNew,"-1000x653"+extendsImgNew)%> 1000w, <%=WebConstant.getLocalHost()%>/<%=pInterdepend.getPostImg().replace(extendsImgNew,"-104x69"+extendsImgNew)%> 104w, <%=WebConstant.getLocalHost()%>/<%=pInterdepend.getPostImg().replace(extendsImgNew,"-702x459"+extendsImgNew)%> 702w"
                                      sizes="(max-width: 214px) 100vw, 214px"/> </a>
-                            <h2><a href="" title="<%=pInterdepend.getPostTitle()%>"><%=pInterdepend.getPostTitle()%></a></h2>
+                            <h2><a href="" title="<%=pInterdepend.getPostTitle()%>"><%=pInterdepend.getPostTitle()%>
+                            </a></h2>
                             <div class="cf listing-meta meta below">
-                                <time datetime="<%=pInterdepend.getPostDate()%>" class="meta-item"><%=pInterdepend.getPostDate()%></time>
+                                <time datetime="<%=pInterdepend.getPostDate()%>"
+                                      class="meta-item"><%=pInterdepend.getPostDate()%>
+                                </time>
                             </div>
                         </article>
                     </li>
@@ -239,9 +248,7 @@
             </section>
             <div class="comments">
                 <div id="comments">
-                    <% CommentDao commentDao = new CommentDao();
-                        ArrayList<Comment> comments = commentDao.getListCommentByPost(Integer.parseInt(post_id));
-                    %>
+
                     <h3 class="section-head"><%=comments.size()%> bình luận</h3>
                     <ol class="comments-list">
                         <%for (Comment cComment : comments) {%>
@@ -291,7 +298,8 @@
                                                     <a href='${root}' rel='external nofollow'
                                                        class='url'><%=commentChildren.getComment_author()%></a>
                                                 </span> on <a
-                                                href="#comment-<%=commentChildren.getComment_id()%>" class="comment-time"
+                                                href="#comment-<%=commentChildren.getComment_id()%>"
+                                                class="comment-time"
                                                 title="<%=commentChildren.getComment_date()%>">
                                             <time pubdate
                                                   datetime="<%=commentChildren.getComment_date()%>"><%=commentChildren.getComment_date()%>
@@ -327,20 +335,21 @@
                         <form action="<%=WebConstant.getLocalHost()%>/ManagerCommentServlet" method="post"
                               id="commentform" class="comment-form" novalidate>
                             <p><textarea name="comment-content" id="comment-content" cols="45" rows="8"
-                                          aria-required="true" placeholder="Nội dung"></textarea>
+                                         aria-required="true" placeholder="Nội dung"></textarea>
                             </p>
                             <p><input name="comment-author" id="comment-author" type="text" size="30"
-                                       aria-required="true" placeholder="Tên bạn" value=""/>
+                                      aria-required="true" placeholder="Tên bạn" value=""/>
                             </p>
                             <p><input name="comment-email" id="comment-email" type="text" size="30"
-                                       aria-required="true" placeholder="Email" value=""/>
+                                      aria-required="true" placeholder="Email" value=""/>
                             </p>
                             <p class="form-submit">
                                 <input type='hidden' name='comment-post-id' value='<%=post_id%>' id='comment-post-id'/>
                                 <input type='hidden' name='comment-parent' id='comment-parent' value='0'/>
                                 <input type='hidden' name='command' id='command' value='insert'/>
                                 <input type='hidden' name='urlPath' value='<%=urlPath%>'/>
-                                <input name="submit" type="submit" id="comment-submit" class="submit" value="Post Comment"/>
+                                <input name="submit" type="submit" id="comment-submit" class="submit"
+                                       value="Post Comment"/>
                             </p>
                         </form>
                     </div>

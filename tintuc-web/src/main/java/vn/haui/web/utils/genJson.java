@@ -20,7 +20,7 @@ public class genJson {
     List<Post> posts = new ArrayList<>();
     Map objSubData1 = null;
     Map objSubData2 = null;
-    
+
     public JSONObject jsonObject () throws SQLException {
         genJson genJson = new genJson();
         try {
@@ -169,4 +169,5 @@ public class genJson {
         content += "</div></div></section>";
         return content;
     }
+
 }

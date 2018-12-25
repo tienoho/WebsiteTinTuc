@@ -87,7 +87,7 @@
                                 </div>
                             </td>
                             <td><%=u.getCreatedDate()%></td>
-                            <td><%=u.getRoleId()%></td>
+                            <td><%=usersDao.getNameRole(u.getRoleId())%></td>
                         </tr>
                         <%}%>
                         </tbody>
