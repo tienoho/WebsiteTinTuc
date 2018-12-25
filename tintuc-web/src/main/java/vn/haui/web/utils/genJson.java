@@ -20,22 +20,7 @@ public class genJson {
     List<Post> posts = new ArrayList<>();
     Map objSubData1 = null;
     Map objSubData2 = null;
-
-    public static void main(String[] args) throws SQLException {
-        genJson genJson = new genJson();
-        try {
-            genJson.getCategoryData1();
-            genJson.getCategoryData2(WebConstant.getCategorySubOne());
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        JSONObject obj1 = new JSONObject();
-        obj1.put("1", genJson.objSubData1);
-        obj1.put("2", genJson.objSubData2);
-        System.out.println(obj1.toJSONString());
-        return;
-    }
+    
     public JSONObject jsonObject () throws SQLException {
         genJson genJson = new genJson();
         try {
