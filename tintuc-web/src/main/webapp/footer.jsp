@@ -6,6 +6,7 @@
 <%@ page import="vn.haui.web.model.Post" %>
 <%@ page import="java.util.List" %>
 <%@ page import="vn.haui.web.command.PostDao" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="root" value="${pageContext.request.contextPath}"/>
 <%
@@ -23,12 +24,10 @@
                 <div class="about-widget">
                     <img src="${root}/images/sm-logo-footer.png"/>
                     <p><%=WebFooter.getSlogan()%></p>
-                    <p>
-                        Liên kết mạng xã hội:<br/>
+                    <p>Liên kết mạng xã hội:</p><br/>
                     <ul class="social-icons cf">
                     <%for (Social social:socialDao.getListSocial()){%>
-                        <li>
-                            <a href="<%=social.getSocial_url()%>" class="icon fa <%=social.getSocial_icon()%>" title="<%=social.getSocial_title()%>">
+                        <li><a href="<%=social.getSocial_url()%>" class="icon fa <%=social.getSocial_icon()%>" title="<%=social.getSocial_title()%>">
                                 <span class="visuallyhidden"><%=social.getSocial_name()%></span>
                             </a>
                         </li>

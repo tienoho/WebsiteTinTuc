@@ -85,7 +85,26 @@ public class CategoryDao {
         }
         return category;
     }
+    // get name category
+    public String getCategoryName(String category_slug) {
+        Connection connection = DBConnect.getConnecttion();
+        String sql = "SELECT category_name FROM CATEGORY WHERE category_slug='" + category_slug + "'";
+        PreparedStatement preparedStatement;
+        String nameCategory="";
+        try {
+            preparedStatement = connection.prepareStatement(sql);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
 
+                nameCategory=rs.getString("category_name");
+            }
+            connection.close();
+        } catch (SQLException e) {
+            Logger.getLogger(CategoryDao.class.getName()).log(Level.SEVERE, null, e);
+            e.printStackTrace();
+        }
+        return nameCategory;
+    }
     //kiểm tra xem category_slug  đã tồn tại hay chưa
     public boolean checkCategorySlug(String category_slug) {
         Connection connection = DBConnect.getConnecttion();

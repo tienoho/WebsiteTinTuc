@@ -348,7 +348,7 @@
             </div>
         </div>
         <%--sidebar--%>
-        <jsp:include page="sidebar-post.jsp"/>
+        <jsp:include page="sidebar.jsp"/>
     </div>
 </div>
 

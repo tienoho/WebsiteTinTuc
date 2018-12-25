@@ -403,7 +403,7 @@
                             <i class="fa fa-search"></i>
                         </a>
                         <div class="search">
-                            <form role="search" action="" method="get">
+                            <form role="search" action="<%=WebConstant.getLocalHost()%>/Search" method="get">
                                 <input type="text" name="s" class="query live-search-query" value=""
                                        placeholder="Search..."/>
                                 <button class="search-button" type="submit">

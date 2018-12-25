@@ -1,38 +1,34 @@
-<%@ page import="vn.haui.web.command.CategoryDao" %>
 <%@ page import="vn.haui.web.command.PostDao" %>
 <%@ page import="vn.haui.web.command.UsersDao" %>
+<%@ page import="vn.haui.web.command.CategoryDao" %>
 <%@ page import="vn.haui.web.common.WebConstant" %>
 <%@ page import="vn.haui.web.model.Post" %>
-<%@ page import="vn.haui.web.utils.tool" %>
 <%@ page import="java.util.ArrayList" %>
-<%--
+<%@ page import="vn.haui.web.utils.tool" %>
+<%@ page import="java.util.List" %>
+<%@ page import="java.sql.SQLException" %><%--
   Created by IntelliJ IDEA.
   User: Admin
-  Date: 26/11/2018
-  Time: 1:28 CH
+  Date: 25/12/2018
+  Time: 11:51 SA
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="root" value="${pageContext.request.contextPath}"/>
 <%
+    UsersDao usersDao=new UsersDao();
     PostDao postDao = new PostDao();
-    UsersDao usersDao = new UsersDao();
-    CategoryDao categoryDao = new CategoryDao();
-    String categorySlug = request.getRequestURL().toString();
-    categorySlug = categorySlug.substring(categorySlug.lastIndexOf("/") + 1);
-    int category_id = postDao.getCategoyID(categorySlug);
-    String CategoryName = categoryDao.getCategoryName(categorySlug);
-
-    int total = 0;
-    if (request.getParameter("categoryID") != null) {
-        category_id = Integer.parseInt(request.getParameter("categoryID"));
-        CategoryName = categoryDao.getCategory(category_id).getCategoryName();
-        total = postDao.getCountPostByCategoyTerm(category_id);
-    } else {
-        total = postDao.getCountPostByCategoyTerm(category_id);
+    String keySearch = "";
+    if(request.getParameter("s")!=null){
+        keySearch = (String) request.getParameter("s");
     }
-
+    int total=0;
+    try {
+        total=postDao.getCountSearch(keySearch);
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
     int pages = 1, firstResult = 0, maxResult = 0;
     if (request.getParameter("pages") != null) {
         pages = Integer.parseInt(request.getParameter("pages"));
@@ -44,7 +40,13 @@
         firstResult = (pages - 1) * WebConstant.getPostNumber();
         maxResult = WebConstant.getPostNumber();
     }
-    ArrayList<Post> listPost = postDao.getListProductByPagesInTerm(category_id, firstResult, maxResult);
+    List<Post> posts = null;
+    try {
+        posts = postDao.getListSearch(keySearch, firstResult, maxResult);
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+
 %>
 <jsp:include page="header.jsp"/>
 <div class="breadcrumbs-wrap">
@@ -57,17 +59,17 @@
             </a>
             </span>
             <span class="delim">&raquo;</span>
-            <span class="current">Chuyên mục: "<%=CategoryName%>"</span>
+            <span class="current">Tìm kiếm</span>
         </div>
     </div>
 </div>
 <div class="main wrap cf">
     <div class="row">
         <div class="col-8 main-content">
-            <h2 class="main-heading">Chuyên đề: <strong><%=CategoryName%>
+            <h2 class="main-heading">Tìm kiếm: "<%=keySearch%>"<strong>
             </strong></h2>
             <div class="posts-list listing-alt">
-                <% for (Post p : listPost) {%>
+                <% for (Post p : posts) {%>
                 <article
                         class="post-<%=p.getPostID()%> post type-post status-publish format-standard has-post-thumbnail category-business category-lifestyle tag-culture tag-fashion tag-fitness tag-leisure tag-lifestyle">
                     <div class="post-wrap">
@@ -106,7 +108,7 @@
                     if (pages > 1) {
                 %>
                 <a class="prev page-numbers"
-                   href="${root}/Category/categorySlug?categoryID=<%=category_id%>&pages=<%=pages-1%>">
+                   href="${root}/Search?s=<%=keySearch%>&pages=<%=pages-1%>">
                     <i class="fa fa-angle-left"></i>
                     <span class="visuallyhidden">Previous</span>
                 </a>
@@ -120,21 +122,15 @@
                 } else {
                 %>
                 <a class='page-numbers'
-                   href='${root}/Category/categorySlug?categoryID=<%=category_id%>&pages=<%=i%>'><%=i%>
+                   href='${root}/Search?s=<%=keySearch%>&pages=<%=i%>'><%=i%>
                 </a>
-                <%
-                        }
-                    }
-                    if (pages >= cout && cout > 1) {
-                %>
+                <%}}if (pages >= cout && cout > 1) {%>
                 <a class="next page-numbers"
-                   href="${root}/Category/categorySlug?categoryID=<%=category_id%>&pages=<%=pages+1%>">
+                   href="${root}/Search?s=<%=keySearch%>&pages=<%=pages+1%>">
                     <span class="visuallyhidden">Next</span>
                     <i class="fa fa-angle-right"></i>
                 </a>
-                <%
-                    }
-                %>
+                <%}%>
 
             </div>
         </div>

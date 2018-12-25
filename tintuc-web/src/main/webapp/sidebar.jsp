@@ -3,6 +3,8 @@
 <%@ page import="vn.haui.web.common.WebConstant" %>
 <%@ page import="vn.haui.web.model.Users" %>
 <%@ page import="vn.haui.web.command.UsersDao" %>
+<%@ page import="java.util.List" %>
+<%@ page import="vn.haui.web.utils.tool" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="root" value="${pageContext.request.contextPath}"/>
@@ -15,6 +17,13 @@
 <aside class="col-4 sidebar" data-sticky="1">
     <div class="theiaStickySidebar">
         <ul>
+            <li id="bunyad_ads_widget-4" class="widget code-widget">
+                <div class="a-widget">
+                    <a href="${root}">
+                        <img src="${root}/images/sm-banner-350-2x.jpg" width="300" alt="Sidebar Ad" />
+                    </a>
+                </div>
+            </li>
             <li id="bunyad-latest-posts-widget-3" class="widget latest-posts">
                 <h3 class="widgettitle">Xem nhiều nhất</h3>
                 <ul class="posts-list">
@@ -79,105 +88,73 @@
                 </ul>
             </li>
             <li id="bunyad-blocks-widget-2" class="widget page-blocks">
-                <h3 class="widgettitle">Latest Fun</h3>
+                <h3 class="widgettitle">Tin ngẫu nhiên</h3>
                 <section class="block-wrap highlights" data-id="5">
                     <div class="highlights">
+                        <%int demRamdom=0;
+                            List<Post> postListRandom=postDao.getListRandomInPost(4);
+                        for(Post pRandom:postListRandom){
+                            String extendsImgNew = pRandom.getPostImg();
+                            if (extendsImgNew.contains(".")) {
+                                extendsImgNew = extendsImgNew.substring(extendsImgNew.lastIndexOf("."), extendsImgNew.length());
+                            }%>
                         <article>
-                            <a href=""
-                               title="Summer Style: Chunky Knit For Leather Suits" class="image-link">
+                            <a href="<%=WebConstant.getLocalHost()+"/post/"+pRandom.getPostSlug()%>"
+                               title="<%=pRandom.getPostTitle()%>" class="image-link">
                                 <img width="336" height="200"
-                                     src="${root}/images/shutterstock_350007890-336x200.jpg"
-                                     class="image wp-post-image" alt="shutterstock_350007890"
-                                     title="Summer Style: Chunky Knit For Leather Suits"
-                                     srcset="${root}/images/shutterstock_350007890-336x200.jpg 336w, ${root}/images/shutterstock_350007890-336x200@2x.jpg 672w"
+                                     src="<%=WebConstant.getLocalHost()%>/<%=pRandom.getPostImg().replace(extendsImgNew,"-336x200"+extendsImgNew)%>"
+                                     class="image wp-post-image" alt="<%=pRandom.getPostTitle()%>"
+                                     title="<%=pRandom.getPostTitle()%>"
+                                     srcset="<%=WebConstant.getLocalHost()%>/<%=pRandom.getPostImg().replace(extendsImgNew,"-336x200"+extendsImgNew)%> 336w"
                                      sizes="(max-width: 336px) 100vw, 336px"/>
                             </a>
                             <h2 class="post-title">
                                 <a href=""
-                                   title="Summer Style: Chunky Knit For Leather Suits">Summer Style: Chunky
-                                    Knit For Leather Suits</a>
+                                   title="<%=pRandom.getPostTitle()%>"><%=pRandom.getPostTitle()%></a>
                             </h2>
                             <div class="cf listing-meta meta below">
                                                 <span class="meta-item author">
-                                                    By <a href="author/trendy/index.html" title="Posts by Kate Hanson"
-                                                          rel="author">Kate Hanson</a>
+                                                    By <a href="author/trendy/index.html" title="Posts by <%=new UsersDao().getName(pRandom.getAuthorID())%>"
+                                                          rel="author"><%=new UsersDao().getName(pRandom.getAuthorID())%></a>
                                                 </span>
-                                <time datetime="2017-01-08T02:30:37+00:00" class="meta-item">January 8,
-                                    2017
-                                </time>
+                                <time datetime="<%=pRandom.getPostDate()%>" class="meta-item"><%=pRandom.getPostDate()%></time>
                             </div>
                             <div class="excerpt">
-                                <p>It is important to be chic. I love the 2000s because everyone started to
-                                    love&hellip;</p>
+                                <p><%=tool.html2text(pRandom.getPostContent()).substring(0,100)%></p>
                             </div>
                         </article>
+                        <%break;}%>
                         <ul class="block posts-list thumb">
+                            <%for(Post pRandom:postListRandom){
+                                String extendsImgNew = pRandom.getPostImg();
+                                if (extendsImgNew.contains(".")) {
+                                    extendsImgNew = extendsImgNew.substring(extendsImgNew.lastIndexOf("."), extendsImgNew.length());
+                                }
+                            if(demRamdom>0){%>
                             <li>
-                                <a href="">
-                                    <img width="104" height="69" src="${root}/images/pexels-photo-236287-104x69.jpg"
+                                <a href="<%=WebConstant.getLocalHost()+"/post/"+pRandom.getPostSlug()%>">
+                                    <img width="104" height="69" src="<%=WebConstant.getLocalHost()%>/<%=pRandom.getPostImg().replace(extendsImgNew,"-104x69"+extendsImgNew)%>"
                                          class="attachment-post-thumbnail size-post-thumbnail wp-post-image"
-                                         alt="pexels-photo-236287"
-                                         title="Love In Style For The Proposal of Timeless Relation"
-                                         srcset="${root}/images/pexels-photo-236287-104x69.jpg 104w, ${root}/images/pexels-photo-236287-300x200.jpg 300w, ${root}/images/pexels-photo-236287-1000x667.jpg 1000w, ${root}/images/pexels-photo-236287-702x459.jpg 702w, ${root}/images/pexels-photo-236287-214x140.jpg 214w"
+                                         alt="<%=pRandom.getPostTitle()%>"
+                                         title="<%=pRandom.getPostTitle()%>"
+                                         srcset="<%=WebConstant.getLocalHost()%>/<%=pRandom.getPostImg().replace(extendsImgNew,"-104x69"+extendsImgNew)%> 104w, <%=WebConstant.getLocalHost()%>/<%=pRandom.getPostImg().replace(extendsImgNew,"-300x200"+extendsImgNew)%> 300w, <%=WebConstant.getLocalHost()%>/<%=pRandom.getPostImg().replace(extendsImgNew,"-1000x667"+extendsImgNew)%> 1000w, <%=WebConstant.getLocalHost()%>/<%=pRandom.getPostImg().replace(extendsImgNew,"-702x459"+extendsImgNew)%> 702w, <%=WebConstant.getLocalHost()%>/<%=pRandom.getPostImg().replace(extendsImgNew,"-214x140"+extendsImgNew)%> 214w"
                                          sizes="(max-width: 104px) 100vw, 104px"/>
                                 </a>
                                 <div class="content">
-                                    <a href="">Love
-                                        In Style For The Proposal of Timeless Relation</a>
+                                    <a href=""><%=pRandom.getPostTitle()%></a>
                                     <div class="cf listing-meta below">
-                                        <time datetime="2017-01-08T02:28:37+00:00" class="meta-item">January
-                                            8, 2017
-                                        </time>
+                                        <time datetime="<%=pRandom.getPostDate()%>" class="meta-item"><%=pRandom.getPostDate()%></time>
                                     </div>
                                 </div>
                             </li>
-                            <li>
-                                <a href="">
-                                    <img width="104" height="69"
-                                         src="${root}/images/shutterstock_303461690-1-104x69.jpg"
-                                         class="attachment-post-thumbnail size-post-thumbnail wp-post-image"
-                                         alt="shutterstock_303461690"
-                                         title="Annie Ziegler to Wear the Designer Favorite Clothes at Oscars"
-                                         srcset="${root}/images/shutterstock_303461690-1-104x69.jpg 104w, ${root}/images/shutterstock_303461690-1-300x200.jpg 300w, ${root}/images/shutterstock_303461690-1-1000x667.jpg 1000w, ${root}/images/shutterstock_303461690-1-702x459.jpg 702w, ${root}/images/shutterstock_303461690-1-214x140.jpg 214w"
-                                         sizes="(max-width: 104px) 100vw, 104px"/>
-                                </a>
-                                <div class="content">
-                                    <a href="">Annie
-                                        Ziegler to Wear the Designer Favorite Clothes at Oscars</a>
-                                    <div class="cf listing-meta below">
-                                        <time datetime="2017-01-08T02:25:37+00:00" class="meta-item">January
-                                            8, 2017
-                                        </time>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <a href="">
-                                    <img width="104" height="69"
-                                         src="${root}/images/shutterstock_370070387-1-104x69.jpg"
-                                         class="attachment-post-thumbnail size-post-thumbnail wp-post-image"
-                                         alt="shutterstock_370070387"
-                                         title="American Street Style is Taking Over in 2017"
-                                         srcset="${root}/images/shutterstock_370070387-1-104x69.jpg 104w, ${root}/images/shutterstock_370070387-1-702x459.jpg 702w, ${root}/images/shutterstock_370070387-1-214x140.jpg 214w"
-                                         sizes="(max-width: 104px) 100vw, 104px"/>
-                                </a>
-                                <div class="content">
-                                    <a href="">American
-                                        Street Style is Taking Over in 2017</a>
-                                    <div class="cf listing-meta below">
-                                        <time datetime="2017-01-08T02:19:55+00:00" class="meta-item">January
-                                            8, 2017
-                                        </time>
-                                    </div>
-                                </div>
-                            </li>
+                            <%}demRamdom++;}%>
                         </ul>
                     </div>
                 </section>
             </li>
             <li id="bunyad_ads_widget-3" class="widget code-widget">
                 <div class="a-widget">
-                    <img src="images/sm-banner-350.jpg" width="300">
+                    <img src="<%=WebConstant.getLocalHost()%>/images/sm-banner-350.jpg" width="300">
                 </div>
             </li>
             <li id="null-instagram-feed-3" class="widget null-instagram-feed">

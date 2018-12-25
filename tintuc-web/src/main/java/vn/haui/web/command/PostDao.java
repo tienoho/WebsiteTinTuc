@@ -89,6 +89,32 @@ public class PostDao {
         connection.close();
         return list;
     }
+    //phan trang cho search
+    public ArrayList<Post> getListSearch(String str,int firstResult, int maxResult) throws SQLException {
+        Connection connection = DBConnect.getConnecttion();
+        str=str.replace("+","%").replace(" ","%");
+        String sql = "SELECT * FROM post where post_slug like N'%"+str+"%' or post_title like N'%"+str+"%' limit ?,?";
+        PreparedStatement ps = connection.prepareStatement(sql);
+        ps.setInt(1, firstResult);
+        ps.setInt(2, maxResult);
+        ResultSet rs = ps.executeQuery();
+        ArrayList<Post> list = new ArrayList<Post>();
+        while (rs.next()) {
+            Post post = new Post();
+            post.setPostID(rs.getInt("post_id"));
+            post.setAuthorID(rs.getInt("author_id"));
+            post.setPostDate(rs.getDate("post_date"));
+            post.setPostEditDate(rs.getDate("post_edit_date"));
+            post.setPostContent(rs.getString("post_content"));
+            post.setPostTitle(rs.getString("post_title"));
+            post.setPostStatus(rs.getString("post_status"));
+            post.setPostSlug(rs.getString("post_slug"));
+            post.setPostImg(rs.getString("post_img"));
+            list.add(post);
+        }
+        connection.close();
+        return list;
+    }
     //phan trang cho arraylist
     public ArrayList<Post> getListProductByPages(int categoryID, int firstResult, int maxResult) throws SQLException {
         Connection connection = DBConnect.getConnecttion();
@@ -206,7 +232,30 @@ public class PostDao {
         connection.close();
         return list;
     }
-
+    //Get cac bai viet ngau nhien
+    public ArrayList<Post> getListRandomInPost(int number) throws SQLException {
+        Connection connection = DBConnect.getConnecttion();
+        String sql2="SELECT * FROM post ORDER BY RAND() LIMIT ?";
+        PreparedStatement ps = connection.prepareStatement(sql2);
+        ps.setInt(1, number);
+        ResultSet rs = ps.executeQuery();
+        ArrayList<Post> list = new ArrayList<Post>();
+        while (rs.next()) {
+            Post post = new Post();
+            post.setPostID(rs.getInt("post_id"));
+            post.setAuthorID(rs.getInt("author_id"));
+            post.setPostDate(rs.getDate("post_date"));
+            post.setPostEditDate(rs.getDate("post_edit_date"));
+            post.setPostContent(rs.getString("post_content"));
+            post.setPostTitle(rs.getString("post_title"));
+            post.setPostStatus(rs.getString("post_status"));
+            post.setPostSlug(rs.getString("post_slug"));
+            post.setPostImg(rs.getString("post_img"));
+            list.add(post);
+        }
+        connection.close();
+        return list;
+    }
     //
     public ArrayList<Post> getListProductByPagesInTermChildren(int categoryParentID, int firstResult, int maxResult) throws SQLException {
         Connection connection = DBConnect.getConnecttion();
@@ -258,6 +307,19 @@ public class PostDao {
         }
         connection.close();
         return post;
+    }
+    //count search
+    public int getCountSearch(String str) throws SQLException {
+        Connection connection = DBConnect.getConnecttion();
+        String sql = "SELECT * FROM post where post_slug like N'%"+str+"%' or post_title like N'%"+str+"%'";
+        PreparedStatement ps = connection.prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
+        int count = 0;
+        while (rs.next()) {
+            count = rs.getInt(1);
+        }
+        connection.close();
+        return count;
     }
     public int getCountPostByCategoy(int categoryID) throws SQLException {
         Connection connection = DBConnect.getConnecttion();
