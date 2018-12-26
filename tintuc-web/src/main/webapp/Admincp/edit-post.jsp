@@ -1,10 +1,10 @@
-<%@ page import="vn.haui.web.command.PostDao" %>
-<%@ page import="vn.haui.web.model.Post" %>
 <%@ page import="vn.haui.web.command.CategoryDao" %>
-<%@ page import="vn.haui.web.model.Category" %>
-<%@ page import="java.sql.SQLException" %>
+<%@ page import="vn.haui.web.command.PostDao" %>
 <%@ page import="vn.haui.web.command.TermsRelationshipsDao" %>
-<%@ page import="vn.haui.web.model.TermsRelationships" %><%--
+<%@ page import="vn.haui.web.model.Category" %>
+<%@ page import="vn.haui.web.model.Post" %>
+<%@ page import="vn.haui.web.model.TermsRelationships" %>
+<%@ page import="java.sql.SQLException" %><%--
   Created by IntelliJ IDEA.
   User: Admin
   Date: 29/11/2018
@@ -16,33 +16,29 @@
 <c:set var="root" value="${pageContext.request.contextPath}"/>
 <jsp:include page="header.jsp"/>
 <%
-    String action = "",postId="",result="",error="";
+    String action = "", postId = "", result = "", error = "";
 
     if (request.getParameter("action") != null)
         action = request.getParameter("action");
-    PostDao postDao=new PostDao();
-    CategoryDao categoryDao=new CategoryDao();
-    TermsRelationshipsDao termsRelationshipsDao=new TermsRelationshipsDao();
-    Post post=new Post();
-    if(action.equals("edit"))
-    {
-        if(request.getParameter("post")!=null)
-        {
-            postId= request.getParameter("post");
+    PostDao postDao = new PostDao();
+    CategoryDao categoryDao = new CategoryDao();
+    TermsRelationshipsDao termsRelationshipsDao = new TermsRelationshipsDao();
+    Post post = new Post();
+    if (action.equals("edit")) {
+        if (request.getParameter("post") != null) {
+            postId = request.getParameter("post");
             try {
-                post=postDao.getPost(Integer.parseInt(postId));
+                post = postDao.getPost(Integer.parseInt(postId));
             } catch (SQLException e) {
                 e.printStackTrace();
             }
         }
-        if(session.getAttribute("result")!=null)
-        {
-            result=(String)session.getAttribute("result");
+        if (session.getAttribute("result") != null) {
+            result = (String) session.getAttribute("result");
             session.removeAttribute("result");
         }
-        if(session.getAttribute("error")!=null)
-        {
-            error=(String)session.getAttribute("error");
+        if (session.getAttribute("error") != null) {
+            error = (String) session.getAttribute("error");
             session.removeAttribute("error");
         }
     }
@@ -50,10 +46,12 @@
 <div id="page-wrapper">
     <div class="row">
         <div class="col-lg-12">
-            <%if(!result.equals("")){%>
-            <h3 class="text-success"><%=result%></h3>
+            <%if (!result.equals("")) {%>
+            <h3 class="text-success"><%=result%>
+            </h3>
             <%}%>
-            <h1 class="page-header"><%=action.equals("edit")?"Cập nhập bài viết":"Bài viết mới"%></h1>
+            <h1 class="page-header"><%=action.equals("edit") ? "Cập nhập bài viết" : "Bài viết mới"%>
+            </h1>
         </div>
         <!-- /.col-lg-12 -->
     </div>
@@ -64,13 +62,15 @@
                 <div class="form-group">
                     <label>Tiêu đề bài viết</label>
                     <span name="post-title-result" class="text-danger"><%=error%></span>
-                    <input class="form-control" id="post-title" name="post-title" placeholder="Nhập tiêu đề tại đây" value="<%=action.equals("edit")?post.getPostTitle():""%>">
+                    <input class="form-control" id="post-title" name="post-title" placeholder="Nhập tiêu đề tại đây"
+                           value="<%=action.equals("edit")?post.getPostTitle():""%>">
                     <p class="help-block">Tên riêng sẽ hiển thị trên trang mạng của bạn.</p>
                 </div>
                 <%if (action.equals("edit")) {%>
                 <div class="form-group">
                     <label>Liên kết tĩnh</label>
-                    <input class="form-control" id="post-slug" name="post-slug" value="<%=action.equals("edit")?post.getPostSlug():""%>">
+                    <input class="form-control" id="post-slug" name="post-slug"
+                           value="<%=action.equals("edit")?post.getPostSlug():""%>">
                     <span id="post-slug-result"></span>
                     <p class="help-block">Chuỗi cho đường dẫn tĩnh là phiên bản của tên hợp chuẩn với Đường dẫn (URL).
                         Chuỗi này bao gồm chữ cái thường, số và dấu gạch ngang (-).</p>
@@ -79,11 +79,14 @@
                 <div class="form-group">
                     <label>Nội dung</label>
                     <textarea class="form-control" rows="5" id="post-content" name="post-content">
-                        <%=action.equals("edit")?post.getPostContent():""%>
+                        <%=action.equals("edit") ? post.getPostContent() : ""%>
                     </textarea>
                     <script type="text/javascript" language="javascript">
-                        var editer=CKEDITOR.replace('post-content', {width: '100%',height: '300px'},{editorConfig: '/ckeditor/config.js'});
-                        CKFinder.setupCKEditor(editer,'${root}/ckfinder/');
+                        var editer = CKEDITOR.replace('post-content', {
+                            width: '100%',
+                            height: '300px'
+                        }, {editorConfig: '/ckeditor/config.js'});
+                        CKFinder.setupCKEditor(editer, '${root}/ckfinder/');
                     </script>
                     <p class="help-block"></p>
                 </div>
@@ -100,7 +103,7 @@
             <div class="col-lg-3">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <i class="fa fa-bell fa-fw"></i> <%=action.equals("edit")?"Cập nhập":"Đăng"%>
+                        <i class="fa fa-bell fa-fw"></i> <%=action.equals("edit") ? "Cập nhập" : "Đăng"%>
                     </div>
                     <!-- /.panel-heading -->
                     <div class="panel-body">
@@ -117,8 +120,9 @@
                             </a>
                         </div>
                         <!-- /.list-group -->
-                        <%if(action.equals("edit")){%>
-                        <a href="${root}/ManagerPostServlet?post=<%=post.getPostID()%>&action=delete" class="text-danger">Xóa</a>
+                        <%if (action.equals("edit")) {%>
+                        <a href="${root}/ManagerPostServlet?post=<%=post.getPostID()%>&action=delete"
+                           class="text-danger">Xóa</a>
                         <input hidden="hidden" name="postID" value="<%=post.getPostID()%>">
                         <%}%>
                         <input hidden="hidden" name="command" value="<%=action.equals("edit")?"update":"insert"%>">
@@ -152,7 +156,7 @@
                     <!-- /.panel-heading -->
                     <div class="panel-body" style="height: 200px;">
                         <ul class="chat">
-                            <%for(Category c:categoryDao.getListCategory()){%>
+                            <%for (Category c : categoryDao.getListCategory()) {%>
                             <div class="checkbox">
                                 <label>
                                     <input type="checkbox" name="category" id="category-item-<%=c.getCategoryID()%>"
@@ -186,7 +190,7 @@
                             </div>
                             <p class="help-block">Phân cách các thẻ bằng dấu phẩy (,).</p>
                         </div>
-                        <ul class="tagchecklist"  role="list">
+                        <ul class="tagchecklist" role="list">
                             <li>a</li>
                             <li>d</li>
                         </ul>
@@ -199,8 +203,7 @@
                         <i class="fa fa-bell fa-fw"></i>Ảnh đại diện
                     </div>
                     <script>
-                        function BrowseServer( startupPath, functionData )
-                        {
+                        function BrowseServer(startupPath, functionData) {
                             // You can use the "CKFinder" class to render CKFinder in a page:
                             var finder = new CKFinder();
                             //Startup path in a form: "Type:/path/to/directory/"
@@ -215,28 +218,29 @@
                             // Launch CKFinder
                             finder.popup();
                         }
+
                         // This is a sample function which is called when a file is selected in CKFinder.
-                        function SetFileField( fileUrl, data )
-                        {
-                            document.getElementById( data["selectActionData"] ).value = fileUrl;
+                        function SetFileField(fileUrl, data) {
+                            document.getElementById(data["selectActionData"]).value = fileUrl;
                             ShowThumbnailsaa(fileUrl);
                         }
+
                         // This is a sample function which is called when a thumbnail is selected in CKFinder.
-                        function ShowThumbnails( fileUrl, data )
-                        {   // this = CKFinderAPI
+                        function ShowThumbnails(fileUrl, data) {   // this = CKFinderAPI
                             var sFileName = this.getSelectedFile().name;
-                            document.getElementById( 'thumbnails' ).innerHTML +=
+                            document.getElementById('thumbnails').innerHTML +=
                                 '<div class="thumb">' +
                                 '<img src="' + fileUrl + '" />' +
                                 '<div class="caption">' +
                                 '<a href="' + data["fileUrl"] + '" target="_blank">' + sFileName + '</a> (' + data["fileSize"] + 'KB)' +
                                 '</div>' +
                                 '</div>';
-                            document.getElementById( 'preview' ).style.display = "";
+                            document.getElementById('preview').style.display = "";
                             // It is not required to return any value.
                             // When false is returned, CKFinder will not close automatically.
                             return false;
                         }
+
                         function ShowThumbnailsaa(imgUrl) {
                             var htmlll = '<div class="thumb">' +
                                 '<img height= "150px" width= "150px" src="${root}' + imgUrl + '" />' +
@@ -252,8 +256,9 @@
                             <div id="thumbnails"></div>
                         </div>
                         <strong>Selected Image URL</strong><br/>
-                        <input id="xImagePath" name="ImagePath" type="text" value="<%=action.equals("edit")?post.getPostImg():""%>"/>
-                        <input type="button" value="Browse Server" onclick="BrowseServer( 'Images:/', 'xImagePath' );" />
+                        <input id="xImagePath" name="ImagePath" type="text"
+                               value="<%=action.equals("edit")?post.getPostImg():""%>"/>
+                        <input type="button" value="Browse Server" onclick="BrowseServer( 'Images:/', 'xImagePath' );"/>
                     </div>
                     <!-- /.panel-body -->
                 </div>
@@ -265,14 +270,14 @@
     <!-- /.row -->
 </div>
 <script>
-    $(document).ready( function() {
+    $(document).ready(function () {
         if (jQuery('#xImagePath').val() == '') {
         } else {
             var urlImage = $('#xImagePath').val();
-            var htmlll='<div class="thumb">' +
+            var htmlll = '<div class="thumb">' +
                 '<img height= "150px" width= "150px" src="${root}/' + urlImage + '" />' +
                 '</div>';
-            document.getElementById('thumbnails').innerHTML+=htmlll;
+            document.getElementById('thumbnails').innerHTML += htmlll;
             document.getElementById('preview').style.display = "";
         }
     });

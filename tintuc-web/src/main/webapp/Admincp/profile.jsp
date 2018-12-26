@@ -20,21 +20,21 @@
     UsersDao usersDao = new UsersDao();
     List<Role> roleList = roleDao.getListRole();
     Users users = null;
-    String result="";
+    String result = "";
     if (session.getAttribute("user") != null) {
         users = (Users) session.getAttribute("user");
     }
-    if(session.getAttribute("result")!=null)
-    {
-        result=(String)session.getAttribute("result");
+    if (session.getAttribute("result") != null) {
+        result = (String) session.getAttribute("result");
         session.removeAttribute("result");
     }
 %>
 <div id="page-wrapper">
     <div class="row">
         <div class="col-lg-12">
-            <%if(!result.equals("")){%>
-            <h3 class="text-success"><%=result%></h3>
+            <%if (!result.equals("")) {%>
+            <h3 class="text-success"><%=result%>
+            </h3>
             <%}%>
             <h1 class="page-header">Thành viên</h1>
         </div>
@@ -92,7 +92,7 @@
                         // This is a sample function which is called when a file is selected in CKFinder.
                         function SetFileField(fileUrl, data) {
                             document.getElementById(data["selectActionData"]).value = fileUrl;
-                                ShowThumbnailsaa(fileUrl);
+                            ShowThumbnailsaa(fileUrl);
                         }
 
                         // This is a sample function which is called when a thumbnail is selected in CKFinder.
@@ -110,6 +110,7 @@
                             // When false is returned, CKFinder will not close automatically.
                             return false;
                         }
+
                         function ShowThumbnailsaa(imgUrl) {
                             var htmlll = '<div class="thumb">' +
                                 '<img height= "150px" width= "150px" src="${root}' + imgUrl + '" />' +
@@ -149,15 +150,15 @@
         }
     });
     <%--setTimeout(function () {--%>
-        <%--if (jQuery('#xImagePath').val() == '') {--%>
-        <%--} else {--%>
-            <%--var urlImage = $('#xImagePath').val();--%>
-            <%--var htmlll = '<div class="thumb">' +--%>
-                <%--'<img height= "150px" width= "150px" src="${root}/' + urlImage + '" />' +--%>
-                <%--'</div>';--%>
-            <%--document.getElementById('thumbnails').innerHTML += htmlll;--%>
-            <%--document.getElementById('preview').style.display = "";--%>
-        <%--}--%>
+    <%--if (jQuery('#xImagePath').val() == '') {--%>
+    <%--} else {--%>
+    <%--var urlImage = $('#xImagePath').val();--%>
+    <%--var htmlll = '<div class="thumb">' +--%>
+    <%--'<img height= "150px" width= "150px" src="${root}/' + urlImage + '" />' +--%>
+    <%--'</div>';--%>
+    <%--document.getElementById('thumbnails').innerHTML += htmlll;--%>
+    <%--document.getElementById('preview').style.display = "";--%>
+    <%--}--%>
     <%--}, 2000);--%>
 </script>
 <jsp:include page="footer.jsp"/>

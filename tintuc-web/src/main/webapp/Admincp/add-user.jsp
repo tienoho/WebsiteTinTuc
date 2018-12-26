@@ -136,6 +136,7 @@
                             // When false is returned, CKFinder will not close automatically.
                             return false;
                         }
+
                         function ShowThumbnailsaa(imgUrl) {
                             var htmlll = '<div class="thumb">' +
                                 '<img height= "150px" width= "150px" src="${root}' + imgUrl + '" />' +

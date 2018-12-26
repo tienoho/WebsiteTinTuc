@@ -136,7 +136,6 @@
                                             // Launch CKFinder
                                             finder.popup();
                                         }
-
                                         // This is a sample function which is called when a file is selected in CKFinder.
                                         function SetFileField(fileUrl, data) {
                                             document.getElementById(data["selectActionData"]).value = fileUrl;
@@ -144,7 +143,6 @@
                                             x=x.replace("xImagePath","");
                                             ShowThumbnailsaa(x,fileUrl);
                                         }
-
                                         // This is a sample function which is called when a thumbnail is selected in CKFinder.
                                         function ShowThumbnails(fileUrl, data) {   // this = CKFinderAPI
                                             var sFileName = this.getSelectedFile().name;
@@ -297,9 +295,7 @@
         if (jQuery('#xImagePath-banner-header').val() == '') {
         } else {
             var urlImage = $('#xImagePath-banner-header').val();
-            var htmlll = '<div class="thumb">' +
-                '<img height= "150px" width= "150px" src="${root}' + urlImage + '" />' +
-                '</div>';
+            var htmlll = '<div class="thumb"><img height= "150px" width= "150px" src="${root}' + urlImage + '" /></div>';
             document.getElementById('thumbnails-banner-header').innerHTML += htmlll;
             document.getElementById('preview-banner-header').style.display = "";
         }
