@@ -34,11 +34,11 @@
                         }
                     %>
                     <li><a href="<%=WebConstant.getLocalHost()+"/post/"+pView.getPostSlug()%>">
-                            <img width="104" height="69" src="<%=WebConstant.getLocalHost()%>/<%=pView.getPostImg().replace(extendsImgNew,"-104x69"+extendsImgNew)%>"
+                            <img width="104" height="69" src="<%=WebConstant.getLocalHost()%><%=pView.getPostImg().replace(extendsImgNew,"-104x69"+extendsImgNew)%>"
                                  class="attachment-post-thumbnail size-post-thumbnail wp-post-image"
                                  alt="<%=pView.getPostImg()%>"
                                  title="<%=pView.getPostTitle()%>"
-                                 srcset="<%=WebConstant.getLocalHost()%>/<%=pView.getPostImg().replace(extendsImgNew,"-104x69"+extendsImgNew)%> 104w, <%=WebConstant.getLocalHost()%>/<%=pView.getPostImg().replace(extendsImgNew,"-300x200"+extendsImgNew)%> 300w, <%=WebConstant.getLocalHost()%>/<%=pView.getPostImg().replace(extendsImgNew,"-1000x667"+extendsImgNew)%> 1000w, <%=WebConstant.getLocalHost()%>/<%=pView.getPostImg().replace(extendsImgNew,"-702x459"+extendsImgNew)%> 702w, <%=WebConstant.getLocalHost()%>/<%=pView.getPostImg().replace(extendsImgNew,"-214x140"+extendsImgNew)%> 214w"
+                                 srcset="<%=WebConstant.getLocalHost()%><%=pView.getPostImg().replace(extendsImgNew,"-104x69"+extendsImgNew)%> 104w, <%=WebConstant.getLocalHost()%><%=pView.getPostImg().replace(extendsImgNew,"-300x200"+extendsImgNew)%> 300w, <%=WebConstant.getLocalHost()%><%=pView.getPostImg().replace(extendsImgNew,"-1000x667"+extendsImgNew)%> 1000w, <%=WebConstant.getLocalHost()%><%=pView.getPostImg().replace(extendsImgNew,"-702x459"+extendsImgNew)%> 702w, <%=WebConstant.getLocalHost()%><%=pView.getPostImg().replace(extendsImgNew,"-214x140"+extendsImgNew)%> 214w"
                                  sizes="(max-width: 104px) 100vw, 104px"/>
                         </a>
                         <div class="content">
@@ -102,10 +102,10 @@
                             <a href="<%=WebConstant.getLocalHost()+"/post/"+pRandom.getPostSlug()%>"
                                title="<%=pRandom.getPostTitle()%>" class="image-link">
                                 <img width="336" height="200"
-                                     src="<%=WebConstant.getLocalHost()%>/<%=pRandom.getPostImg().replace(extendsImgNew,"-336x200"+extendsImgNew)%>"
+                                     src="<%=WebConstant.getLocalHost()%><%=pRandom.getPostImg().replace(extendsImgNew,"-336x200"+extendsImgNew)%>"
                                      class="image wp-post-image" alt="<%=pRandom.getPostTitle()%>"
                                      title="<%=pRandom.getPostTitle()%>"
-                                     srcset="<%=WebConstant.getLocalHost()%>/<%=pRandom.getPostImg().replace(extendsImgNew,"-336x200"+extendsImgNew)%> 336w"
+                                     srcset="<%=WebConstant.getLocalHost()%><%=pRandom.getPostImg().replace(extendsImgNew,"-336x200"+extendsImgNew)%> 336w"
                                      sizes="(max-width: 336px) 100vw, 336px"/>
                             </a>
                             <h2 class="post-title">
@@ -133,11 +133,11 @@
                             if(demRamdom>0){%>
                             <li>
                                 <a href="<%=WebConstant.getLocalHost()+"/post/"+pRandom.getPostSlug()%>">
-                                    <img width="104" height="69" src="<%=WebConstant.getLocalHost()%>/<%=pRandom.getPostImg().replace(extendsImgNew,"-104x69"+extendsImgNew)%>"
+                                    <img width="104" height="69" src="<%=WebConstant.getLocalHost()%><%=pRandom.getPostImg().replace(extendsImgNew,"-104x69"+extendsImgNew)%>"
                                          class="attachment-post-thumbnail size-post-thumbnail wp-post-image"
                                          alt="<%=pRandom.getPostTitle()%>"
                                          title="<%=pRandom.getPostTitle()%>"
-                                         srcset="<%=WebConstant.getLocalHost()%>/<%=pRandom.getPostImg().replace(extendsImgNew,"-104x69"+extendsImgNew)%> 104w, <%=WebConstant.getLocalHost()%>/<%=pRandom.getPostImg().replace(extendsImgNew,"-300x200"+extendsImgNew)%> 300w, <%=WebConstant.getLocalHost()%>/<%=pRandom.getPostImg().replace(extendsImgNew,"-1000x667"+extendsImgNew)%> 1000w, <%=WebConstant.getLocalHost()%>/<%=pRandom.getPostImg().replace(extendsImgNew,"-702x459"+extendsImgNew)%> 702w, <%=WebConstant.getLocalHost()%>/<%=pRandom.getPostImg().replace(extendsImgNew,"-214x140"+extendsImgNew)%> 214w"
+                                         srcset="<%=WebConstant.getLocalHost()%><%=pRandom.getPostImg().replace(extendsImgNew,"-104x69"+extendsImgNew)%> 104w, <%=WebConstant.getLocalHost()%><%=pRandom.getPostImg().replace(extendsImgNew,"-300x200"+extendsImgNew)%> 300w, <%=WebConstant.getLocalHost()%><%=pRandom.getPostImg().replace(extendsImgNew,"-1000x667"+extendsImgNew)%> 1000w, <%=WebConstant.getLocalHost()%><%=pRandom.getPostImg().replace(extendsImgNew,"-702x459"+extendsImgNew)%> 702w, <%=WebConstant.getLocalHost()%><%=pRandom.getPostImg().replace(extendsImgNew,"-214x140"+extendsImgNew)%> 214w"
                                          sizes="(max-width: 104px) 100vw, 104px"/>
                                 </a>
                                 <div class="content">
@@ -173,10 +173,10 @@
                                     <a href="<%=WebConstant.getLocalHost()+"/post/"+pMiss.getPostSlug()%>"
                                        title="<%=pMiss.getPostTitle()%>" class="image-link">
                                         <img width="336" height="200"
-                                             src="<%=WebConstant.getLocalHost()%>/<%=pMiss.getPostImg().replace(extendsImgNew,"-336x200"+extendsImgNew)%>"
+                                             src="<%=WebConstant.getLocalHost()%><%=pMiss.getPostImg().replace(extendsImgNew,"-336x200"+extendsImgNew)%>"
                                              class="image wp-post-image" alt="<%=pMiss.getPostTitle()%>"
                                              title="<%=pMiss.getPostTitle()%>"
-                                             srcset="<%=WebConstant.getLocalHost()%>/<%=pMiss.getPostImg().replace(extendsImgNew,"-336x200"+extendsImgNew)%> 336w"
+                                             srcset="<%=WebConstant.getLocalHost()%><%=pMiss.getPostImg().replace(extendsImgNew,"-336x200"+extendsImgNew)%> 336w"
                                              sizes="(max-width: 336px) 100vw, 336px"/>
                                     </a>
                                     <h2 class="post-title">

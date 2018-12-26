@@ -71,13 +71,13 @@
                 <article
                         class="post-<%=p.getPostID()%> post type-post status-publish format-standard has-post-thumbnail category-business category-lifestyle tag-culture tag-fashion tag-fitness tag-leisure tag-lifestyle">
                     <div class="post-wrap">
-                        <a href="${root}/post/<%=p.getPostSlug()%>" class="image-link">
+                        <a href="<%=WebConstant.getLocalHost()%>/post/<%=p.getPostSlug()%>" class="image-link">
                             <img width="312" height="198"
-                                 src="${root}/<%=p.getPostImg()%>"
+                                 src="<%=WebConstant.getLocalHost()%><%=p.getPostImg()%>"
                                  class="attachment-list-block size-list-block wp-post-image"
                                  alt="shutterstock_485005621"
                                  title="Rachel Runs a Business by Her Own Set of Rules"
-                                 srcset="${root}/<%=p.getPostImg().replace(".jpg","-300x200.jpg")%> 300w, ${root}/<%=p.getPostImg().replace(".jpg","-163x102.jpg")%> 163w"
+                                 srcset="<%=WebConstant.getLocalHost()%><%=p.getPostImg().replace(".jpg","-300x200.jpg")%> 300w, <%=WebConstant.getLocalHost()%><%=p.getPostImg().replace(".jpg","-163x102.jpg")%> 163w"
                                  sizes="(max-width: 300px) 100vw, 300px"/> </a>
                         <div class="content">
                             <a href="<%=WebConstant.getLocalHost()+"/post/"+p.getPostSlug()%>"
@@ -106,7 +106,7 @@
                     if (pages > 1) {
                 %>
                 <a class="prev page-numbers"
-                   href="${root}/Category/categorySlug?categoryID=<%=category_id%>&pages=<%=pages-1%>">
+                   href="<%=WebConstant.getLocalHost()%>/Category/categorySlug?categoryID=<%=category_id%>&pages=<%=pages-1%>">
                     <i class="fa fa-angle-left"></i>
                     <span class="visuallyhidden">Previous</span>
                 </a>
@@ -120,7 +120,7 @@
                 } else {
                 %>
                 <a class='page-numbers'
-                   href='${root}/Category/categorySlug?categoryID=<%=category_id%>&pages=<%=i%>'><%=i%>
+                   href='<%=WebConstant.getLocalHost()%>/Category/categorySlug?categoryID=<%=category_id%>&pages=<%=i%>'><%=i%>
                 </a>
                 <%
                         }
@@ -128,7 +128,7 @@
                     if (pages >= cout && cout > 1) {
                 %>
                 <a class="next page-numbers"
-                   href="${root}/Category/categorySlug?categoryID=<%=category_id%>&pages=<%=pages+1%>">
+                   href="<%=WebConstant.getLocalHost()%>/Category/categorySlug?categoryID=<%=category_id%>&pages=<%=pages+1%>">
                     <span class="visuallyhidden">Next</span>
                     <i class="fa fa-angle-right"></i>
                 </a>

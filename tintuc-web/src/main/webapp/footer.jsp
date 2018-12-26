@@ -157,6 +157,6 @@
     </div>
 </footer>
 </div>
-<script type="text/javascript" defer src="${root}/js/mainjs.js"></script>
+<script type="text/javascript" defer src="<%=WebConstant.getLocalHost()%>/js/mainjs.js"></script>
 </body>
 </html>

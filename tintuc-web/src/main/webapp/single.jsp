@@ -71,7 +71,7 @@
                             <span class="author-img">
                                 <img width="35" height="35" alt="<%=usersDao.getName(p.getAuthorID())%>"
                                      class="avatar avatar-35 wp-user-avatar wp-user-avatar-35 alignnone photo"
-                                     srcset="${root}/images/3874418485_26e0893ff4_z-150x150.jpg"/>
+                                     srcset="<%=WebConstant.getLocalHost()%>/images/3874418485_26e0893ff4_z-150x150.jpg"/>
                             </span>
                         <span class="posted-by">bởi <a href="#"
                                                        title="Posts by <%=usersDao.getName(p.getAuthorID())%>"
@@ -116,13 +116,13 @@
                         <a href="#" class="show-more">+</a>
                     </div>
                     <div class="featured">
-                        <a href="<%=WebConstant.getLocalHost()%>/<%=p.getPostImg()%>"
+                        <a href="<%=WebConstant.getLocalHost()%><%=p.getPostImg()%>"
                            title="<%=p.getPostTitle()%>">
                             <img width="702" height="459" src="<%=WebConstant.getLocalHost()%>/<%=p.getPostImg().replace(".jpg","-702x459.jpg")%>"
                                  class="attachment-main-featured size-main-featured wp-post-image"
                                  alt="shutterstock_303461690"
                                  title="<%=p.getPostTitle()%>"
-                                 srcset="<%=WebConstant.getLocalHost()%>/<%=p.getPostImg().replace(".jpg","-702x459.jpg")%> 702w,<%=WebConstant.getLocalHost()%>/<%=p.getPostImg().replace(".jpg","-104x69.jpg")%> 104w, <%=WebConstant.getLocalHost()%>/<%=p.getPostImg().replace(".jpg","-214x140.jpg")%> 214w"
+                                 srcset="<%=WebConstant.getLocalHost()%><%=p.getPostImg().replace(".jpg","-702x459.jpg")%> 702w,<%=WebConstant.getLocalHost()%><%=p.getPostImg().replace(".jpg","-104x69.jpg")%> 104w, <%=WebConstant.getLocalHost()%><%=p.getPostImg().replace(".jpg","-214x140.jpg")%> 214w"
                                  sizes="(max-width: 702px) 100vw, 702px"/>
                         </a>
                     </div>
@@ -197,7 +197,7 @@
                     <div class="description">
                         <a href="" title="Posts by Kate Hanson" rel="author">Kate Hanson</a>
                         <ul class="social-icons">
-                            <li><a href="${root}" class="icon fa fa-home" title="Website"> <span
+                            <li><a href="<%=WebConstant.getLocalHost()%>" class="icon fa fa-home" title="Website"> <span
                                     class="visuallyhidden">Website</span></a></li>
                             <li><a href="#" class="icon fa fa-facebook" title="Facebook"> <span class="visuallyhidden">Facebook</span></a>
                             </li>
@@ -229,10 +229,10 @@
                         <article>
                             <a href="" title="<%=pInterdepend.getPostTitle()%>" class="image-link">
                                 <img width="214" height="140"
-                                     src="<%=WebConstant.getLocalHost()%>/<%=pInterdepend.getPostImg().replace(extendsImgNew,"-214x140"+extendsImgNew)%>"
+                                     src="<%=WebConstant.getLocalHost()%><%=pInterdepend.getPostImg().replace(extendsImgNew,"-214x140"+extendsImgNew)%>"
                                      class="image wp-post-image" alt="shutterstock_536935141"
                                      title="<%=pInterdepend.getPostTitle()%>"
-                                     srcset="<%=WebConstant.getLocalHost()%>/<%=pInterdepend.getPostImg().replace(extendsImgNew,"-214x140"+extendsImgNew)%> 214w, <%=WebConstant.getLocalHost()%>/<%=pInterdepend.getPostImg().replace(extendsImgNew,"-300x196"+extendsImgNew)%> 300w, <%=WebConstant.getLocalHost()%>/<%=pInterdepend.getPostImg().replace(extendsImgNew,"-1000x653"+extendsImgNew)%> 1000w, <%=WebConstant.getLocalHost()%>/<%=pInterdepend.getPostImg().replace(extendsImgNew,"-104x69"+extendsImgNew)%> 104w, <%=WebConstant.getLocalHost()%>/<%=pInterdepend.getPostImg().replace(extendsImgNew,"-702x459"+extendsImgNew)%> 702w"
+                                     srcset="<%=WebConstant.getLocalHost()%><%=pInterdepend.getPostImg().replace(extendsImgNew,"-214x140"+extendsImgNew)%> 214w, <%=WebConstant.getLocalHost()%><%=pInterdepend.getPostImg().replace(extendsImgNew,"-300x196"+extendsImgNew)%> 300w, <%=WebConstant.getLocalHost()%><%=pInterdepend.getPostImg().replace(extendsImgNew,"-1000x653"+extendsImgNew)%> 1000w, <%=WebConstant.getLocalHost()%><%=pInterdepend.getPostImg().replace(extendsImgNew,"-104x69"+extendsImgNew)%> 104w, <%=WebConstant.getLocalHost()%><%=pInterdepend.getPostImg().replace(extendsImgNew,"-702x459"+extendsImgNew)%> 702w"
                                      sizes="(max-width: 214px) 100vw, 214px"/> </a>
                             <h2><a href="" title="<%=pInterdepend.getPostTitle()%>"><%=pInterdepend.getPostTitle()%>
                             </a></h2>
@@ -289,13 +289,13 @@
                                     id="li-comment-<%=commentChildren.getComment_id()%>">
                                     <article id="comment-<%=commentChildren.getComment_id()%>" class="comment">
                                         <div class="comment-avatar">
-                                            <img src='${root}/images/jane-doe.jpg'
+                                            <img src='<%=WebConstant.getLocalHost()%>/images/jane-doe.jpg'
                                                  width="50" height="50" alt=""
                                                  class="avatar avatar-50wp-user-avatar wp-user-avatar-50 alignnone photo avatar-default"/>
                                         </div>
                                         <div class="comment-meta">
                                                 <span class="comment-author">
-                                                    <a href='${root}' rel='external nofollow'
+                                                    <a href='<%=WebConstant.getLocalHost()%>' rel='external nofollow'
                                                        class='url'><%=commentChildren.getComment_author()%></a>
                                                 </span> on <a
                                                 href="#comment-<%=commentChildren.getComment_id()%>"

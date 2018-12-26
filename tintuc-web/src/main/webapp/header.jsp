@@ -132,7 +132,7 @@
                     <a href="${root}/" title="<%=WebConstant.getBlogname()%>" rel="home" class="is-logo-mobile">
                         <img src="<%=WebConstant.getLocalHost()+WebConstant.getxImagePath_logo_mobile()%>" class="logo-mobile" width="0" height="0"/>
                         <img src="<%=WebConstant.getLocalHost()+WebConstant.getxImagePath_logo()%>" class="logo-image" alt="<%=WebConstant.getBlogname()%>"
-                             srcset="<%=WebConstant.getLocalHost()+WebConstant.getxImagePath_logo_2x()%> ,<%=WebConstant.getLocalHost()+WebConstant.getxImagePath_logo_2x()%> 2x"/>
+                             srcset="<%=WebConstant.getLocalHost()+WebConstant.getxImagePath_logo()%> ,<%=WebConstant.getLocalHost()+WebConstant.getxImagePath_logo_2x()%> 2x"/>
                     </a>
                 </div>
                 <div class="search-overlay">
