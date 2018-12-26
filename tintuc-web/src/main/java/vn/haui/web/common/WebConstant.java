@@ -15,6 +15,60 @@ public class WebConstant {
     public static String blogdescription = "";
     public static String blogname = "";
     public static String comment = "false";
+    public static String xImagePath_icon = "/images/sm-logo-mobile.png";
+    public static String xImagePath_logo = "/images/sm-logo.png";
+    public static String xImagePath_logo_2x = "/images/sm-logo2x-1.png";
+    public static String xImagePath_logo_mobile = "/images/sm-logo-mobile.png";
+    public static String banner_header = "/images/sm-728x90.jpg";
+    public static String url_banner_header = "";
+
+    public static String getUrl_banner_header() {
+        return url_banner_header;
+    }
+
+    public static void setUrl_banner_header(String url_banner_header) {
+        WebConstant.url_banner_header = url_banner_header;
+    }
+
+    public static String getBanner_header() {
+        return banner_header;
+    }
+
+    public static void setBanner_header(String banner_header) {
+        WebConstant.banner_header = banner_header;
+    }
+
+    public static String getxImagePath_logo_2x() {
+        return xImagePath_logo_2x;
+    }
+
+    public static void setxImagePath_logo_2x(String xImagePath_logo_2x) {
+        WebConstant.xImagePath_logo_2x = xImagePath_logo_2x;
+    }
+
+    public static String getxImagePath_icon() {
+        return xImagePath_icon;
+    }
+
+    public static void setxImagePath_icon(String xImagePath_icon) {
+        WebConstant.xImagePath_icon = xImagePath_icon;
+    }
+
+    public static String getxImagePath_logo() {
+        return xImagePath_logo;
+    }
+
+    public static void setxImagePath_logo(String xImagePath_logo) {
+        WebConstant.xImagePath_logo = xImagePath_logo;
+    }
+
+    public static String getxImagePath_logo_mobile() {
+        return xImagePath_logo_mobile;
+    }
+
+    public static void setxImagePath_logo_mobile(String xImagePath_logo_mobile) {
+        WebConstant.xImagePath_logo_mobile = xImagePath_logo_mobile;
+    }
 
     public static int getPostMissNumber() {
         return postMissNumber;

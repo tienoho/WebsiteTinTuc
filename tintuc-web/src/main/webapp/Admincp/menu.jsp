@@ -1,4 +1,4 @@
-<%--
+<%@ page import="vn.haui.web.common.WebConstant" %><%--
   Created by IntelliJ IDEA.
   User: Admin
   Date: 28/11/2018
@@ -44,9 +44,9 @@
             <li>
                 <a href="#"><i class="fa fa-user fa-fw"></i> Thành viên<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
-                    <li><a href="#">Tất cả thành viên</a></li>
-                    <li><a href="#">Thêm thành viên</a></li>
-                    <li><a href="#">Hồ sơ của bạn</a></li>
+                    <li><a href="<%=WebConstant.getLocalHost()%>/Admincp/user.jsp">Tất cả thành viên</a></li>
+                    <li><a href="<%=WebConstant.getLocalHost()%>/Admincp/add-user.jsp">Thêm thành viên</a></li>
+                    <li><a href="<%=WebConstant.getLocalHost()%>/Admincp/profile.jsp">Hồ sơ của bạn</a></li>
                 </ul>
                 <!-- /.nav-second-level -->
             </li>

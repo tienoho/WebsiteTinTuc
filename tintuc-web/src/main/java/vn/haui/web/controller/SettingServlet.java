@@ -32,6 +32,12 @@ public class SettingServlet extends HttpServlet {
         String post_miss_id = request.getParameter("post_miss_id");
         String post_miss_number = request.getParameter("post_miss_number");
         String post_view_number = request.getParameter("post_view_number");
+        String image_icon = request.getParameter("xImagePath-icon");
+        String logo_image = request.getParameter("xImagePath-logo");
+        String logo_image_2x = request.getParameter("xImagePath-logo-2x");
+        String logo_image_mobile = request.getParameter("xImagePath-logo-mobile");
+        String banner_header = request.getParameter("banner-header");
+        String url_banner_header = request.getParameter("url-banner-header");
 
         HttpSession session = request.getSession(false);
         if (blogname != null && !blogname.equals("")) {
@@ -80,6 +86,29 @@ public class SettingServlet extends HttpServlet {
         }
         if (post_category != null && !post_category.equals("")) {
             setting = new Setting(1, "post_view_number", post_view_number);
+            setSetting(setting);
+        }
+        if (image_icon != null && !image_icon.equals("")) {
+            setting = new Setting(1, "icon", image_icon);
+            setSetting(setting);
+        }
+        if (logo_image != null && !logo_image.equals("")) {
+            setting = new Setting(1, "logo_image", logo_image);
+            setSetting(setting);
+        }
+        if (logo_image_2x != null && !logo_image_2x.equals("")) {
+            setting = new Setting(1, "logo_image_2x", logo_image_2x);
+            setSetting(setting);
+        }
+        if (logo_image_mobile != null && !logo_image_mobile.equals("")) {
+            setting = new Setting(1, "logo_image_mobile", logo_image_mobile);
+            setSetting(setting);
+        }
+        if (banner_header != null && !banner_header.equals("")) {
+            setting = new Setting(1, "banner_header", banner_header);
+            setSetting(setting);
+        }if (url_banner_header != null && !url_banner_header.equals("")) {
+            setting = new Setting(1, "url_banner_header", url_banner_header);
             setSetting(setting);
         }
         //HttpSession session = request.getSession(false);

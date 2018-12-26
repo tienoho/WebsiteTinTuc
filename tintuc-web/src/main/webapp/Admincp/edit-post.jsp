@@ -268,7 +268,6 @@
             document.getElementById('preview').style.display = "";
         }
     });
-
 </script>
 <!-- /#page-wrapper -->
 <jsp:include page="footer.jsp"/>

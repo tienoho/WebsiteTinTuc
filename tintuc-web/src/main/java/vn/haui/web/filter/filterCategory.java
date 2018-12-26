@@ -16,12 +16,12 @@ import java.util.List;
 public class filterCategory implements Filter{
     @Override
     public void init(FilterConfig fConfig) throws ServletException {
-        System.out.println("LogFilter init!");
+        System.out.println("Category Filter init!");
     }
 
     @Override
     public void destroy() {
-        System.out.println("LogFilter destroy!");
+        System.out.println("Category Filter destroy!");
     }
 
     @Override

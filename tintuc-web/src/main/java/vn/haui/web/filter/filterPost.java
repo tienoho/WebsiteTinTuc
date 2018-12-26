@@ -14,12 +14,12 @@ import java.util.List;
 public class filterPost implements Filter {
     @Override
     public void init(FilterConfig fConfig) throws ServletException {
-        System.out.println("LogFilter init!");
+        System.out.println("Post Filter init!");
     }
 
     @Override
     public void destroy() {
-        System.out.println("LogFilter destroy!");
+        System.out.println("Post Filter destroy!");
     }
 
     @Override

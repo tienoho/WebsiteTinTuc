@@ -22,7 +22,7 @@
             <li class="widget col-4 bunyad-about">
                 <h3 class="widgettitle">About</h3>
                 <div class="about-widget">
-                    <img src="${root}/images/sm-logo-footer.png"/>
+                    <img src="<%=WebConstant.getLocalHost()+WebFooter.getLogo()%>"/>
                     <p><%=WebFooter.getSlogan()%></p>
                     <p>Liên kết mạng xã hội:</p><br/>
                     <ul class="social-icons cf">

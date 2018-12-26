@@ -157,9 +157,6 @@
                     <img src="<%=WebConstant.getLocalHost()%>/images/sm-banner-350.jpg" width="300">
                 </div>
             </li>
-            <li id="null-instagram-feed-3" class="widget null-instagram-feed">
-                <h3 class="widgettitle">From Instagram</h3>Instagram has returned invalid data.
-            </li>
             <li id="bunyad-blocks-widget-3" class="widget page-blocks">
                 <h3 class="widgettitle">Đừng bỏ lỡ</h3>
                 <section class="block-wrap blog" data-id="6">

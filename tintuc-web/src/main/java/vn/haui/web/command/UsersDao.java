@@ -1,6 +1,7 @@
 package vn.haui.web.command;
 
 import vn.haui.web.connect.DBConnect;
+import vn.haui.web.model.Post;
 import vn.haui.web.model.Users;
 
 import java.security.MessageDigest;
@@ -141,5 +142,38 @@ public class UsersDao {
             connection.close();
         }
         return null;
+    }
+    public boolean update(Users c) throws SQLException {
+        Connection connection=null;
+        try {
+            connection = DBConnect.getConnecttion();
+            String sql = "UPDATE user set fullname=?, img=?, roleid=? where email=?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1,c.getFullName());
+            ps.setString(2, c.getImg());
+            ps.setInt(3, c.getRoleId());
+            ps.setString(4, c.getEmail());
+            int temp = ps.executeUpdate();
+            connection.close();
+            return temp == 1;
+        } catch (Exception e) {
+            connection.close();
+            return false;
+        }
+    }
+    public boolean delete(String email) throws SQLException {
+        Connection connection=null;
+        try {
+            connection = DBConnect.getConnecttion();
+            String sql = "DELETE FROM user WHERE email = ?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, email);
+            int temp = ps.executeUpdate();
+            connection.close();
+            return temp == 1;
+        } catch (Exception e) {
+            connection.close();
+            return false;
+        }
     }
 }

@@ -3,6 +3,9 @@
 <%@ page import="vn.haui.web.common.WebConstant" %>
 <%@ page import="vn.haui.web.model.Category" %>
 <%@ page import="vn.haui.web.model.Users" %>
+<%@ page import="vn.haui.web.model.Social" %>
+<%@ page import="java.util.List" %>
+<%@ page import="vn.haui.web.command.SocialDao" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="root" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
@@ -11,11 +14,8 @@
     <meta charset="UTF-8"/>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link type="text/css" media="all" href="${root}/css/style.css" rel="stylesheet"/>
+    <link rel="icon" href="<%=WebConstant.getLocalHost()+"/"+WebConstant.getxImagePath_icon()%>">
     <!--<link rel='stylesheet' id='rs-plugin-settings-css' href='http://localhost/wp-content/plugins/revslider/public/assets/css/settings.css?ver=5.3.1.5' type='text/css' media='all' />
-    <style id='rs-plugin-settings-inline-css' type='text/css'>
-        #rs-demo-id {
-        }
-    </style>
     <link rel='stylesheet' id='smartmag-fonts-css' href='http://fonts.googleapis.com/css?family=Libre+Franklin%3A400%2C400i%2C500%2C600%7CLato%3A400%2C700%2C900%7CHind%3A400%2C500%2C600%7CMerriweather%3A300italic&#038;subset' type='text/css' media='all' />
     <link rel='stylesheet' id='smartmag-core-css' href='http://localhost/wp-content/themes/smart-mag/style.css?ver=3.0.2' type='text/css' media='all' />
     <link rel='stylesheet' id='smartmag-responsive-css' href='http://localhost/wp-content/themes/smart-mag/css/responsive.css?ver=3.0.2' type='text/css' media='all' />
@@ -33,6 +33,7 @@
             head_title = (String) session.getAttribute("head_title");
             session.removeAttribute("head_title");
         }
+        List<Social> socialList=new SocialDao().getListSocial();
     %>
     <%if (!head_title.equals("")) {%>
     <title><%=head_title%> - <%=WebConstant.getBlogname()%>
@@ -67,34 +68,10 @@
                 startTime();
             }, 500);
         }
-
         // Hàm này có tác dụng chuyển những số bé hơn 10 thành dạng 01, 02, 03, ...
-        function checkTime(i) {
-            if (i < 10) {
-                i = "0" + i;
-            }
-            return i;
-        }
-
+        function checkTime(i) {if (i < 10) {i = "0" + i;}return i;}
         //hàm lấy thứ trong tuần
-        function getDay(i) {
-            switch (i) {
-                case 0:
-                    return "Thứ 2";
-                case 1:
-                    return "Thứ 3";
-                case 2:
-                    return "Thứ 4";
-                case 3:
-                    return "Thứ 5";
-                case 4:
-                    return "Thứ 6";
-                case 5:
-                    return "Thứ 7";
-                case 6:
-                    return "Chủ nhật";
-            }
-        }
+        function getDay(i) {switch (i) {case 0:return "Chủ nhật";case 1:return "Thứ 2";case 2:return "Thứ 3";case 3:return "Thứ 4";case 4:return "Thứ 5";case 5:return "Thứ 6";case 6:return "Thứ 7";}}
     </script>
 </head>
 <body onload="startTime()"
@@ -136,27 +113,12 @@
                 </div>
                 <div class="textwidget">
                     <ul class="social-icons cf">
-                        <li>
-                            <a href="http://facebook.com/themesphere" class="icon fa fa-facebook" title="Facebook">
-                                <span class="visuallyhidden">Facebook</span>
+                        <%for (Social s:socialList){%>
+                        <li><a href="<%=s.getSocial_url()%>" class="icon fa <%=s.getSocial_icon()%>" title="<%=s.getSocial_title()%>">
+                                <span class="visuallyhidden"><%=s.getSocial_name()%></span>
                             </a>
                         </li>
-                        <li>
-                            <a href="http://twitter.com/Theme_Sphere" class="icon fa fa-twitter" title="Twitter">
-                                <span class="visuallyhidden">Twitter</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="icon fa fa-google-plus" title="Google+">
-                                <span class="visuallyhidden">Google+</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="icon fa fa-linkedin" title="LinkedIn">
-                                <span class="visuallyhidden">LinkedIn</span>
-                            </a>
-                        </li>
-                        <li><a href="#" class="icon fa fa-vk" title="VK"><span class="visuallyhidden">VK</span></a></li>
+                        <%}%>
                     </ul>
                 </div>
             </section>
@@ -167,10 +129,10 @@
             <div class="mobile-head">
                 <div class="menu-icon"><a href="#"><i class="fa fa-bars"></i></a></div>
                 <div class="title">
-                    <a href="${root}/" title="SmartMag Trendy" rel="home" class="is-logo-mobile">
-                        <img src="${root}/images/sm-logo-mobile.png" class="logo-mobile" width="0" height="0"/>
-                        <img src="${root}/images/sm-logo-1.png" class="logo-image" alt="SmartMag Trendy"
-                             srcset="${root}/images/sm-logo-1.png ,${root}/images/sm-logo2x-1.png 2x"/>
+                    <a href="${root}/" title="<%=WebConstant.getBlogname()%>" rel="home" class="is-logo-mobile">
+                        <img src="<%=WebConstant.getLocalHost()+WebConstant.getxImagePath_logo_mobile()%>" class="logo-mobile" width="0" height="0"/>
+                        <img src="<%=WebConstant.getLocalHost()+WebConstant.getxImagePath_logo()%>" class="logo-image" alt="<%=WebConstant.getBlogname()%>"
+                             srcset="<%=WebConstant.getLocalHost()+WebConstant.getxImagePath_logo_2x()%> ,<%=WebConstant.getLocalHost()+WebConstant.getxImagePath_logo_2x()%> 2x"/>
                     </a>
                 </div>
                 <div class="search-overlay">
@@ -180,15 +142,15 @@
             <header class="tech">
                 <div class="title">
                     <a href="<%=WebConstant.getLocalHost()%>" title="Website tin tức" rel="home" class="is-logo-mobile">
-                        <img src="${root}/images/sm-logo-mobile.png" class="logo-mobile" width="0" height="0"/>
-                        <img src="${root}/images/sm-logo-1.png" class="logo-image" alt="Website tin tức"
-                             srcset="${root}/images/sm-logo-1.png ,${root}/images/sm-logo2x-1.png 2x"/>
+                        <img src="<%=WebConstant.getLocalHost()+WebConstant.getxImagePath_logo_mobile()%>" class="logo-mobile" width="0" height="0"/>
+                        <img src="<%=WebConstant.getLocalHost()+WebConstant.getxImagePath_logo()%>" class="logo-image" alt="<%=WebConstant.getBlogname()%>"
+                             srcset="<%=WebConstant.getLocalHost()+WebConstant.getxImagePath_logo_2x()%> ,<%=WebConstant.getLocalHost()+WebConstant.getxImagePath_logo_2x()%> 2x"/>
                     </a>
                 </div>
                 <div class="right">
                     <div class="a-widget">
-                        <a href="#">
-                            <img src="${root}/images/sm-728x90.jpg" width="728" height="90" alt="Banner"/>
+                        <a href="<%=WebConstant.getUrl_banner_header()%>">
+                            <img src="<%=WebConstant.getLocalHost()+WebConstant.getBanner_header()%>" width="728" height="90" alt="Banner"/>
                         </a>
                     </div>
                 </div>

@@ -12,12 +12,12 @@ import java.util.ArrayList;
 public class filterConfig implements Filter {
     @Override
     public void init(FilterConfig fConfig) throws ServletException {
-        System.out.println("init!");
+        System.out.println("Config init!");
     }
 
     @Override
     public void destroy() {
-        System.out.println("LogFilter destroy!");
+        System.out.println("Config Filter destroy!");
     }
 
     @Override
@@ -66,6 +66,21 @@ public class filterConfig implements Filter {
                         break;
                     case "post_miss_number":
                         WebConstant.setPostMissNumber(Integer.parseInt(s.getOptionValue()));
+                        break;
+                    case "icon":
+                        WebConstant.setxImagePath_icon(s.getOptionValue());
+                        break;
+                    case "logo_image":
+                        WebConstant.setxImagePath_logo((s.getOptionValue()));
+                        break;
+                    case "logo_image_mobile":
+                        WebConstant.setxImagePath_logo_mobile(s.getOptionValue());
+                        break;
+                    case "banner_header":
+                        WebConstant.setBanner_header(s.getOptionValue());
+                        break;
+                    case "url_banner_header":
+                        WebConstant.setUrl_banner_header(s.getOptionValue());
                         break;
                 }
             }

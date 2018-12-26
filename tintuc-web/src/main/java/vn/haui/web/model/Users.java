@@ -7,11 +7,21 @@ public class Users {
     private String password;
     private String fullName;
     private Date createdDate;
+    private String img;
     private int roleId;
 
 
     public Users() {
 
+    }
+
+    public Users(String email, String password, String fullName, Date createdDate, String img, int roleId) {
+        this.email = email;
+        this.password = password;
+        this.fullName = fullName;
+        this.createdDate = createdDate;
+        this.img = img;
+        this.roleId = roleId;
     }
 
     public Users(String email, String password, String fullName, Date createdDate, int roleId) {
@@ -22,6 +32,13 @@ public class Users {
         this.roleId = roleId;
     }
 
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
+    }
 
     public String getEmail() {
         return email;

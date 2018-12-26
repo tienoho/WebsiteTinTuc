@@ -348,8 +348,7 @@
                                 <input type='hidden' name='comment-parent' id='comment-parent' value='0'/>
                                 <input type='hidden' name='command' id='command' value='insert'/>
                                 <input type='hidden' name='urlPath' value='<%=urlPath%>'/>
-                                <input name="submit" type="submit" id="comment-submit" class="submit"
-                                       value="Post Comment"/>
+                                <input name="submit" type="submit" id="comment-submit" class="submit" value="Post Comment"/>
                             </p>
                         </form>
                     </div>
