@@ -219,6 +219,7 @@
                         function SetFileField( fileUrl, data )
                         {
                             document.getElementById( data["selectActionData"] ).value = fileUrl;
+                            ShowThumbnailsaa(fileUrl);
                         }
                         // This is a sample function which is called when a thumbnail is selected in CKFinder.
                         function ShowThumbnails( fileUrl, data )
@@ -235,6 +236,13 @@
                             // It is not required to return any value.
                             // When false is returned, CKFinder will not close automatically.
                             return false;
+                        }
+                        function ShowThumbnailsaa(imgUrl) {
+                            var htmlll = '<div class="thumb">' +
+                                '<img height= "150px" width= "150px" src="${root}' + imgUrl + '" />' +
+                                '</div>';
+                            document.getElementById('thumbnails').innerHTML = htmlll;
+                            document.getElementById('preview').style.display = "";
                         }
                     </script>
                     <!-- /.panel-heading -->

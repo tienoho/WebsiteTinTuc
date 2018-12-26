@@ -17,17 +17,37 @@
 <%
     RoleDao roleDao = new RoleDao();
     UsersDao usersDao = new UsersDao();
-List<Role> roleList = roleDao.getListRole();
-Users users = null;
-String result = "";
-if (session.getAttribute("user") != null) {
-users = (Users) session.getAttribute("user");
-}
-if (session.getAttribute("result") != null) {
-result = (String) session.getAttribute("result");
-session.removeAttribute("result");
-}
+    List<Role> roleList = roleDao.getListRole();
+    Users users = null;
+    String result = "";
+    if (session.getAttribute("user") != null) {
+        users = (Users) session.getAttribute("user");
+    }
+    if (session.getAttribute("result") != null) {
+        result = (String) session.getAttribute("result");
+        session.removeAttribute("result");
+    }
 %>
+<script type="text/javascript">
+    //check email
+    $(document).ready(function () {
+        var x_timer;
+        $("#email").keyup(function (e) {
+            clearTimeout(x_timer);
+            var user_name = $(this).val();
+            x_timer = setTimeout(function () {
+                check_username_ajax(user_name);
+            }, 1000);
+        });
+
+        function check_username_ajax(email) {
+            $("#user-result").html('<img src="js/ajax-loader.gif" />');
+            $.post('<%=WebConstant.getLocalHost()%>/CheckEmailServlet', {'email': email}, function (data) {
+                $("#user-result").html(data);
+            });
+        }
+    });
+</script>
 <div id="page-wrapper">
     <div class="row">
         <div class="col-lg-12">
@@ -98,6 +118,7 @@ session.removeAttribute("result");
                         // This is a sample function which is called when a file is selected in CKFinder.
                         function SetFileField(fileUrl, data) {
                             document.getElementById(data["selectActionData"]).value = fileUrl;
+                            ShowThumbnailsaa(fileUrl);
                         }
 
                         // This is a sample function which is called when a thumbnail is selected in CKFinder.
@@ -115,6 +136,13 @@ session.removeAttribute("result");
                             // When false is returned, CKFinder will not close automatically.
                             return false;
                         }
+                        function ShowThumbnailsaa(imgUrl) {
+                            var htmlll = '<div class="thumb">' +
+                                '<img height= "150px" width= "150px" src="${root}' + imgUrl + '" />' +
+                                '</div>';
+                            document.getElementById('thumbnails').innerHTML = htmlll;
+                            document.getElementById('preview').style.display = "";
+                        }
                     </script>
                     <!-- /.panel-heading -->
                     <div class="panel-body col-sm-10">
@@ -122,7 +150,7 @@ session.removeAttribute("result");
                             <div id="thumbnails"></div>
                         </div>
                         <strong>Selected Image URL</strong><br/>
-                        <input id="xImagePath" name="ImagePath" type="text" value="<%=users.getImg()%>"/>
+                        <input id="xImagePath" name="ImagePath" type="text" value=""/>
                         <input type="button" value="Chọn ảnh" onclick="BrowseServer( 'Images:/', 'xImagePath' );"/>
                     </div>
                 </div>
@@ -134,28 +162,4 @@ session.removeAttribute("result");
     <!-- /.row -->
 </div>
 <!-- /#page-wrapper -->
-<script>
-    $(document).ready(function () {
-        if (jQuery('#xImagePath').val() == '') {
-        } else {
-            var urlImage = $('#xImagePath').val();
-            var htmlll = '<div class="thumb">' +
-                '<img height= "150px" width= "150px" src="${root}/' + urlImage + '" />' +
-                '</div>';
-            document.getElementById('thumbnails').innerHTML += htmlll;
-            document.getElementById('preview').style.display = "";
-        }
-    });
-    setTimeout(function () {
-        if (jQuery('#xImagePath').val() == '') {
-        } else {
-            var urlImage = $('#xImagePath').val();
-            var htmlll = '<div class="thumb">' +
-                '<img height= "150px" width= "150px" src="${root}/' + urlImage + '" />' +
-                '</div>';
-            document.getElementById('thumbnails').innerHTML += htmlll;
-            document.getElementById('preview').style.display = "";
-        }
-    }, 2000);
-</script>
 <jsp:include page="footer.jsp"/>

@@ -92,6 +92,7 @@
                         // This is a sample function which is called when a file is selected in CKFinder.
                         function SetFileField(fileUrl, data) {
                             document.getElementById(data["selectActionData"]).value = fileUrl;
+                                ShowThumbnailsaa(fileUrl);
                         }
 
                         // This is a sample function which is called when a thumbnail is selected in CKFinder.
@@ -108,6 +109,13 @@
                             // It is not required to return any value.
                             // When false is returned, CKFinder will not close automatically.
                             return false;
+                        }
+                        function ShowThumbnailsaa(imgUrl) {
+                            var htmlll = '<div class="thumb">' +
+                                '<img height= "150px" width= "150px" src="${root}' + imgUrl + '" />' +
+                                '</div>';
+                            document.getElementById('thumbnails').innerHTML = htmlll;
+                            document.getElementById('preview').style.display = "";
                         }
                     </script>
                     <!-- /.panel-heading -->
@@ -134,22 +142,22 @@
         } else {
             var urlImage = $('#xImagePath').val();
             var htmlll = '<div class="thumb">' +
-                '<img height= "150px" width= "150px" src="${root}/' + urlImage + '" />' +
+                '<img height= "150px" width= "150px" src="${root}' + urlImage + '" />' +
                 '</div>';
             document.getElementById('thumbnails').innerHTML += htmlll;
             document.getElementById('preview').style.display = "";
         }
     });
-    setTimeout(function () {
-        if (jQuery('#xImagePath').val() == '') {
-        } else {
-            var urlImage = $('#xImagePath').val();
-            var htmlll = '<div class="thumb">' +
-                '<img height= "150px" width= "150px" src="${root}/' + urlImage + '" />' +
-                '</div>';
-            document.getElementById('thumbnails').innerHTML += htmlll;
-            document.getElementById('preview').style.display = "";
-        }
-    }, 2000);
+    <%--setTimeout(function () {--%>
+        <%--if (jQuery('#xImagePath').val() == '') {--%>
+        <%--} else {--%>
+            <%--var urlImage = $('#xImagePath').val();--%>
+            <%--var htmlll = '<div class="thumb">' +--%>
+                <%--'<img height= "150px" width= "150px" src="${root}/' + urlImage + '" />' +--%>
+                <%--'</div>';--%>
+            <%--document.getElementById('thumbnails').innerHTML += htmlll;--%>
+            <%--document.getElementById('preview').style.display = "";--%>
+        <%--}--%>
+    <%--}, 2000);--%>
 </script>
 <jsp:include page="footer.jsp"/>

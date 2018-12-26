@@ -140,6 +140,9 @@
                                         // This is a sample function which is called when a file is selected in CKFinder.
                                         function SetFileField(fileUrl, data) {
                                             document.getElementById(data["selectActionData"]).value = fileUrl;
+                                            var x = document.getElementById(data["selectActionData"]).getAttribute("id");
+                                            x=x.replace("xImagePath","");
+                                            ShowThumbnailsaa(x,fileUrl);
                                         }
 
                                         // This is a sample function which is called when a thumbnail is selected in CKFinder.
@@ -156,6 +159,13 @@
                                             // It is not required to return any value.
                                             // When false is returned, CKFinder will not close automatically.
                                             return false;
+                                        }
+                                        function ShowThumbnailsaa(x,imgUrl) {
+                                            var htmlll = '<div class="thumb">' +
+                                                '<img height= "150px" width= "150px" src="${root}' + imgUrl + '" />' +
+                                                '</div>';
+                                            document.getElementById('thumbnails'+x).innerHTML = htmlll;
+                                            document.getElementById('preview'+x).style.display = "";
                                         }
                                     </script>
                                     <!-- /.panel-heading -->
@@ -195,7 +205,7 @@
                                         <input id="xImagePath-logo-2x" name="xImagePath-logo-2x" type="text"
                                                value="<%=WebConstant.getxImagePath_logo()%>"/>
                                         <input type="button" value="Chọn ảnh"
-                                               onclick="BrowseServer( 'Images:/', 'xImagePath-logo-2x' );"/>
+                                               onclick="BrowseServer( 'Images:/', 'xImagePath-logo-2x');"/>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -210,21 +220,21 @@
                                         <input id="xImagePath-logo-mobile" name="xImagePath-logo-mobile" type="text"
                                                value="<%=WebConstant.getxImagePath_logo_mobile()%>"/>
                                         <input type="button" value="Chọn ảnh"
-                                               onclick="BrowseServer( 'Images:/', 'xImagePath-logo-mobile' );"/>
+                                               onclick="BrowseServer( 'Images:/', 'xImagePath-logo-mobile');"/>
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="banner-header" class="col-sm-2 col-form-label">Banner header</label>
+                                    <label for="xImagePath-banner-header" class="col-sm-2 col-form-label">Banner header</label>
                                     <!-- /.panel-heading -->
                                     <div class="panel-body col-sm-10">
                                         <div id="preview-banner-header" style="display:none">
                                             <div id="thumbnails-banner-header"></div>
                                         </div>
                                         <strong>Selected Image URL</strong><br/>
-                                        <input id="banner-header" name="banner-header" type="text"
+                                        <input id="xImagePath-banner-header" name="xImagePath-banner-header" type="text"
                                                value="<%=WebConstant.getxImagePath_logo_mobile()%>"/>
                                         <input type="button" value="Chọn ảnh"
-                                               onclick="BrowseServer( 'Images:/', 'banner-header' );"/>
+                                               onclick="BrowseServer( 'Images:/', 'xImagePath-banner-header' );"/>
                                         <label>Url</label>
                                         <input class="form-control" type="text" name="url-banner-header"
                                                value="<%=WebConstant.getUrl_banner_header()%>">
@@ -284,9 +294,9 @@
             document.getElementById('thumbnails-logo-mobile').innerHTML += htmlll;
             document.getElementById('preview-logo-mobile').style.display = "";
         }
-        if (jQuery('#banner-header').val() == '') {
+        if (jQuery('#xImagePath-banner-header').val() == '') {
         } else {
-            var urlImage = $('#banner-header').val();
+            var urlImage = $('#xImagePath-banner-header').val();
             var htmlll = '<div class="thumb">' +
                 '<img height= "150px" width= "150px" src="${root}' + urlImage + '" />' +
                 '</div>';
