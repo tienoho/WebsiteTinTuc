@@ -18,7 +18,7 @@
 %>
 <script>
     function delete_post_ajax(Post_ID) {
-        $.post('${root}/ManagerPostServlet', {'post-ID': Post_ID,'command': "delete"},function (data) {
+        $.post('<%=WebConstant.getLocalHost()%>/ManagerPostServlet', {'post-ID': Post_ID,'command': "delete"},function (data) {
             $("#myModalLabel").html(data);
         });
         //xóa thẻ sau 2 giây

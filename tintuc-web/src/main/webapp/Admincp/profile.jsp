@@ -113,7 +113,7 @@
 
                         function ShowThumbnailsaa(imgUrl) {
                             var htmlll = '<div class="thumb">' +
-                                '<img height= "150px" width= "150px" src="${root}' + imgUrl + '" />' +
+                                '<img height= "150px" width= "150px" src="<%=WebConstant.getLocalHost()%>' + imgUrl + '" />' +
                                 '</div>';
                             document.getElementById('thumbnails').innerHTML = htmlll;
                             document.getElementById('preview').style.display = "";
@@ -143,7 +143,7 @@
         } else {
             var urlImage = $('#xImagePath').val();
             var htmlll = '<div class="thumb">' +
-                '<img height= "150px" width= "150px" src="${root}' + urlImage + '" />' +
+                '<img height= "150px" width= "150px" src="<%=WebConstant.getLocalHost()%>' + urlImage + '" />' +
                 '</div>';
             document.getElementById('thumbnails').innerHTML += htmlll;
             document.getElementById('preview').style.display = "";
@@ -154,7 +154,7 @@
     <%--} else {--%>
     <%--var urlImage = $('#xImagePath').val();--%>
     <%--var htmlll = '<div class="thumb">' +--%>
-    <%--'<img height= "150px" width= "150px" src="${root}/' + urlImage + '" />' +--%>
+    <%--'<img height= "150px" width= "150px" src="<%=WebConstant.getLocalHost()%>/' + urlImage + '" />' +--%>
     <%--'</div>';--%>
     <%--document.getElementById('thumbnails').innerHTML += htmlll;--%>
     <%--document.getElementById('preview').style.display = "";--%>

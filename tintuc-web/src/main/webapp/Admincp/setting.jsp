@@ -42,7 +42,7 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-lg-12">
-                            <form role="form" method="post" action="${root}/SettingServlet">
+                            <form role="form" method="post" action="<%=WebConstant.getLocalHost()%>/SettingServlet">
                                 <div class="form-group">
                                     <label>Tên website</label>
                                     <input class="form-control" name="blogname" value="<%=WebConstant.getBlogname()%>">
@@ -160,7 +160,7 @@
                                         }
                                         function ShowThumbnailsaa(x,imgUrl) {
                                             var htmlll = '<div class="thumb">' +
-                                                '<img height= "150px" width= "150px" src="${root}' + imgUrl + '" />' +
+                                                '<img height= "150px" width= "150px" src="<%=WebConstant.getLocalHost()%>' + imgUrl + '" />' +
                                                 '</div>';
                                             document.getElementById('thumbnails'+x).innerHTML = htmlll;
                                             document.getElementById('preview'+x).style.display = "";
@@ -260,7 +260,7 @@
         } else {
             var urlImage = $('#xImagePath-icon').val();
             var htmlll = '<div class="thumb">' +
-                '<img height= "16px" width= "16px" src="${root}' + urlImage + '" />' +
+                '<img height= "16px" width= "16px" src="<%=WebConstant.getLocalHost()%>' + urlImage + '" />' +
                 '</div>';
             document.getElementById('thumbnails-icon').innerHTML += htmlll;
             document.getElementById('preview-icon').style.display = "";
@@ -269,7 +269,7 @@
         } else {
             var urlImage = $('#xImagePath-logo').val();
             var htmlll = '<div class="thumb">' +
-                '<img height= "150px" width= "150px" src="${root}' + urlImage + '" />' +
+                '<img height= "150px" width= "150px" src="<%=WebConstant.getLocalHost()%>' + urlImage + '" />' +
                 '</div>';
             document.getElementById('thumbnails-logo').innerHTML += htmlll;
             document.getElementById('preview-logo').style.display = "";
@@ -278,7 +278,7 @@
         } else {
             var urlImage = $('#xImagePath-logo-2x').val();
             var htmlll = '<div class="thumb">' +
-                '<img height= "150px" width= "150px" src="${root}' + urlImage + '" />' +
+                '<img height= "150px" width= "150px" src="<%=WebConstant.getLocalHost()%>' + urlImage + '" />' +
                 '</div>';
             document.getElementById('thumbnails-logo-2x').innerHTML += htmlll;
             document.getElementById('preview-logo-2x').style.display = "";
@@ -287,7 +287,7 @@
         } else {
             var urlImage = $('#xImagePath-logo-mobile').val();
             var htmlll = '<div class="thumb">' +
-                '<img height= "150px" width= "150px" src="${root}' + urlImage + '" />' +
+                '<img height= "150px" width= "150px" src="<%=WebConstant.getLocalHost()%>' + urlImage + '" />' +
                 '</div>';
             document.getElementById('thumbnails-logo-mobile').innerHTML += htmlll;
             document.getElementById('preview-logo-mobile').style.display = "";
@@ -295,7 +295,7 @@
         if (jQuery('#xImagePath-banner-header').val() == '') {
         } else {
             var urlImage = $('#xImagePath-banner-header').val();
-            var htmlll = '<div class="thumb"><img height= "150px" width= "150px" src="${root}' + urlImage + '" /></div>';
+            var htmlll = '<div class="thumb"><img height= "150px" width= "150px" src="<%=WebConstant.getLocalHost()%>' + urlImage + '" /></div>';
             document.getElementById('thumbnails-banner-header').innerHTML += htmlll;
             document.getElementById('preview-banner-header').style.display = "";
         }

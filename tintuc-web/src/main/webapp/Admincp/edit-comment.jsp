@@ -12,6 +12,7 @@
 <%@ page import="vn.haui.web.model.Comment" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="vn.haui.web.common.WebConstant" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="root" value="${pageContext.request.contextPath}"/>
@@ -61,7 +62,7 @@
     </div>
     <!-- /.row -->
     <div class="row">
-        <form role="form" action="${root}/ManagerCommentServlet" method="post">
+        <form role="form" action="<%=WebConstant.getLocalHost()%>/ManagerCommentServlet" method="post">
             <div class="col-lg-9">
                 <div class="form-group">
                     <label>Tên:</label>
@@ -112,7 +113,7 @@
                             </a>
                         </div>
                         <!-- /.list-group -->
-                        <a href="${root}/ManagerCommentServlet?comment=<%=comment.getComment_id()%>&action=delete" class="text-danger">Xóa</a>
+                        <a href="<%=WebConstant.getLocalHost()%>/ManagerCommentServlet?comment=<%=comment.getComment_id()%>&action=delete" class="text-danger">Xóa</a>
                         <input hidden="hidden" name="postID" value="<%=comment.getComment_id()%>">
                         <input hidden="hidden" name="command" value=update">
                         <button type="submit" class="btn btn-success">Cập nhập</button>

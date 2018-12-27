@@ -32,7 +32,7 @@
     </div>
     <!-- /.row -->
     <div class="row">
-        <form role="form" action="${root}/" method="post">
+        <form role="form" action="<%=WebConstant.getLocalHost()%>/" method="post">
             <div class="col-lg-9">
                 <div class="form-group">
                     <label>Khẩu hiệu của website</label>
@@ -148,7 +148,7 @@
         } else {
             var urlImage = $('#xImagePath').val();
             var htmlll='<div class="thumb">' +
-                '<img height= "150px" width= "150px" src="${root}' + urlImage + '" />' +
+                '<img height= "150px" width= "150px" src="<%=WebConstant.getLocalHost()%>' + urlImage + '" />' +
                 '</div>';
             document.getElementById('thumbnails').innerHTML+=htmlll;
             document.getElementById('preview').style.display = "";

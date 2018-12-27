@@ -139,7 +139,7 @@
 
                         function ShowThumbnailsaa(imgUrl) {
                             var htmlll = '<div class="thumb">' +
-                                '<img height= "150px" width= "150px" src="${root}' + imgUrl + '" />' +
+                                '<img height= "150px" width= "150px" src="<%=WebConstant.getLocalHost()%>' + imgUrl + '" />' +
                                 '</div>';
                             document.getElementById('thumbnails').innerHTML = htmlll;
                             document.getElementById('preview').style.display = "";

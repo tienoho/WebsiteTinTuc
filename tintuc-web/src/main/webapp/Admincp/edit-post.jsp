@@ -4,7 +4,8 @@
 <%@ page import="vn.haui.web.model.Category" %>
 <%@ page import="vn.haui.web.model.Post" %>
 <%@ page import="vn.haui.web.model.TermsRelationships" %>
-<%@ page import="java.sql.SQLException" %><%--
+<%@ page import="java.sql.SQLException" %>
+<%@ page import="vn.haui.web.common.WebConstant" %><%--
   Created by IntelliJ IDEA.
   User: Admin
   Date: 29/11/2018
@@ -43,6 +44,31 @@
         }
     }
 %>
+<script>
+    function addTag() {
+        var tag=document.getElementById('btn-input').value;
+        console.log("tag: "+tag);
+        var listTag;
+        var x;
+        if(tag.includes(',')===true){
+            listTag=tag.split(',');
+            console.log("listTag: "+listTag);
+            for (x in listTag){
+                console.log("x: "+listTag[x]);
+                var tagLi = '<li>'+listTag[x]+'</li>';
+                if(tag!=""){
+                    document.getElementById('tagchecklist').innerHTML += tagLi;
+                }
+            }
+        }else {
+            var tagLi = '<li>'+tag+'</li>';
+            console.log("tagLi: "+listTag);
+            if(tag!=""){
+                document.getElementById('tagchecklist').innerHTML += tagLi;
+            }
+        }
+    }
+</script>
 <div id="page-wrapper">
     <div class="row">
         <div class="col-lg-12">
@@ -57,7 +83,7 @@
     </div>
     <!-- /.row -->
     <div class="row">
-        <form role="form" action="${root}/ManagerPostServlet" method="post">
+        <form role="form" action="<%=WebConstant.getLocalHost()%>/ManagerPostServlet" method="post">
             <div class="col-lg-9">
                 <div class="form-group">
                     <label>Tiêu đề bài viết</label>
@@ -86,7 +112,7 @@
                             width: '100%',
                             height: '300px'
                         }, {editorConfig: '/ckeditor/config.js'});
-                        CKFinder.setupCKEditor(editer, '${root}/ckfinder/');
+                        CKFinder.setupCKEditor(editer, '<%=WebConstant.getLocalHost()%>/ckfinder/');
                     </script>
                     <p class="help-block"></p>
                 </div>
@@ -121,7 +147,7 @@
                         </div>
                         <!-- /.list-group -->
                         <%if (action.equals("edit")) {%>
-                        <a href="${root}/ManagerPostServlet?post=<%=post.getPostID()%>&action=delete"
+                        <a href="<%=WebConstant.getLocalHost()%>/ManagerPostServlet?post=<%=post.getPostID()%>&action=delete"
                            class="text-danger">Xóa</a>
                         <input hidden="hidden" name="postID" value="<%=post.getPostID()%>">
                         <%}%>
@@ -183,14 +209,12 @@
                                 <input id="btn-input" type="text" class="form-control input-sm"
                                        placeholder="tag here..."/>
                                 <span class="input-group-btn">
-                                    <button class="btn btn-warning btn-sm" id="btn-chat">
-                                        Thêm
-                                    </button>
+                                    <input type="button" class="btn btn-warning btn-sm" id="btn-chat" value="Thêm" onclick="addTag();"></input>
                                 </span>
                             </div>
                             <p class="help-block">Phân cách các thẻ bằng dấu phẩy (,).</p>
                         </div>
-                        <ul class="tagchecklist" role="list">
+                        <ul class="tagchecklist" id="tagchecklist" role="list">
                             <li>a</li>
                             <li>d</li>
                         </ul>
@@ -243,7 +267,7 @@
 
                         function ShowThumbnailsaa(imgUrl) {
                             var htmlll = '<div class="thumb">' +
-                                '<img height= "150px" width= "150px" src="${root}' + imgUrl + '" />' +
+                                '<img height= "150px" width= "150px" src="<%=WebConstant.getLocalHost()%>' + imgUrl + '" />' +
                                 '</div>';
                             document.getElementById('thumbnails').innerHTML = htmlll;
                             document.getElementById('preview').style.display = "";
@@ -275,7 +299,7 @@
         } else {
             var urlImage = $('#xImagePath').val();
             var htmlll = '<div class="thumb">' +
-                '<img height= "150px" width= "150px" src="${root}/' + urlImage + '" />' +
+                '<img height= "150px" width= "150px" src="<%=WebConstant.getLocalHost()%>/' + urlImage + '" />' +
                 '</div>';
             document.getElementById('thumbnails').innerHTML += htmlll;
             document.getElementById('preview').style.display = "";

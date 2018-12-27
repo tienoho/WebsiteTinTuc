@@ -126,6 +126,40 @@ public class UsersDao {
         }
         return null;
     }
+    public String getImage(String email) throws SQLException {
+        Connection connection = DBConnect.getConnecttion();
+        String sql = "select * from user where email='" + email + "'";
+        PreparedStatement ps;
+        try {
+            ps = (PreparedStatement) connection.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getString("img");
+            }
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            connection.close();
+        }
+        return null;
+    }
+    public String getImageId(int userId) throws SQLException {
+        Connection connection = DBConnect.getConnecttion();
+        String sql = "select * from user where userid='" + userId + "'";
+        PreparedStatement ps;
+        try {
+            ps = (PreparedStatement) connection.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getString("img");
+            }
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            connection.close();
+        }
+        return null;
+    }
     public String getNameRole(int roleId) throws SQLException {
         Connection connection = DBConnect.getConnecttion();
         String sql = "select * from role where roleid='" + roleId + "'";

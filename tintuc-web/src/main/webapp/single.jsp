@@ -1,19 +1,17 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="vn.haui.web.command.*" %>
 <%@ page import="vn.haui.web.common.WebConstant" %>
-<%@ page import="vn.haui.web.model.Comment" %>
-<%@ page import="vn.haui.web.model.HitCounter" %>
-<%@ page import="vn.haui.web.model.Post" %>
-<%@ page import="vn.haui.web.model.TermsRelationships" %>
 <%@ page import="java.sql.SQLException" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.util.List" %>
+<%@ page import="vn.haui.web.model.*" %>
 <%
     UsersDao usersDao = new UsersDao();
     PostDao postDao = new PostDao();
     TermsRelationshipsDao termsRelationshipsDao = new TermsRelationshipsDao();
     String urlPath = "";
     String post_id = "";
+    String avata_default="/images/avatar-64x64.jpg";
     if (request.getAttribute("postId1") != null) {
 
         post_id = (String) request.getAttribute("postId1");
@@ -43,6 +41,10 @@
         hitCounter = new HitCounter(Integer.parseInt(post_id), hitsCount);
         hitCounterDao.update(hitCounter);
     }
+    Users users = null;
+    if (session.getAttribute("user") != null) {
+        users = (Users) session.getAttribute("user");
+    }
     CommentDao commentDao = new CommentDao();
     ArrayList<Comment> comments = commentDao.getListCommentByPost(Integer.parseInt(post_id));
 %>
@@ -71,7 +73,7 @@
                             <span class="author-img">
                                 <img width="35" height="35" alt="<%=usersDao.getName(p.getAuthorID())%>"
                                      class="avatar avatar-35 wp-user-avatar wp-user-avatar-35 alignnone photo"
-                                     srcset="<%=WebConstant.getLocalHost()%>/images/3874418485_26e0893ff4_z-150x150.jpg"/>
+                                     srcset="<%=WebConstant.getLocalHost()%><%=usersDao.getImageId(p.getAuthorID())%>"/>
                             </span>
                         <span class="posted-by">bởi <a href="#"
                                                        title="Posts by <%=usersDao.getName(p.getAuthorID())%>"
@@ -255,13 +257,13 @@
                         <li class="comment even thread-even depth-1" id="li-comment-<%=cComment.getComment_id()%>">
                             <article id="comment-<%=cComment.getComment_id()%>" class="comment">
                                 <div class="comment-avatar">
-                                    <img src='<%=WebConstant.getLocalHost()%>/images/admin-avatar.jpg'
+                                    <img src='<%=WebConstant.getLocalHost()%><%=usersDao.checkEmail(cComment.getComment_author_email())==true?usersDao.getImage(cComment.getComment_author_email()):avata_default%>'
                                          width="50" height="50" alt=""
                                          class="avatar avatar-50wp-user-avatar wp-user-avatar-50 alignnone photo avatar-default"/>
                                 </div>
                                 <div class="comment-meta">
                                         <span class="comment-author">
-                                            <a href='${root}/' rel='external nofollow'
+                                            <a href='<%=WebConstant.getLocalHost()%>/' rel='external nofollow'
                                                class='url'><%=cComment.getComment_author()%></a>
                                         </span> on <a href="#comment-<%=cComment.getComment_id()%>" class="comment-time"
                                                       title="<%=cComment.getComment_date()%>">
@@ -289,7 +291,7 @@
                                     id="li-comment-<%=commentChildren.getComment_id()%>">
                                     <article id="comment-<%=commentChildren.getComment_id()%>" class="comment">
                                         <div class="comment-avatar">
-                                            <img src='<%=WebConstant.getLocalHost()%>/images/jane-doe.jpg'
+                                            <img src='<%=WebConstant.getLocalHost()%><%=usersDao.checkEmail(cComment.getComment_author_email())==true?usersDao.getImage(cComment.getComment_author_email()):avata_default%>'
                                                  width="50" height="50" alt=""
                                                  class="avatar avatar-50wp-user-avatar wp-user-avatar-50 alignnone photo avatar-default"/>
                                         </div>
@@ -334,15 +336,19 @@
                         </h3>
                         <form action="<%=WebConstant.getLocalHost()%>/ManagerCommentServlet" method="post"
                               id="commentform" class="comment-form" novalidate>
-                            <p><textarea name="comment-content" id="comment-content" cols="45" rows="8"
+                            <p>
+                                <textarea name="comment-content" id="comment-content" cols="45" rows="8"
                                          aria-required="true" placeholder="Nội dung"></textarea>
                             </p>
+                            <%if(users!=null){%>
+                            <input type='hidden' name='comment-author' value='<%=users.getFullName()%>'/>
+                            <input type='hidden' name='comment-email'  value='<%=users.getEmail()%>'/>
+                            <%}else{%>
                             <p><input name="comment-author" id="comment-author" type="text" size="30"
-                                      aria-required="true" placeholder="Tên bạn" value=""/>
-                            </p>
+                                      aria-required="true" placeholder="Tên bạn" value=""/></p>
                             <p><input name="comment-email" id="comment-email" type="text" size="30"
-                                      aria-required="true" placeholder="Email" value=""/>
-                            </p>
+                                      aria-required="true" placeholder="Email" value=""/></p>
+                            <%}%>
                             <p class="form-submit">
                                 <input type='hidden' name='comment-post-id' value='<%=post_id%>' id='comment-post-id'/>
                                 <input type='hidden' name='comment-parent' id='comment-parent' value='0'/>

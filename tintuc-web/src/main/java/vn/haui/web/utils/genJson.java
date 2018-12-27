@@ -170,4 +170,14 @@ public class genJson {
         return content;
     }
 
+    public static void main(String[] args) {
+
+        JSONObject obj1 = new JSONObject();
+        obj1.put("1", "abc");
+        obj1.put("2", "qwe");
+        obj1.put("3", "asd");
+        obj1.put("4", "zxc");
+        System.out.println(obj1.toJSONString());
+        System.out.println(obj1.get("1"));
+    }
 }

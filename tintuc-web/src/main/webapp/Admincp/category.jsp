@@ -25,8 +25,8 @@
         });
 
         function check_slug_category_ajax(category_slug) {
-            $("#category-slug-result").html('<img src="${root}/js/ajax-loader.gif" />');
-            $.post('${root}/CheckCategorySlugServlet', {'category-slug': category_slug}, function (data) {
+            $("#category-slug-result").html('<img src="<%=WebConstant.getLocalHost()%>/js/ajax-loader.gif" />');
+            $.post('<%=WebConstant.getLocalHost()%>/CheckCategorySlugServlet', {'category-slug': category_slug}, function (data) {
                 $("#category-slug-result").html(data);
             });
         }
@@ -34,7 +34,7 @@
 </script>
 <script>
     function delete_category_ajax(category_ID) {
-        $.post('${root}/MCategoryServlet', {'category-ID': category_ID,'command': "delete"},function (data) {
+        $.post('<%=WebConstant.getLocalHost()%>/MCategoryServlet', {'category-ID': category_ID,'command': "delete"},function (data) {
             $("#myModalLabel").html(data);
         });
         //xóa thẻ sau 2 giây
@@ -70,7 +70,7 @@
     <!-- /.row -->
     <div class="row">
         <div class="col-lg-4">
-            <form role="form" action="${root}/MCategoryServlet" method="post">
+            <form role="form" action="<%=WebConstant.getLocalHost()%>/MCategoryServlet" method="post">
                 <div class="form-group">
                     <label>Tên chuyên mục</label>
                     <span name="category-name-result" class="text-danger"><%=error%></span>
@@ -133,10 +133,10 @@
                             <tr id="item-<%=c.getCategoryID()%>">
                                 <td><%=c.getCategoryID()%></td>
                                 <td>
-                                    <a href="${root}/Admincp/edit-category.jsp?category=<%=c.getCategoryID()%>&action=edit"><%=c.getCategoryName()%>
+                                    <a href="<%=WebConstant.getLocalHost()%>/Admincp/edit-category.jsp?category=<%=c.getCategoryID()%>&action=edit"><%=c.getCategoryName()%>
                                     </a>
                                     <div class="row-actions">
-                                        <span class="edit"><a href="${root}/Admincp/edit-category.jsp?category=<%=c.getCategoryID()%>&action=edit"
+                                        <span class="edit"><a href="<%=WebConstant.getLocalHost()%>/Admincp/edit-category.jsp?category=<%=c.getCategoryID()%>&action=edit"
                                                               aria-label="Sửa “Beauty”">Chỉnh sửa</a> | </span>
                                         <span class="delete"><a href="" class="delete-tag aria-button-if-js"
                                                                 data-toggle="modal"
@@ -167,7 +167,7 @@
                                             <!-- /.modal-dialog -->
                                         </div>
                                         <!-- /.modal -->
-                                        <span class="view"><a href="${root}/<%=c.getCategorySlug()%>" aria-label="Xem lưu trữ “<%=c.getCategoryName()%>>”">Xem</a></span>
+                                        <span class="view"><a href="<%=WebConstant.getLocalHost()%>/<%=c.getCategorySlug()%>" aria-label="Xem lưu trữ “<%=c.getCategoryName()%>>”">Xem</a></span>
                                     </div>
                                 </td>
                                 <td><%=c.getCategoryDes() == null ? "" : c.getCategoryDes()%>

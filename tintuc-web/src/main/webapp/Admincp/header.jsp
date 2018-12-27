@@ -28,28 +28,28 @@
     <meta name="author" content="">
     <title>Admin - <%=WebConstant.getBlogname()%></title>
     <!-- Bootstrap Core CSS -->
-    <link href="${root}/Admincp/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<%=WebConstant.getLocalHost()%>/Admincp/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- MetisMenu CSS -->
-    <link href="${root}/Admincp/vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
+    <link href="<%=WebConstant.getLocalHost()%>/Admincp/vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
     <!-- Custom CSS -->
-    <link href="${root}/Admincp/dist/css/sb-admin-2.css" rel="stylesheet">
-    <link href="${root}/Admincp/vendor/datatables-plugins/dataTables.bootstrap.css" rel="stylesheet">
+    <link href="<%=WebConstant.getLocalHost()%>/Admincp/dist/css/sb-admin-2.css" rel="stylesheet">
+    <link href="<%=WebConstant.getLocalHost()%>/Admincp/vendor/datatables-plugins/dataTables.bootstrap.css" rel="stylesheet">
     <!-- DataTables Responsive CSS -->
-    <link href="${root}/Admincp/vendor/datatables-responsive/dataTables.responsive.css" rel="stylesheet">
+    <link href="<%=WebConstant.getLocalHost()%>/Admincp/vendor/datatables-responsive/dataTables.responsive.css" rel="stylesheet">
     <!-- Morris Charts CSS -->
-    <%--<link href="${root}/Admincp/vendor/morrisjs/morris.css" rel="stylesheet">--%>
+    <%--<link href="<%=WebConstant.getLocalHost()%>/Admincp/vendor/morrisjs/morris.css" rel="stylesheet">--%>
     <!-- Custom Fonts -->
-    <link href="${root}/Admincp/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="<%=WebConstant.getLocalHost()%>/Admincp/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>    <![endif]-->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" type="text/javascript"></script>
-    <script src="<c:url value="${root}/ckeditor/ckeditor.js" />"></script>
-    <script src="<c:url value="${root}/ckfinder/ckfinder.js" />"></script>
-    <link href="${root}/Admincp/dist/css/bootstrap-select.css" rel="stylesheet">
-    <%--<script src="<c:url value="${root}/ckfinder/plugins/imageresize/plugin.js" />"></script>--%>
+    <script src="<c:url value="<%=WebConstant.getLocalHost()%>/ckeditor/ckeditor.js" />"></script>
+    <script src="<c:url value="<%=WebConstant.getLocalHost()%>/ckfinder/ckfinder.js" />"></script>
+    <link href="<%=WebConstant.getLocalHost()%>/Admincp/dist/css/bootstrap-select.css" rel="stylesheet">
+    <%--<script src="<c:url value="<%=WebConstant.getLocalHost()%>/ckfinder/plugins/imageresize/plugin.js" />"></script>--%>
 </head>
 <body>
 <div id="wrapper">
@@ -62,7 +62,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="${root}">Website tin tức</a>
+            <a class="navbar-brand" href="<%=WebConstant.getLocalHost()%>">Website tin tức</a>
         </div>
         <!-- /.navbar-header -->
         <ul class="nav navbar-top-links navbar-right">

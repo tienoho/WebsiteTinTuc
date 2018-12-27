@@ -19,8 +19,8 @@
         <ul>
             <li id="bunyad_ads_widget-4" class="widget code-widget">
                 <div class="a-widget">
-                    <a href="${root}">
-                        <img src="${root}/images/sm-banner-350-2x.jpg" width="300" alt="Sidebar Ad" />
+                    <a href="<%=WebConstant.getLocalHost()%>">
+                        <img src="<%=WebConstant.getLocalHost()%>/images/sm-banner-350-2x.jpg" width="300" alt="Sidebar Ad" />
                     </a>
                 </div>
             </li>
@@ -54,7 +54,7 @@
             </li>
             <li id="bunyad-social-2" class="widget widget-social">
                 <ul class="social-follow" itemscope itemtype="http://schema.org/Organization">
-                    <link itemprop="url" href="${root}">
+                    <link itemprop="url" href="<%=WebConstant.getLocalHost()%>">
                     <li class="service">
                         <a href="https://facebook.com/" class="service-link facebook cf"
                            target="_blank" itemprop="sameAs">

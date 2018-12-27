@@ -18,25 +18,25 @@
                 </div>
                 <!-- /input-group -->
             </li>
-            <li><a href="${root}/Admincp/"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a></li>
+            <li><a href="<%=WebConstant.getLocalHost()%>/Admincp/"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a></li>
             <li>
                 <a href="#"><i class="fa fa-book fa-fw"></i> Bài viết<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
-                    <li><a href="${root}/Admincp/post.jsp">Tất cả bài viết</a></li>
-                    <li><a href="${root}/Admincp/edit-post.jsp">Bài viết mới</a></li>
-                    <li><a href="${root}/Admincp/category.jsp">Chuyên mục</a></li>
-                    <li><a href="${root}/Admincp/tag.jsp">Thẻ</a></li>
+                    <li><a href="<%=WebConstant.getLocalHost()%>/Admincp/post.jsp">Tất cả bài viết</a></li>
+                    <li><a href="<%=WebConstant.getLocalHost()%>/Admincp/edit-post.jsp">Bài viết mới</a></li>
+                    <li><a href="<%=WebConstant.getLocalHost()%>/Admincp/category.jsp">Chuyên mục</a></li>
+                    <li><a href="<%=WebConstant.getLocalHost()%>/Admincp/tag.jsp">Thẻ</a></li>
                 </ul>
                 <!-- /.nav-second-level -->
             </li>
-            <li><a href="${root}/Admincp/upload.jsp"><i class="fa fa-upload fa-fw"></i>Thư viện<span class="fa arrow"></span></a></li>
-            <li><a href="${root}/Admincp/setting.jsp"><i class="fa fa-wrench fa-fw"></i> Cài đặt</a></li>
-            <li><a href="${root}/Admincp/comment.jsp"><i class="fa fa-edit fa-fw"></i> Bình luận</a></li>
+            <li><a href="<%=WebConstant.getLocalHost()%>/Admincp/upload.jsp"><i class="fa fa-upload fa-fw"></i>Thư viện<span class="fa arrow"></span></a></li>
+            <li><a href="<%=WebConstant.getLocalHost()%>/Admincp/setting.jsp"><i class="fa fa-wrench fa-fw"></i> Cài đặt</a></li>
+            <li><a href="<%=WebConstant.getLocalHost()%>/Admincp/comment.jsp"><i class="fa fa-edit fa-fw"></i> Bình luận</a></li>
             <li>
                 <a href="#"><i class="fa fa-user fa-fw"></i>Giao diện<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li><a href="#">Header</a></li>
-                    <li><a href="${root}/Admincp/edit-footer.jsp">Footer</a></li>
+                    <li><a href="<%=WebConstant.getLocalHost()%>/Admincp/edit-footer.jsp">Footer</a></li>
                     <li><a href="#">Contact</a></li>
                 </ul>
                 <!-- /.nav-second-level -->
@@ -52,7 +52,7 @@
             </li>
             <li><a href="#"><i class="fa fa-sitemap fa-fw"></i>Phản hồi<span class="fa arrow"></span></a></li>
             <li><a href="#"><i class="fa fa-sitemap fa-fw"></i>Quảng cáo<span class="fa arrow"></span></a></li>
-            <li><a href="${root}/Admincp/social.jsp"><i class="fa fa-sitemap fa-fw"></i>Mạng xã hội<span class="fa arrow"></span></a></li>
+            <li><a href="<%=WebConstant.getLocalHost()%>/Admincp/social.jsp"><i class="fa fa-sitemap fa-fw"></i>Mạng xã hội<span class="fa arrow"></span></a></li>
         </ul>
     </div>
     <!-- /.sidebar-collapse -->

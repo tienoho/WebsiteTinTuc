@@ -42,6 +42,14 @@
         <url-pattern>/Search/*</url-pattern>
     </servlet-mapping>
     <servlet>
+        <servlet-name>Tag</servlet-name>
+        <jsp-file>/tag.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Tag</servlet-name>
+        <url-pattern>/tag/*</url-pattern>
+    </servlet-mapping>
+    <servlet>
         <servlet-name>CategoryPost</servlet-name>
         <servlet-class>vn.haui.web.controller.PostServlet</servlet-class>
     </servlet>

@@ -1,4 +1,4 @@
-<%--
+<%@ page import="vn.haui.web.common.WebConstant" %><%--
   Created by IntelliJ IDEA.
   User: Admin
   Date: 26/11/2018
@@ -17,11 +17,11 @@
                     <li>
                         <a href=""><img
                                 width="104" height="69"
-                                src="${root}/images/shutterstock_554776870-104x69.jpg"
+                                src="<%=WebConstant.getLocalHost()%>/images/shutterstock_554776870-104x69.jpg"
                                 class="attachment-post-thumbnail size-post-thumbnail wp-post-image"
                                 alt="shutterstock_554776870"
                                 title="Hairstyle Tips &#038; Tricks from Designer Edition"
-                                srcset="${root}/images/shutterstock_554776870-104x69.jpg 104w, ${root}/images/shutterstock_554776870-300x200.jpg 300w, ${root}/images/shutterstock_554776870-1000x667.jpg 1000w, ${root}/images/shutterstock_554776870-702x459.jpg 702w, ${root}/images/shutterstock_554776870-214x140.jpg 214w"
+                                srcset="<%=WebConstant.getLocalHost()%>/images/shutterstock_554776870-104x69.jpg 104w, <%=WebConstant.getLocalHost()%>/images/shutterstock_554776870-300x200.jpg 300w, <%=WebConstant.getLocalHost()%>/images/shutterstock_554776870-1000x667.jpg 1000w, <%=WebConstant.getLocalHost()%>/images/shutterstock_554776870-702x459.jpg 702w, <%=WebConstant.getLocalHost()%>/images/shutterstock_554776870-214x140.jpg 214w"
                                 sizes="(max-width: 104px) 100vw, 104px"/> </a>
                         <div class="content"><a
                                 href=""
@@ -37,11 +37,11 @@
                     <li>
                         <a href=""><img
                                 width="104" height="69"
-                                src="${root}/images/woman-1209592_1920-104x69.jpg"
+                                src="<%=WebConstant.getLocalHost()%>/images/woman-1209592_1920-104x69.jpg"
                                 class="attachment-post-thumbnail size-post-thumbnail wp-post-image"
                                 alt="woman-1209592_1920"
                                 title="Tom explains why Trendy Clothing is in style"
-                                srcset="${root}/images/woman-1209592_1920-104x69.jpg 104w, ${root}/images/woman-1209592_1920-300x196.jpg 300w, ${root}/images/woman-1209592_1920-1000x654.jpg 1000w, ${root}/images/woman-1209592_1920-702x459.jpg 702w, ${root}/images/woman-1209592_1920-214x140.jpg 214w"
+                                srcset="<%=WebConstant.getLocalHost()%>/images/woman-1209592_1920-104x69.jpg 104w, <%=WebConstant.getLocalHost()%>/images/woman-1209592_1920-300x196.jpg 300w, <%=WebConstant.getLocalHost()%>/images/woman-1209592_1920-1000x654.jpg 1000w, <%=WebConstant.getLocalHost()%>/images/woman-1209592_1920-702x459.jpg 702w, <%=WebConstant.getLocalHost()%>/images/woman-1209592_1920-214x140.jpg 214w"
                                 sizes="(max-width: 104px) 100vw, 104px"/> </a>
                         <div class="content"><a
                                 href=""
@@ -56,10 +56,10 @@
                     </li>
                     <li><a href=""><img
                             width="104" height="69"
-                            src="${root}/images/shutterstock_358043111-104x69.jpg"
+                            src="<%=WebConstant.getLocalHost()%>/images/shutterstock_358043111-104x69.jpg"
                             class="attachment-post-thumbnail size-post-thumbnail wp-post-image"
                             alt="shutterstock_358043111" title="15 Instagram Trends You Should Follow Today"
-                            srcset="${root}/images/shutterstock_358043111-104x69.jpg 104w, ${root}/images/shutterstock_358043111-300x200.jpg 300w, ${root}/images/shutterstock_358043111-1000x665.jpg 1000w, ${root}/images/shutterstock_358043111-702x459.jpg 702w, ${root}/images/shutterstock_358043111-214x140.jpg 214w"
+                            srcset="<%=WebConstant.getLocalHost()%>/images/shutterstock_358043111-104x69.jpg 104w, <%=WebConstant.getLocalHost()%>/images/shutterstock_358043111-300x200.jpg 300w, <%=WebConstant.getLocalHost()%>/images/shutterstock_358043111-1000x665.jpg 1000w, <%=WebConstant.getLocalHost()%>/images/shutterstock_358043111-702x459.jpg 702w, <%=WebConstant.getLocalHost()%>/images/shutterstock_358043111-214x140.jpg 214w"
                             sizes="(max-width: 104px) 100vw, 104px"/> </a>
                         <div class="content"><a
                                 href=""
@@ -74,10 +74,10 @@
                     </li>
                     <li><a href=""><img
                             width="104" height="69"
-                            src="${root}/images/shutterstock_530536855-104x69.jpg"
+                            src="<%=WebConstant.getLocalHost()%>/images/shutterstock_530536855-104x69.jpg"
                             class="attachment-post-thumbnail size-post-thumbnail wp-post-image"
                             alt="shutterstock_530536855" title="Things to Let Go Now for a Healthy New Year"
-                            srcset="${root}/images/shutterstock_530536855-104x69.jpg 104w, ${root}/images/shutterstock_530536855-300x200.jpg 300w, ${root}/images/shutterstock_530536855-1000x667.jpg 1000w, ${root}/images/shutterstock_530536855-702x459.jpg 702w, ${root}/images/shutterstock_530536855-214x140.jpg 214w"
+                            srcset="<%=WebConstant.getLocalHost()%>/images/shutterstock_530536855-104x69.jpg 104w, <%=WebConstant.getLocalHost()%>/images/shutterstock_530536855-300x200.jpg 300w, <%=WebConstant.getLocalHost()%>/images/shutterstock_530536855-1000x667.jpg 1000w, <%=WebConstant.getLocalHost()%>/images/shutterstock_530536855-702x459.jpg 702w, <%=WebConstant.getLocalHost()%>/images/shutterstock_530536855-214x140.jpg 214w"
                             sizes="(max-width: 104px) 100vw, 104px"/> </a>
                         <div class="content"><a
                                 href=""
@@ -121,10 +121,10 @@
                                 href=""
                                 title="Summer Style: Chunky Knit For Leather Suits" class="image-link"> <img
                                 width="336" height="200"
-                                src="${root}/images/shutterstock_350007890-336x200.jpg"
+                                src="<%=WebConstant.getLocalHost()%>/images/shutterstock_350007890-336x200.jpg"
                                 class="image wp-post-image" alt="shutterstock_350007890"
                                 title="Summer Style: Chunky Knit For Leather Suits"
-                                srcset="${root}/images/shutterstock_350007890-336x200.jpg 336w"
+                                srcset="<%=WebConstant.getLocalHost()%>/images/shutterstock_350007890-336x200.jpg 336w"
                                 sizes="(max-width: 336px) 100vw, 336px"/> </a>
                             <h2 class="post-title"><a
                                     href=""
@@ -144,11 +144,11 @@
                             <li>
                                 <a href=""><img
                                         width="104" height="69"
-                                        src="${root}/images/pexels-photo-236287-104x69.jpg"
+                                        src="<%=WebConstant.getLocalHost()%>/images/pexels-photo-236287-104x69.jpg"
                                         class="attachment-post-thumbnail size-post-thumbnail wp-post-image"
                                         alt="pexels-photo-236287"
                                         title="Love In Style For The Proposal of Timeless Relation"
-                                        srcset="${root}/images/pexels-photo-236287-104x69.jpg 104w, ${root}/images/pexels-photo-236287-300x200.jpg 300w, ${root}/images/pexels-photo-236287-1000x667.jpg 1000w, ${root}/images/pexels-photo-236287-702x459.jpg 702w, ${root}/images/pexels-photo-236287-214x140.jpg 214w"
+                                        srcset="<%=WebConstant.getLocalHost()%>/images/pexels-photo-236287-104x69.jpg 104w, <%=WebConstant.getLocalHost()%>/images/pexels-photo-236287-300x200.jpg 300w, <%=WebConstant.getLocalHost()%>/images/pexels-photo-236287-1000x667.jpg 1000w, <%=WebConstant.getLocalHost()%>/images/pexels-photo-236287-702x459.jpg 702w, <%=WebConstant.getLocalHost()%>/images/pexels-photo-236287-214x140.jpg 214w"
                                         sizes="(max-width: 104px) 100vw, 104px"/> </a>
                                 <div class="content"><a
                                         href="">Love
@@ -163,11 +163,11 @@
                             <li>
                                 <a href=""><img
                                         width="104" height="69"
-                                        src="${root}/images/shutterstock_303461690-1-104x69.jpg"
+                                        src="<%=WebConstant.getLocalHost()%>/images/shutterstock_303461690-1-104x69.jpg"
                                         class="attachment-post-thumbnail size-post-thumbnail wp-post-image"
                                         alt="shutterstock_303461690"
                                         title="Annie Ziegler to Wear the Designer Favorite Clothes at Oscars"
-                                        srcset="${root}/images/shutterstock_303461690-1-104x69.jpg 104w, ${root}/images/shutterstock_303461690-1-300x200.jpg 300w, ${root}/images/shutterstock_303461690-1-1000x667.jpg 1000w, ${root}/images/shutterstock_303461690-1-702x459.jpg 702w, ${root}/images/shutterstock_303461690-1-214x140.jpg 214w"
+                                        srcset="<%=WebConstant.getLocalHost()%>/images/shutterstock_303461690-1-104x69.jpg 104w, <%=WebConstant.getLocalHost()%>/images/shutterstock_303461690-1-300x200.jpg 300w, <%=WebConstant.getLocalHost()%>/images/shutterstock_303461690-1-1000x667.jpg 1000w, <%=WebConstant.getLocalHost()%>/images/shutterstock_303461690-1-702x459.jpg 702w, <%=WebConstant.getLocalHost()%>/images/shutterstock_303461690-1-214x140.jpg 214w"
                                         sizes="(max-width: 104px) 100vw, 104px"/> </a>
                                 <div class="content"><a
                                         href="">Annie
@@ -182,11 +182,11 @@
                             <li>
                                 <a href=""><img
                                         width="104" height="69"
-                                        src="${root}/images/shutterstock_370070387-1-104x69.jpg"
+                                        src="<%=WebConstant.getLocalHost()%>/images/shutterstock_370070387-1-104x69.jpg"
                                         class="attachment-post-thumbnail size-post-thumbnail wp-post-image"
                                         alt="shutterstock_370070387"
                                         title="American Street Style is Taking Over in 2017"
-                                        srcset="${root}/images/shutterstock_370070387-1-104x69.jpg 104w, ${root}/images/shutterstock_370070387-1-702x459.jpg 702w, ${root}/images/shutterstock_370070387-1-214x140.jpg 214w"
+                                        srcset="<%=WebConstant.getLocalHost()%>/images/shutterstock_370070387-1-104x69.jpg 104w, <%=WebConstant.getLocalHost()%>/images/shutterstock_370070387-1-702x459.jpg 702w, <%=WebConstant.getLocalHost()%>/images/shutterstock_370070387-1-214x140.jpg 214w"
                                         sizes="(max-width: 104px) 100vw, 104px"/> </a>
                                 <div class="content"><a
                                         href="">American

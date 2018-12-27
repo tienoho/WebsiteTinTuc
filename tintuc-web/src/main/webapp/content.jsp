@@ -81,9 +81,9 @@
                     </div>
                     <%} else {%>
                     <div class="col-6 item small-item">
-                        <a href="${root}/post/<%=p.getPostSlug()%>"
+                        <a href="<%=WebConstant.getLocalHost()%>/post/<%=p.getPostSlug()%>"
                            class="image-link">
-                            <img width="235" height="216" src="${root}/<%=p.getPostImg()%>"
+                            <img width="235" height="216" src="<%=WebConstant.getLocalHost()%>/<%=p.getPostImg()%>"
                                  class="attachment-grid-slider-b-small size-grid-slider-b-small wp-post-image"
                                  alt="<%=p.getPostTitle()%>" title="<%=p.getPostTitle()%>"
                                  srcset="<%=WebConstant.getLocalHost()%><%=p.getPostImg().replace(extendsImg,"-235x216"+extendsImg)%> 235w"
@@ -92,7 +92,7 @@
                         <div class="caption caption-small">
                             <span class="cat-title cat-7"><a href="category/celebrities/index.html" title="Celebrities">Celebrities</a></span>
                             <h3>
-                                <a href="${root}/post/<%=p.getPostSlug()%>" class="item-heading heading-small"><%=p.getPostTitle()%></a>
+                                <a href="<%=WebConstant.getLocalHost()%>/post/<%=p.getPostSlug()%>" class="item-heading heading-small"><%=p.getPostTitle()%></a>
                             </h3>
                             <time class="the-date" datetime="<%=p.getPostDate()%>"><%=p.getPostDate()%></time>
                         </div>

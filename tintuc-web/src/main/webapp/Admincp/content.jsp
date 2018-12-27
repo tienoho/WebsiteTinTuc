@@ -1,4 +1,4 @@
-<%--
+<%@ page import="vn.haui.web.common.WebConstant" %><%--
   Created by IntelliJ IDEA.
   User: Admin
   Date: 29/11/2018
@@ -52,7 +52,7 @@
                         </div>
                     </div>
                 </div>
-                <a href="${root}/Admincp/post.jsp">
+                <a href="<%=WebConstant.getLocalHost()%>/Admincp/post.jsp">
                     <div class="panel-footer">
                         <span class="pull-left">Xem chi tiết</span>
                         <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -74,7 +74,7 @@
                         </div>
                     </div>
                 </div>
-                <a href="${root}/Admincp/category.jsp">
+                <a href="<%=WebConstant.getLocalHost()%>/Admincp/category.jsp">
                     <div class="panel-footer">
                         <span class="pull-left">Xem chi tiết</span>
                         <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>

@@ -19,7 +19,7 @@
 %>
 <script>
     function delete_post_ajax(User_ID) {
-        $.post('${root}/ManagerUserServlet', {'user-ID': User_ID,'command': "delete"},function (data) {
+        $.post('<%=WebConstant.getLocalHost()%>/ManagerUserServlet', {'user-ID': User_ID,'command': "delete"},function (data) {
             $("#myModalLabel").html(data);
         });
         //xóa thẻ sau 2 giây

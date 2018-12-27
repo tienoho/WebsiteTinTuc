@@ -1,7 +1,8 @@
 <%@ page import="vn.haui.web.command.CategoryDao" %>
 <%@ page import="vn.haui.web.model.Category" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="java.sql.SQLException" %><%--
+<%@ page import="java.sql.SQLException" %>
+<%@ page import="vn.haui.web.common.WebConstant" %><%--
   Created by IntelliJ IDEA.
   User: Admin
   Date: 29/11/2018
@@ -25,8 +26,8 @@
         });
 
         function check_slug_category_ajax(category_slug) {
-            $("#category-slug-result").html('<img src="${root}/js/ajax-loader.gif" />');
-            $.post('${root}/CheckCategorySlugServlet', {'category-slug': category_slug}, function (data) {
+            $("#category-slug-result").html('<img src="<%=WebConstant.getLocalHost()%>/js/ajax-loader.gif" />');
+            $.post('<%=WebConstant.getLocalHost()%>/CheckCategorySlugServlet', {'category-slug': category_slug}, function (data) {
                 $("#category-slug-result").html(data);
             });
         }
@@ -62,7 +63,7 @@
     <!-- /.row -->
     <div class="row">
         <div class="col-lg-12">
-            <form role="form" method="post" action="${root}/MCategoryServlet">
+            <form role="form" method="post" action="<%=WebConstant.getLocalHost()%>/MCategoryServlet">
                 <div class="form-group">
                     <label>Tên chuyên mục</label>
                     <span name="category-name-result" class="text-danger"><%=error%></span>
