@@ -206,17 +206,22 @@
                     <div class="panel-body">
                         <div class="form-group">
                             <div class="input-group">
-                                <input id="btn-input" type="text" class="form-control input-sm"
-                                       placeholder="tag here..."/>
+                                <input id="btn-input" type="text" class="form-control input-sm" placeholder="tag here..."/>
                                 <span class="input-group-btn">
-                                    <input type="button" class="btn btn-warning btn-sm" id="btn-chat" value="Thêm" onclick="addTag();"></input>
+                                    <input type="button" class="btn btn-warning btn-sm" id="btn-chat" value="Thêm" onclick="addTag();"/>
                                 </span>
                             </div>
                             <p class="help-block">Phân cách các thẻ bằng dấu phẩy (,).</p>
                         </div>
                         <ul class="tagchecklist" id="tagchecklist" role="list">
-                            <li>a</li>
-                            <li>d</li>
+                            <li name="item-tag">a</li>
+                            <li name="item-tag">
+                                <button type="button" id="post_tag-check-num-0" class="ntdelbutton">
+                                    <span class="remove-tag-icon" aria-hidden="true"></span>
+                                    <span class="screen-reader-text">Xóa term: culture</span>
+                                </button>dsss
+                            </li>
+
                         </ul>
                     </div>
                     <!-- /.panel-body -->

@@ -46,8 +46,8 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>    <![endif]-->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" type="text/javascript"></script>
-    <script src="<c:url value="<%=WebConstant.getLocalHost()%>/ckeditor/ckeditor.js" />"></script>
-    <script src="<c:url value="<%=WebConstant.getLocalHost()%>/ckfinder/ckfinder.js" />"></script>
+    <script src="<%=WebConstant.getLocalHost()%>/ckeditor/ckeditor.js"></script>
+    <script src="<%=WebConstant.getLocalHost()%>/ckfinder/ckfinder.js"></script>
     <link href="<%=WebConstant.getLocalHost()%>/Admincp/dist/css/bootstrap-select.css" rel="stylesheet">
     <%--<script src="<c:url value="<%=WebConstant.getLocalHost()%>/ckfinder/plugins/imageresize/plugin.js" />"></script>--%>
 </head>

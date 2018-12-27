@@ -149,16 +149,5 @@
             document.getElementById('preview').style.display = "";
         }
     });
-    <%--setTimeout(function () {--%>
-    <%--if (jQuery('#xImagePath').val() == '') {--%>
-    <%--} else {--%>
-    <%--var urlImage = $('#xImagePath').val();--%>
-    <%--var htmlll = '<div class="thumb">' +--%>
-    <%--'<img height= "150px" width= "150px" src="<%=WebConstant.getLocalHost()%>/' + urlImage + '" />' +--%>
-    <%--'</div>';--%>
-    <%--document.getElementById('thumbnails').innerHTML += htmlll;--%>
-    <%--document.getElementById('preview').style.display = "";--%>
-    <%--}--%>
-    <%--}, 2000);--%>
 </script>
 <jsp:include page="footer.jsp"/>

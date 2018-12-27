@@ -15,7 +15,7 @@
 <jsp:include page="header.jsp"/>
 <%
     UsersDao usersDao=new UsersDao();
-    ArrayList<Users> users=new ArrayList<>();
+    ArrayList<Users> users=usersDao.getListUsers();
 %>
 <script>
     function delete_post_ajax(User_ID) {
@@ -42,7 +42,7 @@
         <div class="col-lg-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <a href="edit-user.jsp" class="font-italic" ><strong>Thêm người dùng mới</strong></a>
+                    <a href="add-user.jsp" class="font-italic" ><strong>Thêm người dùng mới</strong></a>
                 </div>
                 <!-- /.panel-heading -->
                 <div class="panel-body">
@@ -59,9 +59,9 @@
                         <%for (Users u : users) {%>
                         <tr class="odd gradeX" id="item-user-<%=u.getEmail()%>">
                             <td><%=u.getFullName()%></td>
-                            <td><a href="edit-user.jsp?user=<%=u.getEmail()%>&action=edit" class="font-weight-bold"><strong><%=u.getEmail()%></strong></a>
+                            <td><a href="profile.jsp?user=<%=u.getEmail()%>&action=edit" class="font-weight-bold"><strong><%=u.getEmail()%></strong></a>
                                 <div class="row-actions">
-                                    <span class="edit"><a class="text-primary" href="edit-user.jsp?user=<%=u.getEmail()%>&action=edit" aria-label="Sửa">Chỉnh sửa</a> | </span>
+                                    <span class="edit"><a class="text-primary" href="profile.jsp?user=<%=u.getEmail()%>&action=edit" aria-label="Sửa">Chỉnh sửa</a> | </span>
                                     <span class="delete"><a href="" class="delete-tag aria-button-if-js text-danger" data-toggle="modal" data-target="#delete-<%=u.getEmail()%>" aria-label="Xóa" role="button">Xóa</a> | </span>
                                     <!-- Modal -->
                                     <div class="modal fade" id="delete-<%=u.getEmail()%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

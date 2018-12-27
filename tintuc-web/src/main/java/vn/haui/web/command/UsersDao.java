@@ -6,15 +6,31 @@ import vn.haui.web.model.Users;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class UsersDao {
+    public ArrayList<Users> getListUsers() throws SQLException {
+        Connection connection = DBConnect.getConnecttion();
+        String sql = "SELECT * FROM user";
+        Statement st = connection.createStatement();
+        ResultSet rs = st.executeQuery(sql);
+        ArrayList<Users> list = new ArrayList<Users>();
+        while (rs.next()) {
+            Users  users = new Users();
+            users.setEmail(rs.getString("email"));
+            users.setFullName(rs.getString("fullname"));
+            users.setImg(rs.getString("img"));
+            users.setRoleId(rs.getInt("roleid"));
+            users.setCreatedDate(rs.getDate("createddate"));
+            list.add(users);
+        }
+        connection.close();
+        return list;
+    }
     //mã hóa mật khẩu MD5
     public static String encryption(String str) {
         byte[] defaultBytes = str.getBytes();
@@ -39,7 +55,6 @@ public class UsersDao {
         return str;
 
     }
-
     //kiểm tra xem usernam và email đã tồn tại hay chưa
     public boolean checkEmail(String email) {
         Connection connection = DBConnect.getConnecttion();
@@ -63,7 +78,6 @@ public class UsersDao {
         }
         return false;
     }
-
     //insert tai khoan
     public boolean insertUser(Users user) throws SQLException {
         Connection connection = DBConnect.getConnecttion();
@@ -100,6 +114,8 @@ public class UsersDao {
                 users.setEmail(rs.getString("email"));
                 users.setFullName(rs.getString("fullname"));
                 users.setRoleId(rs.getInt("roleid"));
+                users.setImg(rs.getString("img"));
+                users.setCreatedDate(rs.getDate("createddate"));
                 connection.close();
                 return users;
             }

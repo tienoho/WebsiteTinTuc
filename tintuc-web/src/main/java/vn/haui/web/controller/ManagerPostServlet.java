@@ -35,6 +35,8 @@ public class ManagerPostServlet extends HttpServlet {
         String url =WebConstant.getLocalHost()+"/Admincp/edit-post.jsp", error = "", result = "", error_slug = "";
         String command = request.getParameter("command");
         String postTitle = request.getParameter("post-title");
+        String[] tagList = request.getParameterValues("item-tag");
+
         String postSlug = "";
         HttpSession session = request.getSession(false);
         if (postDao.checkPostSlug(postSlug) && postSlug != "") {

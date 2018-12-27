@@ -1,9 +1,7 @@
 package vn.haui.web.command;
 
 import vn.haui.web.connect.DBConnect;
-import vn.haui.web.model.Setting;
 import vn.haui.web.model.Tag;
-import vn.haui.web.model.Users;
 
 import java.sql.*;
 import java.util.ArrayList;
