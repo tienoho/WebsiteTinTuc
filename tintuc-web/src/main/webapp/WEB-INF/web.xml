@@ -9,6 +9,7 @@
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
+
     <servlet>
         <servlet-name>login</servlet-name>
         <jsp-file>/login.jsp</jsp-file>
@@ -86,6 +87,7 @@
         <filter-name>ConfigFilter</filter-name>
         <filter-class>vn.haui.web.filter.filterConfig</filter-class>
     </filter>
+
     <filter-mapping>
         <filter-name>ConfigFilter</filter-name>
         <url-pattern>/*</url-pattern>
@@ -114,4 +116,25 @@
         <filter-name>AdminFilter</filter-name>
         <url-pattern>/Admincp/*</url-pattern>
     </filter-mapping>
+    <!--cấu hình kết nối-->
+    <env-entry>
+        <env-entry-name>url</env-entry-name>
+        <env-entry-type>java.lang.String</env-entry-type>
+        <env-entry-value>localhost</env-entry-value>
+    </env-entry>
+    <env-entry>
+        <env-entry-name>DBname</env-entry-name>
+        <env-entry-type>java.lang.String</env-entry-type>
+        <env-entry-value>tintuc</env-entry-value>
+    </env-entry>
+    <env-entry>
+        <env-entry-name>user</env-entry-name>
+        <env-entry-type>java.lang.String</env-entry-type>
+        <env-entry-value>root</env-entry-value>
+    </env-entry>
+    <env-entry>
+        <env-entry-name>password</env-entry-name>
+        <env-entry-type>java.lang.String</env-entry-type>
+        <env-entry-value></env-entry-value>
+    </env-entry>
 </web-app>

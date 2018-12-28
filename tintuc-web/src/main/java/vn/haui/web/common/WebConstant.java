@@ -22,6 +22,7 @@ public class WebConstant {
     public static String banner_header = "/images/sm-728x90.jpg";
     public static String url_banner_header = "";
 
+
     public static String getUrl_banner_header() {
         return url_banner_header;
     }

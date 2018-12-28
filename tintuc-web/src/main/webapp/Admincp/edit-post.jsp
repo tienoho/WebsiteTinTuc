@@ -215,12 +215,7 @@
                         </div>
                         <ul class="tagchecklist" id="tagchecklist" role="list">
                             <li name="item-tag">a</li>
-                            <li name="item-tag">
-                                <button type="button" id="post_tag-check-num-0" class="ntdelbutton">
-                                    <span class="remove-tag-icon" aria-hidden="true"></span>
-                                    <span class="screen-reader-text">Xóa term: culture</span>
-                                </button>dsss
-                            </li>
+                            <li name="item-tag">dsss</li>
 
                         </ul>
                     </div>
