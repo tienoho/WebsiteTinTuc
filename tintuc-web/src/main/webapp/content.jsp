@@ -210,9 +210,10 @@
                 </section>
                 <section class="block-wrap blog" data-id="2">
                     <div class="block-head cat-text-12">
-                        <h3 class="heading"><a href="category/leisure/index.html">Latest Leisure</a></h3>
+                        <%Category categorySub=categoryDao.getCategory(WebConstant.getCategorySubOne());%>
+                        <h3 class="heading"><a href="<%=WebConstant.getLocalHost()+"/Category/"+categorySub.getCategorySlug()%>"><%=categorySub.getCategoryName()%></a></h3>
                         <ul class="subcats filters">
-                            <li><a href="#" data-id="0" class="active">All</a></li>
+                            <li><a href="#" data-id="0" class="active">Tất cả</a></li>
                             <%for (Category cSub:categoryDao.getListCategoryChildren(WebConstant.getCategorySubOne())){%>
                             <li><a href="" data-id="<%=cSub.getCategoryID()%>"><%=cSub.getCategoryName()%></a></li>
                             <%}%>
@@ -240,7 +241,7 @@
                                     </h2>
                                     <div class="cf listing-meta meta below">
                                                 <span class="meta-item author">
-                                                    By <a href="author/trendy/index.html" title="Posts by <%=usersDao.getName(pSub.getAuthorID())%>"
+                                                    By <a href="" title="Posts by <%=usersDao.getName(pSub.getAuthorID())%>"
                                                           rel="author"><%=usersDao.getName(pSub.getAuthorID())%></a>
                                                 </span>
                                         <time datetime="<%=pSub.getPostDate()%>" class="meta-item"><%=pSub.getPostDate()%></time>
@@ -349,7 +350,8 @@
                 <section class="block-wrap blog" data-id="4">
                     <div class="block-head cat-text-4">
                         <h3 class="heading">
-                            <a href="category/fashion/index.html">Latest Fashion</a>
+                            <%Category categorySubOne=categoryDao.getCategory(WebConstant.getCategorySubOne());%>
+                            <a href="<%=WebConstant.getLocalHost()+"/Category/"+categorySubOne.getCategorySlug()%>"><%=categorySubOne.getCategoryName()%></a>
                         </h3>
                     </div>
                     <div class="block-content">

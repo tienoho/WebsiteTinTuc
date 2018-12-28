@@ -18,7 +18,6 @@
 <jsp:include page="header.jsp"/>
 <%
     String action = "", postId = "", result = "", error = "";
-
     if (request.getParameter("action") != null)
         action = request.getParameter("action");
     PostDao postDao = new PostDao();
@@ -121,7 +120,6 @@
                     <textarea class="form-control" rows="2" id="post-summary" name="post-summary"></textarea>
                     <p class="help-block"></p>
                 </div>
-
                 <span name="category-result"></span>
 
             </div>
@@ -166,16 +164,8 @@
                                 <i class="fa fa-chevron-down"></i>
                             </button>
                             <ul class="dropdown-menu slidedown">
-                                <li>
-                                    <a href="#">
-                                        <i class="fa fa-refresh fa-fw"></i> Làm mới
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <i class="fa fa-check-circle fa-fw"></i> Available
-                                    </a>
-                                </li>
+                                <li><a href="#"><i class="fa fa-refresh fa-fw"></i> Làm mới</a></li>
+                                <li><a href="#"><i class="fa fa-check-circle fa-fw"></i> Available</a></li>
                             </ul>
                         </div>
                     </div>
@@ -199,9 +189,7 @@
                 </div>
                 <!-- /.panel .chat-panel -->
                 <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <i class="fa fa-bell fa-fw"></i>Thẻ
-                    </div>
+                    <div class="panel-heading"><i class="fa fa-bell fa-fw"></i>Thẻ</div>
                     <!-- /.panel-heading -->
                     <div class="panel-body">
                         <div class="form-group">
@@ -216,7 +204,6 @@
                         <ul class="tagchecklist" id="tagchecklist" role="list">
                             <li name="item-tag">a</li>
                             <li name="item-tag">dsss</li>
-
                         </ul>
                     </div>
                     <!-- /.panel-body -->
@@ -264,7 +251,6 @@
                             // When false is returned, CKFinder will not close automatically.
                             return false;
                         }
-
                         function ShowThumbnailsaa(imgUrl) {
                             var htmlll = '<div class="thumb">' +
                                 '<img height= "150px" width= "150px" src="<%=WebConstant.getLocalHost()%>' + imgUrl + '" />' +
@@ -280,8 +266,7 @@
                             <div id="thumbnails"></div>
                         </div>
                         <strong>Selected Image URL</strong><br/>
-                        <input id="xImagePath" name="ImagePath" type="text"
-                               value="<%=action.equals("edit")?post.getPostImg():""%>"/>
+                        <input id="xImagePath" name="ImagePath" type="text" value="<%=action.equals("edit")?post.getPostImg():""%>"/>
                         <input type="button" value="Browse Server" onclick="BrowseServer( 'Images:/', 'xImagePath' );"/>
                     </div>
                     <!-- /.panel-body -->

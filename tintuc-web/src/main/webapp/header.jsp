@@ -15,13 +15,6 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link type="text/css" media="all" href="<%=WebConstant.getLocalHost()%>/css/style.css" rel="stylesheet"/>
     <link rel="icon" href="<%=WebConstant.getLocalHost()+"/"+WebConstant.getxImagePath_icon()%>">
-    <!--<link rel='stylesheet' id='rs-plugin-settings-css' href='http://localhost/wp-content/plugins/revslider/public/assets/css/settings.css?ver=5.3.1.5' type='text/css' media='all' />
-    <link rel='stylesheet' id='smartmag-fonts-css' href='http://fonts.googleapis.com/css?family=Libre+Franklin%3A400%2C400i%2C500%2C600%7CLato%3A400%2C700%2C900%7CHind%3A400%2C500%2C600%7CMerriweather%3A300italic&#038;subset' type='text/css' media='all' />
-    <link rel='stylesheet' id='smartmag-core-css' href='http://localhost/wp-content/themes/smart-mag/style.css?ver=3.0.2' type='text/css' media='all' />
-    <link rel='stylesheet' id='smartmag-responsive-css' href='http://localhost/wp-content/themes/smart-mag/css/responsive.css?ver=3.0.2' type='text/css' media='all' />
-    <link rel='stylesheet' id='pretty-photo-css' href='http://localhost/wp-content/themes/smart-mag/css/prettyPhoto.css?ver=3.0.2' type='text/css' media='all' />
-    <link rel='stylesheet' id='smartmag-font-awesome-css' href='http://localhost/wp-content/themes/smart-mag/css/fontawesome/css/font-awesome.min.css?ver=3.0.2' type='text/css' media='all' />
-    <link rel='stylesheet' id='smartmag-skin-css' href='http://localhost/wp-content/themes/smart-mag/css/skin-trendy.css?ver=4.9.8' type='text/css' media='all' />-->
     <%
         Users users = null;
         if (session.getAttribute("user") != null) {

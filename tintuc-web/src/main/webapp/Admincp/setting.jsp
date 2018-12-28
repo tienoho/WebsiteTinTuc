@@ -201,7 +201,7 @@
                                         </div>
                                         <strong>Selected Image URL</strong><br/>
                                         <input id="xImagePath-logo-2x" name="xImagePath-logo-2x" type="text"
-                                               value="<%=WebConstant.getxImagePath_logo()%>"/>
+                                               value="<%=WebConstant.getxImagePath_logo_2x()%>"/>
                                         <input type="button" value="Chọn ảnh"
                                                onclick="BrowseServer( 'Images:/', 'xImagePath-logo-2x');"/>
                                     </div>
@@ -230,7 +230,7 @@
                                         </div>
                                         <strong>Selected Image URL</strong><br/>
                                         <input id="xImagePath-banner-header" name="xImagePath-banner-header" type="text"
-                                               value="<%=WebConstant.getxImagePath_logo_mobile()%>"/>
+                                               value="<%=WebConstant.getBanner_header()%>"/>
                                         <input type="button" value="Chọn ảnh"
                                                onclick="BrowseServer( 'Images:/', 'xImagePath-banner-header' );"/>
                                         <label>Url</label>
@@ -269,7 +269,7 @@
         } else {
             var urlImage = $('#xImagePath-logo').val();
             var htmlll = '<div class="thumb">' +
-                '<img height= "150px" width= "150px" src="<%=WebConstant.getLocalHost()%>' + urlImage + '" />' +
+                '<img height= "" width= "" src="<%=WebConstant.getLocalHost()%>' + urlImage + '" />' +
                 '</div>';
             document.getElementById('thumbnails-logo').innerHTML += htmlll;
             document.getElementById('preview-logo').style.display = "";
@@ -278,7 +278,7 @@
         } else {
             var urlImage = $('#xImagePath-logo-2x').val();
             var htmlll = '<div class="thumb">' +
-                '<img height= "150px" width= "150px" src="<%=WebConstant.getLocalHost()%>' + urlImage + '" />' +
+                '<img height= "" width= "" src="<%=WebConstant.getLocalHost()%>' + urlImage + '" />' +
                 '</div>';
             document.getElementById('thumbnails-logo-2x').innerHTML += htmlll;
             document.getElementById('preview-logo-2x').style.display = "";
@@ -287,7 +287,7 @@
         } else {
             var urlImage = $('#xImagePath-logo-mobile').val();
             var htmlll = '<div class="thumb">' +
-                '<img height= "150px" width= "150px" src="<%=WebConstant.getLocalHost()%>' + urlImage + '" />' +
+                '<img height= "" width= "" src="<%=WebConstant.getLocalHost()%>' + urlImage + '" />' +
                 '</div>';
             document.getElementById('thumbnails-logo-mobile').innerHTML += htmlll;
             document.getElementById('preview-logo-mobile').style.display = "";
@@ -295,7 +295,7 @@
         if (jQuery('#xImagePath-banner-header').val() == '') {
         } else {
             var urlImage = $('#xImagePath-banner-header').val();
-            var htmlll = '<div class="thumb"><img height= "150px" width= "150px" src="<%=WebConstant.getLocalHost()%>' + urlImage + '" /></div>';
+            var htmlll = '<div class="thumb"><img height= "" width= "" src="<%=WebConstant.getLocalHost()%>' + urlImage + '" /></div>';
             document.getElementById('thumbnails-banner-header').innerHTML += htmlll;
             document.getElementById('preview-banner-header').style.display = "";
         }

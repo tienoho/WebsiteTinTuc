@@ -29,11 +29,11 @@
                 </ul>
                 <!-- /.nav-second-level -->
             </li>
-            <li><a href="<%=WebConstant.getLocalHost()%>/Admincp/upload.jsp"><i class="fa fa-upload fa-fw"></i>Thư viện<span class="fa arrow"></span></a></li>
+            <li><a href="<%=WebConstant.getLocalHost()%>/Admincp/upload.jsp"><i class="fa fa-image fa-fw"></i>Thư viện<span class="fa arrow"></span></a></li>
             <li><a href="<%=WebConstant.getLocalHost()%>/Admincp/setting.jsp"><i class="fa fa-wrench fa-fw"></i> Cài đặt</a></li>
             <li><a href="<%=WebConstant.getLocalHost()%>/Admincp/comment.jsp"><i class="fa fa-edit fa-fw"></i> Bình luận</a></li>
             <li>
-                <a href="#"><i class="fa fa-user fa-fw"></i>Giao diện<span class="fa arrow"></span></a>
+                <a href="#"><i class="fa fa-dashboard fa-fw"></i>Giao diện<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li><a href="#">Header</a></li>
                     <li><a href="<%=WebConstant.getLocalHost()%>/Admincp/edit-footer.jsp">Footer</a></li>
@@ -50,8 +50,7 @@
                 </ul>
                 <!-- /.nav-second-level -->
             </li>
-            <li><a href="#"><i class="fa fa-sitemap fa-fw"></i>Phản hồi<span class="fa arrow"></span></a></li>
-            <li><a href="#"><i class="fa fa-sitemap fa-fw"></i>Quảng cáo<span class="fa arrow"></span></a></li>
+            <li><a href="<%=WebConstant.getLocalHost()%>/Admincp/adv.jsp"><i class="fa fa-sitemap fa-fw"></i>Quảng cáo<span class="fa arrow"></span></a></li>
             <li><a href="<%=WebConstant.getLocalHost()%>/Admincp/social.jsp"><i class="fa fa-sitemap fa-fw"></i>Mạng xã hội<span class="fa arrow"></span></a></li>
         </ul>
     </div>
