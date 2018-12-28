@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 26, 2018 at 11:00 AM
+-- Generation Time: Dec 28, 2018 at 10:09 AM
 -- Server version: 10.1.30-MariaDB
 -- PHP Version: 7.0.27
 
@@ -77,7 +77,8 @@ INSERT INTO `comments` (`comment_id`, `comment_post_id`, `comment_author`, `comm
 (4, 13, 'Le Tien', 'tienoho@gmail.com', '2018-12-22 00:00:00', 'fukkkkkkk', 0, 0),
 (5, 13, 'Le Tien', 'tienoho@gmail.com', '2018-12-22 00:00:00', 'sdsadsa', 0, 0),
 (6, 12, '454', 'tienoho@gmail.com', '2018-12-22 00:00:00', 'huhu', 2, 0),
-(7, 13, 'cc', 'tienoho@gmail.com', '2018-12-24 00:00:00', 'ccc', 4, 0);
+(7, 13, 'cc', 'tienoho@gmail.com', '2018-12-24 00:00:00', 'ccc', 4, 0),
+(8, 8, 'dsad', 'tienoho2@gmail.com', '2018-12-27 00:00:00', 'sdadsa', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -95,10 +96,11 @@ CREATE TABLE `hit_counter_post` (
 --
 
 INSERT INTO `hit_counter_post` (`id_post`, `hit_counter`) VALUES
-(13, 65),
-(12, 16),
+(13, 67),
+(12, 21),
 (22, 1),
-(16, 1);
+(16, 1),
+(8, 3);
 
 -- --------------------------------------------------------
 
@@ -257,20 +259,32 @@ INSERT INTO `social_option` (`social_id`, `social_name`, `social_url`, `social_t
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tag`
+--
+
+CREATE TABLE `tag` (
+  `tag_id` int(11) NOT NULL,
+  `tag_post_id` int(11) DEFAULT NULL,
+  `tag_content` text
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `terms_relationships`
 --
 
 CREATE TABLE `terms_relationships` (
   `post_id` int(11) DEFAULT NULL,
   `category_id` int(11) DEFAULT NULL,
-  `order` int(11) DEFAULT '0'
+  `ordera` int(11) DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='bảng kết nối post với category';
 
 --
 -- Dumping data for table `terms_relationships`
 --
 
-INSERT INTO `terms_relationships` (`post_id`, `category_id`, `order`) VALUES
+INSERT INTO `terms_relationships` (`post_id`, `category_id`, `ordera`) VALUES
 (4, 1, 0),
 (4, 2, 0),
 (4, 3, 0),
@@ -321,10 +335,10 @@ INSERT INTO `terms_relationships` (`post_id`, `category_id`, `order`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user`
+-- Table structure for table `users`
 --
 
-CREATE TABLE `user` (
+CREATE TABLE `users` (
   `userid` bigint(20) NOT NULL,
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
@@ -335,12 +349,12 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `user`
+-- Dumping data for table `users`
 --
 
-INSERT INTO `user` (`userid`, `email`, `password`, `fullname`, `createddate`, `img`, `roleid`) VALUES
-(1, 'tienoho@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', 'Le Van Tien', '2018-11-27 17:00:00', NULL, 1),
-(2, 'abc@abc.com', 'e10adc3949ba59abbe56e057f20f883e', 'Le Van Tien', '2018-11-27 17:00:00', NULL, 2);
+INSERT INTO `users` (`userid`, `email`, `password`, `fullname`, `createddate`, `img`, `roleid`) VALUES
+(1, 'tienoho@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', 'Le Van Tien', '2018-11-27 17:00:00', '/images/nastu1.jpg', 1),
+(2, 'abc@abc.com', 'e10adc3949ba59abbe56e057f20f883e', 'Le Van Tien', '2018-11-27 17:00:00', '/images/nastu1.jpg', 2);
 
 --
 -- Indexes for dumped tables
@@ -391,9 +405,15 @@ ALTER TABLE `social_option`
   ADD PRIMARY KEY (`social_id`);
 
 --
--- Indexes for table `user`
+-- Indexes for table `tag`
 --
-ALTER TABLE `user`
+ALTER TABLE `tag`
+  ADD PRIMARY KEY (`tag_id`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
   ADD PRIMARY KEY (`userid`),
   ADD UNIQUE KEY `user_email_uindex` (`email`),
   ADD KEY `FK_USER_ROLE_idx` (`roleid`);
@@ -412,7 +432,7 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT for table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `comment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `comment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `option`
@@ -445,9 +465,15 @@ ALTER TABLE `social_option`
   MODIFY `social_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
--- AUTO_INCREMENT for table `user`
+-- AUTO_INCREMENT for table `tag`
 --
-ALTER TABLE `user`
+ALTER TABLE `tag`
+  MODIFY `tag_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
   MODIFY `userid` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
@@ -455,9 +481,9 @@ ALTER TABLE `user`
 --
 
 --
--- Constraints for table `user`
+-- Constraints for table `users`
 --
-ALTER TABLE `user`
+ALTER TABLE `users`
   ADD CONSTRAINT `FK_USER_ROLE` FOREIGN KEY (`roleid`) REFERENCES `role` (`roleid`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 COMMIT;
 

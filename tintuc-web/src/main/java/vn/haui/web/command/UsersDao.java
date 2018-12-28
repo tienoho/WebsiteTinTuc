@@ -15,7 +15,7 @@ import java.util.logging.Logger;
 public class UsersDao {
     public ArrayList<Users> getListUsers() throws SQLException {
         Connection connection = DBConnect.getConnecttion();
-        String sql = "SELECT * FROM user";
+        String sql = "SELECT * FROM users";
         Statement st = connection.createStatement();
         ResultSet rs = st.executeQuery(sql);
         ArrayList<Users> list = new ArrayList<Users>();
@@ -58,7 +58,7 @@ public class UsersDao {
     //kiểm tra xem usernam và email đã tồn tại hay chưa
     public boolean checkEmail(String email) {
         Connection connection = DBConnect.getConnecttion();
-        String sql = "SELECT * FROM user WHERE email='" + email + "'";
+        String sql = "SELECT * FROM users WHERE email='" + email + "'";
         PreparedStatement preparedStatement;
         try {
             preparedStatement = connection.prepareStatement(sql);
@@ -81,7 +81,7 @@ public class UsersDao {
     //insert tai khoan
     public boolean insertUser(Users user) throws SQLException {
         Connection connection = DBConnect.getConnecttion();
-        String sql = "INSERT INTO user(email,password,fullname,createddate,roleid) values(?,?,?,?,?)";
+        String sql = "INSERT INTO users(email,password,fullname,createddate,roleid) values(?,?,?,?,?)";
 
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
@@ -104,7 +104,7 @@ public class UsersDao {
     //Login
     public Users login(String email, String password) throws SQLException {
         Connection connection = DBConnect.getConnecttion();
-        String sql = "select * from user where email='" + email + "' and password='" + password + "'";
+        String sql = "select * from users where email='" + email + "' and password='" + password + "'";
         PreparedStatement ps;
         try {
             ps = (PreparedStatement) connection.prepareStatement(sql);
@@ -127,7 +127,7 @@ public class UsersDao {
     }
     public String getName(int userId) throws SQLException {
         Connection connection = DBConnect.getConnecttion();
-        String sql = "select * from user where userid='" + userId + "'";
+        String sql = "select * from users where userid='" + userId + "'";
         PreparedStatement ps;
         try {
             ps = (PreparedStatement) connection.prepareStatement(sql);
@@ -144,7 +144,7 @@ public class UsersDao {
     }
     public String getImage(String email) throws SQLException {
         Connection connection = DBConnect.getConnecttion();
-        String sql = "select * from user where email='" + email + "'";
+        String sql = "select * from users where email='" + email + "'";
         PreparedStatement ps;
         try {
             ps = (PreparedStatement) connection.prepareStatement(sql);
@@ -161,7 +161,7 @@ public class UsersDao {
     }
     public String getImageId(int userId) throws SQLException {
         Connection connection = DBConnect.getConnecttion();
-        String sql = "select * from user where userid='" + userId + "'";
+        String sql = "select * from users where userid='" + userId + "'";
         PreparedStatement ps;
         try {
             ps = (PreparedStatement) connection.prepareStatement(sql);
@@ -197,7 +197,7 @@ public class UsersDao {
         Connection connection=null;
         try {
             connection = DBConnect.getConnecttion();
-            String sql = "UPDATE user set fullname=?, img=?, roleid=? where email=?";
+            String sql = "UPDATE users set fullname=?, img=?, roleid=? where email=?";
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setString(1,c.getFullName());
             ps.setString(2, c.getImg());
@@ -215,7 +215,7 @@ public class UsersDao {
         Connection connection=null;
         try {
             connection = DBConnect.getConnecttion();
-            String sql = "DELETE FROM user WHERE email = ?";
+            String sql = "DELETE FROM users WHERE email = ?";
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setString(1, email);
             int temp = ps.executeUpdate();

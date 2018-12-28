@@ -59,5 +59,5 @@ create table user
 );
 
 create index FK_USER_ROLE_idx
-  on user (roleid);
+  on users (roleid);
 

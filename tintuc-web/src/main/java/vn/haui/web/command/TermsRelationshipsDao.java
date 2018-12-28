@@ -19,7 +19,7 @@ public class TermsRelationshipsDao {
             TermsRelationships termsRelationships = new TermsRelationships();
             termsRelationships.setPostID(rs.getInt("post_id"));
             termsRelationships.setCategoryID(rs.getInt("category_id"));
-            termsRelationships.setOrder(rs.getInt("order"));
+            termsRelationships.setOrder(rs.getInt("ordera"));
             list.add(termsRelationships);
         }
         connection.close();
@@ -35,7 +35,7 @@ public class TermsRelationshipsDao {
             TermsRelationships termsRelationships = new TermsRelationships();
             termsRelationships.setPostID(rs.getInt("post_id"));
             termsRelationships.setCategoryID(rs.getInt("category_id"));
-            termsRelationships.setOrder(rs.getInt("order"));
+            termsRelationships.setOrder(rs.getInt("ordera"));
             list.add(termsRelationships);
         }
         connection.close();
@@ -45,7 +45,7 @@ public class TermsRelationshipsDao {
         Connection connection=null;
         try {
             connection = DBConnect.getConnecttion();
-            String sql = "INSERT INTO terms_relationships(post_id, category_id, `order`) VALUE(?,?,?)";
+            String sql = "INSERT INTO terms_relationships(post_id, category_id, ordera) VALUE(?,?,?)";
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, c.getPostID());
             ps.setInt(2, c.getCategoryID());
@@ -63,7 +63,7 @@ public class TermsRelationshipsDao {
         Connection connection=null;
         try {
              connection = DBConnect.getConnecttion();
-            String sql = "UPDATE terms_relationships set category_id=?, `order`=? where  post_id=?";
+            String sql = "UPDATE terms_relationships set category_id=?, ordera=? where  post_id=?";
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, c.getCategoryID());
             ps.setInt(2, c.getOrder());
